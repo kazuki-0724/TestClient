@@ -35,7 +35,14 @@ public class Player{
     
     
     
-
+    /**
+     * コンストラクタ
+     * @param id
+     * @param password
+     * @param win
+     * @param lose
+     * @param games
+     */
     public Player(String id, String password, int win, int lose, int games){
         this.id = id;
         this.password = password;
