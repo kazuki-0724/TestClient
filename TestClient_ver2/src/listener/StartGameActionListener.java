@@ -23,6 +23,13 @@ public class StartGameActionListener extends BoundaryActionListener{
     private Boundary boundary;
     private LobbyBoundary lobbyBoundary;
     
+    
+    /**
+     * コンストラクタ
+     * @param control
+     * @param boundary
+     * @param lobbyBoundary
+     */
     public StartGameActionListener(ClientSystemControl control, Boundary boundary, LobbyBoundary lobbyBoundary) {
     	
     	this.control = control;
@@ -31,7 +38,9 @@ public class StartGameActionListener extends BoundaryActionListener{
     }
     
     
-    
+    /**
+     * イベント処理
+     */
     public void actionPerformed(ActionEvent e){
         
         String str = e.getActionCommand();

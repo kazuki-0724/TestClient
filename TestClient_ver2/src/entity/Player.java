@@ -53,52 +53,99 @@ public class Player{
     }
 
 
-    //getter/setter
+    /**
+     * idのgetter
+     * @return
+     */
     public String getId() {
         return id;
     }
     
+    /**
+     * idのsetter
+     * @param id
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * passのgetter
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * passのsetter
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * 勝ち数のgetter
+     * @return
+     */
     public int getWin() {
         return win;
     }
 
+    /**
+     * 勝ち数のsetter
+     * @param win
+     */
     public void setWin(int win) {
         this.win = win;
     }
 
+    /**
+     * 負け数のgetter
+     * @return
+     */
     public int getLose() {
         return lose;
     }
 
+    /**
+     * 負け数のsetter
+     * @param lose
+     */
     public void setLose(int lose) {
         this.lose = lose;
     }
     
+    /**
+     * rateのgetter
+     * @return
+     */
     public double getRate() {
 		return rate;
 	}
     
+    /**
+     * rateのseter
+     * @param rate
+     */
     public void setRate(double rate) {
 		this.rate = rate;
 	}
     
 
+    /**
+     * 試合数のgetter
+     * @return
+     */
     public int getGames() {
         return games;
     }
 
+    /**
+     * 試合数のsetter
+     * @param games
+     */
     public void setGames(int games) {
         this.games = games;
     }

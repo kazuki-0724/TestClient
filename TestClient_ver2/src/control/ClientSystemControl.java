@@ -70,7 +70,7 @@ public class ClientSystemControl{
 
 		
 	/**
-	 * getter
+	 * Boundaryのgetter
 	 * @return
 	 */
 	public Boundary getBoundary() {

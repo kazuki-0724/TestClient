@@ -198,6 +198,10 @@ public class Boundary extends JFrame{
                 System.out.println("error");
                 break;
         }
+        
+        
+        //何かしら画面遷移が完了したことの通知をサーバに送る予定
+        //control.communicate().sendData("panelChange complete","blank" );
 
     }
     
@@ -220,12 +224,12 @@ public class Boundary extends JFrame{
 
         	//(text使う)認証エラーメッセージとか
             case AccountAuthentificationBoudary:
-            	accountAuthentificationBoundary.getMessageLabel().setText(text);
+            	accountAuthentificationBoundary.updateMessageLabel(text);
                 break;
 
             //(text使う)認証エラーメッセージとか
             case AccountRegistrationBoundary:
-            	accountRegistrationBoundary.getMessageLabel().setText(text);
+            	accountRegistrationBoundary.updateMessageLabel(text);
                 break;
                 
             //ロビーに遷移してきたとき

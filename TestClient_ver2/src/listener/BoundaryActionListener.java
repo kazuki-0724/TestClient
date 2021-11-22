@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
  */
 abstract class BoundaryActionListener implements ActionListener{
     
-    
+	/**
+	 * イベント処理
+	 */
     public void actionPerformed(ActionEvent e){
 
     }

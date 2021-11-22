@@ -53,7 +53,11 @@ public class RespondentBoundary extends JPanel{
     /*******************************************/
 
 
-
+    /**
+     * コンストラクタ
+     * @param boundary
+     * @param control
+     */
     public RespondentBoundary(Boundary boundary, ClientSystemControl control){
 
         this.boundary = boundary;
@@ -136,12 +140,19 @@ public class RespondentBoundary extends JPanel{
 
     }
     
-    
+    /**
+     * カウントダウンタイマー
+     * @param time
+     */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
     }
     
     
+    /**
+     * 送られてきた座標データによって描画
+     * @param stroke
+     */
     public void drawStroke(String stroke) {
     	
     	int type,s_x,s_y,e_x,e_y;
@@ -159,7 +170,10 @@ public class RespondentBoundary extends JPanel{
     	
     }
     
-    
+    /**
+     * answerFieldのgetter
+     * @return
+     */
     public JTextField getAnswerField() {
 		return answerField;
 	}

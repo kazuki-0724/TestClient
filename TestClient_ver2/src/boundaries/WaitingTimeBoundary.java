@@ -28,7 +28,11 @@ class WaitingTimeBoundary extends JPanel{
     private JButton nextButton;
     
     
-    
+    /**
+     * コンストラクタ
+     * @param boundary
+     * @param control
+     */
     public WaitingTimeBoundary(Boundary boundary, ClientSystemControl control) {
 		// TODO 自動生成されたコンストラクター・スタブ
 	

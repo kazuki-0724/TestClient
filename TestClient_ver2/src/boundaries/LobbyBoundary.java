@@ -51,7 +51,11 @@ public class LobbyBoundary extends JPanel{
 
     
     
-
+    /**
+     * コンストラクタ
+     * @param boundary
+     * @param control
+     */
     public LobbyBoundary(Boundary boundary, ClientSystemControl control){
 
         this.boundary = boundary;
@@ -159,53 +163,65 @@ public class LobbyBoundary extends JPanel{
     }
 
 
-
+    /**
+     * idLabelのgetter
+     * @return
+     */
     public JLabel getIdLabel() {
         return idLabel;
     }
 
+    /**
+     * idLabelへのid埋め込み
+     * @param text
+     */
     public void setIdLabel(String text) {
         this.idLabel.setText(String.format("ID : %s", text));
     }
 
+    /**
+     * rateLabelのgetter
+     * @return
+     */
     public JLabel getRateLabel() {
         return rateLabel;
     }
 
+    /**
+     * rateLabelへの埋め込み
+     * @param win
+     * @param lose
+     * @param games
+     */
     public void setRateLabel(int win, int lose, int games) {
         this.rateLabel.setText(String.format("Rate : %d / %d / %d",win,lose,games ));
     }
 
+    /**
+     * messageLabelのgetter
+     * @return
+     */
     public JLabel getMessageLabel() {
         return messageLabel;
     }
 
+    /**
+     * messageLabelへのtext埋め込み
+     * @param text
+     */
     public void setMessageLabel(String text) {
         this.messageLabel.setText(text);
     }
     
-    
-    public JLabel getWaitingMessageLabel() {
-		return waitingMessageLabel;
-	}
-    
-    //サーバからあと何人なのかの情報をもらうはず
-    public void updateWaitingCount(int num) {
-    	this.waitingMessageLabel.setVisible(true);
-		this.waitingMessageLabel.setText(String.format("4人集まると開始します。現在%d人",num));
-	}
-    
-    
+    /**
+     * ロビーのゲームスタートボタンのgetter
+     * @return
+     */
     public JButton getStartGameButton() {
 		return startGameButton;
 	}
     
-    public void changeButtonText() {
-		this.startGameButton.setText("マッチング待機中");
-		
-	}
-    
-    
-     
+
+         
 
 }

@@ -23,38 +23,59 @@ public class GameInfo {
 	private String resultString;
 	
 	
+	/**
+	 * コンストラクタ
+	 * @param csc
+	 */
 	public GameInfo(ClientSystemControl csc) {
 		// TODO 自動生成されたコンストラクター・スタブ
 		this.css = css;
 	}
 	
-	
+	/**
+	 * 参加ユーザのデータをセットする
+	 * @param userMap
+	 */
 	public void setUsers(HashMap<String, Player> userMap) {
 		this.userMap = userMap;
 	}
 	
 	
-	//適宜変化するユーザデータのアップデートを行う
+	/**
+	 * 参加ユーザの情報のアップデート
+	 */
 	public void updateUsersInfo() {
 		
 	}
 	
-	
+	/**
+	 * テーマのセット
+	 * @param theme
+	 */
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
 	
-	
+	/**
+	 * テーマのゲット。基本的にはテーマのデータをgameInfoからとってくる
+	 * @return
+	 */
 	public String getTheme() {
 		return this.theme;
 	}
 	
-	
+	/**
+	 * 結果データのセット
+	 * @param resultString
+	 */
 	public void setResult(String resultString) {
 		this.resultString = resultString;
 	}
 	
-	
+	/**
+	 * 結果データのゲット
+	 * @return
+	 */
 	public String getResult() {
 		return resultString;
 	}

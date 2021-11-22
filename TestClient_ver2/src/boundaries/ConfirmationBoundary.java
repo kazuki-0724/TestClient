@@ -33,7 +33,11 @@ class ConfirmationBoundary extends JPanel{
     private JButton nextButton;
     
     
-
+    /**
+     * コンストラクタ
+     * @param boundary
+     * @param control
+     */
     public ConfirmationBoundary(Boundary boundary, ClientSystemControl control){
 
         this.boundary = boundary;
@@ -91,7 +95,10 @@ class ConfirmationBoundary extends JPanel{
     
     
     
-    
+    /**
+     * テーマのラベルへの埋め込み
+     * @param theme
+     */
     public void setTheme(String theme) {
     	
     	System.out.println("お題は"+theme);
@@ -100,7 +107,10 @@ class ConfirmationBoundary extends JPanel{
     }
     
     
-    
+    /**
+     * カウントダウンタイマー
+     * @param time
+     */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
     }

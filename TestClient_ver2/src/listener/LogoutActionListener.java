@@ -21,6 +21,11 @@ public class LogoutActionListener extends BoundaryActionListener{
     private Boundary boundary;
     
     
+    /**
+     * コンストラクタ
+     * @param control
+     * @param boundary
+     */
     public LogoutActionListener(ClientSystemControl control, Boundary boundary) {
     	
     	this.control = control;
@@ -29,7 +34,9 @@ public class LogoutActionListener extends BoundaryActionListener{
     	
     }
     
-    
+    /**
+	 * イベント処理
+	 */
     public void actionPerformed(ActionEvent e){
         
         String str = e.getActionCommand();

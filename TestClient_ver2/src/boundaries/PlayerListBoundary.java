@@ -27,7 +27,11 @@ public class PlayerListBoundary extends JPanel{
 	    private JLabel timerLabel;
 	    
 	    
-
+	    /**
+	     * コンストラクタ
+	     * @param boundary
+	     * @param control
+	     */
 	    public PlayerListBoundary(Boundary boundary, ClientSystemControl control){
 
 	        this.boundary = boundary;
@@ -68,7 +72,10 @@ public class PlayerListBoundary extends JPanel{
 	    
 	    
 	    
-	    
+	    /**
+	     * タイマーカウントダウン
+	     * @param time
+	     */
 	    public void updateTimer(String time) {
 	    	this.timerLabel.setText(time + "");
 	    }

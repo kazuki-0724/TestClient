@@ -25,19 +25,37 @@ public class ToLobbyActionListener extends BoundaryActionListener{
     private ClientSystemControl control;
     private Boundary boundary;
 
-
+    
+    /**
+     * ログイン画面用のコンストラクタ
+     * @param aab
+     * @param boundary
+     * @param control
+     */
     public ToLobbyActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientSystemControl control){
         this.aab = aab;
         this.control = control;
     }
 
     
+    /**
+     * 新規登録画面用のコンストラクタ
+     * @param arb
+     * @param boundary
+     * @param control
+     */
     public ToLobbyActionListener(AccountRegistrationBoundary arb, Boundary boundary ,ClientSystemControl control){
         this.arb = arb;
         this.control = control;
     }
     
     
+    /**
+     * 最終結果画面用のコンストラクタ
+     * @param frb
+     * @param boundary
+     * @param control
+     */
     public ToLobbyActionListener(FinalResultBoundary frb, Boundary boundary ,ClientSystemControl control){
         this.frb = frb;
         this.control = control;
@@ -45,7 +63,9 @@ public class ToLobbyActionListener extends BoundaryActionListener{
     
     
 
-
+    /**
+     * イベント処理
+     */
     public void actionPerformed(ActionEvent e){
         
         String str = e.getActionCommand();

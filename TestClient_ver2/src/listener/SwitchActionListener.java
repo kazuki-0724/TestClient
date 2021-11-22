@@ -27,6 +27,13 @@ public class SwitchActionListener extends BoundaryActionListener{
 	private ClientSystemControl control;
 	
 	
+	
+	/**
+	 * 新規登録用のコンストラクタ
+	 * @param arb
+	 * @param boundary
+	 * @param control
+	 */
 	public SwitchActionListener(AccountRegistrationBoundary arb, Boundary boundary ,ClientSystemControl control){
 	        this.arb = arb;
 	        this.boundary = boundary;
@@ -34,6 +41,12 @@ public class SwitchActionListener extends BoundaryActionListener{
 	}
 	
 	
+	/**
+	 * ログイン用のコンストラクタ
+	 * @param aab
+	 * @param boundary
+	 * @param control
+	 */
 	public SwitchActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientSystemControl control){
         this.aab = aab;
         this.boundary = boundary;
@@ -42,6 +55,9 @@ public class SwitchActionListener extends BoundaryActionListener{
 	
 
 
+	/**
+	 * イベント処理
+	 */
 	public void actionPerformed(ActionEvent e){
 		
 		System.out.println("[Log] switch Button Clicked");

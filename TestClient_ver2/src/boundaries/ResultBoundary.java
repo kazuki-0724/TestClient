@@ -30,7 +30,12 @@ class ResultBoundary extends JPanel{
     //private JLabel timerLabel;
     private JButton nextButton;
 
-
+    
+    /**
+     * コンストラクタ
+     * @param boundary
+     * @param control
+     */
     public ResultBoundary(Boundary boundary, ClientSystemControl control){
 
         this.boundary = boundary;
@@ -87,7 +92,10 @@ class ResultBoundary extends JPanel{
        
     }
     
-    
+    /**
+     * テーマの埋め込み
+     * @param theme
+     */
     public void setTheme(String theme) {
     	
     	System.out.println("お題は"+theme);
@@ -96,12 +104,10 @@ class ResultBoundary extends JPanel{
     }
     
     
-    /*
-    public void updateTimer(String time) {
-    	this.timerLabel.setText(time + "");
-    }
-    */
-    
+    /**
+     * 結果の埋め込み
+     * @param text
+     */
     public void setResult(String text) {
     	this.messageLabel.setText(String.format("この問題の結果%s", text));
     }

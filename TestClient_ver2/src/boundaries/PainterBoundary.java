@@ -51,7 +51,11 @@ class PainterBoundary extends JPanel{
 
     
     
-
+    /**
+     * コンストラクタ
+     * @param boundary
+     * @param control
+     */
     public PainterBoundary(Boundary boundary, ClientSystemControl control){
 
 
@@ -121,27 +125,50 @@ class PainterBoundary extends JPanel{
     }
 
 
-
+    /**
+     * pointLabelのgetter
+     * @return
+     */
     public JLabel getPointLabel() {
         return pointLabel;
     }
 
+    /**
+     * pointLabelのsetter
+     * @param pointLabel
+     */
     public void setPointLabel(JLabel pointLabel) {
         this.pointLabel = pointLabel;
     }
 
+    /**
+     * timerLabelのgetter
+     * @return
+     */
     public JLabel getTimerLabel() {
         return timerLabel;
     }
 
+    /**
+     * timerLabelのsetter
+     * @param timerLabel
+     */
     public void setTimerLabel(JLabel timerLabel) {
         this.timerLabel = timerLabel;
     }
 
+    /**
+     * タイマーカウントダウン
+     * @param time
+     */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
     }
     
+    /**
+     * テーマの埋め込み
+     * @param theme
+     */
     public void setTheme(String theme) {
     	this.themeLabel.setText(String.format("お題 : %s", theme));
     }

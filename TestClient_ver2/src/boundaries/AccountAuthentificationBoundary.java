@@ -52,7 +52,12 @@ public class AccountAuthentificationBoundary extends JPanel{
     /*************************************/
 
 
-
+    
+    /**
+     * コンストラクタ
+     * @param boundary
+     * @param control
+     */
     public AccountAuthentificationBoundary(Boundary boundary, ClientSystemControl control){
 
         this.boundary = boundary;
@@ -139,25 +144,44 @@ public class AccountAuthentificationBoundary extends JPanel{
 
 
 
-    // getter / setter
+    /**
+     * idFieldのgetter
+     * @return
+     */
     public JTextField getIdField() {
         return idField;
     }
 
+    /**
+     * idFieldのsetter
+     * @param idField
+     */
     public void setIdField(JTextField idField) {
         this.idField = idField;
     }
 
+    /**
+     * passFieldのgetter
+     * @return
+     */
     public JPasswordField getPassFiled() {
         return passFiled;
     }
 
+    /**
+     * passFieldのsetter
+     * @param passFiled
+     */
     public void setPassFiled(JPasswordField passFiled) {
         this.passFiled = passFiled;
     }
     
-    public JLabel getMessageLabel() {
-		return messageLabel;
+    /**
+     * 
+     * @param text エラーメッセージなどの表示用
+     */
+    public void updateMessageLabel(String text) {
+		this.messageLabel.setText(text);
 	}
     
     

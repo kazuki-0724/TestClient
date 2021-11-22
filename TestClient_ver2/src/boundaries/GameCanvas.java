@@ -44,7 +44,10 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
     public Color white = Color.white;
 
     
-
+    /**
+     * コンストラクタ
+     * @param csc
+     */
     public GameCanvas(ClientSystemControl csc) {
         
     	this.csc = csc;
@@ -69,7 +72,10 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
     }
 
 
-
+    
+    /**
+     * 描画処理
+     */
     public void paint(Graphics g) {
     	
         if (type == 1) {
@@ -97,12 +103,18 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
     }
 
 
+    
+    /**
+     * ちらつき防止措置
+     */
     public void update(Graphics g){
         paint(g);
     }
 
 
-
+    /**
+     * マウスのドラッグを検知する
+     */
     @Override
     public void mouseDragged(MouseEvent e) {
     	
@@ -135,7 +147,9 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
     }
 
 
-
+    /**
+     * マウスの動きを検知する
+     */
     @Override
     public void mouseMoved(MouseEvent e) {
 
@@ -147,12 +161,18 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
 
     }
 
-
+    
+    /**
+     * (implementしてるから一応)
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
     }
 
-
+    
+    /**
+     * マウスが押されたことを検知する 
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         Point point = e.getPoint();
@@ -160,17 +180,26 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
         y = point.y;
     }
 
-
+    
+    /**
+     * (implementしてるから一応)
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
     }
 
-
+    
+    /**
+     * (implementしてるから一応)
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
     }
 
 
+    /**
+     * (implementしてるから一応)
+     */
     @Override
     public void mouseExited(MouseEvent e) {
     }

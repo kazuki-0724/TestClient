@@ -20,7 +20,12 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
     private Boundary boundary;
 	
     
-    
+    /**
+     * コンストラクタ
+     * @param rb
+     * @param control
+     * @param boundary
+     */
     public AnswerSubmitActionListener(RespondentBoundary rb, ClientSystemControl control, Boundary boundary) {
     	
     	this.rb = rb;
@@ -29,7 +34,9 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
     }
     
     
-	
+	/**
+	 * イベント処理
+	 */
 	public void actionPerformed(ActionEvent e){
         
 		System.out.println("[Log] Answer Submit Button Clicked");
@@ -45,7 +52,10 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 	
 	
 	
-	//回答の確認
+	/**
+	 * 正誤判定
+	 * @param answer
+	 */
 	public void checkAnswer(String answer) {
 	
 		if(control.getGameInfo().getTheme().equals(answer)) {

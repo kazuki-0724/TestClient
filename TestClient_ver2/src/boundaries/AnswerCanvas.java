@@ -15,6 +15,14 @@ import java.awt.image.BufferedImage;
  * @author Kazuki0724
  *
  */
+/**
+ * @author Kazuki0724
+ *
+ */
+/**
+ * @author Kazuki0724
+ *
+ */
 public class AnswerCanvas extends Canvas{
 
     
@@ -36,7 +44,10 @@ public class AnswerCanvas extends Canvas{
     public Color white = Color.white;
 
 
-
+    
+    /**
+     * コンストラクタ
+     */
     public AnswerCanvas() {
         
         
@@ -60,6 +71,9 @@ public class AnswerCanvas extends Canvas{
 
 
 
+    /**
+     * 描画処理
+     */
     public void paint(Graphics g) {
    
        
@@ -93,13 +107,22 @@ public class AnswerCanvas extends Canvas{
 
 
 
-    //ちらつき防止のため
+    /**
+     * ちらつき防止の措置
+     */
     public void update(Graphics g){
         paint(g);
     }
 
 
-    //受け取った座標からの描画
+    /**
+     * 受け取った座標データの描画
+     * @param type
+     * @param start_x
+     * @param start_y
+     * @param end_x
+     * @param end_y
+     */
     public void setLine(int type, int start_x, int start_y, int end_x, int end_y){
 
         this.type = type;
