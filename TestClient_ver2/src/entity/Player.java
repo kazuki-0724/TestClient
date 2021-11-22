@@ -3,6 +3,7 @@ package entity;
 
 /**
  * ユーザの情報のクラス
+ * 今後大改修がありそう
  * @author Kazuki0724
  *
  */
