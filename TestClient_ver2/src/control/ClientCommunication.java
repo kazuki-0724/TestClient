@@ -171,7 +171,7 @@ public class ClientCommunication{
     	dataFlag = tmpString[0];
     	data = tmpString[1];
     	
-    	
+    	control.handleData(dataFlag, data);
     	
     }
     

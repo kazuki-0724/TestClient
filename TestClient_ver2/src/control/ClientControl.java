@@ -69,7 +69,12 @@ public class ClientControl{
 	}
 	
 
-	
+	/**
+	 * 初期化処理
+	 */
+	public void init() {
+		
+	}
 	
 	
 		

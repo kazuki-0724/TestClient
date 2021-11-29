@@ -13,7 +13,7 @@ public class GameInfo {
 	
 	
 	//ゲームに参加しているユーザのデータ
-	private HashMap<String,Player> userMap = new HashMap<>();
+	private HashMap<String,Player> playerMap = new HashMap<>();
 	
 	private String theme;
 	
@@ -33,15 +33,15 @@ public class GameInfo {
 	 * 参加ユーザのデータをセットする
 	 * @param userMap
 	 */
-	public void setUsers(HashMap<String, Player> userMap) {
-		this.userMap = userMap;
+	public void setPlayers(HashMap<String, Player> playerMap) {
+		this.playerMap = playerMap;
 	}
 	
 	
 	/**
 	 * 参加ユーザの情報のアップデート
 	 */
-	public void updateUsersInfo() {
+	public void updatePlayerInfo() {
 		
 	}
 	
