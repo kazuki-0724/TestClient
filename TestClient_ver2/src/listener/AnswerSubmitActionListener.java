@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import boundaries.Boundary;
 import boundaries.RespondentBoundary;
-import control.ClientSystemControl;
+import control.ClientControl;
 
 /**
  * 回答送信用のリスナークラス
@@ -16,7 +16,7 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
     
 
 	private RespondentBoundary rb;
-    private ClientSystemControl control;
+    private ClientControl control;
     private Boundary boundary;
 	
     
@@ -26,7 +26,7 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
      * @param control
      * @param boundary
      */
-    public AnswerSubmitActionListener(RespondentBoundary rb, ClientSystemControl control, Boundary boundary) {
+    public AnswerSubmitActionListener(RespondentBoundary rb, ClientControl control, Boundary boundary) {
     	
     	this.rb = rb;
     	this.control = control;

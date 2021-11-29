@@ -13,7 +13,7 @@ public enum Boundaries {
 	ConfirmationBoundary,
 	WaitingTimeBoundary,
 	LobbyBoundary,
-	PlayerListBoundary,
+	GameStartBoundary,
 	PainterBoundary,
 	RespondentBoundary,
 	ResultBoundary,

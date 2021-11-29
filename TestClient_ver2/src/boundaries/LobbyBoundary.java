@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
-import control.ClientSystemControl;
+import control.ClientControl;
 import listener.LogoutActionListener;
 import listener.StartGameActionListener;
 
@@ -25,7 +25,7 @@ public class LobbyBoundary extends JPanel{
 
 	
     private Boundary boundary;
-    private ClientSystemControl control;
+    private ClientControl control;
 
     //各パーツ
     private JLabel titleLabel;
@@ -56,7 +56,7 @@ public class LobbyBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public LobbyBoundary(Boundary boundary, ClientSystemControl control){
+    public LobbyBoundary(Boundary boundary, ClientControl control){
 
         this.boundary = boundary;
         this.control = control;

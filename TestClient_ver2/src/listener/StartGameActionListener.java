@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import boundaries.Boundary;
 import boundaries.LobbyBoundary;
-import control.ClientSystemControl;
+import control.ClientControl;
 
 
 
@@ -19,7 +19,7 @@ import control.ClientSystemControl;
 public class StartGameActionListener extends BoundaryActionListener{
     
 
-	private ClientSystemControl control;
+	private ClientControl control;
     private Boundary boundary;
     private LobbyBoundary lobbyBoundary;
     
@@ -30,7 +30,7 @@ public class StartGameActionListener extends BoundaryActionListener{
      * @param boundary
      * @param lobbyBoundary
      */
-    public StartGameActionListener(ClientSystemControl control, Boundary boundary, LobbyBoundary lobbyBoundary) {
+    public StartGameActionListener(ClientControl control, Boundary boundary, LobbyBoundary lobbyBoundary) {
     	
     	this.control = control;
     	this.boundary = boundary;

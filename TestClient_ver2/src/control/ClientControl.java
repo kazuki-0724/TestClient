@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import boundaries.Boundary;
+import entity.Boundaries;
 import entity.GameInfo;
 import entity.Player;
 
@@ -17,7 +18,7 @@ import entity.Player;
  * @author Kazuki0724
  *
  */
-public class ClientSystemControl{
+public class ClientControl{
 	
 	
 	//ユーザデータ
@@ -39,7 +40,7 @@ public class ClientSystemControl{
 	private Long startTime;
 	
 	//通信用
-	private ClientSystemControlCommunication cscc;
+	private ClientCommunication cscc;
 	
 	
 	//3秒の制限時間
@@ -59,23 +60,15 @@ public class ClientSystemControl{
 	 * コンストラクタ
 	 * @param boundary
 	 */
-	public ClientSystemControl(Boundary boundary) {
+	public ClientControl(Boundary boundary) {
 		
 		this.boundary = boundary;
-		this.cscc = new ClientSystemControlCommunication(this); 
-		this.gameInfo = new GameInfo(this);
+		this.cscc = new ClientCommunication(this); 
+		this.gameInfo = new GameInfo();
 			
 	}
 	
 
-		
-	/**
-	 * Boundaryのgetter
-	 * @return
-	 */
-	public Boundary getBoundary() {
-		return boundary;
-	}
 	
 	
 	
@@ -85,40 +78,16 @@ public class ClientSystemControl{
 	 * @param type どの画面のカウントダウンなのか
 	 * @param durationType カウントダウンの時間
 	 */
-	public void runTimer(int type, int durationType) {
+	public void runTimer(Boundaries type, int time) {
 		
 		System.out.println("タイマーカウント");
-		
-		// どの制限時間なのか決定
-		switch(durationType) {
-			
-			case 0:
-				currentDurationTime = durationTime_3;
-				break;
-				
-			case 1:
-				currentDurationTime = durationTime_5;
-				break;
-			
-			case 2:
-				currentDurationTime = durationTime_10;
-				break;
-				
-			case 3:
-				currentDurationTime = durationTime_30;
-				break;
-				
-			default:
-				System.out.println("run time type error");
-				break;
-		}
 		
 		     
 		//スケジューラー
 		timer = new Timer();
 		
 		//タイマータスク
-		timerTask= new MyTimeTask(this, type);
+		timerTask= new MyTimerTask(this, type, time);
 		timer.schedule(timerTask, 0l, 1000l);
 
 		
@@ -152,7 +121,7 @@ public class ClientSystemControl{
 	 * 実体はただのgetter
 	 * @return
 	 */
-	public ClientSystemControlCommunication communicate() {
+	public ClientCommunication communicate() {
 		return this.cscc;
 	}
 	
@@ -199,22 +168,77 @@ public class ClientSystemControl{
 	
 	
 	
+	public void handleData(String dataFlag, String data) {
+		
+
+    	switch(dataFlag) {
+    	
+    		case "userData":			
+    			Player myPlayer = new Player("master1","1234",0,1,2);
+    			setMyPlayer(myPlayer);
+    			boundary.changePanel(Boundaries.LobbyBoundary);
+    			break;
+    			
+    		case "match make":
+    			boundary.changePanel(Boundaries.GameStartBoundary);
+    			runTimer(Boundaries.GameStartBoundary, 5);
+    			break;
+    			   			
+    		case "goConfirm":
+    			System.out.println("theme is "+data);
+    			getGameInfo().setTheme(data);
+    			boundary.changePanel(Boundaries.ConfirmationBoundary);
+    			runTimer(Boundaries.ConfirmationBoundary, 5);
+    			
+    			break;
+    			
+    		case "goPainter":
+    			boundary.changePanel(Boundaries.PainterBoundary);
+    			runTimer(Boundaries.PainterBoundary, 30);
+    			break;
+    			
+    		case "stroke":
+    			boundary.updatePanel(Boundaries.RespondentBoundary, data);
+    			break;
+    		
+    		case "goTurnResult":
+    			getGameInfo().setResult(data);
+    			boundary.changePanel(Boundaries.ResultBoundary);
+    			break;
+    			
+    			
+    		case "final result data":
+    			boundary.changePanel(Boundaries.FinalResultBoundary);
+    			break;
+    			
+    		case "back to lobby":
+    			Player updateMyPlayer = new Player("master1","1234",0,1,2);
+    			setMyPlayer(updateMyPlayer);
+    			boundary.changePanel(Boundaries.LobbyBoundary);
+    			break;		
+    		
+    	}
+	}
+	
+	
 	
 	/**
 	 * タイマーのスレッド
 	 * @author Kazuki0724
 	 *
 	 */
-	private class MyTimeTask extends TimerTask {
+	private class MyTimerTask extends TimerTask {
 		
-		private ClientSystemControl control;
-		private int type;
+		private ClientControl control;
+		private Boundaries type;
+		private int time;
 		
 		
-		public MyTimeTask(ClientSystemControl control, int type) {
+		public MyTimerTask(ClientControl control, Boundaries type, int time) {
 			// TODO 自動生成されたコンストラクター・スタブ
 			this.control = control;
 			this.type = type;
+			this.time = time;
 		}
 
 		
@@ -222,7 +246,7 @@ public class ClientSystemControl{
 		public void run() {
 			if (currentDurationTime >= 0) {
 				
-				control.getBoundary().updateCountDown(type, currentDurationTime+"");
+				boundary.updateCountDown(type, currentDurationTime+"");
 				System.out.println(String.format("count : %2d", currentDurationTime) );
 				currentDurationTime--;
 				
@@ -230,7 +254,8 @@ public class ClientSystemControl{
 			} else {
 				timer.cancel();
 				timer = null;
-				control.getBoundary().updateCountDown(type, "Time Over!");
+				boundary.updateCountDown(type, "Time Over!");
+				communicate().sendData("time over", type.toString());
 			}
 		}
 

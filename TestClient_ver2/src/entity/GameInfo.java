@@ -2,8 +2,6 @@ package entity;
 
 import java.util.HashMap;
 
-import control.ClientSystemControl;
-
 /**
  * ゲームに関する情報を扱うクラス
  * @author Kazuki0724
@@ -14,7 +12,6 @@ import control.ClientSystemControl;
 public class GameInfo {
 	
 	
-	private ClientSystemControl css;
 	//ゲームに参加しているユーザのデータ
 	private HashMap<String,Player> userMap = new HashMap<>();
 	
@@ -27,9 +24,9 @@ public class GameInfo {
 	 * コンストラクタ
 	 * @param csc
 	 */
-	public GameInfo(ClientSystemControl csc) {
+	public GameInfo() {
 		// TODO 自動生成されたコンストラクター・スタブ
-		this.css = css;
+	
 	}
 	
 	/**

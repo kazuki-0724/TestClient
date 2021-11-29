@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import control.ClientSystemControl;
+import control.ClientControl;
 
 
 /**
@@ -14,12 +14,12 @@ import control.ClientSystemControl;
  * @author Kazuki0724
  *
  */
-public class PlayerListBoundary extends JPanel{
+public class GameStartBoundary extends JPanel{
 	
 	
 	//リスナーに渡すだけのため
 		private Boundary boundary;
-	    private ClientSystemControl control;
+	    private ClientControl control;
 	    
 	    
 	    //各パーツ
@@ -32,7 +32,7 @@ public class PlayerListBoundary extends JPanel{
 	     * @param boundary
 	     * @param control
 	     */
-	    public PlayerListBoundary(Boundary boundary, ClientSystemControl control){
+	    public GameStartBoundary(Boundary boundary, ClientControl control){
 
 	        this.boundary = boundary;
 	        this.control = control;

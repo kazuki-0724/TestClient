@@ -1,15 +1,13 @@
 package boundaries;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import control.ClientSystemControl;
+import control.ClientControl;
 
 
 
@@ -23,11 +21,11 @@ class ResultBoundary extends JPanel{
 
 
     private Boundary boundary;
-    private ClientSystemControl control;
+    private ClientControl control;
     //各パーツ
     private JLabel messageLabel;
     private JLabel themeLabel;
-    //private JLabel timerLabel;
+    private JLabel timerLabel;
     private JButton nextButton;
 
     
@@ -36,7 +34,7 @@ class ResultBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public ResultBoundary(Boundary boundary, ClientSystemControl control){
+    public ResultBoundary(Boundary boundary, ClientControl control){
 
         this.boundary = boundary;
         this.control = control;
@@ -48,18 +46,9 @@ class ResultBoundary extends JPanel{
         //各パーツのインスタンス生成
         messageLabel = new JLabel("この問題の結果"); 
         themeLabel = new JLabel("お題：");
-        //timerLabel = new JLabel("timer");
+        timerLabel = new JLabel("timer");
         
-        nextButton = new JButton("次へ");
-        nextButton.addActionListener(new ActionListener() {
-        	
-        	@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO 自動生成されたメソッド・スタブ
-        		control.communicate().sendData("final result","");
-        		control.stopTimer();
-			}
-        });
+        
         
         
         
@@ -112,5 +101,14 @@ class ResultBoundary extends JPanel{
     	this.messageLabel.setText(String.format("この問題の結果%s", text));
     }
     
+    
+    
+    /**
+     * タイマーカウントダウン
+     * @param time
+     */
+    public void updateTimer(String time) {
+    	this.timerLabel.setText(time + "");
+    }
 
 }

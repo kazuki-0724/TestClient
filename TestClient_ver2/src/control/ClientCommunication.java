@@ -8,9 +8,6 @@ import javax.websocket.DeploymentException;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 
-import entity.Boundaries;
-import entity.Player;
-
 
 
 
@@ -21,13 +18,13 @@ import entity.Player;
  * @author Kazuki0724
  *
  */
-public class ClientSystemControlCommunication{
+public class ClientCommunication{
 
 	
-    private ClientSystemControl control;
+    private ClientControl control;
     private boolean isConnection;
     
-    private WebSocketClient webSocketClient;
+    private WebSocketEndpoint webSocketEndpoint;
 	private Session session; 
     
     
@@ -49,10 +46,10 @@ public class ClientSystemControlCommunication{
      * コンストラクタ
      * @param control
      */
-    public ClientSystemControlCommunication(ClientSystemControl control){
+    public ClientCommunication(ClientControl control){
         this.control = control;
         isConnection = false;
-        this.webSocketClient = new WebSocketClient(this);
+        this.webSocketEndpoint = new WebSocketEndpoint(this);
         
         connect();
     }
@@ -73,7 +70,7 @@ public class ClientSystemControlCommunication{
     	
     	System.out.println("[Log] send data [" + dataFlag + "] "+ communicationFormat);
     	
-    	webSocketClient.sendMessage(communicationFormat);
+    	webSocketEndpoint.sendMessage(communicationFormat);
     	
     }
 
@@ -175,54 +172,6 @@ public class ClientSystemControlCommunication{
     	data = tmpString[1];
     	
     	
-    	switch(dataFlag) {
-    	
-    		case "userData":			
-    			Player myPlayer = new Player("master1","1234",0,1,2);
-    			control.setMyPlayer(myPlayer);
-    			control.getBoundary().changePanel(Boundaries.LobbyBoundary);
-    			break;
-    			
-    		case "match make":
-    			control.getBoundary().changePanel(Boundaries.PlayerListBoundary);
-    			control.runTimer(TIMER_TYPE_MATCH_MAKE, TIMER_DURATION_5);
-    			break;
-    			   			
-    		case "goConfirm":
-    			System.out.println("theme is "+data);
-    			control.getGameInfo().setTheme(data);
-    			control.getBoundary().changePanel(Boundaries.ConfirmationBoundary);
-    			control.runTimer(TIMER_TYPE_CONFIRM, TIMER_DURATION_5);
-    			
-    			break;
-    			
-    		case "goPainter":
-    			control.getBoundary().changePanel(Boundaries.PainterBoundary);
-    			control.runTimer(TIMER_TYPE_PAINTER, TIMER_DURATION_30);
-    			break;
-    			
-    		case "stroke":
-    			control.getBoundary().updatePanel(Boundaries.RespondentBoundary, data);
-    			break;
-    		
-    		case "goTurnResult":
-    			control.getGameInfo().setResult(data);
-    			control.getBoundary().changePanel(Boundaries.ResultBoundary);
-    			break;
-    			
-    			
-    		case "final result data":
-    			control.getBoundary().changePanel(Boundaries.FinalResultBoundary);
-    			break;
-    			
-    		case "back to lobby":
-    			Player updateMyPlayer = new Player("master1","1234",0,1,2);
-    			control.setMyPlayer(updateMyPlayer);
-    			control.getBoundary().changePanel(Boundaries.LobbyBoundary);
-    			break;		
-    		
-    	}
-    	
     	
     }
     
@@ -246,7 +195,7 @@ public class ClientSystemControlCommunication{
     	
     	// サーバー・エンドポイントとのセッションを確立する
     	try {
-			session = container.connectToServer(webSocketClient,uri);
+			session = container.connectToServer(webSocketEndpoint,uri);
 		} catch (DeploymentException | IOException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

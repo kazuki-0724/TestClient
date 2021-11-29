@@ -1,15 +1,12 @@
 package boundaries;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import control.ClientSystemControl;
+import control.ClientControl;
 
 
 
@@ -23,14 +20,14 @@ class ConfirmationBoundary extends JPanel{
 
     //リスナーに渡すだけのため
 	private Boundary boundary;
-    private ClientSystemControl control;
+    private ClientControl control;
     
     
     //各パーツ
     private JLabel messageLabel;
     private JLabel themeLabel;
     private JLabel timerLabel;
-    private JButton nextButton;
+    
     
     
     /**
@@ -38,7 +35,7 @@ class ConfirmationBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public ConfirmationBoundary(Boundary boundary, ClientSystemControl control){
+    public ConfirmationBoundary(Boundary boundary, ClientControl control){
 
         this.boundary = boundary;
         this.control = control;
@@ -52,16 +49,7 @@ class ConfirmationBoundary extends JPanel{
         themeLabel = new JLabel("お題：");
         timerLabel = new JLabel("timer");
         
-        nextButton = new JButton("次へ");
-        nextButton.addActionListener(new ActionListener() {
-        	
-        	@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO 自動生成されたメソッド・スタブ
-        		control.communicate().sendData("game start","");
-        		control.stopTimer();
-			}
-        });
+       
         
         
         
@@ -74,7 +62,7 @@ class ConfirmationBoundary extends JPanel{
         themeLabel.setBounds(250,250,300,40);
         timerLabel.setBounds(470,10,150,40);
         timerLabel.setBorder(border);
-        nextButton.setBounds(250,350,200,40);
+        
         
         /***************************************************/
         
@@ -83,7 +71,6 @@ class ConfirmationBoundary extends JPanel{
         this.add(messageLabel);
         this.add(themeLabel);
         this.add(timerLabel);
-        this.add(nextButton);
         /************************/
         
         

@@ -11,14 +11,14 @@ import javax.websocket.RemoteEndpoint.Basic;
 import javax.websocket.Session;
  
 @ClientEndpoint
-public class WebSocketClient {
+public class WebSocketEndpoint {
 	
 	private Session currentSession;
-	private ClientSystemControlCommunication cscc;
+	private ClientCommunication cscc;
 	Basic basic;
 	
 	
-	public WebSocketClient(ClientSystemControlCommunication cscc) {	
+	public WebSocketEndpoint(ClientCommunication cscc) {	
 		super();
 		this.cscc = cscc;
 	}
