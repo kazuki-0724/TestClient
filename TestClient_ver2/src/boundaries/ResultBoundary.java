@@ -2,7 +2,6 @@ package boundaries;
 
 import java.awt.Color;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -26,7 +25,6 @@ class ResultBoundary extends JPanel{
     private JLabel messageLabel;
     private JLabel themeLabel;
     private JLabel timerLabel;
-    private JButton nextButton;
 
     
     /**
@@ -59,9 +57,8 @@ class ResultBoundary extends JPanel{
         
         messageLabel.setBounds(250,200,300,40);
         themeLabel.setBounds(250,250,300,40);
-        //timerLabel.setBounds(470,10,150,40);
-        //timerLabel.setBorder(border);
-        nextButton.setBounds(250,350,200,40);
+        timerLabel.setBounds(470,10,150,40);
+        timerLabel.setBorder(border);
         
         /***************************************************/
         
@@ -69,8 +66,7 @@ class ResultBoundary extends JPanel{
         /*パネルに追加***********/
         this.add(messageLabel);
         this.add(themeLabel);
-        //this.add(timerLabel);
-        this.add(nextButton);
+        this.add(timerLabel);
         /************************/
         
         

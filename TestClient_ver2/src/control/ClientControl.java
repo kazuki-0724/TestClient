@@ -249,11 +249,11 @@ public class ClientControl{
 		
 		@Override
 		public void run() {
-			if (currentDurationTime >= 0) {
+			if (time >= 0) {
 				
-				boundary.updateCountDown(type, currentDurationTime+"");
-				System.out.println(String.format("count : %2d", currentDurationTime) );
-				currentDurationTime--;
+				boundary.updateCountDown(type, time+"");
+				System.out.println(String.format("count : %2d", time) );
+				time--;
 				
 				
 			} else {

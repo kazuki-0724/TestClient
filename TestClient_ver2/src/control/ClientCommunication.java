@@ -27,20 +27,7 @@ public class ClientCommunication{
     private WebSocketEndpoint webSocketEndpoint;
 	private Session session; 
     
-    
-    private final int TIMER_TYPE_PAINTER = 0;
-    private final int TIMER_TYPE_RESPONDER = 1;
-    private final int TIMER_TYPE_CONFIRM = 2;
-    private final int TIMER_TYPE_MATCH_MAKE = 3;
-    
-    
-    
-    private final int TIMER_DURATION_3 = 0;
-    private final int TIMER_DURATION_5 = 1;
-    private final int TIMER_DURATION_10 = 2;
-    private final int TIMER_DURATION_30 = 3;
-    
-    
+   
     
     /**
      * コンストラクタ
@@ -125,6 +112,10 @@ public class ClientCommunication{
     		case "back to lobby":
     			json = String.format("%s#%s",dataFlag,"blank");
     			break;
+    		
+    		case "time over":
+    			json = String.format("%s#%s",dataFlag,data);
+    			break;	
     			
     		default:
     			System.out.println("[Error] handleSendData dataFlag error");
