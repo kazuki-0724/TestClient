@@ -1,9 +1,13 @@
 package boundaries;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import control.ClientControl;
+import control.ClientSystemControl;
 
 
 
@@ -16,11 +20,12 @@ import control.ClientControl;
 class WaitingTimeBoundary extends JPanel{
 
     private Boundary boundary;
-    private ClientControl control;
+    private ClientSystemControl control;
     
     
     //各パーツ
     private JLabel messageLabel;
+    private JButton nextButton;
     
     
     /**
@@ -28,7 +33,7 @@ class WaitingTimeBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public WaitingTimeBoundary(Boundary boundary, ClientControl control) {
+    public WaitingTimeBoundary(Boundary boundary, ClientSystemControl control) {
 		// TODO 自動生成されたコンストラクター・スタブ
 	
 
@@ -38,6 +43,16 @@ class WaitingTimeBoundary extends JPanel{
         
         /*各インスタンス生成****************************************************/
         messageLabel = new JLabel("出題者がお題確認中。しばらくお待ちください");     
+        
+        nextButton = new JButton("次へ");
+        nextButton.addActionListener(new ActionListener() {
+        	
+        	@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO 自動生成されたメソッド・スタブ
+        		control.communicate().sendData("game start","");
+			}
+        });
         
         /***********************************************************************/
         
@@ -49,12 +64,14 @@ class WaitingTimeBoundary extends JPanel{
         this.setLayout(null);
 
         messageLabel.setBounds(250,200,300,40);
+        nextButton.setBounds(250,350,200,40);
         
         /*************************************/
         
         
         /*パネルに追加*********/
         this.add(messageLabel);
+        this.add(nextButton);
         /**********************/
         
         

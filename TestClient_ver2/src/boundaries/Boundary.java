@@ -3,7 +3,7 @@ package boundaries;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import control.ClientControl;
+import control.ClientSystemControl;
 import entity.Boundaries;
 
 
@@ -19,7 +19,7 @@ public class Boundary extends JFrame{
 
     
     // Control
-    ClientControl control;
+    ClientSystemControl control;
     
     
 
@@ -35,7 +35,7 @@ public class Boundary extends JFrame{
     private ConfirmationBoundary confirmationBoundary;
     private WaitingTimeBoundary waitingTimeBoundary;
     private ResultBoundary resultBoundary;
-    private GameStartBoundary gameStartBoundary;
+    private PlayerListBoundary playerListBoundary;
     private FinalResultBoundary finalResultBoundary;
     
 
@@ -43,7 +43,7 @@ public class Boundary extends JFrame{
     public Boundary(){
 
     	//各インスタンス生成
-        control = new ClientControl(this);
+        control = new ClientSystemControl(this);
         
 
         accountAuthentificationBoundary  = new AccountAuthentificationBoundary(this,control);
@@ -54,7 +54,7 @@ public class Boundary extends JFrame{
         confirmationBoundary = new ConfirmationBoundary(this,control);
         waitingTimeBoundary = new WaitingTimeBoundary(this,control);
         resultBoundary = new ResultBoundary(this,control);
-        gameStartBoundary = new GameStartBoundary(this, control);
+        playerListBoundary = new PlayerListBoundary(this, control);
         finalResultBoundary = new FinalResultBoundary(this, control);
 
 
@@ -83,8 +83,8 @@ public class Boundary extends JFrame{
         this.add(resultBoundary);
         resultBoundary.setVisible(false);
         
-        this.add(gameStartBoundary);
-        gameStartBoundary.setVisible(false);
+        this.add(playerListBoundary);
+        playerListBoundary.setVisible(false);
         
         this.add(finalResultBoundary);
         finalResultBoundary.setVisible(false);
@@ -188,9 +188,9 @@ public class Boundary extends JFrame{
             	
             case PlayerListBoundary:
             	updatePanel(Boundaries.PlayerListBoundary, "");
-            	gameStartBoundary.setVisible(true);
+            	playerListBoundary.setVisible(true);
             	this.setTitle("PlayerList");
-            	currentPanel = gameStartBoundary;
+            	currentPanel = playerListBoundary;
             	break;
                 
                 
@@ -287,7 +287,7 @@ public class Boundary extends JFrame{
     
     
     
-    //このメソッドの廃止
+    
     
     //それぞれの画面のカウントダウン制御 
     //時間制限が来たら次のページへ。早めのスタートのときどうしよう
@@ -334,7 +334,7 @@ public class Boundary extends JFrame{
     			break;
     		
     		case 3:
-    			gameStartBoundary.updateTimer(time);
+    			playerListBoundary.updateTimer(time);
     			
     			//制限時間の超過
     			if(time.equals("Time Over!")) {

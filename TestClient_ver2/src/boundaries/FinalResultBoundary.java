@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import control.ClientControl;
+import control.ClientSystemControl;
 import listener.ToLobbyActionListener;
 
 
@@ -20,7 +20,7 @@ public class FinalResultBoundary extends JPanel{
 
 
     private Boundary boundary;
-    private ClientControl control;
+    private ClientSystemControl control;
     //各パーツ
     private JLabel messageLabel;
     private JLabel themeLabel;
@@ -33,7 +33,7 @@ public class FinalResultBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public FinalResultBoundary(Boundary boundary, ClientControl control){
+    public FinalResultBoundary(Boundary boundary, ClientSystemControl control){
 
         this.boundary = boundary;
         this.control = control;

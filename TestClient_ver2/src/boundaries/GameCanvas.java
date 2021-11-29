@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
-import control.ClientControl;
+import control.ClientSystemControl;
 
 
 
@@ -24,7 +24,7 @@ import control.ClientControl;
 public class GameCanvas extends Canvas implements MouseListener,MouseMotionListener {
 
 
-	private ClientControl csc;
+	private ClientSystemControl csc;
 	
     static int w = 800, h = 600;
     public String position;
@@ -48,7 +48,7 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
      * コンストラクタ
      * @param csc
      */
-    public GameCanvas(ClientControl csc) {
+    public GameCanvas(ClientSystemControl csc) {
         
     	this.csc = csc;
     	

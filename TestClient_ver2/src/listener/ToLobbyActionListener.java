@@ -6,7 +6,7 @@ import boundaries.AccountAuthentificationBoundary;
 import boundaries.AccountRegistrationBoundary;
 import boundaries.Boundary;
 import boundaries.FinalResultBoundary;
-import control.ClientControl;
+import control.ClientSystemControl;
 import entity.Boundaries;
 
 
@@ -22,7 +22,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
     private AccountAuthentificationBoundary aab;
     private AccountRegistrationBoundary arb;
     private FinalResultBoundary frb;
-    private ClientControl control;
+    private ClientSystemControl control;
     private Boundary boundary;
 
     
@@ -32,7 +32,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
      * @param boundary
      * @param control
      */
-    public ToLobbyActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientControl control){
+    public ToLobbyActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientSystemControl control){
         this.aab = aab;
         this.control = control;
     }
@@ -44,7 +44,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
      * @param boundary
      * @param control
      */
-    public ToLobbyActionListener(AccountRegistrationBoundary arb, Boundary boundary ,ClientControl control){
+    public ToLobbyActionListener(AccountRegistrationBoundary arb, Boundary boundary ,ClientSystemControl control){
         this.arb = arb;
         this.control = control;
     }
@@ -56,7 +56,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
      * @param boundary
      * @param control
      */
-    public ToLobbyActionListener(FinalResultBoundary frb, Boundary boundary ,ClientControl control){
+    public ToLobbyActionListener(FinalResultBoundary frb, Boundary boundary ,ClientSystemControl control){
         this.frb = frb;
         this.control = control;
     }

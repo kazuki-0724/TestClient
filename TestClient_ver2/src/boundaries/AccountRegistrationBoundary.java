@@ -12,7 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import control.ClientControl;
+import control.ClientSystemControl;
 import listener.SwitchActionListener;
 import listener.ToLobbyActionListener;
 
@@ -32,7 +32,7 @@ public class AccountRegistrationBoundary extends JPanel{
 
 	//リスナーに渡すだけのために
     private Boundary boundary;
-    private ClientControl control;
+    private ClientSystemControl control;
 
     //各パーツ
     private JLabel titleLabel;
@@ -53,7 +53,7 @@ public class AccountRegistrationBoundary extends JPanel{
     /*************************************/
 
 
-    public AccountRegistrationBoundary(Boundary boundary,ClientControl control){
+    public AccountRegistrationBoundary(Boundary boundary,ClientSystemControl control){
 
 
         this.boundary = boundary;

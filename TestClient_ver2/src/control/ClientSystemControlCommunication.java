@@ -8,6 +8,9 @@ import javax.websocket.DeploymentException;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 
+import entity.Boundaries;
+import entity.Player;
+
 
 
 
@@ -18,15 +21,27 @@ import javax.websocket.WebSocketContainer;
  * @author Kazuki0724
  *
  */
-public class ClientCommunication{
+public class ClientSystemControlCommunication{
 
 	
-    private ClientControl control;
+    private ClientSystemControl control;
     private boolean isConnection;
     
-    private WebSocketEndpoint webSocketEndpoint;
+    private WebSocketClient webSocketClient;
 	private Session session; 
     
+    
+    private final int TIMER_TYPE_PAINTER = 0;
+    private final int TIMER_TYPE_RESPONDER = 1;
+    private final int TIMER_TYPE_CONFIRM = 2;
+    private final int TIMER_TYPE_MATCH_MAKE = 3;
+    
+    
+    
+    private final int TIMER_DURATION_3 = 0;
+    private final int TIMER_DURATION_5 = 1;
+    private final int TIMER_DURATION_10 = 2;
+    private final int TIMER_DURATION_30 = 3;
     
     
     
@@ -34,10 +49,10 @@ public class ClientCommunication{
      * コンストラクタ
      * @param control
      */
-    public ClientCommunication(ClientControl control){
+    public ClientSystemControlCommunication(ClientSystemControl control){
         this.control = control;
         isConnection = false;
-        this.webSocketEndpoint = new WebSocketEndpoint(this);
+        this.webSocketClient = new WebSocketClient(this);
         
         connect();
     }
@@ -58,7 +73,7 @@ public class ClientCommunication{
     	
     	System.out.println("[Log] send data [" + dataFlag + "] "+ communicationFormat);
     	
-    	this.webSocketEndpoint.sendMessage(communicationFormat);
+    	webSocketClient.sendMessage(communicationFormat);
     	
     }
 
@@ -148,25 +163,65 @@ public class ClientCommunication{
      * 受け取ったデータの解析。実際のデータの形の未定だからこれも要変更
      * @param json
      */
-    public void handleReceivedData(String receivedData) {
+    public void handleReceivedData(String json) {
     	
     	
     	String dataFlag;
     	String data;
-    
     	
-    	//本来は何らかのデータ解析処理が入る***********/
-    	String[] tmpString = receivedData.split("#");
+    	String[] tmpString = json.split("#");
     	
     	dataFlag = tmpString[0];
     	data = tmpString[1];
     	
-    	/*********************************************/
     	
+    	switch(dataFlag) {
     	
-    	
-    	//解析したデータ判別のフラグ?とデータを使って画面遷移等々
-    	control.handleData(dataFlag, data);
+    		case "userData":			
+    			Player myPlayer = new Player("master1","1234",0,1,2);
+    			control.setMyPlayer(myPlayer);
+    			control.getBoundary().changePanel(Boundaries.LobbyBoundary);
+    			break;
+    			
+    		case "match make":
+    			control.getBoundary().changePanel(Boundaries.PlayerListBoundary);
+    			control.runTimer(TIMER_TYPE_MATCH_MAKE, TIMER_DURATION_5);
+    			break;
+    			   			
+    		case "goConfirm":
+    			System.out.println("theme is "+data);
+    			control.getGameInfo().setTheme(data);
+    			control.getBoundary().changePanel(Boundaries.ConfirmationBoundary);
+    			control.runTimer(TIMER_TYPE_CONFIRM, TIMER_DURATION_5);
+    			
+    			break;
+    			
+    		case "goPainter":
+    			control.getBoundary().changePanel(Boundaries.PainterBoundary);
+    			control.runTimer(TIMER_TYPE_PAINTER, TIMER_DURATION_30);
+    			break;
+    			
+    		case "stroke":
+    			control.getBoundary().updatePanel(Boundaries.RespondentBoundary, data);
+    			break;
+    		
+    		case "goTurnResult":
+    			control.getGameInfo().setResult(data);
+    			control.getBoundary().changePanel(Boundaries.ResultBoundary);
+    			break;
+    			
+    			
+    		case "final result data":
+    			control.getBoundary().changePanel(Boundaries.FinalResultBoundary);
+    			break;
+    			
+    		case "back to lobby":
+    			Player updateMyPlayer = new Player("master1","1234",0,1,2);
+    			control.setMyPlayer(updateMyPlayer);
+    			control.getBoundary().changePanel(Boundaries.LobbyBoundary);
+    			break;		
+    		
+    	}
     	
     	
     }
@@ -191,7 +246,7 @@ public class ClientCommunication{
     	
     	// サーバー・エンドポイントとのセッションを確立する
     	try {
-			session = container.connectToServer(webSocketEndpoint,uri);
+			session = container.connectToServer(webSocketClient,uri);
 		} catch (DeploymentException | IOException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -205,6 +260,8 @@ public class ClientCommunication{
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+    	
+    	
     	
     	
     	System.out.println("connection successed");

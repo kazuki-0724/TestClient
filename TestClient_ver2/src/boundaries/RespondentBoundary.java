@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import control.ClientControl;
+import control.ClientSystemControl;
 import listener.AnswerSubmitActionListener;
 
 
@@ -24,7 +24,7 @@ import listener.AnswerSubmitActionListener;
 public class RespondentBoundary extends JPanel{
 
     private Boundary boundary;
-    private ClientControl control;
+    private ClientSystemControl control;
 
     
     //各パーツ
@@ -58,7 +58,7 @@ public class RespondentBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public RespondentBoundary(Boundary boundary, ClientControl control){
+    public RespondentBoundary(Boundary boundary, ClientSystemControl control){
 
         this.boundary = boundary;
         this.control = control;

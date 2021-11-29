@@ -4,7 +4,7 @@ package listener;
 import java.awt.event.ActionEvent;
 
 import boundaries.Boundary;
-import control.ClientControl;
+import control.ClientSystemControl;
 
 
 
@@ -17,7 +17,7 @@ import control.ClientControl;
 public class LogoutActionListener extends BoundaryActionListener{
     
 	
-	private ClientControl control;
+	private ClientSystemControl control;
     private Boundary boundary;
     
     
@@ -26,7 +26,7 @@ public class LogoutActionListener extends BoundaryActionListener{
      * @param control
      * @param boundary
      */
-    public LogoutActionListener(ClientControl control, Boundary boundary) {
+    public LogoutActionListener(ClientSystemControl control, Boundary boundary) {
     	
     	this.control = control;
     	this.boundary = boundary;
