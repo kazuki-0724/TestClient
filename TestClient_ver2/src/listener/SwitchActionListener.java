@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import boundaries.AccountAuthentificationBoundary;
 import boundaries.AccountRegistrationBoundary;
 import boundaries.Boundary;
-import control.ClientSystemControl;
+import control.ClientControl;
 import entity.Boundaries;
 
 
@@ -24,7 +24,7 @@ public class SwitchActionListener extends BoundaryActionListener{
 	private AccountRegistrationBoundary arb;
 	private AccountAuthentificationBoundary aab;
 	private Boundary boundary;
-	private ClientSystemControl control;
+	private ClientControl control;
 	
 	
 	
@@ -34,7 +34,7 @@ public class SwitchActionListener extends BoundaryActionListener{
 	 * @param boundary
 	 * @param control
 	 */
-	public SwitchActionListener(AccountRegistrationBoundary arb, Boundary boundary ,ClientSystemControl control){
+	public SwitchActionListener(AccountRegistrationBoundary arb, Boundary boundary ,ClientControl control){
 	        this.arb = arb;
 	        this.boundary = boundary;
 	        this.control = control;
@@ -47,7 +47,7 @@ public class SwitchActionListener extends BoundaryActionListener{
 	 * @param boundary
 	 * @param control
 	 */
-	public SwitchActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientSystemControl control){
+	public SwitchActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientControl control){
         this.aab = aab;
         this.boundary = boundary;
         this.control = control;
@@ -66,10 +66,10 @@ public class SwitchActionListener extends BoundaryActionListener{
 		System.out.println("[Log] "+type);
 		
 		if(type.equals("goLogin")) {
-			control.getBoundary().changePanel(Boundaries.AccountAuthentificationBoudary);
+			boundary.changePanel(Boundaries.AccountAuthentificationBoudary);
 			
 		}else if(type.equals("goResist")) {
-			control.getBoundary().changePanel(Boundaries.AccountRegistrationBoundary);
+			boundary.changePanel(Boundaries.AccountRegistrationBoundary);
 		
 		}else {
 			System.out.println("[Error] Switch action listener error");

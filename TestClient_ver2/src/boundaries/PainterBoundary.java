@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
-import control.ClientSystemControl;
+import control.ClientControl;
 
 
 
@@ -22,7 +22,7 @@ class PainterBoundary extends JPanel{
 
 
     private Boundary boundary;
-    private ClientSystemControl control;
+    private ClientControl control;
 
     //各パーツ
     private JLabel messageLabel_1;
@@ -56,7 +56,7 @@ class PainterBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public PainterBoundary(Boundary boundary, ClientSystemControl control){
+    public PainterBoundary(Boundary boundary, ClientControl control){
 
 
         this.boundary = boundary;
