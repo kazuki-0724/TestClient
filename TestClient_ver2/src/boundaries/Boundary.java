@@ -186,8 +186,8 @@ public class Boundary extends JFrame{
             	break;
             	
             	
-            case PlayerListBoundary:
-            	updatePanel(Boundaries.PlayerListBoundary, "");
+            case GameStartBoundary:
+            	updatePanel(Boundaries.GameStartBoundary, "");
             	gameStartBoundary.setVisible(true);
             	this.setTitle("PlayerList");
             	currentPanel = gameStartBoundary;
@@ -272,7 +272,7 @@ public class Boundary extends JFrame{
             	break;
             	
             //ゲーム待機画面	
-            case PlayerListBoundary:
+            case GameStartBoundary:
             	//画面に参加者データをセット(gameInfoから)
             	break;
                                 
@@ -282,6 +282,17 @@ public class Boundary extends JFrame{
         }
 
     }
+    
+    
+     
+    /**
+     * 現在のパネルのgetter
+     * @return
+     */
+    public JPanel getCurrentBoundary() {
+    	return this.currentPanel;
+    }
+    
     
     
     

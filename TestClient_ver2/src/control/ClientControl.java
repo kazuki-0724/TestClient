@@ -98,40 +98,18 @@ public class ClientControl{
 	 * @param type どの画面のカウントダウンなのか
 	 * @param durationType カウントダウンの時間
 	 */
-	public void runTimer(int type, int durationType) {
+	public void runTimer(int type, int durationTime) {
 		
 		System.out.println("タイマーカウント");
 		
-		// どの制限時間なのか決定
-		switch(durationType) {
-			
-			case 0:
-				currentDurationTime = durationTime_3;
-				break;
-				
-			case 1:
-				currentDurationTime = durationTime_5;
-				break;
-			
-			case 2:
-				currentDurationTime = durationTime_10;
-				break;
-				
-			case 3:
-				currentDurationTime = durationTime_30;
-				break;
-				
-			default:
-				System.out.println("run time type error");
-				break;
-		}
+	
 		
 		     
 		//スケジューラー
 		timer = new Timer();
 		
 		//タイマータスク
-		timerTask= new MyTimeTask(this, type);
+		timerTask= new MyTimeTask(this, type, durationTime);
 		timer.schedule(timerTask, 0l, 1000l);
 
 		
@@ -232,7 +210,7 @@ public class ClientControl{
     			break;
     			
     		case "match make":
-    			boundary.changePanel(Boundaries.PlayerListBoundary);
+    			boundary.changePanel(Boundaries.GameStartBoundary);
     			runTimer(TIMER_TYPE_MATCH_MAKE, TIMER_DURATION_5);
     			break;
     			   			
@@ -281,21 +259,27 @@ public class ClientControl{
 	private class MyTimeTask extends TimerTask {
 		
 		private ClientControl control;
-		private int type;
+		private Boundaries panelType;
+		private int durationTime;
 		
 		
-		public MyTimeTask(ClientControl control, int type) {
+		public MyTimeTask(ClientControl control, Boundaries panelType, int durationTime) {
 			// TODO 自動生成されたコンストラクター・スタブ
 			this.control = control;
-			this.type = type;
+			this.panelType = panelType;
+			this.durationTime = durationTime;
 		}
+
 
 		
 		@Override
 		public void run() {
+			
+			
 			if (currentDurationTime >= 0) {
 				
-				boundary.updateCountDown(type, currentDurationTime+"");
+				boundary.updateCountDown(panelType, currentDurationTime+"");
+					
 				System.out.println(String.format("count : %2d", currentDurationTime) );
 				currentDurationTime--;
 				
@@ -303,9 +287,12 @@ public class ClientControl{
 			} else {
 				timer.cancel();
 				timer = null;
-				boundary.updateCountDown(type, "Time Over!");
+				boundary.updateCountDown(panelType, "time over");
 			}
 		}
+		
+		
+	
 
 	}
     
