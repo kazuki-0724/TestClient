@@ -24,7 +24,8 @@ public class ToLobbyActionListener extends BoundaryActionListener{
     private FinalResultBoundary frb;
     private ClientControl control;
     private Boundary boundary;
-
+    private final String[] FORBIDDEN_CHARACTERS = {"_"}; 
+    
     
     /**
      * ログイン画面用のコンストラクタ
@@ -34,7 +35,9 @@ public class ToLobbyActionListener extends BoundaryActionListener{
      */
     public ToLobbyActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientControl control){
         this.aab = aab;
+        this.boundary = boundary;
         this.control = control;
+        
     }
 
     
@@ -46,6 +49,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
      */
     public ToLobbyActionListener(AccountRegistrationBoundary arb, Boundary boundary ,ClientControl control){
         this.arb = arb;
+        this.boundary = boundary;
         this.control = control;
     }
     
@@ -58,6 +62,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
      */
     public ToLobbyActionListener(FinalResultBoundary frb, Boundary boundary ,ClientControl control){
         this.frb = frb;
+        this.boundary = boundary;
         this.control = control;
     }
     
@@ -90,7 +95,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
             this.aab.getPassFiled().setText("");
             
             
-            //
+            //空入力と禁止文字の排除
             if(userId.equals("") || userPass.equals("")) {
             	
             	boundary.updatePanel(Boundaries.AccountAuthentificationBoudary, "error");
@@ -98,6 +103,12 @@ public class ToLobbyActionListener extends BoundaryActionListener{
             	
             }else{
               	
+            	if( !checkCharacters(userId) || !checkCharacters(userPass)) {
+            		boundary.updatePanel(Boundaries.AccountAuthentificationBoudary, "forbidden character");
+                	System.out.println("[Error] forbidden character");
+                	return;
+            	}
+            	
             	control.communicate().sendData("login",String.format("%s&%s",userId,userPass));
         	
             }
@@ -119,13 +130,21 @@ public class ToLobbyActionListener extends BoundaryActionListener{
             this.arb.getIdField().setText("");
             this.arb.getPassFiled().setText("");
             
-           
+            //空入力と禁止文字の排除
             if(userId.equals("") || userPass.equals("")) {
             	
-            	boundary.updatePanel(Boundaries.AccountRegistrationBoundary, "error");
+            	
+            	boundary.updatePanel(Boundaries.AccountRegistrationBoundary, "blank input");
             	System.out.println("[Error] not enterted");
             	
+            
             }else{
+            	
+            	if( !checkCharacters(userId) || !checkCharacters(userPass)) {
+            		boundary.updatePanel(Boundaries.AccountRegistrationBoundary, "forbidden character");
+                	System.out.println("[Error] forbidden character");
+                	return;
+            	}
               	
             	control.communicate().sendData("regist",String.format("%s&%s",userId,userPass));
         	
@@ -149,6 +168,19 @@ public class ToLobbyActionListener extends BoundaryActionListener{
 
         
     
+    }
+    
+    
+    
+    private boolean checkCharacters(String text) {
+    	
+    	for(int i=0;i<FORBIDDEN_CHARACTERS.length;i++) {
+    		if(text.indexOf(FORBIDDEN_CHARACTERS[i]) != -1 ) {
+    			System.out.println("Forbidden characters include");
+    			return false;
+    		}
+    	}
+    	return true;
     }
     
 }
