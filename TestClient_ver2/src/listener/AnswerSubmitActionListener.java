@@ -62,8 +62,8 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 			
 			//答えが一致していた場合、実際に正解時刻を送信する
 			System.out.println("[Log] your answer is correct");
+			//時刻じゃなくて正解した旨を送信
 			control.communicate().sendData("answer", LocalDateTime.now().toString());
-			
 			
 			
 		}else {

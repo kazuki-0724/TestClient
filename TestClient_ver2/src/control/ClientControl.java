@@ -65,7 +65,7 @@ public class ClientControl{
 		this.boundary = boundary;
 		this.cscc = new ClientCommunication(this); 
 		this.gameInfo = new GameInfo();
-			
+		init();
 	}
 	
 
@@ -73,7 +73,7 @@ public class ClientControl{
 	 * 初期化処理
 	 */
 	public void init() {
-		
+		cscc.connect();
 	}
 	
 	
@@ -92,7 +92,7 @@ public class ClientControl{
 		timer = new Timer();
 		
 		//タイマータスク
-		timerTask= new MyTimerTask(this, type, time);
+		timerTask= new MyTimerTask(this,boundary, type, time);
 		timer.schedule(timerTask, 0l, 1000l);
 
 		
@@ -235,13 +235,15 @@ public class ClientControl{
 	private class MyTimerTask extends TimerTask {
 		
 		private ClientControl control;
+		private Boundary boundary;
 		private Boundaries type;
 		private int time;
 		
 		
-		public MyTimerTask(ClientControl control, Boundaries type, int time) {
+		public MyTimerTask(ClientControl control,Boundary boundary, Boundaries type, int time) {
 			// TODO 自動生成されたコンストラクター・スタブ
 			this.control = control;
+			this.boundary = boundary;
 			this.type = type;
 			this.time = time;
 		}
@@ -260,7 +262,7 @@ public class ClientControl{
 				timer.cancel();
 				timer = null;
 				boundary.updateCountDown(type, "Time Over!");
-				communicate().sendData("time over", type.toString());
+				control.communicate().sendData("time over", "blank");
 			}
 		}
 

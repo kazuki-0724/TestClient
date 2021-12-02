@@ -27,7 +27,10 @@ public class ClientCommunication{
     private WebSocketEndpoint webSocketEndpoint;
 	private Session session; 
     
-   
+	private static String CLM_URI = "ws://localhost:8080/TestServer/WebSocketServer";
+    private static String AP_URI = "";
+    
+    
     
     /**
      * コンストラクタ
@@ -38,7 +41,7 @@ public class ClientCommunication{
         isConnection = false;
         this.webSocketEndpoint = new WebSocketEndpoint(this);
         
-        connect();
+        //connect();
     }
 
 
@@ -174,6 +177,7 @@ public class ClientCommunication{
 
     /**
      * サーバに接続
+     * 引数でCLMかAPの判別が必要な気がする
      */
     public void connect(){
     	
@@ -181,7 +185,7 @@ public class ClientCommunication{
     	WebSocketContainer container = ContainerProvider.getWebSocketContainer();
     			
    		// サーバー・エンドポイントのURI
-    	URI uri = URI.create("ws://localhost:8080/TestServer/WebSocketServer");
+    	URI uri = URI.create(CLM_URI);
     		
     	
     	// サーバー・エンドポイントとのセッションを確立する
@@ -195,14 +199,11 @@ public class ClientCommunication{
     	
     	//メッセージをサーバへ送る
     	try {
-			session.getBasicRemote().sendText("Hello World!!#blank");
+			session.getBasicRemote().sendText("Hello Server#blank");
 		} catch (IOException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-    	
-    	
-    	
     	
     	System.out.println("connection successed");
     }
@@ -216,7 +217,13 @@ public class ClientCommunication{
     public void disconnect(){
     	
     	System.out.println("connection disconnected");
-    	control.setMyPlayer(null);
+    	
+    	try {
+			session.close();
+		} catch (IOException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
     	
     }
     
@@ -227,7 +234,7 @@ public class ClientCommunication{
      * @return
      */
     public boolean isConnected(){
-        return this.isConnection;
+        return this.session.isOpen();
     }
 
     
