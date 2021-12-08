@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import boundaries.Boundary;
-import entity.Boundaries;
+import entity.BoundaryID;
 import entity.GameInfo;
 import entity.Player;
 
@@ -83,7 +83,7 @@ public class ClientControl{
 	 * @param type どの画面のカウントダウンなのか
 	 * @param durationType カウントダウンの時間
 	 */
-	public void runTimer(Boundaries type, int time) {
+	public void runTimer(BoundaryID type, int time) {
 		
 		System.out.println("タイマーカウント");
 		
@@ -181,45 +181,44 @@ public class ClientControl{
     		case "userData":			
     			Player myPlayer = new Player("master1","1234",0,1,2);
     			setMyPlayer(myPlayer);
-    			boundary.changePanel(Boundaries.LobbyBoundary);
+    			boundary.changePanel(BoundaryID.LobbyBoundary);
     			break;
     			
     		case "match make":
-    			boundary.changePanel(Boundaries.GameStartBoundary);
-    			runTimer(Boundaries.GameStartBoundary, 5);
+    			boundary.changePanel(BoundaryID.GameStartBoundary);
+    			runTimer(BoundaryID.GameStartBoundary, 5);
     			break;
     			   			
     		case "goConfirm":
     			System.out.println("theme is "+data);
     			getGameInfo().setTheme(data);
-    			boundary.changePanel(Boundaries.ConfirmationBoundary);
-    			runTimer(Boundaries.ConfirmationBoundary, 5);
-    			
+    			boundary.changePanel(BoundaryID.ConfirmationBoundary);
+    			runTimer(BoundaryID.ConfirmationBoundary, 5);
     			break;
     			
     		case "goPainter":
-    			boundary.changePanel(Boundaries.PainterBoundary);
-    			runTimer(Boundaries.PainterBoundary, 30);
+    			boundary.changePanel(BoundaryID.PainterBoundary);
+    			runTimer(BoundaryID.PainterBoundary, 30);
     			break;
     			
     		case "stroke":
-    			boundary.updatePanel(Boundaries.RespondentBoundary, data);
+    			boundary.updatePanel(BoundaryID.RespondentBoundary, data);
     			break;
     		
     		case "goTurnResult":
     			getGameInfo().setResult(data);
-    			boundary.changePanel(Boundaries.ResultBoundary);
+    			boundary.changePanel(BoundaryID.ResultBoundary);
     			break;
     			
     			
     		case "final result data":
-    			boundary.changePanel(Boundaries.FinalResultBoundary);
+    			boundary.changePanel(BoundaryID.FinalResultBoundary);
     			break;
     			
     		case "back to lobby":
     			Player updateMyPlayer = new Player("master1","1234",0,1,2);
     			setMyPlayer(updateMyPlayer);
-    			boundary.changePanel(Boundaries.LobbyBoundary);
+    			boundary.changePanel(BoundaryID.LobbyBoundary);
     			break;		
     		
     	}
@@ -236,11 +235,11 @@ public class ClientControl{
 		
 		private ClientControl control;
 		private Boundary boundary;
-		private Boundaries type;
+		private BoundaryID type;
 		private int time;
 		
 		
-		public MyTimerTask(ClientControl control,Boundary boundary, Boundaries type, int time) {
+		public MyTimerTask(ClientControl control,Boundary boundary, BoundaryID type, int time) {
 			// TODO 自動生成されたコンストラクター・スタブ
 			this.control = control;
 			this.boundary = boundary;

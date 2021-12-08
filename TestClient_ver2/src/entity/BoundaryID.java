@@ -6,7 +6,7 @@ package entity;
  * @author Kazuki0724
  *
  */
-public enum Boundaries {
+public enum BoundaryID {
 	
 	AccountAuthentificationBoudary,
 	AccountRegistrationBoundary,

@@ -26,7 +26,9 @@ public class GameStartBoundary extends JPanel{
 	    private JLabel messageLabel;
 	    private JLabel timerLabel;
 	    
-	    
+	    //参加プレイヤーラベル
+	    private JLabel[] playerLabel = new JLabel[4];
+	    	    
 	    /**
 	     * コンストラクタ
 	     * @param boundary
@@ -40,6 +42,11 @@ public class GameStartBoundary extends JPanel{
 	        
 	        LineBorder border = new LineBorder(Color.RED, 2, true);
 	        
+	        
+	        
+	        for(int i=0; i<4; i++) {
+	        	playerLabel[i] = new JLabel(String.format("%s","player")); 
+	        }
 	        
 	        //各パーツのインスタンス生成
 	        messageLabel = new JLabel("ゲーム参加者"); 
@@ -78,6 +85,22 @@ public class GameStartBoundary extends JPanel{
 	     */
 	    public void updateTimer(String time) {
 	    	this.timerLabel.setText(time + "");
+	    }
+	    
+	    
+	    
+	    public void setPlayersLabel(String[] data ) {
+	    	
+	    	//(name_rate )* 4
+	    	/**
+	    	 * split(_)
+	    	 */
+	    	
+	    	
+	    	for(int i=0; i<4;i++) {
+	    		playerLabel[i].setText(String.format("%s : %s", "player"+i,"rate")); 
+	    	}
+	    	
 	    }
 	    
 	    

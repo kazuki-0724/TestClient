@@ -42,6 +42,11 @@ public class RespondentBoundary extends JPanel{
 
     private JTextField answerField;
     private JButton answerButton;
+    
+    
+
+    //参加プレイヤーラベル
+    private JLabel[] playerLabel = new JLabel[4];
     /**********************************/
     
     
@@ -84,6 +89,12 @@ public class RespondentBoundary extends JPanel{
         answerButton.setActionCommand("answer");
         
         ac = new AnswerCanvas();
+        
+        for(int i=0; i<4; i++) {
+        	playerLabel[i] = new JLabel("playerLabel");
+        }
+        
+
         /**************************************************/
 
         
@@ -177,6 +188,21 @@ public class RespondentBoundary extends JPanel{
     public JTextField getAnswerField() {
 		return answerField;
 	}
+    
+    
+    public void setPlayersLabel(String[] data ) {
+    	
+    	//(name_rate )* 4
+    	/**
+    	 * split(_)
+    	 */
+    	
+    	
+    	for(int i=0; i<4;i++) {
+    		playerLabel[i].setText(String.format("%s : %s", "player"+i,"rate")); 
+    	}
+    	
+    }
 
 
 }

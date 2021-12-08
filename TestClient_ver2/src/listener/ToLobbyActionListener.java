@@ -7,7 +7,7 @@ import boundaries.AccountRegistrationBoundary;
 import boundaries.Boundary;
 import boundaries.FinalResultBoundary;
 import control.ClientControl;
-import entity.Boundaries;
+import entity.BoundaryID;
 
 
 /**
@@ -98,13 +98,13 @@ public class ToLobbyActionListener extends BoundaryActionListener{
             //空入力と禁止文字の排除
             if(userId.equals("") || userPass.equals("")) {
             	
-            	boundary.updatePanel(Boundaries.AccountAuthentificationBoudary, "error");
+            	boundary.updatePanel(BoundaryID.AccountAuthentificationBoudary, "error");
             	System.out.println("[Error] not enterted");
             	
             }else{
               	
             	if( !checkCharacters(userId) || !checkCharacters(userPass)) {
-            		boundary.updatePanel(Boundaries.AccountAuthentificationBoudary, "forbidden character");
+            		boundary.updatePanel(BoundaryID.AccountAuthentificationBoudary, "forbidden character");
                 	System.out.println("[Error] forbidden character");
                 	return;
             	}
@@ -134,14 +134,14 @@ public class ToLobbyActionListener extends BoundaryActionListener{
             if(userId.equals("") || userPass.equals("")) {
             	
             	
-            	boundary.updatePanel(Boundaries.AccountRegistrationBoundary, "blank input");
+            	boundary.updatePanel(BoundaryID.AccountRegistrationBoundary, "blank input");
             	System.out.println("[Error] not enterted");
             	
             
             }else{
             	
             	if( !checkCharacters(userId) || !checkCharacters(userPass)) {
-            		boundary.updatePanel(Boundaries.AccountRegistrationBoundary, "forbidden character");
+            		boundary.updatePanel(BoundaryID.AccountRegistrationBoundary, "forbidden character");
                 	System.out.println("[Error] forbidden character");
                 	return;
             	}

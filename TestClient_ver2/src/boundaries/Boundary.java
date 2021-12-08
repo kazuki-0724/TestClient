@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import control.ClientControl;
-import entity.Boundaries;
+import entity.BoundaryID;
 
 
 
@@ -115,7 +115,7 @@ public class Boundary extends JFrame{
 
    
     //パネルの切り替え用メソッド(nextPanelを文字列にしてるのめんどい)
-    public void changePanel(Boundaries nextBoundary){
+    public void changePanel(BoundaryID nextBoundary){
 
         // close currentPanel
         this.currentPanel.setVisible(false);
@@ -123,63 +123,63 @@ public class Boundary extends JFrame{
         switch(nextBoundary){
 
             case AccountAuthentificationBoudary:
-            	updatePanel(Boundaries.AccountAuthentificationBoudary, "");
+            	updatePanel(BoundaryID.AccountAuthentificationBoudary, "");
                 accountAuthentificationBoundary.setVisible(true);
                 this.setTitle("Login");
                 currentPanel = accountAuthentificationBoundary;
                 break;
 
             case AccountRegistrationBoundary:
-            	updatePanel(Boundaries.AccountRegistrationBoundary, "");
+            	updatePanel(BoundaryID.AccountRegistrationBoundary, "");
                 accountRegistrationBoundary.setVisible(true);
                 this.setTitle("new Account");
                 currentPanel = accountRegistrationBoundary;
                 break;
 
             case LobbyBoundary:
-            	updatePanel(Boundaries.LobbyBoundary, "");    
+            	updatePanel(BoundaryID.LobbyBoundary, "");    
                 lobbyBoundary.setVisible(true);
                 this.setTitle("Lobby");
                 currentPanel = lobbyBoundary;
                 break;
 
             case WaitingTimeBoundary:
-                updatePanel(Boundaries.WaitingTimeBoundary, "");
+                updatePanel(BoundaryID.WaitingTimeBoundary, "");
             	waitingTimeBoundary.setVisible(true);
                 this.setTitle("Waiting");
                 currentPanel = waitingTimeBoundary;   
                 break;
 
             case ConfirmationBoundary:
-            	updatePanel(Boundaries.ConfirmationBoundary, "");
+            	updatePanel(BoundaryID.ConfirmationBoundary, "");
                 confirmationBoundary.setVisible(true);
                 this.setTitle("Confirmation");
                 currentPanel = confirmationBoundary;
                 break;
                 
             case PainterBoundary:
-            	updatePanel(Boundaries.PainterBoundary, "");
+            	updatePanel(BoundaryID.PainterBoundary, "");
                 painterBoundary.setVisible(true);
                 this.setTitle("Paint");
                 currentPanel = painterBoundary;
                 break;
 
             case RespondentBoundary:
-            	updatePanel(Boundaries.RespondentBoundary, "");
+            	updatePanel(BoundaryID.RespondentBoundary, "");
                 respondentBoundary.setVisible(true);
                 this.setTitle("Answer");
                 currentPanel = respondentBoundary;
                 break;
 
             case ResultBoundary:
-            	updatePanel(Boundaries.ResultBoundary, "");
+            	updatePanel(BoundaryID.ResultBoundary, "");
                 resultBoundary.setVisible(true);
                 this.setTitle("Result");
                 currentPanel = resultBoundary;
                 break;
 
             case FinalResultBoundary:
-            	updatePanel(Boundaries.FinalResultBoundary, "");
+            	updatePanel(BoundaryID.FinalResultBoundary, "");
             	finalResultBoundary.setVisible(true);
             	this.setTitle("FinalResult");
             	currentPanel = finalResultBoundary;
@@ -187,7 +187,7 @@ public class Boundary extends JFrame{
             	
             	
             case GameStartBoundary:
-            	updatePanel(Boundaries.GameStartBoundary, "");
+            	updatePanel(BoundaryID.GameStartBoundary, "");
             	gameStartBoundary.setVisible(true);
             	this.setTitle("PlayerList");
             	currentPanel = gameStartBoundary;
@@ -215,7 +215,7 @@ public class Boundary extends JFrame{
      * @param boundary どの画面を更新するのか
      * @param text 更新内容(からの場合もある)
      */
-     public void updatePanel(Boundaries boundary, String text){
+     public void updatePanel(BoundaryID boundary, String text){
 
     	
     	//textを使う場面は画面遷移を伴わない画面の更新があるとき
@@ -290,7 +290,7 @@ public class Boundary extends JFrame{
     
     
     //それぞれの画面のカウントダウン制御 
-    public void updateCountDown(Boundaries type, String time) {
+    public void updateCountDown(BoundaryID type, String time) {
     	
     	
     	

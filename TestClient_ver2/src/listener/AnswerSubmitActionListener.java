@@ -45,7 +45,19 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 		System.out.println("[Log] answer is "+answer);
 		
 		
-		checkAnswer(answer);
+		if( checkAnswer(answer) ) {
+			//正しい場合
+			
+			//答えが一致していた場合、実際に正解時刻を送信する
+			System.out.println("[Log] your answer is correct");
+			//時刻じゃなくて正解した旨を送信
+			control.communicate().sendData("answer", LocalDateTime.now().toString());
+			
+		}else {
+			//間違っている場合
+			//実際に一致していなかった場合
+			System.out.println("[Log] your answer is incorrect");
+		}
 		 
     
     }
@@ -56,24 +68,13 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 	 * 正誤判定
 	 * @param answer
 	 */
-	public void checkAnswer(String answer) {
+	public boolean checkAnswer(String answer) {
 	
 		if(control.getGameInfo().getTheme().equals(answer)) {
-			
-			//答えが一致していた場合、実際に正解時刻を送信する
-			System.out.println("[Log] your answer is correct");
-			//時刻じゃなくて正解した旨を送信
-			control.communicate().sendData("answer", LocalDateTime.now().toString());
-			
-			
-		}else {
-			
-			//実際に一致していなかった場合
-			System.out.println("[Log] your answer is incorrect");
-			
-			
+			return true;	
 		}
 		
+		return false;
 	}
     
 	

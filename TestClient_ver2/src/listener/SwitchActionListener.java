@@ -7,7 +7,7 @@ import boundaries.AccountAuthentificationBoundary;
 import boundaries.AccountRegistrationBoundary;
 import boundaries.Boundary;
 import control.ClientControl;
-import entity.Boundaries;
+import entity.BoundaryID;
 
 
 
@@ -66,10 +66,10 @@ public class SwitchActionListener extends BoundaryActionListener{
 		System.out.println("[Log] "+type);
 		
 		if(type.equals("goLogin")) {
-			boundary.changePanel(Boundaries.AccountAuthentificationBoudary);
+			boundary.changePanel(BoundaryID.AccountAuthentificationBoudary);
 			
 		}else if(type.equals("goResist")) {
-			boundary.changePanel(Boundaries.AccountRegistrationBoundary);
+			boundary.changePanel(BoundaryID.AccountRegistrationBoundary);
 		
 		}else {
 			System.out.println("[Error] Switch action listener error");

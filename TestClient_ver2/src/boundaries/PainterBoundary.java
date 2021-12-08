@@ -39,6 +39,9 @@ class PainterBoundary extends JPanel{
 
     private GameCanvas gc;
     
+  //参加プレイヤーラベル
+    private JLabel[] playerLabel = new JLabel[4];
+    
 
     /*クラス図にはいらない気がする********/
     final String FONT_NAME = "MS ゴシック";
@@ -78,6 +81,11 @@ class PainterBoundary extends JPanel{
         sp = new JScrollPane();
                 
         gc = new GameCanvas(control);
+        
+        
+        for(int i=0; i<4; i++) {
+        	playerLabel[i] = new JLabel("playerLabel");
+        }
         
         /********************************/
 
@@ -173,5 +181,20 @@ class PainterBoundary extends JPanel{
     	this.themeLabel.setText(String.format("お題 : %s", theme));
     }
     
+    
+    
+    public void setPlayersLabel(String[] data ) {
+    	
+    	//(name_rate )* 4
+    	/**
+    	 * split(_)
+    	 */
+    	
+    	
+    	for(int i=0; i<4;i++) {
+    		playerLabel[i].setText(String.format("%s : %s", "player"+i,"rate")); 
+    	}
+    	
+    }
 
 }
