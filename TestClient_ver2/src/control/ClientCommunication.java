@@ -8,6 +8,8 @@ import javax.websocket.DeploymentException;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 
+import entity.ProcessID;
+
 
 
 
@@ -52,13 +54,13 @@ public class ClientCommunication{
      * @param dataFlag
      * @param data
      */
-    public void sendData(String dataFlag, String data){
+    public void sendData(ProcessID processID, String data){
 
     	
-    	String communicationFormat = handleSendData(dataFlag,data);
+    	String communicationFormat = handleSendData(processID,data);
 
     	
-    	System.out.println("[Log] send data [" + dataFlag + "] "+ communicationFormat);
+    	System.out.println("[Log] send data [" + processID.toString() + "] "+ communicationFormat);
     	
     	webSocketEndpoint.sendMessage(communicationFormat);
     	
@@ -69,66 +71,74 @@ public class ClientCommunication{
 
     /**
      * 送信データを通信形式に合わせる。実際の通信形式は未確定
-     * @param dataFlag
+     * @param processID
      * @param data
      * @return
      */
-    public String handleSendData(String dataFlag, String data) {
+    public String handleSendData(ProcessID processID, String data) {
     	
-    	String json = "";
+    	String communicationFormat = "";
     	
-    	switch(dataFlag) {
-    		
-    		case "login":
-    			json = String.format("%s#%s",dataFlag,data);
-    			break;
-    			
-    		case "regist":
-    			json = String.format("%s#%s",dataFlag,data);
-    			break;
-    			
-    		case "match make":
-    			json = String.format("%s#%s",dataFlag,"blank");
-    			break;
-    			
-    		case "confirm":
-    			json = String.format("%s#%s",dataFlag,"blank");
-    			break;
-    		
-    		case "game start":
-    			json = String.format("%s#%s",dataFlag,"blank");
-    			break;
-    			
-    		case "stroke":
-    			json = String.format("%s#%s",dataFlag,data);
-    			break;
-    			
-    		case "turn result":
-    			json = String.format("%s#%s",dataFlag,"blank");
-    			break;
-    			
-    			
-    		case "final result":
-    			json = String.format("%s#%s",dataFlag,"blank");
-    			break;
-    			
-    		case "back to lobby":
-    			json = String.format("%s#%s",dataFlag,"blank");
-    			break;
-    		
-    		case "time over":
-    			json = String.format("%s#%s",dataFlag,data);
-    			break;	
-    			
-    		default:
-    			System.out.println("[Error] handleSendData dataFlag error");
-    			break;
     	
+    	switch(processID) {
+	    	
+    		case LOGIN:
+	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.LOGIN, data);
+	    		break;
+	    	
+	    	case REGIST:
+	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.REGISTER, data);
+	    		break;
+	    	
+	    	case GOLOBBY:
+	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.MAKELOBBY, data);
+	    		break;
+	    		
+	    	case MATCHMAKE:
+	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.JOIN, data);
+	    		break;
+	    	
+	    	case CONFIRM:
+	    		communicationFormat = encode(ProcessID.REQUEST, processID, data);
+	    		break;
+	    	
+	    	case STARTGAME:
+	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.LOGIN);
+	    		break;
+	    	
+	    	case STROKE:
+	    		communicationFormat = encode(ProcessID.POSITION, ProcessID.COODINATE, data);
+	    		break;
+	    	
+	    	case TURNRESULT:
+	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.LOGIN);
+	    		break;
+	    	
+	    	case FINALRESULT:
+	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.REGISTER);
+	    		break;
+	    	
+	    	case BACKTOLOBBY:
+	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.REGISTER);
+	    		break;
+	    	
+	    	case TIMEOVER:
+	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.LOGIN);
+	    		break;
+	    		
+	    	case CHANGE:
+	    		communicationFormat = String.format("%s#%s", ProcessID.CHANGE, data);
+	    		break;
+	    		
+	    	case MAKELOBBY:
+	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.MAKELOBBY, data);
+	    		break;
+	    		
     	}
     	
+    	   	
     	
-    	
-    	return json; 
+    	return communicationFormat; 
     }
     
     
@@ -160,7 +170,7 @@ public class ClientCommunication{
     	String dataFlag;
     	String data;
     	
-    	String[] tmpString = json.split("#");
+    	String[] tmpString = json.split("_");
     	
     	dataFlag = tmpString[0];
     	data = tmpString[1];
@@ -199,7 +209,7 @@ public class ClientCommunication{
     	
     	//メッセージをサーバへ送る
     	try {
-			session.getBasicRemote().sendText("Hello Server#blank");
+			session.getBasicRemote().sendText(String.format("%s#%s", ProcessID.REQUEST.toString(),ProcessID.HELLOSERVER));
 		} catch (IOException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -236,7 +246,18 @@ public class ClientCommunication{
     public boolean isConnected(){
         return this.session.isOpen();
     }
-
+    
+    
+    
+    
+    public String encode(ProcessID processID_1, ProcessID processID_2, String data) {
+    	
+    	String format = "";
+    	
+    	format = String.format("%s#%s_%s", processID_1.toString(),processID_2.toString(),data);
+    		
+    	return format;
+    }
     
     
     

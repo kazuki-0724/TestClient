@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import control.ClientControl;
 import listener.ToLobbyActionListener;
 
 
@@ -19,8 +18,8 @@ import listener.ToLobbyActionListener;
 public class FinalResultBoundary extends JPanel{
 
 
-    private Boundary boundary;
-    private ClientControl control;
+    //private Boundary boundary;
+    //private ClientControl control;
     //各パーツ
     private JLabel messageLabel;
     private JLabel themeLabel;
@@ -33,10 +32,10 @@ public class FinalResultBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public FinalResultBoundary(Boundary boundary, ClientControl control){
+    public FinalResultBoundary(){
 
-        this.boundary = boundary;
-        this.control = control;
+        //this.boundary = boundary;
+        //this.control = control;
         
         
         LineBorder border = new LineBorder(Color.RED, 2, true);
@@ -53,8 +52,8 @@ public class FinalResultBoundary extends JPanel{
         
         
         
-        ToLobbyActionListener listener = new ToLobbyActionListener(this, boundary, control);
-        nextButton.addActionListener(listener);
+        //ToLobbyActionListener listener = new ToLobbyActionListener(this, boundary, control);
+        //nextButton.addActionListener(listener);
         
         
         
@@ -84,6 +83,17 @@ public class FinalResultBoundary extends JPanel{
         
        
     }
+    
+    
+    /**
+     * 
+     * @param toLobbyActionListener
+     */
+    public void addNextButtonActionListener(ToLobbyActionListener toLobbyActionListener) {
+    	this.nextButton.addActionListener(toLobbyActionListener);
+    }
+    
+    
     
     /**
      * テーマのラベルへの埋め込み

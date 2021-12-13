@@ -11,7 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import control.ClientControl;
 import listener.AnswerSubmitActionListener;
 
 
@@ -23,9 +22,7 @@ import listener.AnswerSubmitActionListener;
  */
 public class RespondentBoundary extends JPanel{
 
-    private Boundary boundary;
-    private ClientControl control;
-
+    
     
     //各パーツ
     private JLabel messageLabel_1;
@@ -63,13 +60,9 @@ public class RespondentBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public RespondentBoundary(Boundary boundary, ClientControl control){
+    public RespondentBoundary(){
 
-        this.boundary = boundary;
-        this.control = control;
-        
-        
-
+       
 
         //各パーツのインスタンス生成
         messageLabel_1 = new JLabel(TIMEKEEP);
@@ -98,11 +91,7 @@ public class RespondentBoundary extends JPanel{
         /**************************************************/
 
         
-        
-        AnswerSubmitActionListener answerSubmitActionListener = new AnswerSubmitActionListener(this, control, boundary);
-        answerButton.addActionListener(answerSubmitActionListener);
-        
-        
+       
 
         
         //レイアウト可視化のため
@@ -150,6 +139,17 @@ public class RespondentBoundary extends JPanel{
         this.setSize(640, 480);
 
     }
+    
+    
+    /**
+     * 
+     * @param answerSubmitActionListener
+     */
+    public void addAnswerButtonListener(AnswerSubmitActionListener answerSubmitActionListener) {
+    	this.answerButton.addActionListener(answerSubmitActionListener);
+    }
+    
+    
     
     /**
      * カウントダウンタイマー

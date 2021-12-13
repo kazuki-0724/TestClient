@@ -1,0 +1,62 @@
+package entity;
+
+public enum ProcessID {
+	
+	
+	//通信用第1フラグ
+	REQUEST,
+	POSITION,
+	CHANGE,
+	REPLY,
+	UPDATE,
+	
+	//通信用第2フラグ
+	HELLOSERVER,
+	LOGIN,
+	MAKELOBBY,
+	REGISTER,
+	JOIN,
+	CONNECTAP,
+	LOGOUT,
+	COODINATE,
+	ANSWER,
+	
+	
+	
+	
+	
+	
+	//画面遷移完了通知
+	STARTGAME_OK,
+	STARTTURN_OK,
+	THEMECHECK_OK,
+	QTIMESTART_OK,
+	COODINATE_OK,
+	QTIMEFIN_OK,
+	TURNRESULT_OK,
+	FINALRESULT_OK,
+	LOBBY_OK,
+	REGISTER_OK,
+	LOGIN_OK,
+	
+	
+	
+	//クライアント内データフラグ
+	
+	REGIST,
+	MATCHMAKE,
+	CONFIRM,
+	STARTGAME,
+	STROKE,
+	TURNRESULT,
+	FINALRESULT,
+	BACKTOLOBBY,
+	TIMEOVER,
+	GOLOBBY,
+	
+	
+	
+	
+	
+
+}

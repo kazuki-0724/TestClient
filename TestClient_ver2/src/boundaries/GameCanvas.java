@@ -12,6 +12,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import control.ClientControl;
+import entity.ProcessID;
 
 
 
@@ -139,7 +140,7 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
 
     
         String position = String.format("%d %d %d %d %d",type,xx,yy,point.x,point.y);
-        this.csc.communicate().sendData("stroke",position);
+        this.csc.communicate().sendData(ProcessID.STROKE,position);
         
     
        

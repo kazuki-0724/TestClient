@@ -12,7 +12,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import control.ClientControl;
 import listener.SwitchActionListener;
 import listener.ToLobbyActionListener;
 
@@ -31,8 +30,8 @@ import listener.ToLobbyActionListener;
 public class AccountRegistrationBoundary extends JPanel{
 
 	//リスナーに渡すだけのために
-    private Boundary boundary;
-    private ClientControl control;
+    //private Boundary boundary;
+    //private ClientControl control;
 
     //各パーツ
     private JLabel titleLabel;
@@ -53,11 +52,11 @@ public class AccountRegistrationBoundary extends JPanel{
     /*************************************/
 
 
-    public AccountRegistrationBoundary(Boundary boundary,ClientControl control){
+    public AccountRegistrationBoundary(){
 
 
-        this.boundary = boundary;
-        this.control = control;
+        //this.boundary = boundary;
+        //this.control = control;
 
         //各パーツのインスタンス生成
         titleLabel = new JLabel(REGISTRATION);
@@ -74,12 +73,13 @@ public class AccountRegistrationBoundary extends JPanel{
 
         
         //新規登録ボタンのリスナー
-        ToLobbyActionListener listener = new ToLobbyActionListener(this, boundary, control);
-        registButton.addActionListener(listener);
+        //ToLobbyActionListener listener = new ToLobbyActionListener(this, boundary, control);
+        //registButton.addActionListener(listener);
         
         //ログインと新規登録の切り替えリスナー
-        SwitchActionListener sListener = new SwitchActionListener(this, boundary, control); 
-        switchButton.addActionListener(sListener);
+        //SwitchActionListener sListener = new SwitchActionListener(this, boundary, control); 
+        //switchButton.addActionListener(sListener);
+        
 
         /*レイアウト視覚化のためのもの************************/
         LineBorder border = new LineBorder(Color.RED, 2, true);
@@ -133,6 +133,23 @@ public class AccountRegistrationBoundary extends JPanel{
     }
 
 
+    
+    /**
+     * 
+     * @param toLobbyActionListener
+     */
+    public void addLoginButtonListener(ToLobbyActionListener toLobbyActionListener) {
+    	this.registButton.addActionListener(toLobbyActionListener);
+    }
+    
+    /**
+     * 
+     * @param switchActionListener
+     */
+    public void addSwitchButtonListener(SwitchActionListener switchActionListener) {
+    	this.switchButton.addActionListener(switchActionListener);
+    }
+    
 
     
     

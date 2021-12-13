@@ -6,8 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import control.ClientControl;
-
 
 
 
@@ -19,8 +17,6 @@ import control.ClientControl;
 class ResultBoundary extends JPanel{
 
 
-    private Boundary boundary;
-    private ClientControl control;
     //各パーツ
     private JLabel messageLabel;
     private JLabel themeLabel;
@@ -32,11 +28,9 @@ class ResultBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public ResultBoundary(Boundary boundary, ClientControl control){
+    public ResultBoundary(){
 
-        this.boundary = boundary;
-        this.control = control;
-        
+       
         
         LineBorder border = new LineBorder(Color.RED, 2, true);
         

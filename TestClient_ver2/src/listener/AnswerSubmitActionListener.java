@@ -1,11 +1,10 @@
 package listener;
 
 import java.awt.event.ActionEvent;
-import java.time.LocalDateTime;
 
 import boundaries.Boundary;
 import boundaries.RespondentBoundary;
-import control.ClientControl;
+import entity.ProcessID;
 
 /**
  * 回答送信用のリスナークラス
@@ -16,7 +15,6 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
     
 
 	private RespondentBoundary rb;
-    private ClientControl control;
     private Boundary boundary;
 	
     
@@ -26,10 +24,9 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
      * @param control
      * @param boundary
      */
-    public AnswerSubmitActionListener(RespondentBoundary rb, ClientControl control, Boundary boundary) {
+    public AnswerSubmitActionListener(RespondentBoundary rb, Boundary boundary) {
     	
     	this.rb = rb;
-    	this.control = control;
     	this.boundary = boundary;
     }
     
@@ -51,7 +48,7 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 			//答えが一致していた場合、実際に正解時刻を送信する
 			System.out.println("[Log] your answer is correct");
 			//時刻じゃなくて正解した旨を送信
-			control.communicate().sendData("answer", LocalDateTime.now().toString());
+			boundary.getControl().communicate().sendData(ProcessID.ANSWER, "correct");
 			
 		}else {
 			//間違っている場合
@@ -70,7 +67,7 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 	 */
 	public boolean checkAnswer(String answer) {
 	
-		if(control.getGameInfo().getTheme().equals(answer)) {
+		if(boundary.getControl().getGameInfo().getTheme().equals(answer)) {
 			return true;	
 		}
 		

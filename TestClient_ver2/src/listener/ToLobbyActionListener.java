@@ -6,8 +6,8 @@ import boundaries.AccountAuthentificationBoundary;
 import boundaries.AccountRegistrationBoundary;
 import boundaries.Boundary;
 import boundaries.FinalResultBoundary;
-import control.ClientControl;
 import entity.BoundaryID;
+import entity.ProcessID;
 
 
 /**
@@ -22,9 +22,9 @@ public class ToLobbyActionListener extends BoundaryActionListener{
     private AccountAuthentificationBoundary aab;
     private AccountRegistrationBoundary arb;
     private FinalResultBoundary frb;
-    private ClientControl control;
+    //private ClientControl control;
     private Boundary boundary;
-    private final String[] FORBIDDEN_CHARACTERS = {"_"}; 
+    private final String[] FORBIDDEN_CHARACTERS = {"_","#"}; 
     
     
     /**
@@ -33,38 +33,17 @@ public class ToLobbyActionListener extends BoundaryActionListener{
      * @param boundary
      * @param control
      */
-    public ToLobbyActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientControl control){
+    public ToLobbyActionListener(AccountAuthentificationBoundary aab, AccountRegistrationBoundary arb, FinalResultBoundary frb,Boundary boundary){
         this.aab = aab;
+        this.arb = arb;
+        this.frb = frb;
         this.boundary = boundary;
-        this.control = control;
+        //this.control = control;
         
     }
 
     
-    /**
-     * 新規登録画面用のコンストラクタ
-     * @param arb
-     * @param boundary
-     * @param control
-     */
-    public ToLobbyActionListener(AccountRegistrationBoundary arb, Boundary boundary ,ClientControl control){
-        this.arb = arb;
-        this.boundary = boundary;
-        this.control = control;
-    }
-    
-    
-    /**
-     * 最終結果画面用のコンストラクタ
-     * @param frb
-     * @param boundary
-     * @param control
-     */
-    public ToLobbyActionListener(FinalResultBoundary frb, Boundary boundary ,ClientControl control){
-        this.frb = frb;
-        this.boundary = boundary;
-        this.control = control;
-    }
+  
     
     
 
@@ -109,7 +88,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
                 	return;
             	}
             	
-            	control.communicate().sendData("login",String.format("%s&%s",userId,userPass));
+            	boundary.getControl().communicate().sendData(ProcessID.LOGIN,String.format("%s_%s",userId,userPass));
         	
             }
             
@@ -146,7 +125,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
                 	return;
             	}
               	
-            	control.communicate().sendData("regist",String.format("%s&%s",userId,userPass));
+            	boundary.getControl().communicate().sendData(ProcessID.REGIST,String.format("%s_%s",userId,userPass));
         	
             }
             
@@ -156,8 +135,8 @@ public class ToLobbyActionListener extends BoundaryActionListener{
         	
         	System.out.println("[Log] BackToLobby Button Clicked");
                 
-         	
-            control.communicate().sendData("back to lobby", "blank");
+         	//明示的に呼ばないとロビーに関する情報がもらえない(MAKELOBBYとかかも)
+            boundary.getControl().communicate().sendData(ProcessID.BACKTOLOBBY, "blank");
         	
             
             

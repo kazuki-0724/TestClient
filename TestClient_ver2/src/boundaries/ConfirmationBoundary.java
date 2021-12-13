@@ -6,8 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import control.ClientControl;
-
 
 
 
@@ -18,10 +16,6 @@ import control.ClientControl;
  */
 class ConfirmationBoundary extends JPanel{
 
-    //リスナーに渡すだけのため
-	private Boundary boundary;
-    private ClientControl control;
-    
     
     //各パーツ
     private JLabel messageLabel;
@@ -35,10 +29,8 @@ class ConfirmationBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public ConfirmationBoundary(Boundary boundary, ClientControl control){
+    public ConfirmationBoundary(){
 
-        this.boundary = boundary;
-        this.control = control;
         
         
         LineBorder border = new LineBorder(Color.RED, 2, true);

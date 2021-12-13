@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
-import control.ClientControl;
 import listener.LogoutActionListener;
 import listener.StartGameActionListener;
 
@@ -24,8 +23,8 @@ import listener.StartGameActionListener;
 public class LobbyBoundary extends JPanel{
 
 	
-    private Boundary boundary;
-    private ClientControl control;
+    //private Boundary boundary;
+    //private ClientControl control;
 
     //各パーツ
     private JLabel titleLabel;
@@ -56,10 +55,10 @@ public class LobbyBoundary extends JPanel{
      * @param boundary
      * @param control
      */
-    public LobbyBoundary(Boundary boundary, ClientControl control){
+    public LobbyBoundary(){
 
-        this.boundary = boundary;
-        this.control = control;
+        //this.boundary = boundary;
+        //this.control = control;
         
         
         //各パーツのインスタンス生成
@@ -88,14 +87,7 @@ public class LobbyBoundary extends JPanel{
         sp.getViewport().setView(list);
 
         
-        //スタートゲームボタンのリスナー
-        StartGameActionListener startGameActionListener = new StartGameActionListener( control, boundary, this);
-        startGameButton.addActionListener(startGameActionListener);
-        
-        //ログアウトボタンのリスナー
-        LogoutActionListener logoutActionListener = new LogoutActionListener( control, boundary );        
-        logoutButton.addActionListener(logoutActionListener);
-        
+       
         
         
 
@@ -162,6 +154,21 @@ public class LobbyBoundary extends JPanel{
 
     }
 
+    /**
+     * 
+     * @param startGameActionListener
+     */
+    public void addStartGameButtonListener(StartGameActionListener startGameActionListener) {
+    	this.startGameButton.addActionListener(startGameActionListener);
+    }
+    
+    /**
+     * 
+     * @param logoutActionListener
+     */
+    public void addLogoutButtonListener(LogoutActionListener logoutActionListener) {
+    	this.logoutButton.addActionListener(logoutActionListener);
+    }
 
     /**
      * idLabelのgetter

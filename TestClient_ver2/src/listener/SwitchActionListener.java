@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import boundaries.AccountAuthentificationBoundary;
 import boundaries.AccountRegistrationBoundary;
 import boundaries.Boundary;
-import control.ClientControl;
 import entity.BoundaryID;
 
 
@@ -24,7 +23,7 @@ public class SwitchActionListener extends BoundaryActionListener{
 	private AccountRegistrationBoundary arb;
 	private AccountAuthentificationBoundary aab;
 	private Boundary boundary;
-	private ClientControl control;
+	//private ClientControl control;
 	
 	
 	
@@ -34,10 +33,11 @@ public class SwitchActionListener extends BoundaryActionListener{
 	 * @param boundary
 	 * @param control
 	 */
-	public SwitchActionListener(AccountRegistrationBoundary arb, Boundary boundary ,ClientControl control){
+	public SwitchActionListener(AccountRegistrationBoundary arb, AccountAuthentificationBoundary aab,Boundary boundary){
 	        this.arb = arb;
+	        this.aab = aab;
 	        this.boundary = boundary;
-	        this.control = control;
+	        //this.control = control;
 	}
 	
 	
@@ -47,11 +47,11 @@ public class SwitchActionListener extends BoundaryActionListener{
 	 * @param boundary
 	 * @param control
 	 */
-	public SwitchActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientControl control){
-        this.aab = aab;
-        this.boundary = boundary;
-        this.control = control;
-	}
+	//public SwitchActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientControl control){
+    //    this.aab = aab;
+    //    this.boundary = boundary;
+    //    this.control = control;
+	//}
 	
 
 

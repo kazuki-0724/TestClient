@@ -7,6 +7,7 @@ import boundaries.Boundary;
 import entity.BoundaryID;
 import entity.GameInfo;
 import entity.Player;
+import entity.ProcessID;
 
 
 
@@ -43,14 +44,6 @@ public class ClientControl{
 	private ClientCommunication cscc;
 	
 	
-	//3秒の制限時間
-	private final int durationTime_3 = 3;
-	//5秒の制限時間
-	private final int durationTime_5 = 5;
-	//10秒の制限時間
-	private final int durationTime_10 = 10;
-	//30秒の制限時間
-	private final int durationTime_30 = 30;
 	
 	private int currentDurationTime = 0;
 	
@@ -220,6 +213,21 @@ public class ClientControl{
     			setMyPlayer(updateMyPlayer);
     			boundary.changePanel(BoundaryID.LobbyBoundary);
     			break;		
+    			
+    		case "LOGIN":
+    			if(data.equals("OK")) {
+    				communicate().sendData(ProcessID.MAKELOBBY, "master1");
+    			}else {
+    				
+    			}
+    			break;
+    			
+    		case "LOBBY":
+    			Player player = new Player("master1", "1234", 5, 5, 10);
+    			setMyPlayer(player);
+    			boundary.changePanel(BoundaryID.LobbyBoundary);
+    			break;
+    			
     		
     	}
 	}
@@ -261,7 +269,7 @@ public class ClientControl{
 				timer.cancel();
 				timer = null;
 				boundary.updateCountDown(type, "Time Over!");
-				control.communicate().sendData("time over", "blank");
+				control.communicate().sendData(ProcessID.TIMEOVER, "blank");
 			}
 		}
 

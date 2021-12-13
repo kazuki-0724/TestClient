@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import boundaries.Boundary;
 import boundaries.LobbyBoundary;
-import control.ClientControl;
+import entity.ProcessID;
 
 
 
@@ -19,7 +19,7 @@ import control.ClientControl;
 public class StartGameActionListener extends BoundaryActionListener{
     
 
-	private ClientControl control;
+	//private ClientControl control;
     private Boundary boundary;
     private LobbyBoundary lobbyBoundary;
     
@@ -30,9 +30,8 @@ public class StartGameActionListener extends BoundaryActionListener{
      * @param boundary
      * @param lobbyBoundary
      */
-    public StartGameActionListener(ClientControl control, Boundary boundary, LobbyBoundary lobbyBoundary) {
+    public StartGameActionListener(LobbyBoundary lobbyBoundary, Boundary boundary) {
     	
-    	this.control = control;
     	this.boundary = boundary;
     	this.lobbyBoundary = lobbyBoundary;
     }
@@ -48,7 +47,10 @@ public class StartGameActionListener extends BoundaryActionListener{
         
         
         //サーバ側にマッチメイクに参加することを通知
-        control.communicate().sendData("match make","");
+        boundary.getControl().communicate().sendData(ProcessID.MATCHMAKE,"blank");
+        
+        //ボタンを押せなくさせる
+        lobbyBoundary.getStartGameButton().setEnabled(false);
       
     
     }

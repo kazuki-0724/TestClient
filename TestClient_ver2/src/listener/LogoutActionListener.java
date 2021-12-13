@@ -4,7 +4,8 @@ package listener;
 import java.awt.event.ActionEvent;
 
 import boundaries.Boundary;
-import control.ClientControl;
+import boundaries.LobbyBoundary;
+import entity.ProcessID;
 
 
 
@@ -17,8 +18,9 @@ import control.ClientControl;
 public class LogoutActionListener extends BoundaryActionListener{
     
 	
-	private ClientControl control;
+	//private ClientControl control;
     private Boundary boundary;
+    LobbyBoundary lobbyBoundary;
     
     
     /**
@@ -26,11 +28,11 @@ public class LogoutActionListener extends BoundaryActionListener{
      * @param control
      * @param boundary
      */
-    public LogoutActionListener(ClientControl control, Boundary boundary) {
+    public LogoutActionListener(LobbyBoundary lobbyBoundary, Boundary boundary) {
     	
-    	this.control = control;
+    	//this.control = control;
     	this.boundary = boundary;
-    	
+    	this.lobbyBoundary = lobbyBoundary;
     	
     }
     
@@ -43,7 +45,7 @@ public class LogoutActionListener extends BoundaryActionListener{
         System.out.println("[Log] LogOut Button Clicked");
         
         //サーバ側にログアウトを通知
-        control.communicate().sendData("logout","");
+        boundary.getControl().communicate().sendData(ProcessID.LOGOUT,"blank");
         
     }
 

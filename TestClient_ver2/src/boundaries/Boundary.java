@@ -5,6 +5,12 @@ import javax.swing.JPanel;
 
 import control.ClientControl;
 import entity.BoundaryID;
+import entity.ProcessID;
+import listener.AnswerSubmitActionListener;
+import listener.LogoutActionListener;
+import listener.StartGameActionListener;
+import listener.SwitchActionListener;
+import listener.ToLobbyActionListener;
 
 
 
@@ -21,8 +27,6 @@ public class Boundary extends JFrame{
     // Control
     ClientControl control;
     
-    
-
     // 現在のJPanel
     private JPanel currentPanel;
     
@@ -38,6 +42,10 @@ public class Boundary extends JFrame{
     private GameStartBoundary gameStartBoundary;
     private FinalResultBoundary finalResultBoundary;
     
+    
+    
+    
+    
 
     //コンストラクタ
     public Boundary(){
@@ -45,18 +53,40 @@ public class Boundary extends JFrame{
     	//各インスタンス生成
         control = new ClientControl(this);
         
+        
+        //画面インスタンス生成
+        accountAuthentificationBoundary  = new AccountAuthentificationBoundary();
+        accountRegistrationBoundary = new AccountRegistrationBoundary();
+        finalResultBoundary = new FinalResultBoundary();
+        lobbyBoundary = new LobbyBoundary();
+        painterBoundary = new PainterBoundary(this);
+        respondentBoundary = new RespondentBoundary();
+        confirmationBoundary = new ConfirmationBoundary();
+        waitingTimeBoundary = new WaitingTimeBoundary();
+        resultBoundary = new ResultBoundary();
+        gameStartBoundary = new GameStartBoundary();
+        
+        
+        //各リスナー生成
+        ToLobbyActionListener toLobbyActionListener = new ToLobbyActionListener(accountAuthentificationBoundary, accountRegistrationBoundary, finalResultBoundary, this);
+        SwitchActionListener switchActionListener = new SwitchActionListener(accountRegistrationBoundary, accountAuthentificationBoundary, this);
+        StartGameActionListener startGameActionListener = new StartGameActionListener(lobbyBoundary, this);
+        LogoutActionListener logoutActionListener = new LogoutActionListener(lobbyBoundary,this); 
+        AnswerSubmitActionListener answerSubmitActionListener = new AnswerSubmitActionListener(respondentBoundary, this);
+        
+        
+        //listenerのadd
+        accountAuthentificationBoundary.addLoginButtonListener(toLobbyActionListener);
+        accountAuthentificationBoundary.addSwitchButtonListener(switchActionListener);
+        accountRegistrationBoundary.addLoginButtonListener(toLobbyActionListener);
+        accountRegistrationBoundary.addSwitchButtonListener(switchActionListener);
+        lobbyBoundary.addStartGameButtonListener(startGameActionListener);
+        lobbyBoundary.addLogoutButtonListener(logoutActionListener);
+        respondentBoundary.addAnswerButtonListener(answerSubmitActionListener);
+        
+        
 
-        accountAuthentificationBoundary  = new AccountAuthentificationBoundary(this,control);
-        accountRegistrationBoundary = new AccountRegistrationBoundary(this,control);
-        lobbyBoundary = new LobbyBoundary(this,control);
-        painterBoundary = new PainterBoundary(this,control);
-        respondentBoundary = new RespondentBoundary(this,control);
-        confirmationBoundary = new ConfirmationBoundary(this,control);
-        waitingTimeBoundary = new WaitingTimeBoundary(this,control);
-        resultBoundary = new ResultBoundary(this,control);
-        gameStartBoundary = new GameStartBoundary(this, control);
-        finalResultBoundary = new FinalResultBoundary(this, control);
-
+        
 
         //JFrameに追加
         this.add(accountAuthentificationBoundary);
@@ -88,8 +118,6 @@ public class Boundary extends JFrame{
         
         this.add(finalResultBoundary);
         finalResultBoundary.setVisible(false);
-        
-        
         
         
         //初期画面
@@ -201,7 +229,7 @@ public class Boundary extends JFrame{
         
         
         //何かしら画面遷移が完了したことの通知をサーバに送る予定
-        //control.communicate().sendData("panelChange complete","blank" );
+        control.communicate().sendData(ProcessID.CHANGE,nextBoundary.toString() );
 
     }
     
@@ -293,7 +321,6 @@ public class Boundary extends JFrame{
     public void updateCountDown(BoundaryID type, String time) {
     	
     	
-    	
     	switch(type) {
     	
 	    	case GameStartBoundary:
@@ -329,6 +356,10 @@ public class Boundary extends JFrame{
     	
     }
     
+    
+    public ClientControl getControl() {
+    	return this.control;
+    }
     
     
     
