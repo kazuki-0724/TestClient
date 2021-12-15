@@ -22,7 +22,7 @@ import listener.StartGameActionListener;
  */
 public class LobbyBoundary extends JPanel{
 
-	
+
     //private Boundary boundary;
     //private ClientControl control;
 
@@ -39,7 +39,7 @@ public class LobbyBoundary extends JPanel{
 
 
     /*クラス図にはいらない気がする********/
-    final String[] data = {"1st:aaaa","2nd:bbbb","3rd:cccc","4th:dddd","5th:eeee","6th:ffff"};
+    private String[] rankingData = {"1","2","3"};
     final String GAME = "Paint Quiz";
     final String START = "START";
     final String LOGOUT = "LOGOUT";
@@ -48,8 +48,8 @@ public class LobbyBoundary extends JPanel{
     private String message = "message";
     /*************************************/
 
-    
-    
+
+
     /**
      * コンストラクタ
      * @param boundary
@@ -57,10 +57,8 @@ public class LobbyBoundary extends JPanel{
      */
     public LobbyBoundary(){
 
-        //this.boundary = boundary;
-        //this.control = control;
-        
-        
+
+
         //各パーツのインスタンス生成
         // title
         titleLabel = new JLabel(GAME);
@@ -71,9 +69,9 @@ public class LobbyBoundary extends JPanel{
         // waitingMessageLabel
         waitingMessageLabel = new JLabel();
         waitingMessageLabel.setVisible(false);
-     
-        
-        
+
+
+
         rateLabel = new JLabel(message);
         // start
         startGameButton = new JButton(START);
@@ -81,15 +79,17 @@ public class LobbyBoundary extends JPanel{
         // logout
         logoutButton = new JButton(LOGOUT);
         logoutButton.setActionCommand(LOGOUT);
+
+
         // ranking
-        list = new JList<>(data);
+        list = new JList<>(rankingData);
         sp = new JScrollPane();
         sp.getViewport().setView(list);
 
-        
-       
-        
-        
+
+
+
+
 
         /*レイアウト視覚化のためのもの************************/
         Font titleFont = new Font(FONT_NAME, Font.BOLD,40);
@@ -101,10 +101,10 @@ public class LobbyBoundary extends JPanel{
         /*****************************************************/
 
 
-        
-        
+
+
         /*レイアウト***************************************/
-       
+
 
         // init Layout
         this.setLayout(null);
@@ -120,22 +120,22 @@ public class LobbyBoundary extends JPanel{
         rateLabel.setBounds(10, 40, 160, 25);
         rateLabel.setFont(textFont);
         rateLabel.setBorder(border);
-        
+
         messageLabel.setBounds(150, 100, 350, 40);
         messageLabel.setFont(helloFont);
-            
+
         waitingMessageLabel.setBounds(400,400,200,50);
-        
+
         startGameButton.setBounds(250, 200, 100, 20);
-       
+
         logoutButton.setBounds(500, 10, 90, 20);
-        
+
         sp.setBounds(200, 300, 200, 80);
-        
+
         /***************************************************/
 
-        
-        
+
+
         /*パネルに追加***********/
         this.add(titleLabel);
         this.add(idLabel);
@@ -145,25 +145,37 @@ public class LobbyBoundary extends JPanel{
         this.add(startGameButton);
         this.add(logoutButton);
         this.add(sp);
-        
+
         /************************/
 
 
-        
+
         this.setSize(640, 480);
 
     }
 
+
+    public void setRankingData(String[] rankingData) {
+
+    	for(int i=0;i<rankingData.length;i++) {
+
+    	}
+
+
+
+    }
+
+
     /**
-     * 
+     *
      * @param startGameActionListener
      */
     public void addStartGameButtonListener(StartGameActionListener startGameActionListener) {
     	this.startGameButton.addActionListener(startGameActionListener);
     }
-    
+
     /**
-     * 
+     *
      * @param logoutActionListener
      */
     public void addLogoutButtonListener(LogoutActionListener logoutActionListener) {
@@ -219,7 +231,7 @@ public class LobbyBoundary extends JPanel{
     public void setMessageLabel(String text) {
         this.messageLabel.setText(text);
     }
-    
+
     /**
      * ロビーのゲームスタートボタンのgetter
      * @return
@@ -227,8 +239,8 @@ public class LobbyBoundary extends JPanel{
     public JButton getStartGameButton() {
 		return startGameButton;
 	}
-    
 
-         
+
+
 
 }

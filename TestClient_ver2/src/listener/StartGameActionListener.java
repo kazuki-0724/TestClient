@@ -17,13 +17,13 @@ import entity.ProcessID;
  *
  */
 public class StartGameActionListener extends BoundaryActionListener{
-    
+
 
 	//private ClientControl control;
     private Boundary boundary;
     private LobbyBoundary lobbyBoundary;
-    
-    
+
+
     /**
      * コンストラクタ
      * @param control
@@ -31,28 +31,30 @@ public class StartGameActionListener extends BoundaryActionListener{
      * @param lobbyBoundary
      */
     public StartGameActionListener(LobbyBoundary lobbyBoundary, Boundary boundary) {
-    	
+
     	this.boundary = boundary;
     	this.lobbyBoundary = lobbyBoundary;
     }
-    
-    
+
+
     /**
      * イベント処理
      */
     public void actionPerformed(ActionEvent e){
-        
+
         String str = e.getActionCommand();
         System.out.println("[Log] Start Game Button Clicked");
-        
-        
+
+
         //サーバ側にマッチメイクに参加することを通知
-        boundary.getControl().communicate().sendData(ProcessID.MATCHMAKE,"blank");
-        
+        boundary.getControl().communicate().sendData(ProcessID.JOIN,"blank");
+
+        lobbyBoundary.setMessageLabel("マッチング待機中");
+
         //ボタンを押せなくさせる
         lobbyBoundary.getStartGameButton().setEnabled(false);
-      
-    
+
+
     }
-    
+
 }

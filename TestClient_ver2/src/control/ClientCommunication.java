@@ -22,18 +22,21 @@ import entity.ProcessID;
  */
 public class ClientCommunication{
 
-	
+
     private ClientControl control;
     private boolean isConnection;
-    
+
     private WebSocketEndpoint webSocketEndpoint;
-	private Session session; 
-    
-	private static String CLM_URI = "ws://localhost:8080/TestServer/WebSocketServer";
-    private static String AP_URI = "";
-    
-    
-    
+	private Session session;
+
+	private final String CLM_URI = "ws://localhost:8080/TestServer/WebSocketServer";
+    private final String AP_URI = "";
+
+    private final String REQUEST = "REQUEST";
+    private final String REPLY = "REPLY";
+    private final String POSITION = "POSITION";
+
+
     /**
      * コンストラクタ
      * @param control
@@ -42,13 +45,11 @@ public class ClientCommunication{
         this.control = control;
         isConnection = false;
         this.webSocketEndpoint = new WebSocketEndpoint(this);
-        
-        //connect();
     }
 
 
-    
-    
+
+
     /**
      * データ送信メソッド。送信前に一度送信形式に変換する。
      * @param dataFlag
@@ -56,18 +57,18 @@ public class ClientCommunication{
      */
     public void sendData(ProcessID processID, String data){
 
-    	
+
     	String communicationFormat = handleSendData(processID,data);
 
-    	
+
     	System.out.println("[Log] send data [" + processID.toString() + "] "+ communicationFormat);
-    	
+
     	webSocketEndpoint.sendMessage(communicationFormat);
-    	
+
     }
 
 
-    
+
 
     /**
      * 送信データを通信形式に合わせる。実際の通信形式は未確定
@@ -76,128 +77,178 @@ public class ClientCommunication{
      * @return
      */
     public String handleSendData(ProcessID processID, String data) {
-    	
+
     	String communicationFormat = "";
-    	
-    	
+
+
+    	System.out.println("[Log handleSendData() ] data = "+ data);
+
     	switch(processID) {
-	    	
+
+    		//サーバ接続時
+    		case CONNECTCLM:
+    			communicationFormat = encode(REQUEST, ProcessID.CONNECTCLM.toString());
+    			break;
+
+    		case CONNECTAP:
+    			communicationFormat = encode(REQUEST, ProcessID.CONNECTAP.toString(),control.getMyPlayer().getId());
+    			break;
+
+    		case CONNECTAP_OK:
+    			communicationFormat = encode(REPLY, ProcessID.CONNECTAP_OK.toString());
+    			break;
+
+    		//ログイン時
     		case LOGIN:
-	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.LOGIN, data);
+	    		communicationFormat = encode(REQUEST, "LOGIN", data);
 	    		break;
-	    	
-	    	case REGIST:
-	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.REGISTER, data);
+
+	    	//新規登録時
+	    	case REGISTER:
+	    		communicationFormat = encode(REQUEST, "REGISTER", data);
 	    		break;
-	    	
-	    	case GOLOBBY:
-	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.MAKELOBBY, data);
-	    		break;
-	    		
-	    	case MATCHMAKE:
-	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.JOIN, data);
-	    		break;
-	    	
-	    	case CONFIRM:
-	    		communicationFormat = encode(ProcessID.REQUEST, processID, data);
-	    		break;
-	    	
-	    	case STARTGAME:
-	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.LOGIN);
-	    		break;
-	    	
-	    	case STROKE:
-	    		communicationFormat = encode(ProcessID.POSITION, ProcessID.COODINATE, data);
-	    		break;
-	    	
-	    	case TURNRESULT:
-	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.LOGIN);
-	    		break;
-	    	
-	    	case FINALRESULT:
-	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.REGISTER);
-	    		break;
-	    	
-	    	case BACKTOLOBBY:
-	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.REGISTER);
-	    		break;
-	    	
-	    	case TIMEOVER:
-	    		communicationFormat = String.format("%s#%s", ProcessID.REQUEST,ProcessID.LOGIN);
-	    		break;
-	    		
-	    	case CHANGE:
-	    		communicationFormat = String.format("%s#%s", ProcessID.CHANGE, data);
-	    		break;
-	    		
+
+	    	//ロビー遷移要求
 	    	case MAKELOBBY:
-	    		communicationFormat = encode(ProcessID.REQUEST, ProcessID.MAKELOBBY, data);
+	    		communicationFormat = encode(REQUEST, "MAKELOBBY", control.getMyPlayer().getId());
 	    		break;
-	    		
+
+	    	//マッチ参加要求
+	    	case JOIN:
+	    		communicationFormat = encode(REQUEST, "JOIN", control.getMyPlayer().getId());
+	    		break;
+
+	    	//座標
+	    	case STROKE:
+	    		communicationFormat = encode(POSITION, "COODINATE", data);
+	    		break;
+
+	    	//ゲームからロビーに戻る
+	    	case BACKTOLOBBY:
+	    		communicationFormat = encode(REQUEST,"");
+	    		break;
+
+	    	//時間経過を通知
+	    	case TIMEOVER:
+	    		communicationFormat = encode(REQUEST,"");
+	    		break;
+
+	    	//画面遷移等の通知系
+	    	case CHANGE:
+	    		communicationFormat = encode(REPLY, "");
+	    		break;
+
+	    	case LOGOUT:
+	    		communicationFormat = encode(REQUEST,"LOGOUT",control.getMyPlayer().getId());
+	    		break;
+
+	    	case STARTGAME_OK:
+	    		communicationFormat = encode(REPLY, "STARTGAME_OK");
+	    		break;
+
+	    	case STARTTURN_OK:
+	    		communicationFormat = encode(REPLY, "STARTTURN_OK");
+	    		break;
+
+	    	case QTIMESTART_OK:
+	    		communicationFormat = encode(REPLY, "QTIMESTART_OK");
+	    		break;
+
+	    	case ANSWER:
+	    		communicationFormat = encode(REQUEST, "ANSWER",control.getGameInfo().getRoomID() + "_" + control.getMyPlayer().getPlayerNum());
+	    		break;
+
+	    	case ANSWER_OK:
+	    		communicationFormat = encode(REQUEST, "ANSWER_OK");
+	    		break;
+
+	    	case POSITION:
+	    		communicationFormat = encode(POSITION,data);
+	    		break;
+
+	    	case TURNRESULT_OK:
+	    		communicationFormat = encode(REPLY, "TURNRESULT_OK");
+	    		break;
+
+	    	case FINISHGAME_OK:
+	    		communicationFormat = encode(REPLY, "FINISHGAME_OK");
+	    		break;
+
     	}
-    	
-    	   	
-    	
-    	return communicationFormat; 
+
+
+
+    	return communicationFormat;
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /**
      * WebSocketServerのOnMessageで受信したらこのメソッド
      * @param message
      */
     public void receivedData(String message){
-    	
+
     	System.out.println("[Log] received Data "+message);
     	//イメージ的にはこの感じ
     	handleReceivedData(message);
-    	
+
     }
-    
-    
-    
-    
+
+
+
+
     /**
-     * 受け取ったデータの解析。実際のデータの形の未定だからこれも要変更
+     * 受け取ったデータの解析
      * @param json
      */
     public void handleReceivedData(String json) {
-    	
-    	
+
+
     	String dataFlag;
     	String data;
-    	
-    	String[] tmpString = json.split("_");
-    	
+
+    	String[] tmpString = json.split("#");
+
     	dataFlag = tmpString[0];
     	data = tmpString[1];
-    	
+
     	control.handleData(dataFlag, data);
-    	
+
     }
-    
-    
-    
-    
-    
+
+
+
+
+
 
 
     /**
      * サーバに接続
-     * 引数でCLMかAPの判別が必要な気がする
+     *
      */
-    public void connect(){
-    	
+    public void connect(int type){
+
+    	URI uri = null;
+
+    	if(type == 0) {
+
+    		// CLMのURI
+    		uri = URI.create(CLM_URI);
+
+    	}else if(type == 1){
+    		// APのURI
+    		uri = URI.create(AP_URI);
+
+    	}else {
+    		System.out.println("[Error connect()] type error");
+    	}
+
     	// 初期化のためWebSocketコンテナのオブジェクトを取得する
     	WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-    			
-   		// サーバー・エンドポイントのURI
-    	URI uri = URI.create(CLM_URI);
-    		
-    	
+
     	// サーバー・エンドポイントとのセッションを確立する
     	try {
 			session = container.connectToServer(webSocketEndpoint,uri);
@@ -205,39 +256,41 @@ public class ClientCommunication{
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-    	
-    	
-    	//メッセージをサーバへ送る
-    	try {
-			session.getBasicRemote().sendText(String.format("%s#%s", ProcessID.REQUEST.toString(),ProcessID.HELLOSERVER));
-		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+
+    	if(type == 0) {
+    		sendData(ProcessID.CONNECTCLM,"blank");
+    	}else if(type == 1) {
+    		sendData(ProcessID.CONNECTAP,"blank");
+    	}
+
+
+		if(session.isOpen()) {
+			System.out.println("connection successed");
+		}else {
+			System.out.println("cannot connect server");
 		}
-    	
-    	System.out.println("connection successed");
     }
-    
-    
-    
+
+
+
 
     /**
      * サーバから切断
      */
     public void disconnect(){
-    	
+
     	System.out.println("connection disconnected");
-    	
+
     	try {
 			session.close();
 		} catch (IOException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-    	
+
     }
-    
-    
+
+
 
     /**
      * 接続状態確認
@@ -246,22 +299,43 @@ public class ClientCommunication{
     public boolean isConnected(){
         return this.session.isOpen();
     }
-    
-    
-    
-    
-    public String encode(ProcessID processID_1, ProcessID processID_2, String data) {
-    	
+
+
+
+    /**
+     *
+     * @param processID_1 REQUEST, REPLY, POSITIONのどれか
+     * @param processID_2 具体的な処理内容
+     * @param data
+     * @return
+     */
+    public String encode(String processID_1, String processID_2, String data) {
+
     	String format = "";
-    	
-    	format = String.format("%s#%s_%s", processID_1.toString(),processID_2.toString(),data);
-    		
+
+    	format = String.format("%s#%s_%s", processID_1,processID_2,data);
+
     	return format;
     }
-    
-    
-    
-    
+
+
+    /**
+     *
+     * @param processID_1 POSITION
+     * @param data 座標データ
+     * @return
+     */
+    public String encode(String processID_1, String data) {
+
+    	String format = "";
+
+    	format = String.format("%s#%s", processID_1,data);
+
+    	return format;
+    }
+
+
+
     /**************************************************/
-      
+
 }

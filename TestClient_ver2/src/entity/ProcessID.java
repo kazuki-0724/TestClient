@@ -1,49 +1,13 @@
 package entity;
 
 public enum ProcessID {
-	
-	
-	//通信用第1フラグ
-	REQUEST,
-	POSITION,
-	CHANGE,
-	REPLY,
-	UPDATE,
-	
-	//通信用第2フラグ
-	HELLOSERVER,
+
+	//クライアント内処理判別ID
+	//handleSendData()内で利用する
+
 	LOGIN,
-	MAKELOBBY,
 	REGISTER,
-	JOIN,
-	CONNECTAP,
-	LOGOUT,
-	COODINATE,
-	ANSWER,
-	
-	
-	
-	
-	
-	
-	//画面遷移完了通知
-	STARTGAME_OK,
-	STARTTURN_OK,
-	THEMECHECK_OK,
-	QTIMESTART_OK,
-	COODINATE_OK,
-	QTIMEFIN_OK,
-	TURNRESULT_OK,
-	FINALRESULT_OK,
-	LOBBY_OK,
-	REGISTER_OK,
-	LOGIN_OK,
-	
-	
-	
-	//クライアント内データフラグ
-	
-	REGIST,
+	CHANGE,
 	MATCHMAKE,
 	CONFIRM,
 	STARTGAME,
@@ -52,11 +16,19 @@ public enum ProcessID {
 	FINALRESULT,
 	BACKTOLOBBY,
 	TIMEOVER,
-	GOLOBBY,
-	
-	
-	
-	
-	
-
+	MAKELOBBY,
+	CONNECTCLM,
+	CONNECTAP,
+	CONNECTAP_OK,
+	ANSWER,
+	LOGOUT,
+	JOIN,
+	STARTGAME_OK,
+	STARTTURN_OK,
+	QTIMESTART_OK,
+	ANSWER_OK,
+	POSITION,
+	TURNRESULT_OK,
+	FINISHGAME_OK
 }
+
