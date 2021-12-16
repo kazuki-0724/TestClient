@@ -178,7 +178,7 @@ public class Boundary extends JFrame{
                 break;
 
             case ConfirmationBoundary:
-            	//updatePanel(BoundaryID.ConfirmationBoundary, "");
+            	updatePanel(BoundaryID.ConfirmationBoundary, "");
                 confirmationBoundary.setVisible(true);
                 this.setTitle("Confirmation");
                 currentPanel = confirmationBoundary;
@@ -263,6 +263,7 @@ public class Boundary extends JFrame{
             case LobbyBoundary:
             	lobbyBoundary.setIdLabel(control.getMyPlayer().getId());
                 lobbyBoundary.setRateLabel(control.getMyPlayer().getWin(),control.getMyPlayer().getLose(),control.getMyPlayer().getGames());
+                lobbyBoundary.setWaitingMessageLabel(control.getMyPlayer().getId());
                 //ランキング情報もセットするはず
                 lobbyBoundary.setRankingData(control.getGameInfo().getRankingData());
                 break;

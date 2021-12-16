@@ -16,7 +16,7 @@ public class Player{
     private double rate;
     private int games;
 
-    private int playerNum;
+    //private int playerNum;
 
 
     /**************************/
@@ -61,15 +61,6 @@ public class Player{
     }
 
 
-
-    public int getPlayerNum() {
-		return playerNum;
-	}
-
-
-	public void setPlayerNum(int playerNum) {
-		this.playerNum = playerNum;
-	}
 
 
 

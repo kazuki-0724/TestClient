@@ -271,7 +271,7 @@ public class ClientControl{
 
 
     		case "REQUEST":
-    			System.out.println("[Log handleData() REQUEST switch] data"+ data);
+    			System.out.println("[Log handleData() REQUEST switch] data "+ data);
 
     			String[] dates2 = data.split("_");
 
@@ -279,6 +279,14 @@ public class ClientControl{
 
     				case "STARTGAME":
 	    				//dates2[1]についてJSON処理
+    					Message message = gson.fromJson(dates2[1], Message.class);
+						String roomId = message.getRommID();
+						int playerNum = message.getPlayerNum();
+
+						getGameInfo().setPlayerNum(playerNum);
+						getGameInfo().setRoomID(roomId);
+						communicate().sendData(ProcessID.STARTGAME_OK, "blank");
+
 	    				break;
 
     				case "STARTTURN":
@@ -286,11 +294,31 @@ public class ClientControl{
     					int painterPlayerNum = Integer.parseInt(dates2[1]);
     					//テーマ
     					String theme = dates2[2];
+
+    					getGameInfo().setPainterPlayerNum(painterPlayerNum);
+    					getGameInfo().setTheme(theme);
+
+    					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
+    						boundary.changePanel(BoundaryID.ConfirmationBoundary);
+    					}else {
+    						boundary.changePanel(BoundaryID.WaitingTimeBoundary);
+    					}
+
+    					communicate().sendData(ProcessID.STARTTURN_OK, "blank");
+
+
     					break;
 
     				case "QTIMESTART":
     					//制限時間
     					int limitTime = Integer.parseInt(dates2[1]);
+    					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
+    						runTimer(BoundaryID.PainterBoundary,limitTime);
+    					}else {
+    						runTimer(BoundaryID.RespondentBoundary,limitTime);
+    					}
+
+
     					break;
 
     				case "ANSWERER":

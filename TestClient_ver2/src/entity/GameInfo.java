@@ -13,6 +13,11 @@ public class GameInfo {
 	//ゲームに参加しているユーザのデータ
 	//private HashMap<String,Player> playerMap = new HashMap<>();
 
+	//ゲーム中に使う番号
+	private int playerNum;
+
+	private int painterPlayerNum;
+
 	private String theme;
 
 	private String resultString;
@@ -29,6 +34,34 @@ public class GameInfo {
 	public GameInfo() {
 		// TODO 自動生成されたコンストラクター・スタブ
 
+	}
+
+
+
+
+	public int getPainterPlayerNum() {
+		return painterPlayerNum;
+	}
+
+
+
+
+	public void setPainterPlayerNum(int painterPlayerNum) {
+		this.painterPlayerNum = painterPlayerNum;
+	}
+
+
+
+
+	public int getPlayerNum() {
+		return playerNum;
+	}
+
+
+
+
+	public void setPlayerNum(int playerNum) {
+		this.playerNum = playerNum;
 	}
 
 

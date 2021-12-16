@@ -155,7 +155,7 @@ public class ClientCommunication{
 	    		break;
 
 	    	case ANSWER:
-	    		communicationFormat = encode(REQUEST, "ANSWER",control.getGameInfo().getRoomID() + "_" + control.getMyPlayer().getPlayerNum());
+	    		communicationFormat = encode(REQUEST, "ANSWER",control.getGameInfo().getRoomID() + "_" + control.getGameInfo().getPlayerNum());
 	    		break;
 
 	    	case ANSWER_OK:

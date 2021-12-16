@@ -240,6 +240,9 @@ public class LobbyBoundary extends JPanel{
 		return startGameButton;
 	}
 
+    public void setWaitingMessageLabel(String id) {
+    	this.waitingMessageLabel.setText("こんにちは"+id+"さん。");
+    }
 
 
 
