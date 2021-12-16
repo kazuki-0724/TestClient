@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 
 import listener.LogoutActionListener;
@@ -22,30 +21,31 @@ import listener.StartGameActionListener;
  */
 public class LobbyBoundary extends JPanel{
 
-
-    //private Boundary boundary;
-    //private ClientControl control;
-
-    //各パーツ
+	//各パーツ
     private JLabel titleLabel;
     private JLabel idLabel;
     private JLabel rateLabel;
-    private JLabel messageLabel;
+    private JLabel messageLabel_1;
+    private JLabel messageLabel_2;
     private JLabel waitingMessageLabel;
     private JButton startGameButton;
     private JButton logoutButton;
     private JList<String> list;
-    private JScrollPane sp;
+    //private JScrollPane sp;
+    private JLabel[] playerLabel = new JLabel[5];
 
 
     /*クラス図にはいらない気がする********/
-    private String[] rankingData = {"1","2","3"};
-    final String GAME = "Paint Quiz";
+    final String[] data = {"1st:aaaa","2nd:bbbb","3rd:cccc","4th:dddd","5th:eeee","6th:ffff"};
+    final String GAME = "お絵描きゲーム";
     final String START = "START";
-    final String LOGOUT = "LOGOUT";
+    final String LOGOUT = "ログアウト";
     final String FONT_NAME = "MS ゴシック";
 
-    private String message = "message";
+    final String message = "お絵描きゲームへようこそ！";
+    final String message2 = "現在のランキング";
+    final String PLAYER = "playerLabel   xx%";
+    final String RATE = "勝率：xx%";
     /*************************************/
 
 
@@ -58,34 +58,34 @@ public class LobbyBoundary extends JPanel{
     public LobbyBoundary(){
 
 
-
         //各パーツのインスタンス生成
         // title
         titleLabel = new JLabel(GAME);
         idLabel = new JLabel();
         setIdLabel("user");
         // message
-        messageLabel = new JLabel(message);
+        messageLabel_1 = new JLabel(message);
+        messageLabel_2 = new JLabel(message2);
         // waitingMessageLabel
         waitingMessageLabel = new JLabel();
         waitingMessageLabel.setVisible(false);
 
 
 
-        rateLabel = new JLabel(message);
+        rateLabel = new JLabel(RATE);
         // start
         startGameButton = new JButton(START);
         startGameButton.setActionCommand(START);
         // logout
         logoutButton = new JButton(LOGOUT);
         logoutButton.setActionCommand(LOGOUT);
-
-
         // ranking
-        list = new JList<>(rankingData);
-        sp = new JScrollPane();
-        sp.getViewport().setView(list);
-
+        for(int i=0; i<5; i++) {
+        	playerLabel[i] = new JLabel(PLAYER);
+        }
+        //list = new JList<>(data);
+        //sp = new JScrollPane();
+        //sp.getViewport().setView(list);
 
 
 
@@ -95,6 +95,8 @@ public class LobbyBoundary extends JPanel{
         Font titleFont = new Font(FONT_NAME, Font.BOLD,40);
         Font textFont = new Font(FONT_NAME, Font.BOLD,15);
         Font helloFont = new Font(FONT_NAME, Font.BOLD,30);
+        Font rankingFont = new Font(FONT_NAME,Font.BOLD,24);
+        Font playerFont = new Font(FONT_NAME, Font.PLAIN,14);
 
         // border
         LineBorder border = new LineBorder(Color.RED, 2, true);
@@ -110,27 +112,43 @@ public class LobbyBoundary extends JPanel{
         this.setLayout(null);
 
 
-        titleLabel.setBounds(200, 30, 400, 40);
+        titleLabel.setBounds(200, 40, 400, 40);
+        titleLabel.setBorder(border);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
-        idLabel.setBounds(10, 10, 160, 25);
+        idLabel.setBounds(10, 40, 160, 25);
         idLabel.setFont(textFont);
         idLabel.setBorder(border);
 
-        rateLabel.setBounds(10, 40, 160, 25);
+        rateLabel.setBounds(10, 60, 160, 25);
         rateLabel.setFont(textFont);
         rateLabel.setBorder(border);
 
-        messageLabel.setBounds(150, 100, 350, 40);
-        messageLabel.setFont(helloFont);
+        messageLabel_1.setBounds(200, 180, 420, 40);
+        messageLabel_1.setHorizontalAlignment(JLabel.CENTER);
+        messageLabel_1.setBorder(border);
+        messageLabel_1.setFont(helloFont);
 
+        messageLabel_2.setBounds(280, 280, 240, 40);
+        messageLabel_2.setHorizontalAlignment(JLabel.CENTER);
+        messageLabel_2.setBorder(border);
+        messageLabel_2.setFont(rankingFont);
+
+        for(int i=0; i<5; i++) {
+        	playerLabel[i].setBounds(340,355+20*i,120,20);
+        	playerLabel[i].setBorder(border);
+        	playerLabel[i].setFont(playerFont);
+        }
+
+        //場所未確定
         waitingMessageLabel.setBounds(400,400,200,50);
 
-        startGameButton.setBounds(250, 200, 100, 20);
+        startGameButton.setBounds(350, 500, 100, 30);
 
-        logoutButton.setBounds(500, 10, 90, 20);
+        logoutButton.setBounds(700, 50, 110, 30);
 
-        sp.setBounds(200, 300, 200, 80);
+        //sp.setBounds(300, 340, 200, 80);
 
         /***************************************************/
 
@@ -140,17 +158,22 @@ public class LobbyBoundary extends JPanel{
         this.add(titleLabel);
         this.add(idLabel);
         this.add(rateLabel);
-        this.add(messageLabel);
+        this.add(messageLabel_1);
+        this.add(messageLabel_2);
         this.add(waitingMessageLabel);
         this.add(startGameButton);
         this.add(logoutButton);
-        this.add(sp);
+        for(int i=0; i<5 ; i++) {
+        	this.add(playerLabel[i]);
+        }
+        //this.add(sp);
 
         /************************/
 
 
 
-        this.setSize(640, 480);
+        this.setSize(840, 630);
+
 
     }
 
@@ -221,7 +244,7 @@ public class LobbyBoundary extends JPanel{
      * @return
      */
     public JLabel getMessageLabel() {
-        return messageLabel;
+        return messageLabel_1;
     }
 
     /**
@@ -229,7 +252,7 @@ public class LobbyBoundary extends JPanel{
      * @param text
      */
     public void setMessageLabel(String text) {
-        this.messageLabel.setText(text);
+        this.messageLabel_1.setText(text);
     }
 
     /**

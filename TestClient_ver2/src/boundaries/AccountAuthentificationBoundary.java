@@ -26,7 +26,7 @@ import listener.ToLobbyActionListener;
  */
 public class AccountAuthentificationBoundary extends JPanel{
 
-	
+
 	//リスナーに渡すだけのために
     //private Boundary boundary;
     //private ClientControl control;
@@ -39,11 +39,11 @@ public class AccountAuthentificationBoundary extends JPanel{
     private JLabel passLabel;
     private JPasswordField passFiled;
     private JButton loginButton;
-    
+
     //ログインと新規登録の切り替え
     private JButton switchButton;
-    
-   
+
+
 
     /*クラス図にはいらない気がする********/
     final String LOGIN = "LOGIN";
@@ -52,7 +52,7 @@ public class AccountAuthentificationBoundary extends JPanel{
     /*************************************/
 
 
-    
+
     /**
      * コンストラクタ
      * @param boundary
@@ -60,7 +60,7 @@ public class AccountAuthentificationBoundary extends JPanel{
      */
     public AccountAuthentificationBoundary(){
 
-        
+
         //各パーツのインスタンス生成
         titleLabel = new JLabel(LOGIN);
         messageLabel = new JLabel("message");
@@ -73,7 +73,7 @@ public class AccountAuthentificationBoundary extends JPanel{
         loginButton.setActionCommand(LOGIN);
         switchButton = new JButton("新規登録");
         switchButton.setActionCommand("goResist");
-        
+
 
         /*レイアウト視覚化のためのもの************************/
         LineBorder border = new LineBorder(Color.RED, 2, true);
@@ -81,38 +81,38 @@ public class AccountAuthentificationBoundary extends JPanel{
         Font textFont = new Font("MS ゴシック", Font.BOLD,25);
         /*****************************************************/
 
-        
+
         /*レイアウト***************************************/
-        
+
         this.setLayout(null);
 
 
-        titleLabel.setBounds(100, 10, 500, 60);
+        titleLabel.setBounds(180, 50, 500, 60);
         titleLabel.setBorder(border);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
 
-        messageLabel.setBounds(250,100,200,30);
+        messageLabel.setBounds(250,190,350,36);
         messageLabel.setBorder(border);
         messageLabel.setFont(textFont);
 
 
-        idLabel.setBounds(200, 150, 80, 40);
+        idLabel.setBounds(290, 290, 80, 40);
         idLabel.setFont(textFont);
-        idField.setBounds(300, 150, 160, 40);
+        idField.setBounds(410, 290, 180, 40);
         idField.setFont(textFont);
-        passLabel.setBounds(200, 200, 80, 40);
+        passLabel.setBounds(230, 345, 160, 40);
         passLabel.setFont(textFont);
-        passFiled.setBounds(300, 200, 160, 40);
+        passFiled.setBounds(410, 345, 180, 40);
         passFiled.setFont(textFont);
 
-        loginButton.setBounds(300, 250, 80, 20);
-        switchButton.setBounds(520,350,80,20);
+        loginButton.setBounds(360, 420, 100, 30);
+        switchButton.setBounds(690,540,100,30);
 
         /***************************************************/
 
-        
+
         /*パネルに追加***********/
         this.add(titleLabel);
         this.add(messageLabel);
@@ -123,29 +123,29 @@ public class AccountAuthentificationBoundary extends JPanel{
         this.add(loginButton);
         this.add(switchButton);
         /************************/
-        
-        
 
-        this.setSize(640, 480);
+
+
+        this.setSize(840, 630);
     }
 
 
     /**
-     * 
+     *
      * @param toLobbyActionListener
      */
     public void addLoginButtonListener(ToLobbyActionListener toLobbyActionListener) {
     	this.loginButton.addActionListener(toLobbyActionListener);
     }
-    
+
     /**
-     * 
+     *
      * @param switchActionListener
      */
     public void addSwitchButtonListener(SwitchActionListener switchActionListener) {
     	this.switchButton.addActionListener(switchActionListener);
     }
-    
+
 
     /**
      * idFieldのgetter
@@ -178,16 +178,16 @@ public class AccountAuthentificationBoundary extends JPanel{
     public void setPassFiled(JPasswordField passFiled) {
         this.passFiled = passFiled;
     }
-    
+
     /**
-     * 
+     *
      * @param text エラーメッセージなどの表示用
      */
     public void updateMessageLabel(String text) {
 		this.messageLabel.setText(text);
 	}
-    
-    
+
+
 
 
 

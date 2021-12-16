@@ -21,6 +21,7 @@ import entity.ProcessID;
  * 描画用キャンバス
  * @author Kazuki0724
  *
+ *
  */
 public class GameCanvas extends Canvas implements MouseListener,MouseMotionListener {
 

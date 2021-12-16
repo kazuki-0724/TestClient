@@ -41,7 +41,7 @@ public class AccountRegistrationBoundary extends JPanel{
     private JLabel passLabel;
     private JPasswordField passFiled;
     private JButton registButton;
-    
+
     //ログインと新規登録の切り替え
     private JButton switchButton;
 
@@ -71,15 +71,15 @@ public class AccountRegistrationBoundary extends JPanel{
         switchButton = new JButton("ログイン");
         switchButton.setActionCommand("goLogin");
 
-        
+
         //新規登録ボタンのリスナー
         //ToLobbyActionListener listener = new ToLobbyActionListener(this, boundary, control);
         //registButton.addActionListener(listener);
-        
+
         //ログインと新規登録の切り替えリスナー
-        //SwitchActionListener sListener = new SwitchActionListener(this, boundary, control); 
+        //SwitchActionListener sListener = new SwitchActionListener(this, boundary, control);
         //switchButton.addActionListener(sListener);
-        
+
 
         /*レイアウト視覚化のためのもの************************/
         LineBorder border = new LineBorder(Color.RED, 2, true);
@@ -92,32 +92,32 @@ public class AccountRegistrationBoundary extends JPanel{
         this.setLayout(null);
 
 
-        titleLabel.setBounds(100, 10, 500, 60);
+        titleLabel.setBounds(180, 50, 500, 60);
         titleLabel.setBorder(border);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
 
-        messageLabel.setBounds(250,100,200,30);
+        messageLabel.setBounds(250,190,350,36);
         messageLabel.setBorder(border);
         messageLabel.setFont(textFont);
 
 
-        idLabel.setBounds(200, 150, 80, 40);
+        idLabel.setBounds(280, 290, 80, 40);
         idLabel.setFont(textFont);
-        idField.setBounds(300, 150, 160, 40);
+        idField.setBounds(400, 290, 180, 40);
         idField.setFont(textFont);
-        passLabel.setBounds(200, 200, 80, 40);
+        passLabel.setBounds(220, 345, 160, 40);
         passLabel.setFont(textFont);
-        passFiled.setBounds(300, 200, 160, 40);
+        passFiled.setBounds(400, 345, 180, 40);
         passFiled.setFont(textFont);
-        
-        registButton.setBounds(300, 250, 80, 20);
-        switchButton.setBounds(520,350,80,20);
+
+        registButton.setBounds(360, 420, 100, 30);
+        switchButton.setBounds(690,540,100,30);
 
         /***************************************************/
-        
-        
+
+
         /*パネルに追加***********/
         this.add(titleLabel);
         this.add(messageLabel);
@@ -129,30 +129,30 @@ public class AccountRegistrationBoundary extends JPanel{
         this.add(switchButton);
         /************************/
 
-        this.setSize(640, 480);
+        this.setSize(840, 630);
     }
 
 
-    
+
     /**
-     * 
+     *
      * @param toLobbyActionListener
      */
     public void addLoginButtonListener(ToLobbyActionListener toLobbyActionListener) {
     	this.registButton.addActionListener(toLobbyActionListener);
     }
-    
+
     /**
-     * 
+     *
      * @param switchActionListener
      */
     public void addSwitchButtonListener(SwitchActionListener switchActionListener) {
     	this.switchButton.addActionListener(switchActionListener);
     }
-    
 
-    
-    
+
+
+
     /**
      * idFieldのgetter
      * @return
@@ -161,7 +161,7 @@ public class AccountRegistrationBoundary extends JPanel{
         return idField;
     }
 
-    
+
     /**
      * idFieldのsetter
      * @param idField
@@ -170,7 +170,7 @@ public class AccountRegistrationBoundary extends JPanel{
         this.idField = idField;
     }
 
-    
+
     /**
      * passFieldのgetter
      * @return
@@ -179,7 +179,7 @@ public class AccountRegistrationBoundary extends JPanel{
         return passFiled;
     }
 
-    
+
     /**
      * passFieldのsetter
      * @param passFiled
@@ -187,8 +187,8 @@ public class AccountRegistrationBoundary extends JPanel{
     public void setPassFiled(JPasswordField passFiled) {
         this.passFiled = passFiled;
     }
-    
-    
+
+
     /**
      * エラーメッセージの表示
      * @param text エラーメッセージなどの表示用

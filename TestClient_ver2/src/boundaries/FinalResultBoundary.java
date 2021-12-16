@@ -1,6 +1,7 @@
 package boundaries;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,15 +19,27 @@ import listener.ToLobbyActionListener;
 public class FinalResultBoundary extends JPanel{
 
 
-    //private Boundary boundary;
-    //private ClientControl control;
-    //各パーツ
+	//各パーツ
+    private JLabel titleLabel;
+    private JLabel winnerLabel;
     private JLabel messageLabel;
-    private JLabel themeLabel;
     private JLabel timerLabel;
-    private JButton nextButton;
+    private JLabel[] playerLabel = new JLabel[4];
+    private JButton toLobbyButton;
 
-    
+    //文字列
+    final String TITLE = "最終結果発表";
+    final String MESSAGE = "勝者  〇〇  xxpt";
+    final String MESSAGE2 = "結果";
+    final String PLAYER1 = "1st playerLabel   xxpt";
+    final String PLAYER2 = "2nd playerLabel   xxpt";
+    final String PLAYER3 = "3rd playerLabel   xxpt";
+    final String PLAYER4 = "4th playerLabel   xxpt";
+    final String TOLOBBY = "ロビーへ戻る";
+    final String FONT_NAME = "MS ゴシック";
+
+
+
     /**
      * コンストラクタ
      * @param boundary
@@ -36,77 +49,102 @@ public class FinalResultBoundary extends JPanel{
 
         //this.boundary = boundary;
         //this.control = control;
-        
-        
+
+
         LineBorder border = new LineBorder(Color.RED, 2, true);
-        
-        
+
+
         //各パーツのインスタンス生成
-        messageLabel = new JLabel("最終結果"); 
-        themeLabel = new JLabel("");
-        timerLabel = new JLabel("");
-        
-        nextButton = new JButton("ロビーに戻る");
-        nextButton.setActionCommand("BackToLobby");
-        
-        
-        
-        
-        //ToLobbyActionListener listener = new ToLobbyActionListener(this, boundary, control);
-        //nextButton.addActionListener(listener);
-        
-        
-        
+        titleLabel = new JLabel(TITLE);
+        winnerLabel = new JLabel(MESSAGE);
+        messageLabel = new JLabel(MESSAGE2);
+        //timerLabel = new JLabel("");
+        playerLabel[0] = new JLabel(PLAYER1);
+        playerLabel[1] = new JLabel(PLAYER2);
+        playerLabel[2] = new JLabel(PLAYER3);
+        playerLabel[3] = new JLabel(PLAYER4);
+        toLobbyButton = new JButton(TOLOBBY);
+        toLobbyButton.setActionCommand("BackToLobby");
+
+      //フォント
+        Font titleFont = new Font(FONT_NAME, Font.BOLD,52);
+        Font playerFont = new Font(FONT_NAME, Font.BOLD ,36);
+        Font winnerFont = new Font(FONT_NAME, Font.BOLD,36);
+        Font messageFont = new Font(FONT_NAME, Font.BOLD ,45);
+        Font messageFont2 = new Font(FONT_NAME, Font.BOLD,16);
+
+
         /*レイアウト***************************************/
         this.setLayout(null);
-        
-        messageLabel.setBounds(250,200,300,40);
-        themeLabel.setBounds(250,250,300,40);
-        timerLabel.setBounds(470,10,150,40);
-        timerLabel.setBorder(border);
-        nextButton.setBounds(250,350,200,40);
-        
+
+        titleLabel.setBounds(250,80,330,52);
+        titleLabel.setBorder(border);
+        titleLabel.setFont(titleFont);
+
+        winnerLabel.setBounds(275,190,275,40);
+        winnerLabel.setBorder(border);
+        winnerLabel.setFont(winnerFont);
+
+        messageLabel.setBounds(360,260,100,50);
+        messageLabel.setBorder(border);
+        messageLabel.setFont(messageFont);
+
+        for(int i=0; i<4; i++) {
+        	playerLabel[i].setBounds(220,320+50*i,390,44);
+        	playerLabel[i].setBorder(border);
+        	playerLabel[i].setFont(playerFont);
+        }
+
+        //timerLabel.setBounds(470,10,150,40);
+        //timerLabel.setBorder(border);
+
+        toLobbyButton.setBounds(675,535,120,35);
+
         /***************************************************/
-        
-        
+
+
         /*パネルに追加***********/
+        this.add(titleLabel);
+        this.add(winnerLabel);
         this.add(messageLabel);
-        this.add(themeLabel);
-        this.add(timerLabel);
-        this.add(nextButton);
+        //this.add(timerLabel);
+        this.add(toLobbyButton);
+        for(int i=0; i<4 ; i++) {
+        	this.add(playerLabel[i]);
+        }
         /************************/
-        
-        
-        
-        this.setSize(640, 480);
-        
-        
-       
+
+
+
+        this.setSize(840, 630);
+
+
     }
-    
-    
+
+
     /**
-     * 
+     *時間遷移オンリーならいらない
      * @param toLobbyActionListener
+     *
      */
     public void addNextButtonActionListener(ToLobbyActionListener toLobbyActionListener) {
-    	this.nextButton.addActionListener(toLobbyActionListener);
+    //	this.nextButton.addActionListener(toLobbyActionListener);
     }
-    
-    
-    
+
+
+
     /**
      * テーマのラベルへの埋め込み
      * @param theme
      */
     public void setTheme(String theme) {
-    	
+
     	System.out.println("お題は"+theme);
-    	this.themeLabel.setText(String.format("お題：%s",theme ));
-    	
+    	this.messageLabel.setText(String.format("お題：%s",theme ));
+
     }
-    
-    
+
+
     /**
      * カウントダウンタイマー
      * @param time
@@ -114,6 +152,6 @@ public class FinalResultBoundary extends JPanel{
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
     }
-    
+
 
 }

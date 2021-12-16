@@ -5,9 +5,7 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
@@ -22,9 +20,7 @@ import listener.AnswerSubmitActionListener;
  */
 public class RespondentBoundary extends JPanel{
 
-
-
-    //各パーツ
+	 //各パーツ
     private JLabel messageLabel_1;
     private JLabel messageLabel_2;
     private JLabel messageLabel_3;
@@ -32,8 +28,8 @@ public class RespondentBoundary extends JPanel{
     private JLabel timerLabel;
     private JLabel pointLabel;
 
-    private JList<String> list;
-    private JScrollPane sp;
+    //private JList<String> list;
+    //private JScrollPane sp;
 
     private AnswerCanvas ac;
 
@@ -50,10 +46,15 @@ public class RespondentBoundary extends JPanel{
     /*クラス図にはいらない気がする********/
     final String FONT_NAME = "MS ゴシック";
     final String THEME = "お題 : ";
-    final String TIMEKEEP = "制限時間以内に回答してください";
-    String[] sampleData = {"1st:aaaa","2nd:bbbb","3rd:cccc","4th:dddd","5th:eeee","6th:ffff"};
-    /*******************************************/
+    final String TIMEKEEP = "※制限時間以内に解答を送信してください";
+    final String PLAYER = "・playerLabel   xxpt";
+    final String TIMER = "timer";
+    final String POINT = "point";
 
+
+
+    //String[] sampleData = {"1st:aaaa","2nd:bbbb","3rd:cccc","4th:dddd","5th:eeee","6th:ffff"};
+    /*******************************************/
 
     /**
      * コンストラクタ
@@ -62,29 +63,27 @@ public class RespondentBoundary extends JPanel{
      */
     public RespondentBoundary(){
 
-
-
-        //各パーツのインスタンス生成
+    	 //各パーツのインスタンス生成
         messageLabel_1 = new JLabel(TIMEKEEP);
 
-        timerLabel = new JLabel("timer layout");
+        timerLabel = new JLabel(TIMER);
 
         // ranking
-        list = new JList<>(sampleData);
-        sp = new JScrollPane();
-        sp.getViewport().setView(list);
+        //list = new JList<>(sampleData);
+        //sp = new JScrollPane();
+        //sp.getViewport().setView(list);
 
         // answer input field
         answerField = new JTextField(10);
 
         // submit button
-        answerButton = new JButton("submit");
+        answerButton = new JButton("送信");
         answerButton.setActionCommand("answer");
 
         ac = new AnswerCanvas();
 
         for(int i=0; i<4; i++) {
-        	playerLabel[i] = new JLabel("playerLabel");
+        	playerLabel[i] = new JLabel(PLAYER);
         }
 
 
@@ -96,7 +95,8 @@ public class RespondentBoundary extends JPanel{
 
         //レイアウト可視化のため
         LineBorder border = new LineBorder(Color.RED, 2, true);
-        Font themeFont = new Font(FONT_NAME, Font.BOLD,30);
+        Font messageFont = new Font(FONT_NAME, Font.BOLD,29);
+        Font playerFont = new Font(FONT_NAME, Font.PLAIN,16);
         this.setLayout(null);
         /****************************************************/
 
@@ -105,20 +105,26 @@ public class RespondentBoundary extends JPanel{
         /*レイアウト*******************************/
         this.setLayout(null);
 
-        messageLabel_1.setBounds(150,10,300,40);
+        messageLabel_1.setBounds(20,20,580,36);
         messageLabel_1.setBorder(border);
-        messageLabel_1.setFont(themeFont);
+        messageLabel_1.setFont(messageFont);
 
-        timerLabel.setBounds(470,10,150,40);
+        timerLabel.setBounds(640,20,150,40);
         timerLabel.setBorder(border);
 
-        sp.setBounds(540,50,80,200);
+        for(int i=0; i<4; i++) {
+        	playerLabel[i].setBounds(640,220+30*i,160,30);
+        	playerLabel[i].setBorder(border);
+        	playerLabel[i].setFont(playerFont);
+        }
 
-        answerField.setBounds(380,410,200,30);
+        //sp.setBounds(540,50,80,200);
 
-        answerButton.setBounds(580,410,50,30);
+        answerField.setBounds(540,540,200,30);
 
-        ac.setBounds(20,50,500,350);
+        answerButton.setBounds(740,540,80,30);
+
+        ac.setBounds(20,70,600,450);
 
         /******************************************/
 
@@ -129,14 +135,17 @@ public class RespondentBoundary extends JPanel{
         this.add(ac);
         this.add(messageLabel_1);
         this.add(timerLabel);
-        this.add(sp);
+        //this.add(sp);
+        for(int i=0; i<4 ; i++) {
+        	this.add(playerLabel[i]);
+        }
         this.add(answerField);
         this.add(answerButton);
         /******************************/
 
 
 
-        this.setSize(640, 480);
+        this.setSize(840, 630);
 
     }
 

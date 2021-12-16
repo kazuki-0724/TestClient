@@ -134,7 +134,7 @@ public class Boundary extends JFrame{
         boundary.setDefaultCloseOperation(EXIT_ON_CLOSE);
         boundary.setVisible(true);
         boundary.setTitle("Client");
-        boundary.setSize(640,480);
+        boundary.setSize(840,630);
 
     }
 
