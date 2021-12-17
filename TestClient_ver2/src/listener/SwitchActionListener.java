@@ -18,15 +18,15 @@ import entity.BoundaryID;
  */
 
 public class SwitchActionListener extends BoundaryActionListener{
-	
-	
+
+
 	private AccountRegistrationBoundary arb;
 	private AccountAuthentificationBoundary aab;
 	private Boundary boundary;
 	//private ClientControl control;
-	
-	
-	
+
+
+
 	/**
 	 * 新規登録用のコンストラクタ
 	 * @param arb
@@ -39,44 +39,31 @@ public class SwitchActionListener extends BoundaryActionListener{
 	        this.boundary = boundary;
 	        //this.control = control;
 	}
-	
-	
-	/**
-	 * ログイン用のコンストラクタ
-	 * @param aab
-	 * @param boundary
-	 * @param control
-	 */
-	//public SwitchActionListener(AccountAuthentificationBoundary aab, Boundary boundary ,ClientControl control){
-    //    this.aab = aab;
-    //    this.boundary = boundary;
-    //    this.control = control;
-	//}
-	
+
 
 
 	/**
 	 * イベント処理
 	 */
 	public void actionPerformed(ActionEvent e){
-		
+
 		System.out.println("[Log] switch Button Clicked");
 		String type = e.getActionCommand();
-		
+
 		System.out.println("[Log] "+type);
-		
+
 		if(type.equals("goLogin")) {
 			boundary.changePanel(BoundaryID.AccountAuthentificationBoudary);
-			
+
 		}else if(type.equals("goResist")) {
 			boundary.changePanel(BoundaryID.AccountRegistrationBoundary);
-		
+
 		}else {
 			System.out.println("[Error] Switch action listener error");
 		}
-		
-		
-		
+
+
+
 	}
 
 }

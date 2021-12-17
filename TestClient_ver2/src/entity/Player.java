@@ -61,7 +61,16 @@ public class Player{
     }
 
 
-
+    /*
+     * ログアウトの時の初期化処理
+     */
+    public void init() {
+    	this.id = "unknown";
+    	this.win = -1;
+    	this.lose = -1;
+    	this.games = -1;
+    	this.rate = -1;
+    }
 
 
     /**

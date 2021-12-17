@@ -135,6 +135,7 @@ public class Boundary extends JFrame{
         boundary.setVisible(true);
         boundary.setTitle("Client");
         boundary.setSize(840,630);
+        boundary.setResizable(false);
 
     }
 
@@ -150,21 +151,21 @@ public class Boundary extends JFrame{
         switch(nextBoundary){
 
             case AccountAuthentificationBoudary:
-            	//updatePanel(BoundaryID.AccountAuthentificationBoudary, "","");
+            	updatePanel(BoundaryID.AccountAuthentificationBoudary, "");
                 accountAuthentificationBoundary.setVisible(true);
                 this.setTitle("Login");
                 currentPanel = accountAuthentificationBoundary;
                 break;
 
             case AccountRegistrationBoundary:
-            	//updatePanel(BoundaryID.AccountRegistrationBoundary, "");
+            	updatePanel(BoundaryID.AccountRegistrationBoundary, "");
                 accountRegistrationBoundary.setVisible(true);
                 this.setTitle("new Account");
                 currentPanel = accountRegistrationBoundary;
                 break;
 
             case LobbyBoundary:
-            	//updatePanel(BoundaryID.LobbyBoundary, "");
+            	updatePanel(BoundaryID.LobbyBoundary, "");
                 lobbyBoundary.setVisible(true);
                 this.setTitle("Lobby");
                 currentPanel = lobbyBoundary;

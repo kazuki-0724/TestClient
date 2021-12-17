@@ -53,6 +53,7 @@ public class StartGameActionListener extends BoundaryActionListener{
 
         //ボタンを押せなくさせる
         lobbyBoundary.getStartGameButton().setEnabled(false);
+        lobbyBoundary.getLogoutButton().setEnabled(false);
 
 
     }

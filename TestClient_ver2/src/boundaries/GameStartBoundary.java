@@ -115,16 +115,11 @@ public class GameStartBoundary extends JPanel{
 
 
 
-    public void setPlayersLabel(String[] data ) {
-
-    	//(name_rate )* 4
-    	/**
-    	 * split(_)
-    	 */
+    public void setPlayersLabel(String[] playersData ) {
 
 
     	for(int i=0; i<4;i++) {
-    		playerLabel[i].setText(String.format("%s : %s", "player"+i,"rate"));
+    		playerLabel[i].setText(playersData[i]);
     	}
 
     }

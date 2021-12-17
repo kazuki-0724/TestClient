@@ -182,6 +182,12 @@ public class LobbyBoundary extends JPanel{
 
     	for(int i=0;i<rankingData.length;i++) {
 
+    		String[] data = rankingData[i].split(":");
+    		String name = data[0].trim();
+    		String rate = data[1].trim();
+
+
+    		playerLabel[i].setText(String.format("[%10s] %4s", name, rate));
     	}
 
 
@@ -262,6 +268,14 @@ public class LobbyBoundary extends JPanel{
     public JButton getStartGameButton() {
 		return startGameButton;
 	}
+
+
+    public JButton getLogoutButton() {
+    	return this.logoutButton;
+    }
+
+
+
 
     public void setWaitingMessageLabel(String id) {
     	this.waitingMessageLabel.setText("こんにちは"+id+"さん。");

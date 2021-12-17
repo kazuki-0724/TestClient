@@ -174,6 +174,11 @@ public class ClientControl{
 	}
 
 
+
+
+
+
+
 	/**
 	 *受信解析からの流れ
 	 * @param dataFlag #前の第ヘッダ
@@ -216,6 +221,10 @@ public class ClientControl{
     				case "LOGOUT":
     					if(dates[1].equals("OK")) {
     						//ログアウト処理
+    						System.out.println("[Log] LOGOUT");
+    						getMyPlayer().init();
+    						boundary.changePanel(BoundaryID.AccountAuthentificationBoudary);
+
     					}
     					break;
 
@@ -250,7 +259,7 @@ public class ClientControl{
     					}
     					break;
 
-    				case "CONNECLM":
+    				case "CONNECTCLM":
     					//接続ok。本当は後ろにOKが続いてる
     					System.out.println("[Log ] Connect CLM complete");
     					break;
@@ -280,8 +289,8 @@ public class ClientControl{
     				case "STARTGAME":
 	    				//dates2[1]についてJSON処理
     					Message message = gson.fromJson(dates2[1], Message.class);
-						String roomId = message.getRommID();
 						int playerNum = message.getPlayerNum();
+						String roomId = message.getRommID();
 
 						getGameInfo().setPlayerNum(playerNum);
 						getGameInfo().setRoomID(roomId);
