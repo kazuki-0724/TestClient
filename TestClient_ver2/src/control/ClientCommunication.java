@@ -130,7 +130,7 @@ public class ClientCommunication{
 
 	    	//時間経過を通知
 	    	case TIMEOVER:
-	    		communicationFormat = encode(REQUEST,"");
+	    		communicationFormat = encode(REQUEST,"TIMEOVER",data);
 	    		break;
 
 	    	//画面遷移等の通知系

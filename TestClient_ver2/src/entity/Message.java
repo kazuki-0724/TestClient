@@ -37,7 +37,8 @@ public class Message {
 	//通信番号10
 	private String rommID;
 
-	private int playerNum;
+	private List<GamePlayer> gamePlayerList;
+
 
 	/************************************/
 
@@ -65,6 +66,21 @@ public class Message {
 	}
 
 
+
+
+
+
+
+
+	public List<GamePlayer> getGamePlayerList() {
+		return gamePlayerList;
+	}
+
+
+
+	public void setGamePlayerList(List<GamePlayer> gamePlayerList) {
+		this.gamePlayerList = gamePlayerList;
+	}
 
 
 
@@ -141,16 +157,6 @@ public class Message {
 	}
 
 
-
-	public int getPlayerNum() {
-		return playerNum;
-	}
-
-
-
-	public void setPlayerNum(int playerNum) {
-		this.playerNum = playerNum;
-	}
 
 
 }

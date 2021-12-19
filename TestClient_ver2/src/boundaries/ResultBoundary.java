@@ -2,10 +2,13 @@ package boundaries;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import entity.GamePlayer;
 
 
 
@@ -119,8 +122,7 @@ class ResultBoundary extends JPanel{
      */
     public void setTheme(String theme) {
 
-    	System.out.println("お題は"+theme);
-    	this.themeLabel.setText(String.format("お題：%s",theme ));
+    	this.themeLabel.setText(String.format("正解は %s",theme ));
 
     }
 
@@ -129,8 +131,11 @@ class ResultBoundary extends JPanel{
      * 結果の埋め込み
      * @param text
      */
-    public void setResult(String text) {
-    	this.messageLabel.setText(String.format("この問題の結果%s", text));
+    public void setResult(List<GamePlayer> gamePlayerList) {
+
+    	for(int i=0;i<playerLabel.length;i++) {
+    		playerLabel[i].setText(String.format("[%s] %3d %3d",gamePlayerList.get(i).getId(),gamePlayerList.get(i).getTurnPoint(),gamePlayerList.get(i).getTotalPoint()));
+    	}
     }
 
 

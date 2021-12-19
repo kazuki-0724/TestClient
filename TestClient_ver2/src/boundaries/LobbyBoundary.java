@@ -142,7 +142,7 @@ public class LobbyBoundary extends JPanel{
         }
 
         //場所未確定
-        waitingMessageLabel.setBounds(400,400,200,50);
+        //waitingMessageLabel.setBounds(400,400,200,50);
 
         startGameButton.setBounds(350, 500, 100, 30);
 
@@ -276,10 +276,6 @@ public class LobbyBoundary extends JPanel{
 
 
 
-
-    public void setWaitingMessageLabel(String id) {
-    	this.waitingMessageLabel.setText("こんにちは"+id+"さん。");
-    }
 
 
 

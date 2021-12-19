@@ -2,10 +2,13 @@ package boundaries;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import entity.GamePlayer;
 
 
 /**
@@ -115,11 +118,10 @@ public class GameStartBoundary extends JPanel{
 
 
 
-    public void setPlayersLabel(String[] playersData ) {
+    public void setPlayersLabel(List<GamePlayer> list ) {
 
-
-    	for(int i=0; i<4;i++) {
-    		playerLabel[i].setText(playersData[i]);
+    	for(int i=0;i<list.size();i++) {
+    		playerLabel[i].setText( String.format("[%s] %s", list.get(i).getId(), list.get(i).getRate()) );
     	}
 
     }

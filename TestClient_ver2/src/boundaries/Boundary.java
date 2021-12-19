@@ -215,7 +215,7 @@ public class Boundary extends JFrame{
 
 
             case GameStartBoundary:
-            	//updatePanel(BoundaryID.GameStartBoundary, "");
+            	updatePanel(BoundaryID.GameStartBoundary, "");
             	gameStartBoundary.setVisible(true);
             	this.setTitle("PlayerList");
             	currentPanel = gameStartBoundary;
@@ -264,7 +264,7 @@ public class Boundary extends JFrame{
             case LobbyBoundary:
             	lobbyBoundary.setIdLabel(control.getMyPlayer().getId());
                 lobbyBoundary.setRateLabel(control.getMyPlayer().getWin(),control.getMyPlayer().getLose(),control.getMyPlayer().getGames());
-                lobbyBoundary.setWaitingMessageLabel(control.getMyPlayer().getId());
+                lobbyBoundary.setMessageLabel("こんにちは"+control.getMyPlayer().getId()+"さん");
                 //ランキング情報もセットするはず
                 lobbyBoundary.setRankingData(control.getGameInfo().getRankingData());
                 break;
@@ -293,7 +293,7 @@ public class Boundary extends JFrame{
             case ResultBoundary:
             	resultBoundary.setTheme(control.getGameInfo().getTheme());
                 //画面に結果をセット(gameInfoから)
-            	resultBoundary.setResult(control.getGameInfo().getResult());
+            	resultBoundary.setResult(control.getGameInfo().getGamePlayerList());
             	break;
 
             //最終結果画面
@@ -304,6 +304,7 @@ public class Boundary extends JFrame{
             //ゲーム待機画面
             case GameStartBoundary:
             	//画面に参加者データをセット(gameInfoから)
+            	gameStartBoundary.setPlayersLabel(control.getGameInfo().getGamePlayerList());
             	break;
 
             default:

@@ -1,5 +1,10 @@
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+
 /**
  * ゲームに関する情報を扱うクラス
  * @author Kazuki0724
@@ -20,12 +25,15 @@ public class GameInfo {
 
 	private String theme;
 
-	private String resultString;
+	private String[] resultString;
 
 	private String roomID;
 
 
 	private String[] rankingData;
+
+	private List<GamePlayer> gamePlayerList = new ArrayList<>();
+
 
 	/**
 	 * コンストラクタ
@@ -36,6 +44,19 @@ public class GameInfo {
 
 	}
 
+
+
+
+
+
+	public List<GamePlayer> getGamePlayerList() {
+		return gamePlayerList;
+	}
+
+
+	public void setGamePlayerList(List<GamePlayer> gamePlayerList) {
+		this.gamePlayerList = gamePlayerList;
+	}
 
 
 
@@ -67,15 +88,24 @@ public class GameInfo {
 
 
 
-	public String getResultString() {
+	public String[] getResultString() {
 		return resultString;
 	}
 
 
 
 
-	public void setResultString(String resultString) {
+	public void setResultString(String[] resultString) {
 		this.resultString = resultString;
+
+		for(int i=0;i<resultString.length;i++) {
+
+			String[] tmp = resultString[i].split(":");
+			int playerNum = Integer.parseInt(tmp[0]);
+
+		}
+
+
 	}
 
 
@@ -90,20 +120,6 @@ public class GameInfo {
 
 	public void setRankingData(String[] rankingData) {
 		this.rankingData = rankingData;
-	}
-
-
-
-
-	public String getResult() {
-		return resultString;
-	}
-
-
-
-
-	public void setResult(String resultString) {
-		this.resultString = resultString;
 	}
 
 	/**

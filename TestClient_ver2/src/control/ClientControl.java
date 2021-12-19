@@ -1,5 +1,6 @@
 package control;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -8,6 +9,7 @@ import com.google.gson.Gson;
 import boundaries.Boundary;
 import entity.BoundaryID;
 import entity.GameInfo;
+import entity.GamePlayer;
 import entity.Message;
 import entity.Player;
 import entity.ProcessID;
@@ -255,7 +257,13 @@ public class ClientControl{
     				case "JOIN":
     					if(dates[1].equals("OK")) {
     						//APに接続要求を飛ばす
+
+    						//本当はここでAPへの接続処理をやるはず
+    						//テスト段階では面倒くさいから同じサーバでやってるだけ
+    						//communicate().connect(AP);
     						communicate().sendData(ProcessID.CONNECTAP,getMyPlayer().getId());
+
+
     					}
     					break;
 
@@ -289,14 +297,22 @@ public class ClientControl{
     				case "STARTGAME":
 	    				//dates2[1]についてJSON処理
     					Message message = gson.fromJson(dates2[1], Message.class);
-						int playerNum = message.getPlayerNum();
+						List<GamePlayer> gamePlayerList = message.getGamePlayerList();
 						String roomId = message.getRommID();
 
-						getGameInfo().setPlayerNum(playerNum);
+						getGameInfo().setGamePlayerList(gamePlayerList);
 						getGameInfo().setRoomID(roomId);
-						communicate().sendData(ProcessID.STARTGAME_OK, "blank");
 
+						/**********************************************************/
+
+						communicate().sendData(ProcessID.STARTGAME_OK, "blank");
+						/*********************************************************/
+
+						boundary.changePanel(BoundaryID.GameStartBoundary);
+						runTimer(BoundaryID.GameStartBoundary,10);
 	    				break;
+
+
 
     				case "STARTTURN":
     					//出題者プレイヤーNum
@@ -309,9 +325,13 @@ public class ClientControl{
 
     					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
     						boundary.changePanel(BoundaryID.ConfirmationBoundary);
+    						runTimer(BoundaryID.ConfirmationBoundary,10);
     					}else {
     						boundary.changePanel(BoundaryID.WaitingTimeBoundary);
+    						runTimer(BoundaryID.WaitingTimeBoundary,10);
     					}
+
+
 
     					communicate().sendData(ProcessID.STARTTURN_OK, "blank");
 
@@ -322,8 +342,10 @@ public class ClientControl{
     					//制限時間
     					int limitTime = Integer.parseInt(dates2[1]);
     					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
+    						boundary.changePanel(BoundaryID.PainterBoundary);
     						runTimer(BoundaryID.PainterBoundary,limitTime);
     					}else {
+    						boundary.changePanel(BoundaryID.RespondentBoundary);
     						runTimer(BoundaryID.RespondentBoundary,limitTime);
     					}
 
@@ -337,7 +359,13 @@ public class ClientControl{
 
     				case "TURNRESULT":
     					//結果情報をJSONで扱う
+    					Message result = gson.fromJson(dates2[1], Message.class);
+    					String[] resultStrings = result.getTurnResultString();
+    					getGameInfo().setResultString(resultStrings);
 
+
+    					boundary.changePanel(BoundaryID.ResultBoundary);
+    					runTimer(BoundaryID.ResultBoundary,10);
     					break;
 
     				case "FINISHGAME":
@@ -354,64 +382,7 @@ public class ClientControl{
     			break;
 
 
-    		/*
-    		case "userData":
-    			Player myPlayer = new Player("master1","1234",0,1,2);
-    			setMyPlayer(myPlayer);
-    			boundary.changePanel(BoundaryID.LobbyBoundary);
-    			break;
 
-    		case "match make":
-    			//boundary.changePanel(BoundaryID.GameStartBoundary);
-    			runTimer(BoundaryID.GameStartBoundary, 5);
-    			break;
-
-    		case "goConfirm":
-    			System.out.println("theme is "+data);
-    			getGameInfo().setTheme(data);
-    			//boundary.changePanel(BoundaryID.ConfirmationBoundary);
-    			runTimer(BoundaryID.ConfirmationBoundary, 5);
-    			break;
-
-    		case "goPainter":
-    			//boundary.changePanel(BoundaryID.PainterBoundary);
-    			runTimer(BoundaryID.PainterBoundary, 30);
-    			break;
-
-    		case "stroke":
-    			boundary.updatePanel(BoundaryID.RespondentBoundary, data);
-    			break;
-
-    		case "goTurnResult":
-    			getGameInfo().setResult(data);
-    			boundary.changePanel(BoundaryID.ResultBoundary);
-    			break;
-
-
-    		case "final result data":
-    			boundary.changePanel(BoundaryID.FinalResultBoundary);
-    			break;
-
-    		case "back to lobby":
-    			Player updateMyPlayer = new Player("master1","1234",0,1,2);
-    			setMyPlayer(updateMyPlayer);
-    			boundary.changePanel(BoundaryID.LobbyBoundary);
-    			break;
-
-    		case "LOGIN":
-    			if(data.equals("OK")) {
-    				communicate().sendData(ProcessID.GOLOBBY, "master1");
-    			}else {
-
-    			}
-    			break;
-
-    		case "LOBBY":
-    			Player player = new Player("master1", "1234", 5, 5, 10);
-    			setMyPlayer(player);
-    			boundary.changePanel(BoundaryID.LobbyBoundary);
-    			break;
-    		*/
 
     	}
 	}
@@ -446,11 +417,6 @@ public class ClientControl{
 		@Override
 		public void run() {
 			if (time >= 0) {
-
-				if(time == this.limitTime) {
-					//タイマーが起動してから画面遷移(若干ラグ出ちゃうけどしょうがないかな?)
-					boundary.changePanel(type);
-				}
 
 				boundary.updateCountDown(type, time+"");
 				System.out.println(String.format("count : %2d", time) );
