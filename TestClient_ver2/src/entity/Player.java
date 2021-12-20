@@ -37,8 +37,6 @@ public class Player{
 
 
 
-
-
 	/**
      * コンストラクタ
      * @param id

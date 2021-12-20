@@ -203,6 +203,7 @@ public class ClientControl{
 
     				case "LOGIN":
 	    				if(dates[1].equals("OK")) {
+
 	    					Player myPlayer = new Player(dates[2],Integer.parseInt(dates[3]),Integer.parseInt(dates[4]));
 	    					setMyPlayer(myPlayer);
 
@@ -331,12 +332,9 @@ public class ClientControl{
     						runTimer(BoundaryID.WaitingTimeBoundary,10);
     					}
 
-
-
     					communicate().sendData(ProcessID.STARTTURN_OK, "blank");
-
-
     					break;
+
 
     				case "QTIMESTART":
     					//制限時間
