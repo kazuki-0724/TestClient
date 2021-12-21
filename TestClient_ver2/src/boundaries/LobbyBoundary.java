@@ -210,17 +210,20 @@ public class LobbyBoundary extends JPanel{
 
     }
 
+    
 
     public void setRankingData(String[] rankingData) {
 
     	for(int i=0;i<rankingData.length;i++) {
 
     		String[] data = rankingData[i].split(":");
-    		String name = data[0].trim();
-    		String rate = data[1].trim();
+    		//String rank = data[0];
+    		//String name = data[1];
+    		//String rate = data[2];
 
-
-    		playerLabel[i].setText(String.format("[%10s] %4s", name, rate));
+    		for(int j=0;j<3;j++) {
+    			tableModel.setValueAt(data[j], i,j );
+    		}
     	}
 
 
