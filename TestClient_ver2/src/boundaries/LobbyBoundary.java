@@ -7,7 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 import listener.LogoutActionListener;
 import listener.StartGameActionListener;
@@ -31,12 +34,22 @@ public class LobbyBoundary extends JPanel{
     private JButton startGameButton;
     private JButton logoutButton;
     private JList<String> list;
-    //private JScrollPane sp;
+    private JScrollPane sp;
     private JLabel[] playerLabel = new JLabel[5];
+    //
+    private DefaultTableModel tableModel;
+    private JTable table;
 
 
     /*クラス図にはいらない気がする********/
-    final String[] data = {"1st:aaaa","2nd:bbbb","3rd:cccc","4th:dddd","5th:eeee","6th:ffff"};
+    //final String[][] rankingData = {"1st:aaaa","2nd:bbbb","3rd:cccc","4th:dddd","5th:eeee"};
+    final String[][] rankingData = {
+    								{"1st","aaaa","100%"},
+						    		{"2nd","bbbb","90%"},
+						    		{"3rd","cccc","80%"},
+						    		{"4th","dddd","70%"},
+						    		{"5th","eeee","60%"}};
+
     final String GAME = "お絵描きゲーム";
     final String START = "START";
     final String LOGOUT = "ログアウト";
@@ -46,6 +59,7 @@ public class LobbyBoundary extends JPanel{
     final String message2 = "現在のランキング";
     final String PLAYER = "playerLabel   xx%";
     final String RATE = "勝率：xx%";
+    final String[] COLUMN_NAMES = {"RANK","ID","RATE"};
     /*************************************/
 
 
@@ -83,10 +97,21 @@ public class LobbyBoundary extends JPanel{
         for(int i=0; i<5; i++) {
         	playerLabel[i] = new JLabel(PLAYER);
         }
-        //list = new JList<>(data);
+
+
         //sp = new JScrollPane();
         //sp.getViewport().setView(list);
 
+
+
+        tableModel = new DefaultTableModel(COLUMN_NAMES,0);
+        for(int i=0;i<5;i++) {
+        	tableModel.addRow(rankingData[i]);
+        }
+
+        table = new JTable(tableModel);
+
+        sp = new JScrollPane(table);
 
 
 
@@ -135,11 +160,15 @@ public class LobbyBoundary extends JPanel{
         messageLabel_2.setBorder(border);
         messageLabel_2.setFont(rankingFont);
 
+        /*
         for(int i=0; i<5; i++) {
         	playerLabel[i].setBounds(340,355+20*i,120,20);
         	playerLabel[i].setBorder(border);
         	playerLabel[i].setFont(playerFont);
         }
+        */
+
+
 
         //場所未確定
         //waitingMessageLabel.setBounds(400,400,200,50);
@@ -148,7 +177,7 @@ public class LobbyBoundary extends JPanel{
 
         logoutButton.setBounds(700, 50, 110, 30);
 
-        //sp.setBounds(300, 340, 200, 80);
+        sp.setBounds(300, 355, 240, 160);
 
         /***************************************************/
 
@@ -163,10 +192,14 @@ public class LobbyBoundary extends JPanel{
         this.add(waitingMessageLabel);
         this.add(startGameButton);
         this.add(logoutButton);
+
+        /*
         for(int i=0; i<5 ; i++) {
         	this.add(playerLabel[i]);
         }
-        //this.add(sp);
+        */
+
+        this.add(sp);
 
         /************************/
 
