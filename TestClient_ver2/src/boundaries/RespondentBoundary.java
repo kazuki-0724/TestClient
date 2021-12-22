@@ -2,13 +2,18 @@ package boundaries;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
+import entity.PlayerMessage;
 import listener.AnswerSubmitActionListener;
 
 
@@ -36,10 +41,14 @@ public class RespondentBoundary extends JPanel{
     private JTextField answerField;
     private JButton answerButton;
 
-
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private JScrollPane sp;
 
     //参加プレイヤーラベル
-    private JLabel[] playerLabel = new JLabel[4];
+    //private JLabel[] playerLabel = new JLabel[4];
+
+
     /**********************************/
 
 
@@ -50,6 +59,12 @@ public class RespondentBoundary extends JPanel{
     final String PLAYER = "・playerLabel   xxpt";
     final String TIMER = "timer";
     final String POINT = "point";
+    final String[] COLUMN_NAMES = {"ID","Point"};
+    final String[][] member = {
+			{"aaaa","100%"},
+    		{"bbbb","90%"},
+    		{"cccc","80%"},
+    		{"dddd","70%"}};
 
 
 
@@ -82,9 +97,21 @@ public class RespondentBoundary extends JPanel{
 
         ac = new AnswerCanvas();
 
+
+        /*
         for(int i=0; i<4; i++) {
         	playerLabel[i] = new JLabel(PLAYER);
         }
+        */
+
+        tableModel = new DefaultTableModel(COLUMN_NAMES,0);
+        for(int i=0;i<4;i++) {
+        	tableModel.addRow(member[i]);
+        }
+
+        table = new JTable(tableModel);
+
+        sp = new JScrollPane(table);
 
 
         /**************************************************/
@@ -112,13 +139,15 @@ public class RespondentBoundary extends JPanel{
         timerLabel.setBounds(640,20,150,40);
         timerLabel.setBorder(border);
 
+        /*
         for(int i=0; i<4; i++) {
         	playerLabel[i].setBounds(640,220+30*i,160,30);
         	playerLabel[i].setBorder(border);
         	playerLabel[i].setFont(playerFont);
         }
+        */
 
-        //sp.setBounds(540,50,80,200);
+        sp.setBounds(640,220,160,120);
 
         answerField.setBounds(540,540,200,30);
 
@@ -135,10 +164,13 @@ public class RespondentBoundary extends JPanel{
         this.add(ac);
         this.add(messageLabel_1);
         this.add(timerLabel);
-        //this.add(sp);
+        this.add(sp);
+        /*
         for(int i=0; i<4 ; i++) {
         	this.add(playerLabel[i]);
         }
+        */
+
         this.add(answerField);
         this.add(answerButton);
         /******************************/
@@ -199,17 +231,23 @@ public class RespondentBoundary extends JPanel{
 	}
 
 
-    public void setPlayersLabel(String[] data ) {
 
-    	//(name_rate )* 4
-    	/**
-    	 * split(_)
-    	 */
+    public void setTable(List<PlayerMessage> list ) {
 
+    	for(int i=0;i<4;i++) {
 
-    	for(int i=0; i<4;i++) {
-    		playerLabel[i].setText(String.format("%s : %s", "player"+i,"rate"));
+    		PlayerMessage tmp = list.get(i);
+
+    		//setValueAt(セルにセットするデータ,,n行,n列)
+    		tableModel.setValueAt(tmp.getPlayerID(),i,0);
+    		tableModel.setValueAt(tmp.getTotalPoint(),i,1);
     	}
+
+    }
+
+
+    //正解しているプレイヤーの表示を変える
+    public void setCorrectPlayer() {
 
     }
 

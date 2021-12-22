@@ -6,16 +6,16 @@ package entity;
  * @author Kazuki0724
  *
  */
-public class GamePlayer {
+public class PlayerMessage {
 
 	//ゲーム中でのプレイヤー番号
-	private int playerNum;
+	private String playerNum;
 
 	//プレイヤーID
-	private String id;
+	private String playerID;
 
 	//プレイヤーレート(このレートはロビーでの表示でしか使わないからStringでもいい気はする)
-	private double rate;
+	private String rate;
 
 	//ターンポイント
 	private int turnPoint;
@@ -25,46 +25,46 @@ public class GamePlayer {
 
 
 
-	public GamePlayer(int playerNum, String id, double rate) {
+	public PlayerMessage(String playerNum, String playerID, String rate) {
 
 		this.playerNum = playerNum;
-		this.id = id;
+		this.playerID = playerID;
 		this.rate = rate;
 	}
 
 
 
-	public int getPlayerNum() {
+	public String getPlayerNum() {
 		return playerNum;
 	}
 
 
 
-	public void setPlayerNum(int playerNum) {
+	public void setPlayerNum(String playerNum) {
 		this.playerNum = playerNum;
 	}
 
 
 
-	public String getId() {
-		return id;
+	public String getPlayerID() {
+		return playerID;
 	}
 
 
 
-	public void setId(String id) {
-		this.id = id;
+	public void setPlayerID(String playerID) {
+		this.playerID = playerID;
 	}
 
 
 
-	public double getRate() {
+	public String getRate() {
 		return rate;
 	}
 
 
 
-	public void setRate(double rate) {
+	public void setRate(String rate) {
 		this.rate = rate;
 	}
 
@@ -91,10 +91,6 @@ public class GamePlayer {
 	public void setTotalPoint(int totalPoint) {
 		this.totalPoint = totalPoint;
 	}
-
-
-
-
 
 
 

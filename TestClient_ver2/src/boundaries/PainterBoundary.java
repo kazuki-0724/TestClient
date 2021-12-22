@@ -2,10 +2,19 @@ package boundaries;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
+import entity.PlayerMessage;
 
 
 
@@ -28,6 +37,8 @@ class PainterBoundary extends JPanel{
     private JLabel timerLabel;
     private JLabel pointLabel;
 
+    private JButton clearButton;
+
     //idと点数を紐づけられる何かに変更*****************
     //private JList<String> list;
     //private JScrollPane sp;
@@ -35,7 +46,12 @@ class PainterBoundary extends JPanel{
     private GameCanvas gc;
 
     //参加プレイヤーラベル
-    private JLabel[] playerLabel = new JLabel[4];
+    //private JLabel[] playerLabel = new JLabel[4];
+
+
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private JScrollPane sp;
 
 
     /*クラス図にはいらない気がする********/
@@ -47,7 +63,13 @@ class PainterBoundary extends JPanel{
     final String PLAYER = "・playerLabel   xxpt";
     final String TIMER = "timer";
     final String POINT = "point";
-
+    final String CLEAR = "CLEAR";
+    final String[] COLUMN_NAMES = {"ID","Point"};
+    final String[][] member = {
+			{"aaaa","100%"},
+    		{"bbbb","90%"},
+    		{"cccc","80%"},
+    		{"dddd","70%"}};
 
     //private String[] sampleData = {"1st:aaaa","2nd:bbbb","3rd:cccc","4th:dddd","5th:eeee","6th:ffff"};
     /*************************************/
@@ -76,15 +98,31 @@ class PainterBoundary extends JPanel{
 
         pointLabel = new JLabel(POINT);
 
+        clearButton = new JButton(CLEAR);
+
         //list = new JList<>(sampleData);
         //sp = new JScrollPane();
 
         gc = new GameCanvas(boundary.getControl());
 
 
+        /*
         for(int i=0; i<4; i++) {
         	playerLabel[i] = new JLabel(PLAYER);
         }
+        */
+
+
+        tableModel = new DefaultTableModel(COLUMN_NAMES,0);
+        for(int i=0;i<4;i++) {
+        	tableModel.addRow(member[i]);
+        }
+
+        table = new JTable(tableModel);
+
+        sp = new JScrollPane(table);
+
+
 
         /********************************/
 
@@ -120,12 +158,17 @@ class PainterBoundary extends JPanel{
         timerLabel.setBounds(640,10,150,40);
         timerLabel.setBorder(border);
 
+        clearButton.setBounds(640,70,150,40);
+
+        /*
         for(int i=0; i<4; i++) {
         	playerLabel[i].setBounds(640,220+30*i,160,30);
         	playerLabel[i].setBorder(border);
         	playerLabel[i].setFont(playerFont);
         }
+        */
 
+        sp.setBounds(640, 220, 160, 120);
         //sp.getViewport().setView(list);
         //sp.setBounds(540,200,80,200);
 
@@ -140,12 +183,34 @@ class PainterBoundary extends JPanel{
         this.add(messageLabel_1);
         this.add(messageLabel_2);
         this.add(messageLabel_3);
-        //this.add(sp);
+        this.add(sp);
         this.add(timerLabel);
+
+        /*
         for(int i=0; i<4 ; i++) {
         	this.add(playerLabel[i]);
         }
+        */
+
+        this.add(clearButton);
         /***********************/
+
+
+
+
+        clearButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO 自動生成されたメソッド・スタブ
+				gc.clear();
+
+			}
+
+
+        });
+
+
 
 
 
@@ -204,18 +269,26 @@ class PainterBoundary extends JPanel{
 
 
 
-    public void setPlayersLabel(String[] data ) {
+    public void setTable(List<PlayerMessage> list ) {
 
-    	//(name_rate )* 4
-    	/**
-    	 * split(_)
-    	 */
+    	for(int i=0;i<4;i++) {
 
+    		PlayerMessage tmp = list.get(i);
 
-    	for(int i=0; i<4;i++) {
-    		playerLabel[i].setText(String.format("%s : %s", "player"+i,"rate"));
+    		//setValueAt(セルにセットするデータ,,n行,n列)
+    		tableModel.setValueAt(tmp.getPlayerID(),i,0);
+    		tableModel.setValueAt(tmp.getTotalPoint(),i,1);
     	}
 
     }
+
+
+    //正解しているプレイヤーの表示を変える
+    public void setCorrectPlayer() {
+
+    }
+
+
+
 
 }

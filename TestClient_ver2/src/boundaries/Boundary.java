@@ -172,7 +172,7 @@ public class Boundary extends JFrame{
                 break;
 
             case WaitingTimeBoundary:
-                //updatePanel(BoundaryID.WaitingTimeBoundary, "");
+                updatePanel(BoundaryID.WaitingTimeBoundary, "");
             	waitingTimeBoundary.setVisible(true);
                 this.setTitle("Waiting");
                 currentPanel = waitingTimeBoundary;
@@ -186,28 +186,28 @@ public class Boundary extends JFrame{
                 break;
 
             case PainterBoundary:
-            	//updatePanel(BoundaryID.PainterBoundary, "");
+            	updatePanel(BoundaryID.PainterBoundary, "");
                 painterBoundary.setVisible(true);
                 this.setTitle("Paint");
                 currentPanel = painterBoundary;
                 break;
 
             case RespondentBoundary:
-            	//updatePanel(BoundaryID.RespondentBoundary, "");
+            	updatePanel(BoundaryID.RespondentBoundary, "");
                 respondentBoundary.setVisible(true);
                 this.setTitle("Answer");
                 currentPanel = respondentBoundary;
                 break;
 
             case ResultBoundary:
-            	//updatePanel(BoundaryID.ResultBoundary, "");
+            	updatePanel(BoundaryID.ResultBoundary, "");
                 resultBoundary.setVisible(true);
                 this.setTitle("Result");
                 currentPanel = resultBoundary;
                 break;
 
             case FinalResultBoundary:
-            	//updatePanel(BoundaryID.FinalResultBoundary, "");
+            	updatePanel(BoundaryID.FinalResultBoundary, "");
             	finalResultBoundary.setVisible(true);
             	this.setTitle("FinalResult");
             	currentPanel = finalResultBoundary;
@@ -281,6 +281,7 @@ public class Boundary extends JFrame{
             //書き手側の画面
             case PainterBoundary:
             	painterBoundary.setTheme(control.getGameInfo().getTheme());
+            	painterBoundary.setTable(control.getGameInfo().getGamePlayerList());
                 break;
 
             //(text使う)受け手側の画面
@@ -293,7 +294,7 @@ public class Boundary extends JFrame{
             case ResultBoundary:
             	resultBoundary.setTheme(control.getGameInfo().getTheme());
                 //画面に結果をセット(gameInfoから)
-            	resultBoundary.setResult(control.getGameInfo().getGamePlayerList());
+            	resultBoundary.setTable(control.getGameInfo().getGamePlayerList(), control.getGameInfo().getPainterNum());
             	break;
 
             //最終結果画面
@@ -304,7 +305,7 @@ public class Boundary extends JFrame{
             //ゲーム待機画面
             case GameStartBoundary:
             	//画面に参加者データをセット(gameInfoから)
-            	gameStartBoundary.setPlayersLabel(control.getGameInfo().getGamePlayerList());
+            	gameStartBoundary.setTable(control.getGameInfo().getGamePlayerList());
             	break;
 
             default:
@@ -347,6 +348,7 @@ public class Boundary extends JFrame{
     			break;
 
     		case ResultBoundary:
+    			resultBoundary.updateTimer(time);
     			break;
 
 

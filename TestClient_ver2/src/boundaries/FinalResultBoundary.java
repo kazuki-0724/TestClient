@@ -2,12 +2,17 @@ package boundaries;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
+import entity.PlayerMessage;
 import listener.ToLobbyActionListener;
 
 
@@ -24,8 +29,12 @@ public class FinalResultBoundary extends JPanel{
     private JLabel winnerLabel;
     private JLabel messageLabel;
     private JLabel timerLabel;
-    private JLabel[] playerLabel = new JLabel[4];
+    //private JLabel[] playerLabel = new JLabel[4];
     private JButton toLobbyButton;
+
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private JScrollPane sp;
 
     //文字列
     final String TITLE = "最終結果発表";
@@ -37,7 +46,13 @@ public class FinalResultBoundary extends JPanel{
     final String PLAYER4 = "4th playerLabel   xxpt";
     final String TOLOBBY = "ロビーへ戻る";
     final String FONT_NAME = "MS ゴシック";
-
+    final String[] COLUMN_NAMES = {"Rank","ID","Total Point"};
+    final String[][] member = {
+			{"1st","blank","blank"},
+			{"2nd","blank","blank"},
+			{"3th","blank","blank"},
+			{"4th","blank","blank"}
+    		};
 
 
     /**
@@ -58,11 +73,26 @@ public class FinalResultBoundary extends JPanel{
         titleLabel = new JLabel(TITLE);
         winnerLabel = new JLabel(MESSAGE);
         messageLabel = new JLabel(MESSAGE2);
-        //timerLabel = new JLabel("");
+        timerLabel = new JLabel("");
+
+        /*
         playerLabel[0] = new JLabel(PLAYER1);
         playerLabel[1] = new JLabel(PLAYER2);
         playerLabel[2] = new JLabel(PLAYER3);
         playerLabel[3] = new JLabel(PLAYER4);
+        */
+
+
+        tableModel = new DefaultTableModel(COLUMN_NAMES,0);
+        for(int i=0;i<4;i++) {
+        	tableModel.addRow(member[i]);
+        }
+
+        table = new JTable(tableModel);
+
+        sp = new JScrollPane(table);
+
+
         toLobbyButton = new JButton(TOLOBBY);
         toLobbyButton.setActionCommand("BackToLobby");
 
@@ -89,14 +119,18 @@ public class FinalResultBoundary extends JPanel{
         messageLabel.setBorder(border);
         messageLabel.setFont(messageFont);
 
+        /*
         for(int i=0; i<4; i++) {
         	playerLabel[i].setBounds(220,320+50*i,390,44);
         	playerLabel[i].setBorder(border);
         	playerLabel[i].setFont(playerFont);
         }
+        */
 
-        //timerLabel.setBounds(470,10,150,40);
-        //timerLabel.setBorder(border);
+        sp.setBounds(220,320,390,176);
+
+        timerLabel.setBounds(640,10,150,40);
+        timerLabel.setBorder(border);
 
         toLobbyButton.setBounds(675,535,120,35);
 
@@ -109,9 +143,12 @@ public class FinalResultBoundary extends JPanel{
         this.add(messageLabel);
         //this.add(timerLabel);
         this.add(toLobbyButton);
+
+        /*
         for(int i=0; i<4 ; i++) {
         	this.add(playerLabel[i]);
         }
+        */
         /************************/
 
 
@@ -133,16 +170,6 @@ public class FinalResultBoundary extends JPanel{
 
 
 
-    /**
-     * テーマのラベルへの埋め込み
-     * @param theme
-     */
-    public void setTheme(String theme) {
-
-    	System.out.println("お題は"+theme);
-    	this.messageLabel.setText(String.format("お題：%s",theme ));
-
-    }
 
 
     /**
@@ -151,6 +178,57 @@ public class FinalResultBoundary extends JPanel{
      */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
+    }
+
+
+    public void setTable(List<PlayerMessage> list) {
+
+
+    	//昇順
+    	PlayerMessage[] sorted = bubbleSort(list);
+
+    	for(int i=0;i<4;i++) {
+
+    		tableModel.setValueAt(sorted[3-i].getPlayerID(), i, 1);
+    		tableModel.setValueAt(sorted[3-i].getTotalPoint(), i, 2);
+
+    	}
+
+
+    	winnerLabel.setText( String.format("勝者 %s %dpt", sorted[3].getPlayerID(),sorted[3].getTotalPoint()) );
+
+
+    }
+
+
+    /**
+     * 昇順ソート
+     * @param list
+     * @return
+     */
+    public PlayerMessage[] bubbleSort(List<PlayerMessage> list){
+
+    	PlayerMessage[] players = new PlayerMessage[4];
+
+    	for(int i=0;i<4;i++) {
+    		players[i] = list.get(i) ;
+    	}
+
+
+    	for(int i=1;i<4;i++) {
+
+    		if(players[i-1].getTotalPoint() > players[i].getTotalPoint()) {
+
+    			PlayerMessage tmp = players[i];
+    			players[i] = players[i-1];
+    			players[i-1] = tmp;
+
+    		}
+    	}
+
+
+    	return players;
+
     }
 
 

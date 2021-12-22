@@ -27,7 +27,10 @@ public class ClientCommunication{
     private boolean isConnection;
 
     private WebSocketEndpoint webSocketEndpoint;
-	private Session session;
+	private Session CLMSession;
+	private Session APSession;
+	private Session currentSession;
+
 
 	private final String CLM_URI = "ws://localhost:8080/TestServer/WebSocketServer";
     private final String AP_URI = "";
@@ -155,7 +158,7 @@ public class ClientCommunication{
 	    		break;
 
 	    	case ANSWER:
-	    		communicationFormat = encode(REQUEST, "ANSWER",control.getGameInfo().getRoomID() + "_" + control.getGameInfo().getPlayerNum());
+	    		communicationFormat = encode(REQUEST, "ANSWERER",control.getGameInfo().getRoomID());
 	    		break;
 
 	    	case ANSWER_OK:
@@ -227,48 +230,66 @@ public class ClientCommunication{
 
     /**
      * サーバに接続
-     *
+     * CLMのSessionは張りっぱなし
      */
     public void connect(int type){
 
+
     	URI uri = null;
+    	// 初期化のためWebSocketコンテナのオブジェクトを取得する
+    	WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+
 
     	if(type == 0) {
 
     		// CLMのURI
     		uri = URI.create(CLM_URI);
 
+    		try {
+    			CLMSession = container.connectToServer(webSocketEndpoint,uri);
+    		} catch (DeploymentException | IOException e) {
+    			// TODO 自動生成された catch ブロック
+    			e.printStackTrace();
+    		}
+
+    		currentSession = CLMSession;
+
+
+
+    		sendData(ProcessID.CONNECTCLM,"blank");
+
+
     	}else if(type == 1){
     		// APのURI
     		uri = URI.create(AP_URI);
+
+    		try {
+    			APSession = container.connectToServer(webSocketEndpoint,uri);
+    		} catch (DeploymentException | IOException e) {
+    			// TODO 自動生成された catch ブロック
+    			e.printStackTrace();
+    		}
+
+    		currentSession = APSession;
+
+    		sendData(ProcessID.CONNECTAP,"blank");
+
+
 
     	}else {
     		System.out.println("[Error connect()] type error");
     	}
 
-    	// 初期化のためWebSocketコンテナのオブジェクトを取得する
-    	WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-
-    	// サーバー・エンドポイントとのセッションを確立する
-    	try {
-			session = container.connectToServer(webSocketEndpoint,uri);
-		} catch (DeploymentException | IOException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-
-    	if(type == 0) {
-    		sendData(ProcessID.CONNECTCLM,"blank");
-    	}else if(type == 1) {
-    		sendData(ProcessID.CONNECTAP,"blank");
+    	if( currentSession.isOpen()) {
+    		System.out.println("Connection Successed");
+    	}else {
+    		System.out.println("Connection failed");
     	}
 
 
-		if(session.isOpen()) {
-			System.out.println("connection successed");
-		}else {
-			System.out.println("cannot connect server");
-		}
+
+
+
     }
 
 
@@ -277,16 +298,29 @@ public class ClientCommunication{
     /**
      * サーバから切断
      */
-    public void disconnect(){
+    public void disconnect(int type){
 
     	System.out.println("connection disconnected");
 
-    	try {
-			session.close();
-		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+    	if(type == 0) {
+
+    		try {
+    			CLMSession.close();
+    		} catch (IOException e) {
+    			// TODO 自動生成された catch ブロック
+    			e.printStackTrace();
+    		}
+    	}else if(type == 1) {
+
+    		try {
+    			APSession.close();
+    		} catch (IOException e) {
+    			// TODO 自動生成された catch ブロック
+    			e.printStackTrace();
+    		}
+    	}
+
+
 
     }
 
@@ -297,7 +331,7 @@ public class ClientCommunication{
      * @return
      */
     public boolean isConnected(){
-        return this.session.isOpen();
+        return this.currentSession.isOpen();
     }
 
 

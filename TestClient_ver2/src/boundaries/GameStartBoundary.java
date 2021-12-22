@@ -6,9 +6,12 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
-import entity.GamePlayer;
+import entity.PlayerMessage;
 
 
 /**
@@ -26,7 +29,9 @@ public class GameStartBoundary extends JPanel{
 
 
 	//参加プレイヤーラベル
-    private JLabel[] playerLabel = new JLabel[4];
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private JScrollPane sp;
 
 
     //文字列
@@ -35,6 +40,12 @@ public class GameStartBoundary extends JPanel{
     final String TIMER = "timer";
     final String PLAYER = "・playerLabel   xx%";
     final String FONT_NAME = "MS ゴシック";
+    final String[] COLUMN_NAMES = {"ID","RATE"};
+    final String[][] member = {
+			{"aaaa","100%"},
+    		{"bbbb","90%"},
+    		{"cccc","80%"},
+    		{"dddd","70%"}};
 
     /**
      * コンストラクタ
@@ -55,9 +66,9 @@ public class GameStartBoundary extends JPanel{
         messageLabel_1 = new JLabel(message1);
         messageLabel_2 = new JLabel(message2);
         timerLabel = new JLabel(TIMER);
-        for(int i=0; i<4; i++) {
-        	playerLabel[i] = new JLabel(PLAYER);
-        }
+        //for(int i=0; i<4; i++) {
+        //	playerLabel[i] = new JLabel(PLAYER);
+        //}
 
         //フォント
         Font titleFont = new Font(FONT_NAME, Font.BOLD,45);
@@ -80,11 +91,24 @@ public class GameStartBoundary extends JPanel{
         timerLabel.setBounds(600,60,150,30);
         timerLabel.setBorder(border);
 
+        /*
         for(int i=0; i<4; i++) {
         	playerLabel[i].setBounds(250,280+50*i,300,38);
         	playerLabel[i].setBorder(border);
         	playerLabel[i].setFont(playerFont);
+        }*/
+
+        tableModel = new DefaultTableModel(COLUMN_NAMES,0);
+        for(int i=0;i<4;i++) {
+        	tableModel.addRow(member[i]);
         }
+
+        table = new JTable(tableModel);
+
+        sp = new JScrollPane(table);
+
+        sp.setBounds(250, 280, 300, 152);
+
 
         /***************************************************/
 
@@ -93,9 +117,14 @@ public class GameStartBoundary extends JPanel{
         this.add(messageLabel_1);
         this.add(messageLabel_2);
         this.add(timerLabel);
+        this.add(sp);
+
+        /*
         for(int i=0; i<4 ; i++) {
         	this.add(playerLabel[i]);
-        }
+        }*/
+
+
         /************************/
 
 
@@ -118,10 +147,17 @@ public class GameStartBoundary extends JPanel{
 
 
 
-    public void setPlayersLabel(List<GamePlayer> list ) {
+    public void setTable(List<PlayerMessage> list ) {
 
-    	for(int i=0;i<list.size();i++) {
-    		playerLabel[i].setText( String.format("[%s] %s", list.get(i).getId(), list.get(i).getRate()) );
+    	for(int i=0;i<4;i++) {
+
+    		PlayerMessage tmp = list.get(i);
+
+    		System.out.println(tmp.getPlayerID());
+
+    		//setValueAt(セルにセットするデータ,,n行,n列)
+    		tableModel.setValueAt(tmp.getPlayerID(),i,0);
+    		tableModel.setValueAt(tmp.getRate(),i,1);
     	}
 
     }

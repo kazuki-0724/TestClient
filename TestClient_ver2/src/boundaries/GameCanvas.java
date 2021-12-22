@@ -114,6 +114,16 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
     }
 
 
+
+
+    public void clear() {
+    	g2d.setColor(white);
+    	g2d.fillRect(0, 0, w, h);
+    	repaint();
+    	this.csc.communicate().sendData(ProcessID.POSITION, "CLEAR");
+    }
+
+
     /**
      * マウスのドラッグを検知する
      */

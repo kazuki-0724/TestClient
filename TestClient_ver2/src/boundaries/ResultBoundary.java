@@ -6,9 +6,12 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
-import entity.GamePlayer;
+import entity.PlayerMessage;
 
 
 
@@ -27,7 +30,11 @@ class ResultBoundary extends JPanel{
     private JLabel timerLabel;
     private JLabel messageLabel;
     private JLabel messageLabel_2;
-    private JLabel[] playerLabel = new JLabel[4];
+    //private JLabel[] playerLabel = new JLabel[4];
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private JScrollPane sp;
+
 
     //文字列
     final String TITLE = "ターン結果発表";
@@ -37,7 +44,13 @@ class ResultBoundary extends JPanel{
     final String TIMER = "timer";
     final String PLAYER = "・playerLabel   xxpt";
     final String FONT_NAME = "MS ゴシック";
-
+    final String[] COLUMN_NAMES = {"ID","Answer","Point","Total Point"};
+    final String[][] member = {
+			{"blank","blank","blank","blank"},
+			{"blank","blank","blank","blank"},
+			{"blank","blank","blank","blank"},
+			{"blank","blank","blank","blank"}
+    		};
 
     /**
      * コンストラクタ
@@ -55,9 +68,23 @@ class ResultBoundary extends JPanel{
         messageLabel = new JLabel(MESSAGE);
         messageLabel_2 = new JLabel(MESSAGE2);
         timerLabel = new JLabel(TIMER);
+
+        /*
         for(int i=0; i<4; i++) {
         	playerLabel[i] = new JLabel(PLAYER);
         }
+        */
+
+        tableModel = new DefaultTableModel(COLUMN_NAMES,0);
+        for(int i=0;i<4;i++) {
+        	tableModel.addRow(member[i]);
+        }
+
+        table = new JTable(tableModel);
+
+        sp = new JScrollPane(table);
+
+
 
         //フォント
         Font titleFont = new Font(FONT_NAME, Font.BOLD,45);
@@ -89,11 +116,15 @@ class ResultBoundary extends JPanel{
         timerLabel.setBounds(640,40,150,30);
         timerLabel.setBorder(border);
 
+        /*
         for(int i=0; i<4; i++) {
         	playerLabel[i].setBounds(230,320+50*i,360,44);
         	playerLabel[i].setBorder(border);
         	playerLabel[i].setFont(playerFont);
         }
+        */
+
+        sp.setBounds(230, 320, 360, 176);
 
         /***************************************************/
 
@@ -104,9 +135,12 @@ class ResultBoundary extends JPanel{
         this.add(themeLabel);
         this.add(messageLabel_2);
         this.add(timerLabel);
+        /*
         for(int i=0; i<4 ; i++) {
         	this.add(playerLabel[i]);
         }
+        */
+        this.add(sp);
         /************************/
 
 
@@ -127,15 +161,40 @@ class ResultBoundary extends JPanel{
     }
 
 
-    /**
-     * 結果の埋め込み
-     * @param text
-     */
-    public void setResult(List<GamePlayer> gamePlayerList) {
 
-    	for(int i=0;i<playerLabel.length;i++) {
-    		playerLabel[i].setText(String.format("[%s] %3d %3d",gamePlayerList.get(i).getId(),gamePlayerList.get(i).getTurnPoint(),gamePlayerList.get(i).getTotalPoint()));
+    public void setTable(List<PlayerMessage> list , int painterNum) {
+
+    	for(int i=0;i<4;i++) {
+
+    		PlayerMessage tmp = list.get(i);
+
+    		//System.out.println(tmp.getPlayerID());
+
+    		if(painterNum == Integer.parseInt(tmp.getPlayerNum())) {
+    			//出題者は
+    			//setValueAt(セルにセットするデータ,,n行,n列)
+        		tableModel.setValueAt("[Painter] " + tmp.getPlayerID(),i,0);
+
+    		}else {
+    			//setValueAt(セルにセットするデータ,,n行,n列)
+        		tableModel.setValueAt(tmp.getPlayerID(),i,0);
+    		}
+
+
+
+    		if(tmp.getTurnPoint() > 0 ) {
+    			tableModel.setValueAt("〇",i,1);
+    		}else {
+    			tableModel.setValueAt("×",i,1);
+    		}
+
+
+    		tableModel.setValueAt(tmp.getTurnPoint(),i,2);
+    		tableModel.setValueAt(tmp.getTotalPoint(),i,3);
+
+
     	}
+
     }
 
 

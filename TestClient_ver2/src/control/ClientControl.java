@@ -9,9 +9,9 @@ import com.google.gson.Gson;
 import boundaries.Boundary;
 import entity.BoundaryID;
 import entity.GameInfo;
-import entity.GamePlayer;
 import entity.Message;
 import entity.Player;
+import entity.PlayerMessage;
 import entity.ProcessID;
 
 
@@ -305,11 +305,19 @@ public class ClientControl{
     				case "STARTGAME":
 	    				//dates2[1]についてJSON処理
     					Message message = gson.fromJson(dates2[1], Message.class);
-						List<GamePlayer> gamePlayerList = message.getGamePlayerList();
+						List<PlayerMessage> gamePlayerList = message.getGamePlayerList();
 						String roomId = message.getRoomID();
+
+						if(gamePlayerList == null) {
+							System.out.println("gamePlayerList is null");
+							System.out.println(gamePlayerList.get(0).getPlayerID());
+						}
+
 
 						getGameInfo().setGamePlayerList(gamePlayerList);
 						getGameInfo().setRoomID(roomId);
+
+
 
 						/**********************************************************/
 
@@ -318,7 +326,8 @@ public class ClientControl{
 
 						boundary.changePanel(BoundaryID.GameStartBoundary);
 						runTimer(BoundaryID.GameStartBoundary,10);
-	    				break;
+						System.out.println(getGameInfo().getGamePlayerList().get(1).getPlayerID());
+						break;
 
 
 
@@ -327,6 +336,8 @@ public class ClientControl{
     					int painterPlayerNum = Integer.parseInt(dates2[1]);
     					//テーマ
     					String theme = dates2[2];
+
+    					getGameInfo().setPainterNum(painterPlayerNum);
 
     					getGameInfo().setPainterPlayerNum(painterPlayerNum);
     					getGameInfo().setTheme(theme);
@@ -365,10 +376,16 @@ public class ClientControl{
     				case "TURNRESULT":
     					//結果情報をJSONで扱う
     					Message result = gson.fromJson(dates2[1], Message.class);
-    					List<GamePlayer> resultGamePlayerList = result.getGamePlayerList();
+    					//System.out.println("dates2[1] : "+ dates2[1]);
+
+
+    					List<PlayerMessage> resultGamePlayerList = result.getGamePlayerList();
 
     					getGameInfo().setGamePlayerList(resultGamePlayerList);
 
+
+    					//System.out.println("decode player "+resultGamePlayerList.get(0).getPlayerID());
+    					//System.out.println("decode "+resultGamePlayerList.get(0).getPlayerID());
 
     					boundary.changePanel(BoundaryID.ResultBoundary);
     					runTimer(BoundaryID.ResultBoundary,10);

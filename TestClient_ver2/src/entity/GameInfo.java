@@ -29,11 +29,11 @@ public class GameInfo {
 
 	private String roomID;
 
-
 	private String[] rankingData;
 
-	private List<GamePlayer> gamePlayerList = new ArrayList<>();
+	private List<PlayerMessage> gamePlayerList = new ArrayList<>();
 
+	private int painterNum;
 
 	/**
 	 * コンストラクタ
@@ -49,15 +49,24 @@ public class GameInfo {
 
 
 
-	public List<GamePlayer> getGamePlayerList() {
+	public int getPainterNum() {
+		return painterNum;
+	}
+
+
+	public void setPainterNum(int painterNum) {
+		this.painterNum = painterNum;
+	}
+
+
+	public List<PlayerMessage> getGamePlayerList() {
 		return gamePlayerList;
 	}
 
 
-	public void setGamePlayerList(List<GamePlayer> gamePlayerList) {
+	public void setGamePlayerList(List<PlayerMessage> gamePlayerList) {
 		this.gamePlayerList = gamePlayerList;
 	}
-
 
 
 	public int getPainterPlayerNum() {
