@@ -210,7 +210,7 @@ public class LobbyBoundary extends JPanel{
 
     }
 
-    
+
 
     public void setRankingData(String[] rankingData) {
 
@@ -222,6 +222,7 @@ public class LobbyBoundary extends JPanel{
     		//String rate = data[2];
 
     		for(int j=0;j<3;j++) {
+    			//setValueAt(セルにセットするデータ,,n行,n列)
     			tableModel.setValueAt(data[j], i,j );
     		}
     	}

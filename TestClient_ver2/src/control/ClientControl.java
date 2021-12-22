@@ -30,6 +30,8 @@ public class ClientControl{
 	//ユーザデータ
 	private Player myPlayer;
 
+	private String id;
+
 	//
 	private GameInfo gameInfo;
 
@@ -204,10 +206,10 @@ public class ClientControl{
     				case "LOGIN":
 	    				if(dates[1].equals("OK")) {
 
-	    					Player myPlayer = new Player(dates[2],Integer.parseInt(dates[3]),Integer.parseInt(dates[4]));
-	    					setMyPlayer(myPlayer);
-
-	    					communicate().sendData(ProcessID.MAKELOBBY, "blank");
+	    					//Player myPlayer = new Player(dates[2],Integer.parseInt(dates[3]),Integer.parseInt(dates[4]));
+	    					//setMyPlayer(myPlayer);
+	    					id = dates[2];
+	    					communicate().sendData(ProcessID.MAKELOBBY, dates[2]);
 
 	    				}else if(dates[1].equals("IDERROR")) {
 	    					boundary.updatePanel(BoundaryID.AccountAuthentificationBoudary,"IDエラー");
@@ -250,6 +252,11 @@ public class ClientControl{
     						Message message = gson.fromJson(dates[2], Message.class);
     						String[] rankingData = message.getRankingStrings();
     						getGameInfo().setRankingData(rankingData);
+
+    						Player myPlayer = new Player(id,message.getNumOfWin(),message.getNumOfGame());
+    						setMyPlayer(myPlayer);
+
+
     						boundary.changePanel(BoundaryID.LobbyBoundary);
     					}
 
@@ -299,7 +306,7 @@ public class ClientControl{
 	    				//dates2[1]についてJSON処理
     					Message message = gson.fromJson(dates2[1], Message.class);
 						List<GamePlayer> gamePlayerList = message.getGamePlayerList();
-						String roomId = message.getRommID();
+						String roomId = message.getRoomID();
 
 						getGameInfo().setGamePlayerList(gamePlayerList);
 						getGameInfo().setRoomID(roomId);
@@ -358,8 +365,9 @@ public class ClientControl{
     				case "TURNRESULT":
     					//結果情報をJSONで扱う
     					Message result = gson.fromJson(dates2[1], Message.class);
-    					String[] resultStrings = result.getTurnResultString();
-    					getGameInfo().setResultString(resultStrings);
+    					List<GamePlayer> resultGamePlayerList = result.getGamePlayerList();
+
+    					getGameInfo().setGamePlayerList(resultGamePlayerList);
 
 
     					boundary.changePanel(BoundaryID.ResultBoundary);

@@ -1,5 +1,4 @@
 package entity;
-
 import java.util.List;
 
 /**
@@ -13,17 +12,16 @@ public class Message {
 	/***************************************/
 	//通信番号4
 
-	//private String playerID;
-
-	//private int numOfWin;
-
-	//private int numOfLose;
-
-	//private int numOfGame;
-
+	//勝ち数
+	private int numOfWin;
+	//試合数
+	private int numOfGame;
+	//ランキングの文字配列
 	private String[] rankingStrings;
 
 	/**************************************/
+
+
 
 
 	/*************************************/
@@ -33,29 +31,43 @@ public class Message {
 	/************************************/
 
 
+
+
 	/************************************/
 	//通信番号10
-	private String rommID;
 
+	//roomID
+	private String roomID;
+	//参加プレイヤーのリスト
 	private List<GamePlayer> gamePlayerList;
 
-
 	/************************************/
+
+
 
 
 	/************************************/
 	//通信番号17
-	private String[] turnResultString;
+
+	//結果情報はgamePlayerListに埋め込んである
 
 	/************************************/
+
+
 
 
 	/************************************/
 	//通信番号18
-	private List<Player> playerList;
+	//ここのプレイヤーは型を合わせておかないとだめじゃね?
 
-	private List<Player> logoutList;
+	//private List<Player> playerList;
+
+	//private List<Player> logoutList;
 	/***********************************/
+
+
+
+
 
 
 
@@ -63,100 +75,57 @@ public class Message {
 	//コンストラクタ
 	public Message() {
 			//全データの初期化があったほうがいい?
+
+
 	}
 
-
-
-
-
-
-
-
-	public List<GamePlayer> getGamePlayerList() {
-		return gamePlayerList;
+	public int getNumOfWin() {
+		return numOfWin;
 	}
 
-
-
-	public void setGamePlayerList(List<GamePlayer> gamePlayerList) {
-		this.gamePlayerList = gamePlayerList;
+	public void setNumOfWin(int numOfWin) {
+		this.numOfWin = numOfWin;
 	}
 
-
-
-
-	public String[] getTurnResultString() {
-		return turnResultString;
+	public int getNumOfGame() {
+		return numOfGame;
 	}
 
-
-
-	public void setTurnResultString(String[] turnResultString) {
-		this.turnResultString = turnResultString;
+	public void setNumOfGame(int numOfGame) {
+		this.numOfGame = numOfGame;
 	}
-
-
-
-	public List<Player> getPlayerList() {
-		return playerList;
-	}
-
-
-
-	public void setPlayerList(List<Player> playerList) {
-		this.playerList = playerList;
-	}
-
-
-
-	public List<Player> getLogoutList() {
-		return logoutList;
-	}
-
-
-
-	public void setLogoutList(List<Player> logoutList) {
-		this.logoutList = logoutList;
-	}
-
-
-
 
 	public String[] getRankingStrings() {
 		return rankingStrings;
 	}
 
-
-
 	public void setRankingStrings(String[] rankingStrings) {
 		this.rankingStrings = rankingStrings;
 	}
-
-
 
 	public String[] getId_rateStrings() {
 		return id_rateStrings;
 	}
 
-
-
 	public void setId_rateStrings(String[] id_rateStrings) {
 		this.id_rateStrings = id_rateStrings;
 	}
 
-
-
-	public String getRommID() {
-		return rommID;
+	public String getRoomID() {
+		return roomID;
 	}
 
-
-
-	public void setRommID(String rommID) {
-		this.rommID = rommID;
+	public void setRoomID(String roomID) {
+		this.roomID = roomID;
 	}
 
+	public List<GamePlayer> getGamePlayerList() {
+		return gamePlayerList;
+	}
 
+	public void setGamePlayerList(List<GamePlayer> gamePlayerList) {
+		this.gamePlayerList = gamePlayerList;
+	}
 
 
 }

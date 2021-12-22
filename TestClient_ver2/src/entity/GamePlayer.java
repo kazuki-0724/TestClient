@@ -1,5 +1,6 @@
 package entity;
 
+
 /**
  * ゲーム参加プレイヤー用のクラス
  * @author Kazuki0724
@@ -13,20 +14,58 @@ public class GamePlayer {
 	//プレイヤーID
 	private String id;
 
-	//プレイヤーレート
-	private String rate;
+	//プレイヤーレート(このレートはロビーでの表示でしか使わないからStringでもいい気はする)
+	private double rate;
 
 	//ターンポイント
 	private int turnPoint;
 
+	//トータルポイント
 	private int totalPoint;
 
 
-	public GamePlayer(int playerNum, String id, String rate) {
+
+	public GamePlayer(int playerNum, String id, double rate) {
+
 		this.playerNum = playerNum;
 		this.id = id;
 		this.rate = rate;
+	}
 
+
+
+	public int getPlayerNum() {
+		return playerNum;
+	}
+
+
+
+	public void setPlayerNum(int playerNum) {
+		this.playerNum = playerNum;
+	}
+
+
+
+	public String getId() {
+		return id;
+	}
+
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
+	public double getRate() {
+		return rate;
+	}
+
+
+
+	public void setRate(double rate) {
+		this.rate = rate;
 	}
 
 
@@ -36,9 +75,11 @@ public class GamePlayer {
 	}
 
 
+
 	public void setTurnPoint(int turnPoint) {
 		this.turnPoint = turnPoint;
 	}
+
 
 
 	public int getTotalPoint() {
@@ -46,34 +87,12 @@ public class GamePlayer {
 	}
 
 
+
 	public void setTotalPoint(int totalPoint) {
 		this.totalPoint = totalPoint;
 	}
 
 
-	public int getPlayerNum() {
-		return playerNum;
-	}
-
-	public void setPlayerNum(int playerNum) {
-		this.playerNum = playerNum;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getRate() {
-		return rate;
-	}
-
-	public void setRate(String rate) {
-		this.rate = rate;
-	}
 
 
 

@@ -110,7 +110,7 @@ public class ClientCommunication{
 
 	    	//ロビー遷移要求
 	    	case MAKELOBBY:
-	    		communicationFormat = encode(REQUEST, "MAKELOBBY", control.getMyPlayer().getId());
+	    		communicationFormat = encode(REQUEST, "MAKELOBBY", data);
 	    		break;
 
 	    	//マッチ参加要求
