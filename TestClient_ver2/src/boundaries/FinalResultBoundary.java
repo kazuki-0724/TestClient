@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
@@ -29,7 +30,8 @@ public class FinalResultBoundary extends JPanel{
     private JLabel winnerLabel;
     private JLabel messageLabel;
     private JLabel timerLabel;
-    //private JLabel[] playerLabel = new JLabel[4];
+    private JProgressBar timerBar;
+
     private JButton toLobbyButton;
 
     private DefaultTableModel tableModel;
@@ -75,12 +77,9 @@ public class FinalResultBoundary extends JPanel{
         messageLabel = new JLabel(MESSAGE2);
         timerLabel = new JLabel("");
 
-        /*
-        playerLabel[0] = new JLabel(PLAYER1);
-        playerLabel[1] = new JLabel(PLAYER2);
-        playerLabel[2] = new JLabel(PLAYER3);
-        playerLabel[3] = new JLabel(PLAYER4);
-        */
+        //本来なら秒数依存で幅を決めるはず
+        timerBar = new JProgressBar();
+
 
 
         tableModel = new DefaultTableModel(COLUMN_NAMES,0);
@@ -119,18 +118,13 @@ public class FinalResultBoundary extends JPanel{
         messageLabel.setBorder(border);
         messageLabel.setFont(messageFont);
 
-        /*
-        for(int i=0; i<4; i++) {
-        	playerLabel[i].setBounds(220,320+50*i,390,44);
-        	playerLabel[i].setBorder(border);
-        	playerLabel[i].setFont(playerFont);
-        }
-        */
 
         sp.setBounds(220,320,390,176);
 
         timerLabel.setBounds(640,10,150,40);
         timerLabel.setBorder(border);
+
+        timerBar.setBounds(640, 55, 150, 40);
 
         toLobbyButton.setBounds(675,535,120,35);
 
@@ -144,11 +138,7 @@ public class FinalResultBoundary extends JPanel{
         //this.add(timerLabel);
         this.add(toLobbyButton);
 
-        /*
-        for(int i=0; i<4 ; i++) {
-        	this.add(playerLabel[i]);
-        }
-        */
+
         /************************/
 
 
@@ -178,6 +168,25 @@ public class FinalResultBoundary extends JPanel{
      */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
+
+    	int count;
+
+    	try {
+    		count = Integer.parseInt(time);
+    	}catch(Exception e) {
+    		return;
+    	}
+
+
+    	this.timerBar.setValue(count);
+    	this.timerBar.setString(time);
+    }
+
+
+
+    public void setTimerBar(int num) {
+    	timerBar.setMaximum(num);
+    	timerBar.setMinimum(0);
     }
 
 
@@ -214,16 +223,23 @@ public class FinalResultBoundary extends JPanel{
     		players[i] = list.get(i) ;
     	}
 
+    	boolean flag = true;
 
-    	for(int i=1;i<4;i++) {
+    	while(flag) {
 
-    		if(players[i-1].getTotalPoint() > players[i].getTotalPoint()) {
+	    	for(int i=1;i<4;i++) {
 
-    			PlayerMessage tmp = players[i];
-    			players[i] = players[i-1];
-    			players[i-1] = tmp;
+	    		flag = false;
 
-    		}
+	    		if(players[i-1].getTotalPoint() > players[i].getTotalPoint()) {
+
+	    			PlayerMessage tmp = players[i];
+	    			players[i] = players[i-1];
+	    			players[i-1] = tmp;
+	    			flag = true;
+
+	    		}
+	    	}
     	}
 
 

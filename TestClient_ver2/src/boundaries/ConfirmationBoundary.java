@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.border.LineBorder;
 
 
@@ -24,6 +25,7 @@ class ConfirmationBoundary extends JPanel{
     private JLabel noticeLabel;
     private JLabel themeLabel;
     private JLabel timerLabel;
+    private JProgressBar timerBar;
 
     //文字列
     final String message = "お題を確認してください";
@@ -49,6 +51,7 @@ class ConfirmationBoundary extends JPanel{
         noticeLabel = new JLabel(NOTICE);
         themeLabel = new JLabel(THEME);
         timerLabel = new JLabel(TIMER);
+        timerBar = new JProgressBar();
 
 
         //フォント
@@ -75,6 +78,9 @@ class ConfirmationBoundary extends JPanel{
         timerLabel.setBounds(650,40,150,40);
         timerLabel.setBorder(border);
 
+        timerBar.setBounds(650, 85, 150, 40);
+        timerBar.setStringPainted(true);
+
 
         /***************************************************/
 
@@ -84,6 +90,7 @@ class ConfirmationBoundary extends JPanel{
         this.add(noticeLabel);
         this.add(themeLabel);
         this.add(timerLabel);
+        this.add(timerBar);
         /************************/
 
 
@@ -109,12 +116,32 @@ class ConfirmationBoundary extends JPanel{
 
 
     /**
-     * カウントダウンタイマー
+     * タイマーカウントダウン
      * @param time
      */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
+
+    	int count;
+
+    	try {
+    		count = Integer.parseInt(time);
+    	}catch(Exception e) {
+    		return;
+    	}
+
+
+    	this.timerBar.setValue(count);
+    	this.timerBar.setString(time);
     }
+
+
+
+    public void setTimerBar(int num) {
+    	timerBar.setMaximum(num);
+    	timerBar.setMinimum(0);
+    }
+
 
 
 

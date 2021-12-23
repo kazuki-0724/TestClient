@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
@@ -39,14 +40,11 @@ class PainterBoundary extends JPanel{
 
     private JButton clearButton;
 
-    //idと点数を紐づけられる何かに変更*****************
-    //private JList<String> list;
-    //private JScrollPane sp;
+    private JProgressBar timerBar;
 
     private GameCanvas gc;
 
-    //参加プレイヤーラベル
-    //private JLabel[] playerLabel = new JLabel[4];
+
 
 
     private DefaultTableModel tableModel;
@@ -71,7 +69,6 @@ class PainterBoundary extends JPanel{
     		{"cccc","80%"},
     		{"dddd","70%"}};
 
-    //private String[] sampleData = {"1st:aaaa","2nd:bbbb","3rd:cccc","4th:dddd","5th:eeee","6th:ffff"};
     /*************************************/
 
 
@@ -96,21 +93,14 @@ class PainterBoundary extends JPanel{
 
         timerLabel = new JLabel(TIMER);
 
+        timerBar = new JProgressBar();
+
         pointLabel = new JLabel(POINT);
 
         clearButton = new JButton(CLEAR);
 
-        //list = new JList<>(sampleData);
-        //sp = new JScrollPane();
 
         gc = new GameCanvas(boundary.getControl());
-
-
-        /*
-        for(int i=0; i<4; i++) {
-        	playerLabel[i] = new JLabel(PLAYER);
-        }
-        */
 
 
         tableModel = new DefaultTableModel(COLUMN_NAMES,0);
@@ -158,19 +148,15 @@ class PainterBoundary extends JPanel{
         timerLabel.setBounds(640,10,150,40);
         timerLabel.setBorder(border);
 
-        clearButton.setBounds(640,70,150,40);
+        timerBar.setBounds(640, 55, 150, 40);
+        timerBar.setStringPainted(true);
 
-        /*
-        for(int i=0; i<4; i++) {
-        	playerLabel[i].setBounds(640,220+30*i,160,30);
-        	playerLabel[i].setBorder(border);
-        	playerLabel[i].setFont(playerFont);
-        }
-        */
+        clearButton.setBounds(640,100,150,40);
+
+
 
         sp.setBounds(640, 220, 160, 120);
-        //sp.getViewport().setView(list);
-        //sp.setBounds(540,200,80,200);
+
 
         gc.setBounds(20,70,600,450);
 
@@ -185,6 +171,7 @@ class PainterBoundary extends JPanel{
         this.add(messageLabel_3);
         this.add(sp);
         this.add(timerLabel);
+        this.add(timerBar);
 
         /*
         for(int i=0; i<4 ; i++) {
@@ -251,13 +238,36 @@ class PainterBoundary extends JPanel{
         this.timerLabel = timerLabel;
     }
 
+
+
     /**
      * タイマーカウントダウン
      * @param time
      */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
+
+    	int count;
+
+    	try {
+    		count = Integer.parseInt(time);
+    	}catch(Exception e) {
+    		return;
+    	}
+
+
+    	this.timerBar.setValue(count);
+    	this.timerBar.setString(time);
     }
+
+
+
+    public void setTimerBar(int num) {
+    	timerBar.setMaximum(num);
+    	timerBar.setMinimum(0);
+    }
+
+
 
     /**
      * テーマの埋め込み

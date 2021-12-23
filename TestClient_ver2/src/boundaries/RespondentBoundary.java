@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -32,9 +33,8 @@ public class RespondentBoundary extends JPanel{
 
     private JLabel timerLabel;
     private JLabel pointLabel;
+    private JProgressBar timerBar;
 
-    //private JList<String> list;
-    //private JScrollPane sp;
 
     private AnswerCanvas ac;
 
@@ -45,8 +45,6 @@ public class RespondentBoundary extends JPanel{
     private JTable table;
     private JScrollPane sp;
 
-    //参加プレイヤーラベル
-    //private JLabel[] playerLabel = new JLabel[4];
 
 
     /**********************************/
@@ -82,11 +80,7 @@ public class RespondentBoundary extends JPanel{
         messageLabel_1 = new JLabel(TIMEKEEP);
 
         timerLabel = new JLabel(TIMER);
-
-        // ranking
-        //list = new JList<>(sampleData);
-        //sp = new JScrollPane();
-        //sp.getViewport().setView(list);
+        timerBar = new JProgressBar();
 
         // answer input field
         answerField = new JTextField(10);
@@ -98,11 +92,6 @@ public class RespondentBoundary extends JPanel{
         ac = new AnswerCanvas();
 
 
-        /*
-        for(int i=0; i<4; i++) {
-        	playerLabel[i] = new JLabel(PLAYER);
-        }
-        */
 
         tableModel = new DefaultTableModel(COLUMN_NAMES,0);
         for(int i=0;i<4;i++) {
@@ -139,13 +128,8 @@ public class RespondentBoundary extends JPanel{
         timerLabel.setBounds(640,20,150,40);
         timerLabel.setBorder(border);
 
-        /*
-        for(int i=0; i<4; i++) {
-        	playerLabel[i].setBounds(640,220+30*i,160,30);
-        	playerLabel[i].setBorder(border);
-        	playerLabel[i].setFont(playerFont);
-        }
-        */
+        timerBar.setBounds(640, 65, 150, 40);
+        timerBar.setStringPainted(true);
 
         sp.setBounds(640,220,160,120);
 
@@ -193,12 +177,33 @@ public class RespondentBoundary extends JPanel{
 
 
     /**
-     * カウントダウンタイマー
+     * タイマーカウントダウン
      * @param time
      */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
+
+    	int count;
+
+    	try {
+    		count = Integer.parseInt(time);
+    	}catch(Exception e) {
+    		return;
+    	}
+
+
+    	this.timerBar.setValue(count);
+    	this.timerBar.setString(time);
     }
+
+
+
+    public void setTimerBar(int num) {
+    	timerBar.setMaximum(num);
+    	timerBar.setMinimum(0);
+    }
+
+
 
 
     /**
@@ -218,6 +223,7 @@ public class RespondentBoundary extends JPanel{
     	e_y = Integer.parseInt(tmpString[4]);
 
 
+    	System.out.println("[Log] respondent/drawStroke() "+ stroke);
     	ac.setLine(type,s_x,s_y,e_x,e_y);
 
     }

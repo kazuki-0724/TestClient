@@ -362,6 +362,50 @@ public class Boundary extends JFrame{
     }
 
 
+    //それぞれの画面のカウントダウン制御
+    public void setTimerBar(BoundaryID type, int time) {
+
+
+    	switch(type) {
+
+	    	case GameStartBoundary:
+	    		gameStartBoundary.setTimerBar(time);
+	    		break;
+
+	    	case ConfirmationBoundary:
+				confirmationBoundary.setTimerBar(time);
+				break;
+
+			case WaitingTimeBoundary:
+				gameStartBoundary.setTimerBar(time);
+				break;
+
+    		case PainterBoundary:
+    			painterBoundary.setTimerBar(time);
+    			break;
+
+    		case RespondentBoundary:
+    			respondentBoundary.setTimerBar(time);
+    			break;
+
+    		case ResultBoundary:
+    			resultBoundary.setTimerBar(time);
+    			break;
+
+
+
+
+    		default:
+    			System.out.println("[Error] Boundary updateCountDown type Error");
+
+    	}
+
+    }
+
+
+
+
+
     public ClientControl getControl() {
     	return this.control;
     }

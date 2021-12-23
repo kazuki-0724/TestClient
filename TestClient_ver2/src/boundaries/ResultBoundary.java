@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
@@ -26,11 +27,12 @@ class ResultBoundary extends JPanel{
 
 	//各パーツ
     private JLabel titleLabel;
+    private JProgressBar timerBar;
     private JLabel themeLabel;
     private JLabel timerLabel;
     private JLabel messageLabel;
     private JLabel messageLabel_2;
-    //private JLabel[] playerLabel = new JLabel[4];
+
     private DefaultTableModel tableModel;
     private JTable table;
     private JScrollPane sp;
@@ -69,11 +71,10 @@ class ResultBoundary extends JPanel{
         messageLabel_2 = new JLabel(MESSAGE2);
         timerLabel = new JLabel(TIMER);
 
-        /*
-        for(int i=0; i<4; i++) {
-        	playerLabel[i] = new JLabel(PLAYER);
-        }
-        */
+        //本来なら秒数依存で決める
+        timerBar = new JProgressBar();
+
+
 
         tableModel = new DefaultTableModel(COLUMN_NAMES,0);
         for(int i=0;i<4;i++) {
@@ -116,13 +117,10 @@ class ResultBoundary extends JPanel{
         timerLabel.setBounds(640,40,150,30);
         timerLabel.setBorder(border);
 
-        /*
-        for(int i=0; i<4; i++) {
-        	playerLabel[i].setBounds(230,320+50*i,360,44);
-        	playerLabel[i].setBorder(border);
-        	playerLabel[i].setFont(playerFont);
-        }
-        */
+        timerBar.setBounds(640, 75, 150, 30);
+        timerBar.setStringPainted(true);
+
+
 
         sp.setBounds(230, 320, 360, 176);
 
@@ -135,11 +133,7 @@ class ResultBoundary extends JPanel{
         this.add(themeLabel);
         this.add(messageLabel_2);
         this.add(timerLabel);
-        /*
-        for(int i=0; i<4 ; i++) {
-        	this.add(playerLabel[i]);
-        }
-        */
+        this.add(timerBar);
         this.add(sp);
         /************************/
 
@@ -205,6 +199,25 @@ class ResultBoundary extends JPanel{
      */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
+
+    	int count;
+
+    	try {
+    		count = Integer.parseInt(time);
+    	}catch(Exception e) {
+    		return;
+    	}
+
+
+    	this.timerBar.setValue(count);
+    	this.timerBar.setString(time);
+    }
+
+
+
+    public void setTimerBar(int num) {
+    	timerBar.setMaximum(num);
+    	timerBar.setMinimum(0);
     }
 
 }

@@ -98,7 +98,7 @@ public class ClientControl{
 		timer = new Timer();
 
 		//タイマータスク
-		timerTask= new MyTimerTask(this,boundary, type, time);
+		timerTask= new ClientTimerTask(this,boundary, type, time);
 		timer.schedule(timerTask, 0l, 1000l);
 
 
@@ -325,6 +325,8 @@ public class ClientControl{
 						/*********************************************************/
 
 						boundary.changePanel(BoundaryID.GameStartBoundary);
+						boundary.setTimerBar(BoundaryID.GameStartBoundary, 10);
+
 						runTimer(BoundaryID.GameStartBoundary,10);
 						System.out.println(getGameInfo().getGamePlayerList().get(1).getPlayerID());
 						break;
@@ -344,9 +346,12 @@ public class ClientControl{
 
     					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
     						boundary.changePanel(BoundaryID.ConfirmationBoundary);
+    						boundary.setTimerBar(BoundaryID.ConfirmationBoundary, 10);
     						runTimer(BoundaryID.ConfirmationBoundary,10);
+
     					}else {
     						boundary.changePanel(BoundaryID.WaitingTimeBoundary);
+    						boundary.setTimerBar(BoundaryID.WaitingTimeBoundary, 10);
     						runTimer(BoundaryID.WaitingTimeBoundary,10);
     					}
 
@@ -357,11 +362,15 @@ public class ClientControl{
     				case "QTIMESTART":
     					//制限時間
     					int limitTime = Integer.parseInt(dates2[1]);
+
     					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
     						boundary.changePanel(BoundaryID.PainterBoundary);
+    						boundary.setTimerBar(BoundaryID.PainterBoundary, limitTime);
     						runTimer(BoundaryID.PainterBoundary,limitTime);
+
     					}else {
     						boundary.changePanel(BoundaryID.RespondentBoundary);
+    						boundary.setTimerBar(BoundaryID.RespondentBoundary, limitTime);
     						runTimer(BoundaryID.RespondentBoundary,limitTime);
     					}
 
@@ -376,7 +385,6 @@ public class ClientControl{
     				case "TURNRESULT":
     					//結果情報をJSONで扱う
     					Message result = gson.fromJson(dates2[1], Message.class);
-    					//System.out.println("dates2[1] : "+ dates2[1]);
 
 
     					List<PlayerMessage> resultGamePlayerList = result.getGamePlayerList();
@@ -384,10 +392,8 @@ public class ClientControl{
     					getGameInfo().setGamePlayerList(resultGamePlayerList);
 
 
-    					//System.out.println("decode player "+resultGamePlayerList.get(0).getPlayerID());
-    					//System.out.println("decode "+resultGamePlayerList.get(0).getPlayerID());
-
     					boundary.changePanel(BoundaryID.ResultBoundary);
+    					boundary.setTimerBar(BoundaryID.ResultBoundary, 10);
     					runTimer(BoundaryID.ResultBoundary,10);
     					break;
 
@@ -417,7 +423,7 @@ public class ClientControl{
 	 * @author Kazuki0724
 	 *
 	 */
-	private class MyTimerTask extends TimerTask {
+	private class ClientTimerTask extends TimerTask {
 
 		private ClientControl control;
 		private Boundary boundary;
@@ -426,7 +432,7 @@ public class ClientControl{
 		private int limitTime;
 
 
-		public MyTimerTask(ClientControl control,Boundary boundary, BoundaryID type, int time) {
+		public ClientTimerTask(ClientControl control,Boundary boundary, BoundaryID type, int time) {
 			// TODO 自動生成されたコンストラクター・スタブ
 			this.control = control;
 			this.boundary = boundary;

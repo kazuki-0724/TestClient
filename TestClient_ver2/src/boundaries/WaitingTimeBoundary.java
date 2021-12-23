@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.border.LineBorder;
 
 
@@ -21,6 +22,7 @@ class WaitingTimeBoundary extends JPanel{
     private JLabel messageLabel;
     private JLabel noticeLabel;
     private JLabel timerLabel;
+    private JProgressBar timerBar;
 
     //文字列
     final String message = "出題者がお題を確認中です...";
@@ -43,7 +45,7 @@ class WaitingTimeBoundary extends JPanel{
          messageLabel = new JLabel(message);
          noticeLabel = new JLabel(NOTICE);
          timerLabel = new JLabel(TIMER);
-
+         timerBar = new JProgressBar();
 
          /***********************************************************************/
 
@@ -67,6 +69,9 @@ class WaitingTimeBoundary extends JPanel{
          timerLabel.setBounds(650,40,150,40);
          timerLabel.setBorder(border);
 
+         timerBar.setBounds(650, 85, 150, 40);
+         timerBar.setStringPainted(true);
+
          /*************************************/
 
 
@@ -74,6 +79,7 @@ class WaitingTimeBoundary extends JPanel{
          this.add(messageLabel);
          this.add(noticeLabel);
          this.add(timerLabel);
+         this.add(timerBar);
          /**********************/
 
 
@@ -83,14 +89,35 @@ class WaitingTimeBoundary extends JPanel{
     }
 
 
-
     /**
      * タイマーカウントダウン
      * @param time
      */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
+
+    	int count;
+
+    	try {
+    		count = Integer.parseInt(time);
+    	}catch(Exception e) {
+    		return;
+    	}
+
+
+    	this.timerBar.setValue(count);
+    	this.timerBar.setString(time);
     }
+
+
+
+    public void setTimerBar(int num) {
+    	timerBar.setMaximum(num);
+    	timerBar.setMinimum(0);
+    }
+
+
+
 
 
 

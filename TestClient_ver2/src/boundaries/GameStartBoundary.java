@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
@@ -26,6 +27,7 @@ public class GameStartBoundary extends JPanel{
     private JLabel messageLabel_1;
     private JLabel messageLabel_2;
     private JLabel timerLabel;
+    private JProgressBar timerBar;
 
 
 	//参加プレイヤーラベル
@@ -57,18 +59,14 @@ public class GameStartBoundary extends JPanel{
     	LineBorder border = new LineBorder(Color.RED, 2, true);
 
 
-
-        /*for(int i=0; i<4; i++) {
-        	playerLabel[i] = new JLabel(String.format("%s","player"));
-        }*/
-
         //各パーツのインスタンス生成
         messageLabel_1 = new JLabel(message1);
         messageLabel_2 = new JLabel(message2);
         timerLabel = new JLabel(TIMER);
-        //for(int i=0; i<4; i++) {
-        //	playerLabel[i] = new JLabel(PLAYER);
-        //}
+
+        //本来なら秒数依存で幅を決めるはず
+        timerBar = new JProgressBar();
+
 
         //フォント
         Font titleFont = new Font(FONT_NAME, Font.BOLD,45);
@@ -90,13 +88,9 @@ public class GameStartBoundary extends JPanel{
 
         timerLabel.setBounds(600,60,150,30);
         timerLabel.setBorder(border);
+        timerBar.setBounds(600, 95, 150, 30);
+        timerBar.setStringPainted(true);
 
-        /*
-        for(int i=0; i<4; i++) {
-        	playerLabel[i].setBounds(250,280+50*i,300,38);
-        	playerLabel[i].setBorder(border);
-        	playerLabel[i].setFont(playerFont);
-        }*/
 
         tableModel = new DefaultTableModel(COLUMN_NAMES,0);
         for(int i=0;i<4;i++) {
@@ -118,11 +112,8 @@ public class GameStartBoundary extends JPanel{
         this.add(messageLabel_2);
         this.add(timerLabel);
         this.add(sp);
+        this.add(timerBar);
 
-        /*
-        for(int i=0; i<4 ; i++) {
-        	this.add(playerLabel[i]);
-        }*/
 
 
         /************************/
@@ -143,8 +134,26 @@ public class GameStartBoundary extends JPanel{
      */
     public void updateTimer(String time) {
     	this.timerLabel.setText(time + "");
+
+    	int count;
+
+    	try {
+    		count = Integer.parseInt(time);
+    	}catch(Exception e) {
+    		return;
+    	}
+
+
+    	this.timerBar.setValue(count);
+    	this.timerBar.setString(time);
     }
 
+
+
+    public void setTimerBar(int num) {
+    	timerBar.setMaximum(num);
+    	timerBar.setMinimum(0);
+    }
 
 
     public void setTable(List<PlayerMessage> list ) {
