@@ -294,7 +294,7 @@ public class Boundary extends JFrame{
             case ResultBoundary:
             	resultBoundary.setTheme(control.getGameInfo().getTheme());
                 //画面に結果をセット(gameInfoから)
-            	resultBoundary.setTable(control.getGameInfo().getGamePlayerList(), control.getGameInfo().getPainterNum());
+            	resultBoundary.setTable(control.getGameInfo().getGamePlayerList(), control.getGameInfo().getPainterPlayerNum());
             	break;
 
             //最終結果画面

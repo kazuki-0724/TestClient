@@ -33,7 +33,7 @@ public class GameInfo {
 
 	private List<PlayerMessage> gamePlayerList = new ArrayList<>();
 
-	private int painterNum;
+	//private int painterNum;
 
 	/**
 	 * コンストラクタ
@@ -48,7 +48,7 @@ public class GameInfo {
 
 
 
-
+/*
 	public int getPainterNum() {
 		return painterNum;
 	}
@@ -57,7 +57,7 @@ public class GameInfo {
 	public void setPainterNum(int painterNum) {
 		this.painterNum = painterNum;
 	}
-
+*/
 
 	public List<PlayerMessage> getGamePlayerList() {
 		return gamePlayerList;

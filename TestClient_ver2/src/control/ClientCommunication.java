@@ -177,6 +177,9 @@ public class ClientCommunication{
 	    		communicationFormat = encode(REPLY, "FINISHGAME_OK");
 	    		break;
 
+	    	default:
+	    		break;
+
     	}
 
 
@@ -207,13 +210,13 @@ public class ClientCommunication{
      * 受け取ったデータの解析
      * @param json
      */
-    public void handleReceivedData(String json) {
+    public void handleReceivedData(String message) {
 
 
     	String dataFlag;
     	String data;
 
-    	String[] tmpString = json.split("#");
+    	String[] tmpString = message.split("#");
 
     	dataFlag = tmpString[0];
     	data = tmpString[1];

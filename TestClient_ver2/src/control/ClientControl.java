@@ -44,16 +44,8 @@ public class ClientControl{
 	//タイマーによる処理
 	private TimerTask timerTask;
 
-	//タイマー開始時間
-	private Long startTime;
-
 	//通信用
 	private ClientCommunication cscc;
-
-
-
-	private int currentDurationTime = 0;
-
 
 	private final int CLM = 0;
 
@@ -61,6 +53,8 @@ public class ClientControl{
 
 	//JSON用
 	private Gson gson = new Gson();
+
+
 
 	/**
 	 * コンストラクタ
@@ -75,12 +69,17 @@ public class ClientControl{
 	}
 
 
+
+
+
 	/**
 	 * 初期化処理
 	 */
 	public void init() {
 		cscc.connect(CLM);
 	}
+
+
 
 
 
@@ -91,9 +90,6 @@ public class ClientControl{
 	 */
 	public void runTimer(BoundaryID type, int time) {
 
-		System.out.println("タイマーカウント");
-
-
 		//スケジューラー
 		timer = new Timer();
 
@@ -102,7 +98,7 @@ public class ClientControl{
 		timer.schedule(timerTask, 0l, 1000l);
 
 
-		System.out.println("タスクスタート");
+		System.out.println("[Log runTimer()] Timer Start");
 
 	}
 
@@ -118,7 +114,7 @@ public class ClientControl{
 			timer.cancel();
 			timer = null;
 		}else {
-			System.out.println("[Error] timer is not exsit");
+			System.out.println("[Error stopTimer()] timer is not exsit");
 		}
 	}
 
@@ -191,23 +187,64 @@ public class ClientControl{
 	public void handleData(String dataFlag, String data) {
 
 
+		//第二ヘッダとデータ部のString型データのsplit用
+		String[] dates = {"blank"};
+		String secDataFlag = "blank";
+
+
+		if(data.contains("FINISHGAME")) {
+			//REQUEST#FINISHGAMEはsplitErrorになってしまうから
+			System.out.println("[Log handleData()] FINISHGAME received");
+			secDataFlag = "FINISHGAME";
+
+		}else if(data.contains("TIMEOUT")) {
+			//REQUEST#FINISHGAMEはsplitErrorになってしまうから
+			System.out.println("[Log handleData()] TIMEOUT received");
+			secDataFlag = "TIMEOUT";
+
+		}else {
+
+			try {
+
+				dates = data.split("_");
+				secDataFlag = dates[0];
+
+			}catch(Exception e) {
+
+				//スプリットエラーが出た場合の処理
+				e.printStackTrace();
+				System.out.println("[Error handleData()] cannot split by 「_」");
+
+				//(拡張用)スプリットエラーが出たからもう一回遅れの指示を送るかも
+				//communicate().sendData(null, data);
+
+				return;
+
+			}
+		}
+
+
+		//わざわざやらなくてもいいけど、わかりやすさのために
+
+
+
+
     	switch(dataFlag) {
 
 
     		//第1ヘッダのswitch
     		case "REPLY":
-    			System.out.println("[Log handleData() REPLY switch] data "+ data);
+    			System.out.println("[Log handleData() case REPLY] data "+ data);
 
-    			String[] dates = data.split("_");
+    			//String[] dates = data.split("_")
 
     			//第2ヘッダのswitch
-    			switch(dates[0]) {
+    			switch(secDataFlag) {
 
     				case "LOGIN":
 	    				if(dates[1].equals("OK")) {
 
-	    					//Player myPlayer = new Player(dates[2],Integer.parseInt(dates[3]),Integer.parseInt(dates[4]));
-	    					//setMyPlayer(myPlayer);
+	    					//idの一時保存
 	    					id = dates[2];
 	    					communicate().sendData(ProcessID.MAKELOBBY, dates[2]);
 
@@ -222,6 +259,7 @@ public class ClientControl{
 	    				}
 
 	    				break;
+
 
     				case "LOGOUT":
     					if(dates[1].equals("OK")) {
@@ -248,11 +286,15 @@ public class ClientControl{
 
     				case "MAKELOBBY":
     					if(dates[1].equals("OK")) {
-    						//dates[2]をJSON処理
+
+    						//JSONをmessageクラスに復元
     						Message message = gson.fromJson(dates[2], Message.class);
+
+    						//String[]型のランキングデータの取り出し、gameInfoにセットする
     						String[] rankingData = message.getRankingStrings();
     						getGameInfo().setRankingData(rankingData);
 
+    						//Playerデータの復元、Player情報のセット
     						Player myPlayer = new Player(id,message.getNumOfWin(),message.getNumOfGame());
     						setMyPlayer(myPlayer);
 
@@ -261,6 +303,7 @@ public class ClientControl{
     					}
 
     					break;
+
 
     				case "JOIN":
     					if(dates[1].equals("OK")) {
@@ -285,8 +328,21 @@ public class ClientControl{
     					System.out.println("[Log ] Connect AP complete");
     					break;
 
+
+    				default:
+        				System.out.println("[Error handleData()] secDataFlag is blank");
+        				break;
+
 	    			}
+
+
     			break;
+
+
+
+
+
+
 
 
     		case "POSITION":
@@ -295,61 +351,63 @@ public class ClientControl{
     			break;
 
 
+
+
     		case "REQUEST":
-    			System.out.println("[Log handleData() REQUEST switch] data "+ data);
+    			System.out.println("[Log handleData() case REQUEST] data "+ data);
 
-    			String[] dates2 = data.split("_");
 
-    			switch(dates2[0]) {
+    			switch(secDataFlag) {
 
     				case "STARTGAME":
-	    				//dates2[1]についてJSON処理
-    					Message message = gson.fromJson(dates2[1], Message.class);
-						List<PlayerMessage> gamePlayerList = message.getGamePlayerList();
+
+	    				//JSONからの復元
+    					Message message = gson.fromJson(dates[1], Message.class);
+
+    					//gamePlayerListの取り出し、rommIDの取り出しとgameInfoへのセット
+    					List<PlayerMessage> gamePlayerList = message.getGamePlayerList();
 						String roomId = message.getRoomID();
-
-						if(gamePlayerList == null) {
-							System.out.println("gamePlayerList is null");
-							System.out.println(gamePlayerList.get(0).getPlayerID());
-						}
-
-
 						getGameInfo().setGamePlayerList(gamePlayerList);
 						getGameInfo().setRoomID(roomId);
 
 
-
-						/**********************************************************/
-
+						//ゲーム開始前処理が正常に行えたことを通知する
 						communicate().sendData(ProcessID.STARTGAME_OK, "blank");
-						/*********************************************************/
 
+						//画面遷移
 						boundary.changePanel(BoundaryID.GameStartBoundary);
+
+						//タイマバーの幅を調整
 						boundary.setTimerBar(BoundaryID.GameStartBoundary, 10);
 
+						//タイマーの起動
 						runTimer(BoundaryID.GameStartBoundary,10);
-						System.out.println(getGameInfo().getGamePlayerList().get(1).getPlayerID());
+
 						break;
 
 
 
     				case "STARTTURN":
-    					//出題者プレイヤーNum
-    					int painterPlayerNum = Integer.parseInt(dates2[1]);
-    					//テーマ
-    					String theme = dates2[2];
 
-    					getGameInfo().setPainterNum(painterPlayerNum);
+    					//出題者プレイヤーのゲーム内番号とテーマの取り出し
+    					int painterPlayerNum = Integer.parseInt(dates[1]);
+    					String theme = dates[2];
 
+    					//getGameInfo().setPainterNum(painterPlayerNum);
+
+    					//それらのgameInfoへのセット
     					getGameInfo().setPainterPlayerNum(painterPlayerNum);
     					getGameInfo().setTheme(theme);
 
+
     					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
+    						//自分が出題者だった場合
     						boundary.changePanel(BoundaryID.ConfirmationBoundary);
     						boundary.setTimerBar(BoundaryID.ConfirmationBoundary, 10);
     						runTimer(BoundaryID.ConfirmationBoundary,10);
 
     					}else {
+    						//自分が解答者だった場合
     						boundary.changePanel(BoundaryID.WaitingTimeBoundary);
     						boundary.setTimerBar(BoundaryID.WaitingTimeBoundary, 10);
     						runTimer(BoundaryID.WaitingTimeBoundary,10);
@@ -360,35 +418,48 @@ public class ClientControl{
 
 
     				case "QTIMESTART":
-    					//制限時間
-    					int limitTime = Integer.parseInt(dates2[1]);
+
+    					//制限時間の取り出し
+    					int limitTime = Integer.parseInt(dates[1]);
 
     					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
+    						//自分が出題者だった場合
     						boundary.changePanel(BoundaryID.PainterBoundary);
     						boundary.setTimerBar(BoundaryID.PainterBoundary, limitTime);
     						runTimer(BoundaryID.PainterBoundary,limitTime);
 
     					}else {
+    						//自分が解答者だった場合
     						boundary.changePanel(BoundaryID.RespondentBoundary);
     						boundary.setTimerBar(BoundaryID.RespondentBoundary, limitTime);
     						runTimer(BoundaryID.RespondentBoundary,limitTime);
     					}
 
-
     					break;
+
 
     				case "ANSWERER":
+
+    					/*******************************************************/
     					//正解者のプレイヤーNum
-    					int correctPlayerNum = Integer.parseInt(dates2[1]);
+    					int correctPlayerNum = Integer.parseInt(dates[1]);
+
+    					//correctPlayerNumを使ってPaintrer/RespondenrBoundaryの表示を変える
+
+
+
+    					/*****************************************************/
+
     					break;
 
+
     				case "TURNRESULT":
-    					//結果情報をJSONで扱う
-    					Message result = gson.fromJson(dates2[1], Message.class);
 
+    					//JSONからMessageに復元
+    					Message result = gson.fromJson(dates[1], Message.class);
 
+    					//結果が入ったプレイヤーリストの取り出し
     					List<PlayerMessage> resultGamePlayerList = result.getGamePlayerList();
-
     					getGameInfo().setGamePlayerList(resultGamePlayerList);
 
 
@@ -397,17 +468,32 @@ public class ClientControl{
     					runTimer(BoundaryID.ResultBoundary,10);
     					break;
 
+
+
     				case "FINISHGAME":
-    					//勝者プレイヤー
-    					String wonPlayer = dates2[1];
+    					//finalResultへの遷移
+
+
     					break;
 
 
+    				case "TIMEOUT":
+    					//ログアウト処理を入れる
+
+    					break;
+
+
+
+    				default:
+        				System.out.println("[Error handleData()] secDataFlag is blank");
+        				break;
     			}
+
+
     			break;
 
     		default:
-    			System.out.println("[Log handleData()] type error");
+    			System.out.println("[Log handleData()] dataFlag type error");
     			break;
 
 

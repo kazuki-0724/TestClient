@@ -168,18 +168,18 @@ class ResultBoundary extends JPanel{
     			//出題者は
     			//setValueAt(セルにセットするデータ,,n行,n列)
         		tableModel.setValueAt("[Painter] " + tmp.getPlayerID(),i,0);
+        		tableModel.setValueAt("-",i,1);
 
     		}else {
     			//setValueAt(セルにセットするデータ,,n行,n列)
         		tableModel.setValueAt(tmp.getPlayerID(),i,0);
-    		}
 
+        		if(tmp.getTurnPoint() > 0 ) {
+        			tableModel.setValueAt("〇",i,1);
+        		}else {
+        			tableModel.setValueAt("×",i,1);
+        		}
 
-
-    		if(tmp.getTurnPoint() > 0 ) {
-    			tableModel.setValueAt("〇",i,1);
-    		}else {
-    			tableModel.setValueAt("×",i,1);
     		}
 
 
