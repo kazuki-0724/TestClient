@@ -30,7 +30,7 @@ class ConfirmationBoundary extends JPanel{
     //文字列
     final String message = "お題を確認してください";
     final String NOTICE = "あなたは出題者です";
-    final String TIMER = "timer";
+    final String TIMER = "00";
     final String THEME = "お題： 〇〇〇";
     final String FONT_NAME = "MS ゴシック";
 
@@ -43,7 +43,7 @@ class ConfirmationBoundary extends JPanel{
     public ConfirmationBoundary(){
 
 
-    	LineBorder border = new LineBorder(Color.RED, 2, true);
+    	LineBorder border = new LineBorder(Color.BLACK, 2, true);
 
 
         //各パーツのインスタンス生成
@@ -57,6 +57,7 @@ class ConfirmationBoundary extends JPanel{
         //フォント
         Font titleFont = new Font(FONT_NAME, Font.BOLD,45);
         Font themeFont = new Font(FONT_NAME, Font.BOLD ,38);
+        Font timerFont = new Font(FONT_NAME,Font.BOLD,18);
         Font messageFont = new Font(FONT_NAME, Font.BOLD ,26);
 
 
@@ -64,21 +65,19 @@ class ConfirmationBoundary extends JPanel{
         this.setLayout(null);
 
         messageLabel.setBounds(150,240,530,45);
-        messageLabel.setBorder(border);
         messageLabel.setFont(titleFont);
 
         noticeLabel.setBounds(40,40,260,36);
         noticeLabel.setBorder(border);
         noticeLabel.setFont(messageFont);
 
-        themeLabel.setBounds(270,400,300,40);
-        themeLabel.setBorder(border);
+        themeLabel.setBounds(250,400,330,40);
+        themeLabel.setHorizontalAlignment(JLabel.CENTER);
         themeLabel.setFont(themeFont);
 
-        timerLabel.setBounds(650,40,150,40);
-        timerLabel.setBorder(border);
+        timerLabel.setBounds(625,39,30,40);
 
-        timerBar.setBounds(650, 85, 150, 40);
+        timerBar.setBounds(650, 38, 150, 40);
         timerBar.setStringPainted(true);
 
 

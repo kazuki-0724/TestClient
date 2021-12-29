@@ -83,7 +83,7 @@ public class AccountRegistrationBoundary extends JPanel{
 
         /*レイアウト視覚化のためのもの************************/
         LineBorder border = new LineBorder(Color.RED, 2, true);
-        Font titleFont = new Font("MS ゴシック", Font.BOLD,40);
+        Font titleFont = new Font("MS ゴシック", Font.BOLD,50);
         Font textFont = new Font("MS ゴシック", Font.BOLD,25);
         /*****************************************************/
 
@@ -92,24 +92,22 @@ public class AccountRegistrationBoundary extends JPanel{
         this.setLayout(null);
 
 
-        titleLabel.setBounds(180, 50, 500, 60);
-        titleLabel.setBorder(border);
+        titleLabel.setBounds(180, 70, 480, 60);
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
-
-        messageLabel.setBounds(250,190,350,36);
-        messageLabel.setBorder(border);
+        messageLabel.setBounds(250,190,340,36);
+        messageLabel.setHorizontalAlignment(JLabel.CENTER);
         messageLabel.setFont(textFont);
 
-
-        idLabel.setBounds(280, 290, 80, 40);
+        idLabel.setBounds(290, 285, 80, 40);
         idLabel.setFont(textFont);
-        idField.setBounds(400, 290, 180, 40);
+        idField.setBounds(410, 285, 180, 40);
         idField.setFont(textFont);
-        passLabel.setBounds(220, 345, 160, 40);
+
+        passLabel.setBounds(230, 340, 160, 40);
         passLabel.setFont(textFont);
-        passFiled.setBounds(400, 345, 180, 40);
+        passFiled.setBounds(410, 340, 180, 40);
         passFiled.setFont(textFont);
 
         registButton.setBounds(360, 420, 100, 30);

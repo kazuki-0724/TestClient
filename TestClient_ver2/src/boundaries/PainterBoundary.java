@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
 
@@ -54,20 +55,21 @@ class PainterBoundary extends JPanel{
 
     /*クラス図にはいらない気がする********/
     final String FONT_NAME = "MS ゴシック";
+    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,15);
     final String THEME = "お題：〇〇〇";
     final String TIMEKEEP = "※制限時間内に絵を描いてください";
-    final String LEFTCLICK = "	左クリック：線を描く";
-    final String RIGHTCLICK = "右クリック：消しゴム";
+    final String LEFTCLICK = "	・左クリック：線を描く";
+    final String RIGHTCLICK = "・右クリック：消しゴム";
     final String PLAYER = "・playerLabel   xxpt";
-    final String TIMER = "timer";
+    final String TIMER = "00";
     final String POINT = "point";
-    final String CLEAR = "CLEAR";
+    final String CLEAR = "全消し";
     final String[] COLUMN_NAMES = {"ID","Point"};
     final String[][] member = {
-			{"aaaa","100%"},
-    		{"bbbb","90%"},
-    		{"cccc","80%"},
-    		{"dddd","70%"}};
+			{"aaaa","0"},
+    		{"bbbb","0"},
+    		{"cccc","0"},
+    		{"dddd","0"}};
 
     /*************************************/
 
@@ -109,6 +111,11 @@ class PainterBoundary extends JPanel{
         }
 
         table = new JTable(tableModel);
+        table.setFont(MONOSPACED);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+        TableColumnModel colModel=table.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(125);
+        colModel.getColumn(1).setPreferredWidth(40);
 
         sp = new JScrollPane(table);
 
@@ -121,7 +128,9 @@ class PainterBoundary extends JPanel{
         /*レイアウト視覚化のためのもの*/
         LineBorder border = new LineBorder(Color.RED, 2, true);
         Font themeFont = new Font(FONT_NAME, Font.BOLD,30);
+        Font timerFont = new Font(FONT_NAME,Font.BOLD,18);
         Font messageFont = new Font(FONT_NAME, Font.BOLD,30);
+        Font messageFont2 = new Font(FONT_NAME, Font.BOLD,16);
         Font playerFont = new Font(FONT_NAME, Font.PLAIN,16);
         /*****************************/
 
@@ -131,31 +140,26 @@ class PainterBoundary extends JPanel{
         /*レイアウト***********************************/
         this.setLayout(null);
 
-        themeLabel.setBounds(150,10,300,40);
-        themeLabel.setBorder(border);
+        themeLabel.setBounds(280,10,300,40);
         themeLabel.setFont(themeFont);
 
-        messageLabel_1.setBounds(260,537,500,36);
-        messageLabel_1.setBorder(border);
+        messageLabel_1.setBounds(70,537,500,36);
         messageLabel_1.setFont(messageFont);
 
-        messageLabel_2.setBounds(20,525,150,30);
-        messageLabel_2.setBorder(border);
+        messageLabel_2.setBounds(635,100,180,30);
+        messageLabel_2.setFont(messageFont2);
+        messageLabel_3.setBounds(635,120,180,30);
+        messageLabel_3.setFont(messageFont2);
 
-        messageLabel_3.setBounds(20,555,150,30);
-        messageLabel_3.setBorder(border);
+        timerLabel.setBounds(600,10,30,40);
 
-        timerLabel.setBounds(640,10,150,40);
-        timerLabel.setBorder(border);
-
-        timerBar.setBounds(640, 55, 150, 40);
+        timerBar.setBounds(625, 11, 150, 40);
         timerBar.setStringPainted(true);
 
-        clearButton.setBounds(640,100,150,40);
+        clearButton.setBounds(640,170,150,40);
 
 
-
-        sp.setBounds(640, 220, 160, 120);
+        sp.setBounds(640, 290, 160, 90);
 
 
         gc.setBounds(20,70,600,450);
@@ -296,6 +300,12 @@ class PainterBoundary extends JPanel{
     //正解しているプレイヤーの表示を変える
     public void setCorrectPlayer() {
 
+    }
+
+
+    public void clear() {
+    	clearButton.doClick();
+    	System.out.println("[Log clear()] Canvas clear");
     }
 
 

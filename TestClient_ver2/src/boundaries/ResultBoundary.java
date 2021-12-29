@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
 
@@ -43,16 +44,16 @@ class ResultBoundary extends JPanel{
     final String THEME = "このターンのお題：〇〇〇";
     final String MESSAGE = "現在の獲得ポイント";
     final String MESSAGE2 = "次のターンまで";
-    final String TIMER = "timer";
-    final String PLAYER = "・playerLabel   xxpt";
+    final String TIMER = "00";
+    //final String PLAYER = "・playerLabel   xxpt";
     final String FONT_NAME = "MS ゴシック";
-    final String[] COLUMN_NAMES = {"ID","Answer","Point","Total Point"};
-    final String[][] member = {
-			{"blank","blank","blank","blank"},
-			{"blank","blank","blank","blank"},
-			{"blank","blank","blank","blank"},
-			{"blank","blank","blank","blank"}
-    		};
+    final String[] COLUMN_NAMES = {"ID","正誤","獲得ポイント","	総ポイント"};
+    final Object[][] member = {
+			{"player","○","25","70"},
+    		{"player","×","0","60"},
+    		{"player","○","10","55"},
+    		{"player","×","5","20"}};
+    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,14);
 
     /**
      * コンストラクタ
@@ -75,13 +76,21 @@ class ResultBoundary extends JPanel{
         timerBar = new JProgressBar();
 
 
-
         tableModel = new DefaultTableModel(COLUMN_NAMES,0);
         for(int i=0;i<4;i++) {
         	tableModel.addRow(member[i]);
         }
 
         table = new JTable(tableModel);
+        table.setFont(MONOSPACED);
+        //table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+        TableColumnModel colModel=table.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(380);
+        colModel.getColumn(1).setPreferredWidth(60);
+        colModel.getColumn(2).setPreferredWidth(150);
+        colModel.getColumn(3).setPreferredWidth(150);
+
 
         sp = new JScrollPane(table);
 
@@ -91,6 +100,7 @@ class ResultBoundary extends JPanel{
         Font titleFont = new Font(FONT_NAME, Font.BOLD,45);
         Font playerFont = new Font(FONT_NAME, Font.BOLD ,36);
         Font themeFont = new Font(FONT_NAME, Font.BOLD,30);
+        Font timerFont = new Font(FONT_NAME, Font.BOLD,18);
         Font messageFont = new Font(FONT_NAME, Font.BOLD ,20);
         Font messageFont2 = new Font(FONT_NAME, Font.BOLD,16);
 
@@ -98,31 +108,29 @@ class ResultBoundary extends JPanel{
         /*レイアウト***************************************/
         this.setLayout(null);
 
-        titleLabel.setBounds(240,80,340,45);
-        titleLabel.setBorder(border);
+        titleLabel.setBounds(240,80,360,45);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
-        themeLabel.setBounds(210,170,400,40);
-        themeLabel.setBorder(border);
+        themeLabel.setBounds(210,170,420,40);
+        themeLabel.setHorizontalAlignment(JLabel.CENTER);
         themeLabel.setFont(themeFont);
 
-        messageLabel.setBounds(310,270,200,40);
-        messageLabel.setBorder(border);
+        messageLabel.setBounds(310,270,220,40);
+        messageLabel.setHorizontalAlignment(JLabel.CENTER);
         messageLabel.setFont(messageFont);
 
-        messageLabel_2.setBounds(640,10,150,30);
-        messageLabel_2.setBorder(border);
+        messageLabel_2.setBounds(640,25,150,30);
         messageLabel_2.setFont(messageFont2);
 
-        timerLabel.setBounds(640,40,150,30);
-        timerLabel.setBorder(border);
+        timerLabel.setBounds(605,60,30,30);
+        timerLabel.setFont(timerFont);
 
-        timerBar.setBounds(640, 75, 150, 30);
+        timerBar.setBounds(630, 59, 150, 30);
         timerBar.setStringPainted(true);
 
 
-
-        sp.setBounds(230, 320, 360, 176);
+        sp.setBounds(230, 320, 360, 90);
 
         /***************************************************/
 

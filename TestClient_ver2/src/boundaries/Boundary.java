@@ -267,6 +267,8 @@ public class Boundary extends JFrame{
                 lobbyBoundary.setMessageLabel("こんにちは"+control.getMyPlayer().getId()+"さん");
                 //ランキング情報もセットするはず
                 lobbyBoundary.setRankingData(control.getGameInfo().getRankingData());
+                lobbyBoundary.getStartGameButton().setEnabled(true);
+                lobbyBoundary.getLogoutButton().setEnabled(true);
                 break;
 
             //回答者側の確認画面
@@ -300,6 +302,7 @@ public class Boundary extends JFrame{
             //最終結果画面
             case FinalResultBoundary:
             	//画面に最終結果をセット(gameInfoから)
+            	finalResultBoundary.setTable(control.getGameInfo().getGamePlayerList());
             	break;
 
             //ゲーム待機画面

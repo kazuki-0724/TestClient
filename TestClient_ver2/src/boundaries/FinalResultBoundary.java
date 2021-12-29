@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
 import listener.ToLobbyActionListener;
@@ -48,6 +49,7 @@ public class FinalResultBoundary extends JPanel{
     final String PLAYER4 = "4th playerLabel   xxpt";
     final String TOLOBBY = "ロビーへ戻る";
     final String FONT_NAME = "MS ゴシック";
+    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,12);
     final String[] COLUMN_NAMES = {"Rank","ID","Total Point"};
     final String[][] member = {
 			{"1st","blank","blank"},
@@ -88,6 +90,13 @@ public class FinalResultBoundary extends JPanel{
         }
 
         table = new JTable(tableModel);
+        table.setFont(MONOSPACED);
+
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+        TableColumnModel colModel=table.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(50);
+        colModel.getColumn(1).setPreferredWidth(220);
+        colModel.getColumn(2).setPreferredWidth(150);
 
         sp = new JScrollPane(table);
 
@@ -107,24 +116,15 @@ public class FinalResultBoundary extends JPanel{
         this.setLayout(null);
 
         titleLabel.setBounds(250,80,330,52);
-        titleLabel.setBorder(border);
         titleLabel.setFont(titleFont);
 
         winnerLabel.setBounds(275,190,275,40);
-        winnerLabel.setBorder(border);
         winnerLabel.setFont(winnerFont);
 
         messageLabel.setBounds(360,260,100,50);
-        messageLabel.setBorder(border);
         messageLabel.setFont(messageFont);
 
-
-        sp.setBounds(220,320,390,176);
-
-        timerLabel.setBounds(640,10,150,40);
-        timerLabel.setBorder(border);
-
-        timerBar.setBounds(640, 55, 150, 40);
+        sp.setBounds(220,320,390,100);
 
         toLobbyButton.setBounds(675,535,120,35);
 
@@ -135,8 +135,8 @@ public class FinalResultBoundary extends JPanel{
         this.add(titleLabel);
         this.add(winnerLabel);
         this.add(messageLabel);
-        //this.add(timerLabel);
         this.add(toLobbyButton);
+        this.add(sp);
 
 
         /************************/

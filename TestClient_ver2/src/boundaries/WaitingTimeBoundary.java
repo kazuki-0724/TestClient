@@ -27,7 +27,7 @@ class WaitingTimeBoundary extends JPanel{
     //文字列
     final String message = "出題者がお題を確認中です...";
     final String NOTICE = "あなたは解答者です";
-    final String TIMER = "timer";
+    final String TIMER = "00";
     final String FONT_NAME = "MSゴシック";
 
     /**
@@ -38,7 +38,7 @@ class WaitingTimeBoundary extends JPanel{
     public WaitingTimeBoundary() {
 		// TODO 自動生成されたコンストラクター・スタブ
 
-    	 LineBorder border = new LineBorder(Color.RED, 2, true);
+    	 LineBorder border = new LineBorder(Color.BLACK, 2, true);
 
 
          /*各インスタンス生成****************************************************/
@@ -52,6 +52,7 @@ class WaitingTimeBoundary extends JPanel{
 
          //フォント
          Font titleFont = new Font(FONT_NAME, Font.BOLD,45);
+         Font timerFont = new Font(FONT_NAME,Font.BOLD,18);
          Font messageFont = new Font(FONT_NAME, Font.BOLD ,26);
 
 
@@ -59,17 +60,16 @@ class WaitingTimeBoundary extends JPanel{
          this.setLayout(null);
 
          messageLabel.setBounds(150,270,540,45);
-         messageLabel.setBorder(border);
          messageLabel.setFont(titleFont);
 
          noticeLabel.setBounds(40,40,260,36);
          noticeLabel.setBorder(border);
          noticeLabel.setFont(messageFont);
 
-         timerLabel.setBounds(650,40,150,40);
+         timerLabel.setBounds(625,49,30,40);
          timerLabel.setBorder(border);
 
-         timerBar.setBounds(650, 85, 150, 40);
+         timerBar.setBounds(650, 48, 150, 40);
          timerBar.setStringPainted(true);
 
          /*************************************/

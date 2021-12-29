@@ -472,6 +472,9 @@ public class ClientControl{
 
     				case "FINISHGAME":
     					//finalResultへの遷移
+    					boundary.changePanel(BoundaryID.FinalResultBoundary);
+    					boundary.setTimerBar(BoundaryID.FinalResultBoundary, 10);
+    					runTimer(BoundaryID.FinalResultBoundary,10);
 
 
     					break;

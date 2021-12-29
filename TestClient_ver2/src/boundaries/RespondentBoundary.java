@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
 import listener.AnswerSubmitActionListener;
@@ -52,6 +53,7 @@ public class RespondentBoundary extends JPanel{
 
     /*クラス図にはいらない気がする********/
     final String FONT_NAME = "MS ゴシック";
+    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,15);
     final String THEME = "お題 : ";
     final String TIMEKEEP = "※制限時間以内に解答を送信してください";
     final String PLAYER = "・playerLabel   xxpt";
@@ -59,10 +61,10 @@ public class RespondentBoundary extends JPanel{
     final String POINT = "point";
     final String[] COLUMN_NAMES = {"ID","Point"};
     final String[][] member = {
-			{"aaaa","100%"},
-    		{"bbbb","90%"},
-    		{"cccc","80%"},
-    		{"dddd","70%"}};
+			{"aaaa","0"},
+    		{"bbbb","0"},
+    		{"cccc","0"},
+    		{"dddd","0"}};
 
 
 
@@ -99,6 +101,12 @@ public class RespondentBoundary extends JPanel{
         }
 
         table = new JTable(tableModel);
+        table.setFont(MONOSPACED);
+
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+        TableColumnModel colModel=table.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(125);
+        colModel.getColumn(1).setPreferredWidth(40);
 
         sp = new JScrollPane(table);
 
@@ -113,6 +121,7 @@ public class RespondentBoundary extends JPanel{
         LineBorder border = new LineBorder(Color.RED, 2, true);
         Font messageFont = new Font(FONT_NAME, Font.BOLD,29);
         Font playerFont = new Font(FONT_NAME, Font.PLAIN,16);
+        Font timerFont = new Font(FONT_NAME,Font.BOLD,18);
         this.setLayout(null);
         /****************************************************/
 
@@ -122,16 +131,14 @@ public class RespondentBoundary extends JPanel{
         this.setLayout(null);
 
         messageLabel_1.setBounds(20,20,580,36);
-        messageLabel_1.setBorder(border);
         messageLabel_1.setFont(messageFont);
 
-        timerLabel.setBounds(640,20,150,40);
-        timerLabel.setBorder(border);
+        timerLabel.setBounds(600,20,30,40);
 
-        timerBar.setBounds(640, 65, 150, 40);
+        timerBar.setBounds(625, 21, 150, 40);
         timerBar.setStringPainted(true);
 
-        sp.setBounds(640,220,160,120);
+        sp.setBounds(640,220,160,90);
 
         answerField.setBounds(540,540,200,30);
 
@@ -149,12 +156,6 @@ public class RespondentBoundary extends JPanel{
         this.add(messageLabel_1);
         this.add(timerLabel);
         this.add(sp);
-        /*
-        for(int i=0; i<4 ; i++) {
-        	this.add(playerLabel[i]);
-        }
-        */
-
         this.add(answerField);
         this.add(answerButton);
         /******************************/

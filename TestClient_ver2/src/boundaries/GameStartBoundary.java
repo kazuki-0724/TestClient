@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
 
@@ -42,6 +43,7 @@ public class GameStartBoundary extends JPanel{
     final String TIMER = "timer";
     final String PLAYER = "・playerLabel   xx%";
     final String FONT_NAME = "MS ゴシック";
+    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,15);
     final String[] COLUMN_NAMES = {"ID","RATE"};
     final String[][] member = {
 			{"aaaa","100%"},
@@ -78,17 +80,14 @@ public class GameStartBoundary extends JPanel{
         this.setLayout(null);
 
         messageLabel_1.setBounds(180,160,430,45);
-        messageLabel_1.setBorder(border);
         messageLabel_1.setFont(titleFont);
 
         messageLabel_2.setBounds(600,30,200,30);
-        messageLabel_2.setBorder(border);
         messageLabel_2.setFont(messageFont);
 
+        timerLabel.setBounds(605,60,30,30);
 
-        timerLabel.setBounds(600,60,150,30);
-        timerLabel.setBorder(border);
-        timerBar.setBounds(600, 95, 150, 30);
+        timerBar.setBounds(630, 60, 150, 30);
         timerBar.setStringPainted(true);
 
 
@@ -98,10 +97,16 @@ public class GameStartBoundary extends JPanel{
         }
 
         table = new JTable(tableModel);
+        table.setFont(MONOSPACED);
+
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
+        TableColumnModel colModel=table.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(200);
+        colModel.getColumn(1).setPreferredWidth(60);
 
         sp = new JScrollPane(table);
 
-        sp.setBounds(250, 280, 300, 152);
+        sp.setBounds(280, 280, 200, 90);
 
 
         /***************************************************/
