@@ -27,7 +27,7 @@ public class WebSocketEndpoint {
 	@OnOpen
 	public void onOpen(Session session) {
 
-		basic = session.getBasicRemote();
+		currentSession = session;
 
 		/* セッション確立時の処理 */
 		System.out.println("WebSocketセッション確立");
@@ -58,10 +58,11 @@ public class WebSocketEndpoint {
 	}
 
 
-	public void sendMessage(String str) {
+	public void sendMessage(Session session,String str) {
 
 		try {
-			basic.sendText(str);
+			session.getBasicRemote().sendText(str);
+			//basic.sendText(str);
 		} catch (IOException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

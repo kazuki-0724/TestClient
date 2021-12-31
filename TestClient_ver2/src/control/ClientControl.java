@@ -307,13 +307,9 @@ public class ClientControl{
 
     				case "JOIN":
     					if(dates[1].equals("OK")) {
-    						//APに接続要求を飛ばす
 
-    						//本当はここでAPへの接続処理をやるはず
-    						//テスト段階では面倒くさいから同じサーバでやってるだけ
     						//communicate().connect(AP);
-    						communicate().sendData(ProcessID.CONNECTAP,getMyPlayer().getId());
-
+    						//communicate().sendData(ProcessID.CONNECTAP,getMyPlayer().getId());
 
     					}
     					break;
@@ -358,6 +354,14 @@ public class ClientControl{
 
 
     			switch(secDataFlag) {
+
+
+    				case "CONNECTTOAP":
+    					//CLMからAPに接続城っていう指令が来る
+    					communicate().connect(AP);
+    					communicate().sendData(ProcessID.CONNECTAP,getMyPlayer().getId());
+    					break;
+
 
     				case "STARTGAME":
 
@@ -546,7 +550,7 @@ public class ClientControl{
 				timer = null;
 				boundary.updateCountDown(type, "Time Over!");
 				//時間制限が終了した画面の情報も送る
-				control.communicate().sendData(ProcessID.TIMEOVER, type.toString());
+				//control.communicate().sendData(ProcessID.TIMEOVER, type.toString());
 			}
 		}
 

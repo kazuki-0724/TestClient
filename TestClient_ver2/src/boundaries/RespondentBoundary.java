@@ -213,19 +213,29 @@ public class RespondentBoundary extends JPanel{
      */
     public void drawStroke(String stroke) {
 
-    	int type,s_x,s_y,e_x,e_y;
 
-    	String[] tmpString = stroke.split("_");
+    	if(stroke.equals("CLEAR")) {
 
-    	type = Integer.parseInt(tmpString[0]);
-    	s_x = Integer.parseInt(tmpString[1]);
-    	s_y = Integer.parseInt(tmpString[2]);
-    	e_x = Integer.parseInt(tmpString[3]);
-    	e_y = Integer.parseInt(tmpString[4]);
+    		int type,s_x,s_y,e_x,e_y;
+
+        	String[] tmpString = stroke.split("_");
+
+        	type = Integer.parseInt(tmpString[0]);
+        	s_x = Integer.parseInt(tmpString[1]);
+        	s_y = Integer.parseInt(tmpString[2]);
+        	e_x = Integer.parseInt(tmpString[3]);
+        	e_y = Integer.parseInt(tmpString[4]);
 
 
-    	System.out.println("[Log] respondent/drawStroke() "+ stroke);
-    	ac.setLine(type,s_x,s_y,e_x,e_y);
+        	System.out.println("[Log] respondent/drawStroke() "+ stroke);
+        	ac.setLine(type,s_x,s_y,e_x,e_y);
+
+    	}else {
+
+    		ac.clear();
+    	}
+
+
 
     }
 

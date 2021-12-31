@@ -32,8 +32,9 @@ public class ClientCommunication{
 	private Session currentSession;
 
 
-	private final String CLM_URI = "ws://localhost:8080/TestServer/WebSocketServer";
-    private final String AP_URI = "";
+	//private final String CLM_URI = "ws://localhost:8080/TestServer/WebSocketServer";
+	private final String CLM_URI = "ws://localhost:8080/app/clm";
+    private final String AP_URI = "ws://localhost:8081/app/ap";
 
     private final String REQUEST = "REQUEST";
     private final String REPLY = "REPLY";
@@ -66,8 +67,12 @@ public class ClientCommunication{
 
     	System.out.println("[Log] send data [" + processID.toString() + "] "+ communicationFormat);
 
-    	webSocketEndpoint.sendMessage(communicationFormat);
+    	if(currentSession.isOpen()) {
+    		webSocketEndpoint.sendMessage(currentSession,communicationFormat);
 
+    	}else {
+    		System.out.println("[Log] currentSession is closed");
+    	}
     }
 
 
