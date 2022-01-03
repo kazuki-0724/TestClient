@@ -421,6 +421,7 @@ public class ClientControl{
     					break;
 
 
+
     				case "QTIMESTART":
 
     					//制限時間の取り出し

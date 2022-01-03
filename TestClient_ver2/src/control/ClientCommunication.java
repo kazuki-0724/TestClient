@@ -32,13 +32,16 @@ public class ClientCommunication{
 	private Session currentSession;
 
 
-	//private final String CLM_URI = "ws://localhost:8080/TestServer/WebSocketServer";
+
+	//実機運用ではここのlocalhostをサーバのIPアドレスにする
+	//IPconfigで調べる
 	private final String CLM_URI = "ws://localhost:8080/app/clm";
     private final String AP_URI = "ws://localhost:8081/app/ap";
 
     private final String REQUEST = "REQUEST";
     private final String REPLY = "REPLY";
     private final String POSITION = "POSITION";
+    private final String CONNECT = "CONNECT";
 
 
     /**
@@ -95,11 +98,11 @@ public class ClientCommunication{
 
     		//サーバ接続時
     		case CONNECTCLM:
-    			communicationFormat = encode(REQUEST, ProcessID.CONNECTCLM.toString());
+    			communicationFormat = encode(CONNECT, ProcessID.CONNECTCLM.toString());
     			break;
 
     		case CONNECTAP:
-    			communicationFormat = encode(REQUEST, ProcessID.CONNECTAP.toString(),control.getMyPlayer().getId());
+    			communicationFormat = encode(CONNECT, ProcessID.CONNECTAP.toString(),control.getMyPlayer().getId());
     			break;
 
     		case CONNECTAP_OK:

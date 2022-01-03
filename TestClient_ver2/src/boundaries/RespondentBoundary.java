@@ -213,6 +213,7 @@ public class RespondentBoundary extends JPanel{
      */
     public void drawStroke(String stroke) {
 
+    	System.out.println("[Log RespondentB drawStroke()] "+stroke);
 
     	if(stroke.equals("CLEAR")) {
 
@@ -263,9 +264,17 @@ public class RespondentBoundary extends JPanel{
     }
 
 
-    //正解しているプレイヤーの表示を変える
-    public void setCorrectPlayer() {
+  //正解しているプレイヤーの表示を変える
+    public void setCorrectPlayer(List<PlayerMessage> list ,int correctPlayerNum) {
 
+    	for(int i=0;i<4;i++) {
+    		PlayerMessage tmp = list.get(i);
+
+    		if( Integer.parseInt(tmp.getPlayerNum()) == correctPlayerNum ) {
+
+    			tableModel.setValueAt("〇" + tmp.getPlayerID(), correctPlayerNum, i);
+    		}
+    	}
     }
 
 

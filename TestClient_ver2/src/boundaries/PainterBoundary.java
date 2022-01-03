@@ -290,7 +290,7 @@ class PainterBoundary extends JPanel{
     		PlayerMessage tmp = list.get(i);
 
     		//setValueAt(セルにセットするデータ,,n行,n列)
-    		tableModel.setValueAt(tmp.getPlayerID(),i,0);
+    		tableModel.setValueAt(" " + tmp.getPlayerID(),i,0);
     		tableModel.setValueAt(tmp.getTotalPoint(),i,1);
     	}
 
@@ -298,8 +298,16 @@ class PainterBoundary extends JPanel{
 
 
     //正解しているプレイヤーの表示を変える
-    public void setCorrectPlayer() {
+    public void setCorrectPlayer(List<PlayerMessage> list ,int correctPlayerNum) {
 
+    	for(int i=0;i<4;i++) {
+    		PlayerMessage tmp = list.get(i);
+
+    		if( Integer.parseInt(tmp.getPlayerNum()) == correctPlayerNum ) {
+
+    			tableModel.setValueAt("〇" + tmp.getPlayerID(), correctPlayerNum, i);
+    		}
+    	}
     }
 
 
