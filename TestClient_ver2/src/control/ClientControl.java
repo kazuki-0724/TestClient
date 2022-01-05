@@ -90,6 +90,8 @@ public class ClientControl{
 	 */
 	public void runTimer(BoundaryID type, int time) {
 
+		stopTimer();//
+
 		//スケジューラー
 		timer = new Timer();
 
@@ -266,6 +268,7 @@ public class ClientControl{
     						//ログアウト処理
     						System.out.println("[Log] LOGOUT");
     						getMyPlayer().init();
+    						getGameInfo().init();
     						boundary.changePanel(BoundaryID.AccountAuthentificationBoudary);
 
     					}
@@ -359,7 +362,7 @@ public class ClientControl{
     				case "CONNECTTOAP":
     					//CLMからAPに接続城っていう指令が来る
     					communicate().connect(AP);
-    					communicate().sendData(ProcessID.CONNECTAP,getMyPlayer().getId());
+    					//communicate().sendData(ProcessID.CONNECTAP,getMyPlayer().getId());
     					break;
 
 
@@ -450,7 +453,7 @@ public class ClientControl{
     					int correctPlayerNum = Integer.parseInt(dates[1]);
 
     					//correctPlayerNumを使ってPaintrer/RespondenrBoundaryの表示を変える
-
+    					boundary.setCorrectPlayer(correctPlayerNum);
 
 
     					/*****************************************************/
@@ -480,13 +483,18 @@ public class ClientControl{
     					boundary.changePanel(BoundaryID.FinalResultBoundary);
     					boundary.setTimerBar(BoundaryID.FinalResultBoundary, 10);
     					runTimer(BoundaryID.FinalResultBoundary,10);
-
+    					communicate().sendData(ProcessID.FINISHGAME_OK, secDataFlag);
 
     					break;
 
 
     				case "TIMEOUT":
     					//ログアウト処理を入れる
+    					//ログアウト処理
+						System.out.println("[Log] LOGOUT");
+						getMyPlayer().init();
+						getGameInfo().init();
+						boundary.changePanel(BoundaryID.AccountAuthentificationBoudary);
 
     					break;
 
@@ -551,7 +559,7 @@ public class ClientControl{
 				timer = null;
 				boundary.updateCountDown(type, "Time Over!");
 				//時間制限が終了した画面の情報も送る
-				//control.communicate().sendData(ProcessID.TIMEOVER, type.toString());
+				control.communicate().sendData(ProcessID.TIMEOVER, type.toString());
 			}
 		}
 

@@ -62,7 +62,7 @@ class WaitingTimeBoundary extends JPanel{
          messageLabel.setBounds(150,270,540,45);
          messageLabel.setFont(titleFont);
 
-         noticeLabel.setBounds(40,40,260,36);
+         noticeLabel.setBounds(40,49,260,36);
          noticeLabel.setBorder(border);
          noticeLabel.setFont(messageFont);
 
@@ -78,7 +78,7 @@ class WaitingTimeBoundary extends JPanel{
          /*パネルに追加*********/
          this.add(messageLabel);
          this.add(noticeLabel);
-         this.add(timerLabel);
+         //this.add(timerLabel);
          this.add(timerBar);
          /**********************/
 

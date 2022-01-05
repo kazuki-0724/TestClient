@@ -35,8 +35,8 @@ public class ClientCommunication{
 
 	//実機運用ではここのlocalhostをサーバのIPアドレスにする
 	//IPconfigで調べる
-	private final String CLM_URI = "ws://localhost:8080/app/clm";
-    private final String AP_URI = "ws://localhost:8081/app/ap";
+	private final String CLM_URI = "ws://172.30.26.161:8080/app/clm";
+    private final String AP_URI = "ws://172.30.26.161:8081/app/ap";
 
     private final String REQUEST = "REQUEST";
     private final String REPLY = "REPLY";
@@ -185,6 +185,10 @@ public class ClientCommunication{
 	    		communicationFormat = encode(REPLY, "FINISHGAME_OK");
 	    		break;
 
+	    	case TIMEOUT_OK:
+	    		communicationFormat = encode(REPLY, "TIMEOUT_OK");
+	    		break;
+
 	    	default:
 	    		break;
 
@@ -315,13 +319,19 @@ public class ClientCommunication{
 
     	if(type == 0) {
 
+
     		try {
     			CLMSession.close();
     		} catch (IOException e) {
     			// TODO 自動生成された catch ブロック
     			e.printStackTrace();
     		}
+
+    		currentSession = null;
+
     	}else if(type == 1) {
+
+    		currentSession = CLMSession;
 
     		try {
     			APSession.close();

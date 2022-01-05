@@ -10,7 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import listener.LogoutActionListener;
@@ -111,6 +114,20 @@ public class LobbyBoundary extends JPanel{
         colModel.getColumn(1).setPreferredWidth(120);
         colModel.getColumn(2).setPreferredWidth(50);
 
+        JTableHeader jheader = table.getTableHeader();
+        jheader.setReorderingAllowed(false);// テーブルの列移動を不許可にする。
+
+        table.setEnabled(false);
+
+        table.setRowHeight(25);
+
+        DefaultTableCellRenderer tableCellRenderer = new DefaultTableCellRenderer();
+        tableCellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        TableColumn col = table.getColumnModel().getColumn(0);
+        col.setCellRenderer(tableCellRenderer);
+        TableColumn col2 = table.getColumnModel().getColumn(1);
+        col2.setCellRenderer(tableCellRenderer);
+
         sp = new JScrollPane(table);
 
 
@@ -163,7 +180,7 @@ public class LobbyBoundary extends JPanel{
 
         logoutButton.setBounds(700, 50, 110, 30);
 
-        sp.setBounds(300, 355, 240, 102);
+        sp.setBounds(300, 355, 240, 150);//102
 
         /***************************************************/
 

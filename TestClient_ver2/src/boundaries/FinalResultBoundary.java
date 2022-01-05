@@ -110,7 +110,7 @@ public class FinalResultBoundary extends JPanel{
         Font winnerFont = new Font(FONT_NAME, Font.BOLD,36);
         Font messageFont = new Font(FONT_NAME, Font.BOLD ,45);
         Font messageFont2 = new Font(FONT_NAME, Font.BOLD,16);
-
+        Font timerFont = new Font(FONT_NAME, Font.BOLD,18);
 
         /*レイアウト***************************************/
         this.setLayout(null);
@@ -128,6 +128,12 @@ public class FinalResultBoundary extends JPanel{
 
         toLobbyButton.setBounds(675,535,120,35);
 
+        timerLabel.setBounds(605,60,30,30);
+        timerLabel.setFont(timerFont);
+
+        timerBar.setBounds(630, 59, 150, 30);
+        timerBar.setStringPainted(true);
+
         /***************************************************/
 
 
@@ -137,6 +143,8 @@ public class FinalResultBoundary extends JPanel{
         this.add(messageLabel);
         this.add(toLobbyButton);
         this.add(sp);
+        this.add(timerLabel);
+        this.add(timerBar);
 
 
         /************************/

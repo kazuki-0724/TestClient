@@ -45,6 +45,15 @@ public class GameInfo {
 	}
 
 
+	public void init() {
+		this.gamePlayerList = null;
+		this.painterPlayerNum = -1;
+		this.playerNum = -1;
+		this.rankingData = null;
+		this.resultString = null;
+		this.roomID = null;
+		this.gamePlayerList = null;
+	}
 
 
 
