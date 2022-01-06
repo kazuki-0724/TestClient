@@ -481,7 +481,7 @@ public class ClientControl{
     				case "FINISHGAME":
     					//finalResultへの遷移
     					boundary.changePanel(BoundaryID.FinalResultBoundary);
-    					boundary.setTimerBar(BoundaryID.FinalResultBoundary, 10);
+    					//boundary.setTimerBar(BoundaryID.FinalResultBoundary, 60);
     					runTimer(BoundaryID.FinalResultBoundary,10);
     					communicate().sendData(ProcessID.FINISHGAME_OK, secDataFlag);
 
@@ -559,7 +559,14 @@ public class ClientControl{
 				timer = null;
 				boundary.updateCountDown(type, "Time Over!");
 				//時間制限が終了した画面の情報も送る
-				control.communicate().sendData(ProcessID.TIMEOVER, type.toString());
+				//control.communicate().sendData(ProcessID.TIMEOVER, type.toString());
+
+				//最終結果画面にいるときは裏で60秒カウントする
+				if(type == BoundaryID.FinalResultBoundary) {
+
+					control.communicate().sendData(ProcessID.MAKELOBBY, id);
+				}
+
 			}
 		}
 

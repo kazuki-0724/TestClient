@@ -406,21 +406,15 @@ public class Boundary extends JFrame{
     }
 
 
-    public void setCorrectPlayer(BoundaryID type, int correctPlayerNum) {
+    public void setCorrectPlayer(int correctPlayerNum) {
 
-    	switch(type) {
+    	if( currentPanel == painterBoundary ) {
 
-			case PainterBoundary:
-				painterBoundary.setCorrectPlayer(control.getGameInfo().getGamePlayerList(), correctPlayerNum);
-				break;
+			painterBoundary.setCorrectPlayer(control.getGameInfo().getGamePlayerList(), correctPlayerNum);
 
-			case RespondentBoundary:
-				respondentBoundary.setCorrectPlayer(control.getGameInfo().getGamePlayerList(), correctPlayerNum);
-				break;
+    	}else if( currentPanel == respondentBoundary) {
 
-			default:
-				System.out.println("[Error] Boundary updateCountDown type Error");
-
+    		respondentBoundary.setCorrectPlayer(control.getGameInfo().getGamePlayerList(), correctPlayerNum);
     	}
     }
 
