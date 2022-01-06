@@ -321,10 +321,11 @@ public class Boundary extends JFrame{
 
 
 
-
-
-
-    //それぞれの画面のカウントダウン制御
+    /**
+     * それぞれの画面のカウントダウン制御
+     * @param type
+     * @param time
+     */
     public void updateCountDown(BoundaryID type, String time) {
 
 
@@ -355,6 +356,10 @@ public class Boundary extends JFrame{
     			break;
 
 
+    		case FinalResultBoundary:
+    			//画面にタイマーの表示はいらない
+    			break;
+
 
 
     		default:
@@ -365,7 +370,13 @@ public class Boundary extends JFrame{
     }
 
 
-    //それぞれの画面のカウントダウン制御
+
+
+    /**
+     * 画面のカウントダウンバーを制御
+     * @param type
+     * @param time
+     */
     public void setTimerBar(BoundaryID type, int time) {
 
 
@@ -406,6 +417,13 @@ public class Boundary extends JFrame{
     }
 
 
+
+
+
+    /**
+     * 正解者の情報を画面に反映
+     * @param correctPlayerNum
+     */
     public void setCorrectPlayer(int correctPlayerNum) {
 
     	if( currentPanel == painterBoundary ) {
@@ -420,11 +438,11 @@ public class Boundary extends JFrame{
 
 
 
-
-
     public ClientControl getControl() {
     	return this.control;
     }
+
+
 
 
 

@@ -234,6 +234,11 @@ public class RespondentBoundary extends JPanel{
 
     	if(stroke.equals("CLEAR")) {
 
+    		System.out.println("[Log] respondent/drawStroke() CLEAR");
+    		ac.clear();
+
+    	}else {
+
     		int type,s_x,s_y,e_x,e_y;
 
         	String[] tmpString = stroke.split("_");
@@ -245,12 +250,8 @@ public class RespondentBoundary extends JPanel{
         	e_y = Integer.parseInt(tmpString[4]);
 
 
-        	System.out.println("[Log] respondent/drawStroke() "+ stroke);
+        	System.out.println("[Log] respondent/drawStroke()");
         	ac.setLine(type,s_x,s_y,e_x,e_y);
-
-    	}else {
-
-    		ac.clear();
     	}
 
 
@@ -274,23 +275,30 @@ public class RespondentBoundary extends JPanel{
     		PlayerMessage tmp = list.get(i);
 
     		//setValueAt(セルにセットするデータ,,n行,n列)
-    		tableModel.setValueAt(tmp.getPlayerID(),i,0);
+    		tableModel.setValueAt(" " + tmp.getPlayerID(),i,0);
     		tableModel.setValueAt(tmp.getTotalPoint(),i,1);
     	}
 
     }
 
 
-  //正解しているプレイヤーの表示を変える
+    /**
+     * 正解しているプレイヤーの
+     * @param list
+     * @param correctPlayerNum
+     */
     public void setCorrectPlayer(List<PlayerMessage> list ,int correctPlayerNum) {
 
     	for(int i=0;i<4;i++) {
+
     		PlayerMessage tmp = list.get(i);
+
 
     		if( Integer.parseInt(tmp.getPlayerNum()) == correctPlayerNum ) {
 
-    			tableModel.setValueAt("〇" + tmp.getPlayerID(), correctPlayerNum, i);
+    			tableModel.setValueAt("〇 " + tmp.getPlayerID(), i, 0);
     		}
+
     	}
     }
 

@@ -68,7 +68,7 @@ public class ClientCommunication{
     	String communicationFormat = handleSendData(processID,data);
 
 
-    	System.out.println("[Log] send data [" + processID.toString() + "] "+ communicationFormat);
+    	System.out.println("[Log] sendData()" + communicationFormat);
 
     	if(currentSession.isOpen()) {
     		webSocketEndpoint.sendMessage(currentSession,communicationFormat);
@@ -92,7 +92,7 @@ public class ClientCommunication{
     	String communicationFormat = "";
 
 
-    	System.out.println("[Log handleSendData() ] data = "+ data);
+    	//System.out.println("[Log handleSendData() ] data = "+ data);
 
     	switch(processID) {
 

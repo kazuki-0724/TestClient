@@ -65,7 +65,10 @@ public class ClientControl{
 		this.boundary = boundary;
 		this.cscc = new ClientCommunication(this);
 		this.gameInfo = new GameInfo();
+		this.gameInfo.init();
 		init();
+		//cscc.connect(CLM);
+
 	}
 
 
@@ -226,8 +229,6 @@ public class ClientControl{
 		}
 
 
-		//わざわざやらなくてもいいけど、わかりやすさのために
-
 
 
 
@@ -238,7 +239,6 @@ public class ClientControl{
     		case "REPLY":
     			System.out.println("[Log handleData() case REPLY] data "+ data);
 
-    			//String[] dates = data.split("_")
 
     			//第2ヘッダのswitch
     			switch(secDataFlag) {
@@ -400,7 +400,6 @@ public class ClientControl{
     					int painterPlayerNum = Integer.parseInt(dates[1]);
     					String theme = dates[2];
 
-    					//getGameInfo().setPainterNum(painterPlayerNum);
 
     					//それらのgameInfoへのセット
     					getGameInfo().setPainterPlayerNum(painterPlayerNum);
@@ -484,6 +483,10 @@ public class ClientControl{
     					//boundary.setTimerBar(BoundaryID.FinalResultBoundary, 60);
     					runTimer(BoundaryID.FinalResultBoundary,10);
     					communicate().sendData(ProcessID.FINISHGAME_OK, secDataFlag);
+
+    					//非常に怪しい
+    					communicate().disconnect(AP);
+    					//
 
     					break;
 

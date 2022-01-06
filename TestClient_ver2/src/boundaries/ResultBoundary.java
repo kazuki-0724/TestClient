@@ -196,12 +196,12 @@ class ResultBoundary extends JPanel{
     		if(painterNum == Integer.parseInt(tmp.getPlayerNum())) {
     			//出題者は
     			//setValueAt(セルにセットするデータ,,n行,n列)
-        		tableModel.setValueAt("[Painter] " + tmp.getPlayerID(),i,0);
+        		tableModel.setValueAt("[出題者] " + tmp.getPlayerID(),i,0);
         		tableModel.setValueAt("-",i,1);
 
     		}else {
     			//setValueAt(セルにセットするデータ,,n行,n列)
-        		tableModel.setValueAt(tmp.getPlayerID(),i,0);
+        		tableModel.setValueAt("[解答者] " + tmp.getPlayerID(),i,0);
 
         		if(tmp.getTurnPoint() > 0 ) {
         			tableModel.setValueAt("〇",i,1);
@@ -210,7 +210,6 @@ class ResultBoundary extends JPanel{
         		}
 
     		}
-
 
     		tableModel.setValueAt(tmp.getTurnPoint(),i,2);
     		tableModel.setValueAt(tmp.getTotalPoint(),i,3);

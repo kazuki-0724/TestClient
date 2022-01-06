@@ -281,7 +281,7 @@ public class LobbyBoundary extends JPanel{
     	float temp2 = games;
 
     	float rate = (temp / temp2) * 100;
-        this.rateLabel.setText(String.format("Rate : %f",rate));
+        this.rateLabel.setText(String.format("Rate : %.2f",rate));
     }
 
     /**
