@@ -484,9 +484,15 @@ public class ClientControl{
     					runTimer(BoundaryID.FinalResultBoundary,10);
     					communicate().sendData(ProcessID.FINISHGAME_OK, secDataFlag);
 
-    					//非常に怪しい
+
+
+    					/*非常に怪しい*******************/
     					communicate().disconnect(AP);
-    					//
+    					/********************************/
+
+
+
+
 
     					break;
 

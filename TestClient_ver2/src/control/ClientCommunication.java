@@ -260,6 +260,8 @@ public class ClientCommunication{
     		// CLMのURI
     		uri = URI.create(CLM_URI);
 
+    		System.out.println(CLM_URI);
+
     		try {
     			CLMSession = container.connectToServer(webSocketEndpoint,uri);
     		} catch (DeploymentException | IOException e) {
@@ -277,6 +279,8 @@ public class ClientCommunication{
     	}else if(type == 1){
     		// APのURI
     		uri = URI.create(AP_URI);
+
+    		System.out.println(AP_URI);
 
     		try {
     			APSession = container.connectToServer(webSocketEndpoint,uri);
@@ -296,7 +300,7 @@ public class ClientCommunication{
     	}
 
     	if( currentSession.isOpen()) {
-    		System.out.println("Connection Successed");
+    		System.out.println("Connection Successed ");
     	}else {
     		System.out.println("Connection failed");
     	}
