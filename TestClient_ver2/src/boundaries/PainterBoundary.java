@@ -13,7 +13,10 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
@@ -117,6 +120,20 @@ class PainterBoundary extends JPanel{
         colModel.getColumn(0).setPreferredWidth(125);
         colModel.getColumn(1).setPreferredWidth(40);
 
+        JTableHeader jheader = table.getTableHeader();
+        jheader.setReorderingAllowed(false);
+
+        table.setEnabled(false);
+
+        table.setRowHeight(23);
+
+        DefaultTableCellRenderer tableCellRenderer = new DefaultTableCellRenderer();
+        tableCellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        TableColumn col = table.getColumnModel().getColumn(0);
+        col.setCellRenderer(tableCellRenderer);
+        TableColumn col2 = table.getColumnModel().getColumn(1);
+        col2.setCellRenderer(tableCellRenderer);
+
         sp = new JScrollPane(table);
 
 
@@ -146,20 +163,20 @@ class PainterBoundary extends JPanel{
         messageLabel_1.setBounds(70,537,500,36);
         messageLabel_1.setFont(messageFont);
 
-        messageLabel_2.setBounds(635,100,180,30);
+        messageLabel_2.setBounds(632,100,200,30);
         messageLabel_2.setFont(messageFont2);
-        messageLabel_3.setBounds(635,120,180,30);
+        messageLabel_3.setBounds(632,120,200,30);
         messageLabel_3.setFont(messageFont2);
 
         timerLabel.setBounds(600,10,30,40);
 
-        timerBar.setBounds(625, 11, 150, 40);
+        timerBar.setBounds(645, 11, 150, 40);
         timerBar.setStringPainted(true);
 
-        clearButton.setBounds(640,170,150,40);
+        clearButton.setBounds(648,170,150,40);
 
 
-        sp.setBounds(640, 290, 160, 90);
+        sp.setBounds(640, 290, 170, 115);
 
 
         gc.setBounds(20,70,600,450);
@@ -174,7 +191,7 @@ class PainterBoundary extends JPanel{
         this.add(messageLabel_2);
         this.add(messageLabel_3);
         this.add(sp);
-        this.add(timerLabel);
+        //this.add(timerLabel);
         this.add(timerBar);
 
         /*

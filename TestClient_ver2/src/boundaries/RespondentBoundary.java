@@ -12,7 +12,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
@@ -108,6 +111,20 @@ public class RespondentBoundary extends JPanel{
         colModel.getColumn(0).setPreferredWidth(125);
         colModel.getColumn(1).setPreferredWidth(40);
 
+        JTableHeader jheader = table.getTableHeader();
+        jheader.setReorderingAllowed(false);
+
+        table.setEnabled(false);
+
+        table.setRowHeight(23);
+
+        DefaultTableCellRenderer tableCellRenderer = new DefaultTableCellRenderer();
+        tableCellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        TableColumn col = table.getColumnModel().getColumn(0);
+        col.setCellRenderer(tableCellRenderer);
+        TableColumn col2 = table.getColumnModel().getColumn(1);
+        col2.setCellRenderer(tableCellRenderer);
+
         sp = new JScrollPane(table);
 
 
@@ -138,7 +155,7 @@ public class RespondentBoundary extends JPanel{
         timerBar.setBounds(625, 21, 150, 40);
         timerBar.setStringPainted(true);
 
-        sp.setBounds(640,220,160,90);
+        sp.setBounds(640, 230, 170, 115);
 
         answerField.setBounds(540,540,200,30);
 
@@ -154,7 +171,7 @@ public class RespondentBoundary extends JPanel{
         /*パネルに追加*****************/
         this.add(ac);
         this.add(messageLabel_1);
-        this.add(timerLabel);
+        //this.add(timerLabel);
         this.add(sp);
         this.add(answerField);
         this.add(answerButton);

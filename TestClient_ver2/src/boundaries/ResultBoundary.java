@@ -10,7 +10,10 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
@@ -53,7 +56,7 @@ class ResultBoundary extends JPanel{
     		{"player","×","0","60"},
     		{"player","○","10","55"},
     		{"player","×","5","20"}};
-    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,14);
+    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,24);
 
     /**
      * コンストラクタ
@@ -86,10 +89,28 @@ class ResultBoundary extends JPanel{
         //table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
         TableColumnModel colModel=table.getColumnModel();
-        colModel.getColumn(0).setPreferredWidth(380);
+        colModel.getColumn(0).setPreferredWidth(420);
         colModel.getColumn(1).setPreferredWidth(60);
-        colModel.getColumn(2).setPreferredWidth(150);
-        colModel.getColumn(3).setPreferredWidth(150);
+        colModel.getColumn(2).setPreferredWidth(160);
+        colModel.getColumn(3).setPreferredWidth(160);
+
+        JTableHeader jheader = table.getTableHeader();
+        jheader.setReorderingAllowed(false);
+
+        table.setEnabled(false);
+
+        table.setRowHeight(32);
+
+        DefaultTableCellRenderer tableCellRenderer = new DefaultTableCellRenderer();
+        tableCellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        TableColumn col = table.getColumnModel().getColumn(0);
+        col.setCellRenderer(tableCellRenderer);
+        TableColumn col2 = table.getColumnModel().getColumn(1);
+        col2.setCellRenderer(tableCellRenderer);
+        TableColumn col3 = table.getColumnModel().getColumn(2);
+        col3.setCellRenderer(tableCellRenderer);
+        TableColumn col4 = table.getColumnModel().getColumn(3);
+        col4.setCellRenderer(tableCellRenderer);
 
 
         sp = new JScrollPane(table);
@@ -130,7 +151,7 @@ class ResultBoundary extends JPanel{
         timerBar.setStringPainted(true);
 
 
-        sp.setBounds(230, 320, 360, 90);
+        sp.setBounds(170, 320, 500, 151);
 
         /***************************************************/
 
@@ -140,7 +161,7 @@ class ResultBoundary extends JPanel{
         this.add(messageLabel);
         this.add(themeLabel);
         this.add(messageLabel_2);
-        this.add(timerLabel);
+        //this.add(timerLabel);
         this.add(timerBar);
         this.add(sp);
         /************************/

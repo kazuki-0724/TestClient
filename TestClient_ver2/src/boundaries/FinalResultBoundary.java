@@ -11,7 +11,10 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
@@ -49,7 +52,7 @@ public class FinalResultBoundary extends JPanel{
     final String PLAYER4 = "4th playerLabel   xxpt";
     final String TOLOBBY = "ロビーへ戻る";
     final String FONT_NAME = "MS ゴシック";
-    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,12);
+    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,36);
     final String[] COLUMN_NAMES = {"Rank","ID","Total Point"};
     final String[][] member = {
 			{"1st","blank","blank"},
@@ -98,8 +101,23 @@ public class FinalResultBoundary extends JPanel{
         colModel.getColumn(1).setPreferredWidth(220);
         colModel.getColumn(2).setPreferredWidth(150);
 
-        sp = new JScrollPane(table);
+        JTableHeader jheader = table.getTableHeader();
+        jheader.setReorderingAllowed(false);
 
+        table.setEnabled(false);
+
+        table.setRowHeight(48);
+
+        DefaultTableCellRenderer tableCellRenderer = new DefaultTableCellRenderer();
+        tableCellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        TableColumn col = table.getColumnModel().getColumn(0);
+        col.setCellRenderer(tableCellRenderer);
+        TableColumn col2 = table.getColumnModel().getColumn(1);
+        col2.setCellRenderer(tableCellRenderer);
+        TableColumn col3 = table.getColumnModel().getColumn(2);
+        col3.setCellRenderer(tableCellRenderer);
+
+        sp = new JScrollPane(table);
 
         toLobbyButton = new JButton(TOLOBBY);
         toLobbyButton.setActionCommand("BackToLobby");
@@ -110,29 +128,26 @@ public class FinalResultBoundary extends JPanel{
         Font winnerFont = new Font(FONT_NAME, Font.BOLD,36);
         Font messageFont = new Font(FONT_NAME, Font.BOLD ,45);
         Font messageFont2 = new Font(FONT_NAME, Font.BOLD,16);
-        Font timerFont = new Font(FONT_NAME, Font.BOLD,18);
+
 
         /*レイアウト***************************************/
         this.setLayout(null);
 
-        titleLabel.setBounds(250,80,330,52);
+        titleLabel.setBounds(245,80,350,52);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
-        winnerLabel.setBounds(275,190,275,40);
+        winnerLabel.setBounds(240,180,360,40);
+        winnerLabel.setHorizontalAlignment(JLabel.CENTER);
         winnerLabel.setFont(winnerFont);
 
-        messageLabel.setBounds(360,260,100,50);
+        messageLabel.setBounds(360,250,120,50);
+        messageLabel.setHorizontalAlignment(JLabel.CENTER);
         messageLabel.setFont(messageFont);
 
-        sp.setBounds(220,320,390,100);
+        sp.setBounds(120,300,600,212);
 
         toLobbyButton.setBounds(675,535,120,35);
-
-        timerLabel.setBounds(605,60,30,30);
-        timerLabel.setFont(timerFont);
-
-        timerBar.setBounds(630, 59, 150, 30);
-        timerBar.setStringPainted(true);
 
         /***************************************************/
 
@@ -143,8 +158,6 @@ public class FinalResultBoundary extends JPanel{
         this.add(messageLabel);
         this.add(toLobbyButton);
         this.add(sp);
-        this.add(timerLabel);
-        this.add(timerBar);
 
 
         /************************/

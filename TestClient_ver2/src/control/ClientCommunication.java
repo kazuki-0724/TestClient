@@ -35,7 +35,7 @@ public class ClientCommunication{
 
 	//実機運用ではここのlocalhostをサーバのIPアドレスにする
 	//IPconfigで調べる
-	private final String CLM_URI = "ws://172.30.26.161:8080/app/clm";
+	private final String CLM_URI = "ws://172.30.26.64:8080/app/clm";
     private final String AP_URI = "ws://172.30.26.161:8081/app/ap";
 
     private final String REQUEST = "REQUEST";

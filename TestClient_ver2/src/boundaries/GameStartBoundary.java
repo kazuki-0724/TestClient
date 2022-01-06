@@ -10,7 +10,10 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import entity.PlayerMessage;
@@ -43,7 +46,7 @@ public class GameStartBoundary extends JPanel{
     final String TIMER = "timer";
     final String PLAYER = "・playerLabel   xx%";
     final String FONT_NAME = "MS ゴシック";
-    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,15);
+    Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,38);
     final String[] COLUMN_NAMES = {"ID","RATE"};
     final String[][] member = {
 			{"aaaa","100%"},
@@ -79,10 +82,11 @@ public class GameStartBoundary extends JPanel{
         /*レイアウト***************************************/
         this.setLayout(null);
 
-        messageLabel_1.setBounds(180,160,430,45);
+        messageLabel_1.setBounds(180,160,480,45);
+        messageLabel_1.setHorizontalAlignment(JLabel.CENTER);
         messageLabel_1.setFont(titleFont);
 
-        messageLabel_2.setBounds(600,30,200,30);
+        messageLabel_2.setBounds(610,30,200,30);
         messageLabel_2.setFont(messageFont);
 
         timerLabel.setBounds(605,60,30,30);
@@ -101,12 +105,26 @@ public class GameStartBoundary extends JPanel{
 
         table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
         TableColumnModel colModel=table.getColumnModel();
-        colModel.getColumn(0).setPreferredWidth(200);
-        colModel.getColumn(1).setPreferredWidth(60);
+        colModel.getColumn(0).setPreferredWidth(320);
+        colModel.getColumn(1).setPreferredWidth(100);
+
+        JTableHeader jheader = table.getTableHeader();
+        jheader.setReorderingAllowed(false);// テーブルの列移動を不許可にする。
+
+        table.setEnabled(false);
+
+        table.setRowHeight(42);
+
+        DefaultTableCellRenderer tableCellRenderer = new DefaultTableCellRenderer();
+        tableCellRenderer.setHorizontalAlignment(JLabel.CENTER);
+        TableColumn col = table.getColumnModel().getColumn(0);
+        col.setCellRenderer(tableCellRenderer);
+        TableColumn col2 = table.getColumnModel().getColumn(1);
+        col2.setCellRenderer(tableCellRenderer);
 
         sp = new JScrollPane(table);
 
-        sp.setBounds(280, 280, 200, 90);
+        sp.setBounds(210, 280, 420, 191);
 
 
         /***************************************************/
@@ -115,7 +133,7 @@ public class GameStartBoundary extends JPanel{
         /*パネルに追加***********/
         this.add(messageLabel_1);
         this.add(messageLabel_2);
-        this.add(timerLabel);
+        //this.add(timerLabel);
         this.add(sp);
         this.add(timerBar);
 

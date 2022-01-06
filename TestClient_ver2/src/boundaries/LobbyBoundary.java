@@ -119,7 +119,7 @@ public class LobbyBoundary extends JPanel{
 
         table.setEnabled(false);
 
-        table.setRowHeight(25);
+        table.setRowHeight(22);
 
         DefaultTableCellRenderer tableCellRenderer = new DefaultTableCellRenderer();
         tableCellRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -127,6 +127,8 @@ public class LobbyBoundary extends JPanel{
         col.setCellRenderer(tableCellRenderer);
         TableColumn col2 = table.getColumnModel().getColumn(1);
         col2.setCellRenderer(tableCellRenderer);
+        TableColumn col3 = table.getColumnModel().getColumn(2);
+        col3.setCellRenderer(tableCellRenderer);
 
         sp = new JScrollPane(table);
 
@@ -180,7 +182,7 @@ public class LobbyBoundary extends JPanel{
 
         logoutButton.setBounds(700, 50, 110, 30);
 
-        sp.setBounds(300, 355, 240, 150);//102
+        sp.setBounds(300, 348, 240, 133);//102
 
         /***************************************************/
 
@@ -275,7 +277,11 @@ public class LobbyBoundary extends JPanel{
      * @param games
      */
     public void setRateLabel(int win, int lose, int games) {
-        this.rateLabel.setText(String.format("Rate : %d / %d / %d",win,lose,games ));
+    	float temp = win;
+    	float temp2 = games;
+
+    	float rate = (temp / temp2) * 100;
+        this.rateLabel.setText(String.format("Rate : %f",rate));
     }
 
     /**

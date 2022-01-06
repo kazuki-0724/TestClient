@@ -67,7 +67,7 @@ class ConfirmationBoundary extends JPanel{
         messageLabel.setBounds(150,240,530,45);
         messageLabel.setFont(titleFont);
 
-        noticeLabel.setBounds(40,40,260,36);
+        noticeLabel.setBounds(40,40,248,36);
         noticeLabel.setBorder(border);
         noticeLabel.setFont(messageFont);
 
@@ -88,7 +88,7 @@ class ConfirmationBoundary extends JPanel{
         this.add(messageLabel);
         this.add(noticeLabel);
         this.add(themeLabel);
-        this.add(timerLabel);
+        //this.add(timerLabel);
         this.add(timerBar);
         /************************/
 
