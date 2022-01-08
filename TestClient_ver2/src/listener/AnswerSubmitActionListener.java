@@ -48,7 +48,8 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 			System.out.println("[ AnswerSubmitActionListener ] actionPerFormed() : Log your answer is correct (" + answer + ")");
 			//時刻じゃなくて正解した旨を送信
 			boundary.getControl().communicate().sendData(ProcessID.ANSWER, "correct");
-			this.rb.getAnswerField().setText("");
+			this.rb.getAnswerField().setText("正解");
+			this.rb.getAnswerField().setEditable(false);
 			this.rb.getAnswerButton().setEnabled(false);
 
 		}else {
