@@ -195,6 +195,7 @@ public class Boundary extends JFrame{
             case RespondentBoundary:
             	updatePanel(BoundaryID.RespondentBoundary, "");
                 respondentBoundary.setVisible(true);
+                respondentBoundary.getAnswerButton().setEnabled(true);
                 //this.setTitle("Answer");
                 currentPanel = respondentBoundary;
                 break;

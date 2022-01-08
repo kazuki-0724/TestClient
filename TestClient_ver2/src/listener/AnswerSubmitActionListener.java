@@ -49,6 +49,7 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 			//時刻じゃなくて正解した旨を送信
 			boundary.getControl().communicate().sendData(ProcessID.ANSWER, "correct");
 			this.rb.getAnswerField().setText("");
+			this.rb.getAnswerButton().setEnabled(false);
 
 		}else {
 			//間違っている場合

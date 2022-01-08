@@ -266,6 +266,10 @@ public class RespondentBoundary extends JPanel{
 	}
 
 
+    public JButton getAnswerButton() {
+    	return answerButton;
+    }
+
 
     public void setTable(List<PlayerMessage> list ) {
 
@@ -279,6 +283,8 @@ public class RespondentBoundary extends JPanel{
     	}
 
     }
+
+
 
 
     /**
