@@ -47,10 +47,11 @@ public class SwitchActionListener extends BoundaryActionListener{
 	 */
 	public void actionPerformed(ActionEvent e){
 
-		System.out.println("[Log] switch Button Clicked");
+
+		System.out.println("[ SwitchActionListener ] actionPerFormed() : Log SwitchButton Clicked");
 		String type = e.getActionCommand();
 
-		System.out.println("[Log] "+type);
+		System.out.println("[ LogoutActionListener ] actionPerFormed() : Log Button type = "+ type);
 
 		if(type.equals("goLogin")) {
 			boundary.changePanel(BoundaryID.AccountAuthentificationBoudary);
@@ -59,7 +60,7 @@ public class SwitchActionListener extends BoundaryActionListener{
 			boundary.changePanel(BoundaryID.AccountRegistrationBoundary);
 
 		}else {
-			System.out.println("[Error] Switch action listener error");
+			System.out.println("[ LogoutActionListener ] actionPerFormed() : Eror Button type error");
 		}
 
 

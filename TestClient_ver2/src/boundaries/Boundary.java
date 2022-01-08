@@ -153,63 +153,63 @@ public class Boundary extends JFrame{
             case AccountAuthentificationBoudary:
             	updatePanel(BoundaryID.AccountAuthentificationBoudary, "");
                 accountAuthentificationBoundary.setVisible(true);
-                this.setTitle("Login");
+                //this.setTitle("Login");
                 currentPanel = accountAuthentificationBoundary;
                 break;
 
             case AccountRegistrationBoundary:
             	updatePanel(BoundaryID.AccountRegistrationBoundary, "");
                 accountRegistrationBoundary.setVisible(true);
-                this.setTitle("new Account");
+                //this.setTitle("new Account");
                 currentPanel = accountRegistrationBoundary;
                 break;
 
             case LobbyBoundary:
             	updatePanel(BoundaryID.LobbyBoundary, "");
                 lobbyBoundary.setVisible(true);
-                this.setTitle("Lobby");
+                //this.setTitle("Lobby");
                 currentPanel = lobbyBoundary;
                 break;
 
             case WaitingTimeBoundary:
                 updatePanel(BoundaryID.WaitingTimeBoundary, "");
             	waitingTimeBoundary.setVisible(true);
-                this.setTitle("Waiting");
+                //this.setTitle("Waiting");
                 currentPanel = waitingTimeBoundary;
                 break;
 
             case ConfirmationBoundary:
             	updatePanel(BoundaryID.ConfirmationBoundary, "");
                 confirmationBoundary.setVisible(true);
-                this.setTitle("Confirmation");
+                //this.setTitle("Confirmation");
                 currentPanel = confirmationBoundary;
                 break;
 
             case PainterBoundary:
             	updatePanel(BoundaryID.PainterBoundary, "");
                 painterBoundary.setVisible(true);
-                this.setTitle("Paint");
+                //this.setTitle("Paint");
                 currentPanel = painterBoundary;
                 break;
 
             case RespondentBoundary:
             	updatePanel(BoundaryID.RespondentBoundary, "");
                 respondentBoundary.setVisible(true);
-                this.setTitle("Answer");
+                //this.setTitle("Answer");
                 currentPanel = respondentBoundary;
                 break;
 
             case ResultBoundary:
             	updatePanel(BoundaryID.ResultBoundary, "");
                 resultBoundary.setVisible(true);
-                this.setTitle("Result");
+                //this.setTitle("Result");
                 currentPanel = resultBoundary;
                 break;
 
             case FinalResultBoundary:
             	updatePanel(BoundaryID.FinalResultBoundary, "");
             	finalResultBoundary.setVisible(true);
-            	this.setTitle("FinalResult");
+            	//this.setTitle("FinalResult");
             	currentPanel = finalResultBoundary;
             	break;
 
@@ -217,13 +217,13 @@ public class Boundary extends JFrame{
             case GameStartBoundary:
             	updatePanel(BoundaryID.GameStartBoundary, "");
             	gameStartBoundary.setVisible(true);
-            	this.setTitle("PlayerList");
+            	//this.setTitle("PlayerList");
             	currentPanel = gameStartBoundary;
             	break;
 
 
             default:
-                System.out.println("error");
+                System.out.println("[ Boundary ] changePanel() : Error BoundaryID type eror");
                 break;
         }
 
@@ -288,7 +288,7 @@ public class Boundary extends JFrame{
 
             //(text使う)受け手側の画面
             case RespondentBoundary:
-            	System.out.println("update");
+            	System.out.println("[ Boundary ] updatePanel() : Log call drawStroke() text = "+text);
             	respondentBoundary.drawStroke(text);
                 break;
 
@@ -312,7 +312,7 @@ public class Boundary extends JFrame{
             	break;
 
             default:
-                System.out.println("[Error] Boundary.updatePanel()");
+                System.out.println("[ Boundary ] updatePanel() : Error BoundaryID type eror");
                 break;
         }
 
@@ -363,7 +363,8 @@ public class Boundary extends JFrame{
 
 
     		default:
-    			System.out.println("[Error] Boundary updateCountDown type Error");
+    			System.out.println("[ Boundary ] updateCountDown() : Error BoundaryID type eror");
+    			break;
 
     	}
 
@@ -410,7 +411,8 @@ public class Boundary extends JFrame{
 
 
     		default:
-    			System.out.println("[Error] Boundary updateCountDown type Error");
+    			System.out.println("[ Boundary ] setTimerBar() : Error BoundaryID type eror");
+    			break;
 
     	}
 

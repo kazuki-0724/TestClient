@@ -60,12 +60,12 @@ public class ToLobbyActionListener extends BoundaryActionListener{
         //どっちのバウンダリーのボタン検知か区別
         if(str.equals("LOGIN")) {
 
-        	System.out.println("[Log] Login Button Clicked");
+        	System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Log LoginButton Clicked");
 
             userId = this.aab.getIdField().getText();
             userPass = new String( this.aab.getPassFiled().getPassword() );
 
-            System.out.println(String.format("[Log] Login id = %s / pass = %s",userId,userPass));
+            System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Log id = " + userId +" pass = " + userPass );
 
             //init Field
             this.aab.getIdField().setText("");
@@ -76,7 +76,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
             if(userId.equals("") || userPass.equals("")) {
 
             	boundary.updatePanel(BoundaryID.AccountAuthentificationBoudary, "ID/パスワードを入力してください");
-            	System.out.println("[Error] not enterted");
+            	System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Error Field is blank");
 
             }else{
 
@@ -89,13 +89,12 @@ public class ToLobbyActionListener extends BoundaryActionListener{
 
         }else if(str.equals("REGISTRATION")) {
 
-        	System.out.println("[Log] Login Button Clicked");
+        	System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Log RegistButton Clicked");
 
             userId = this.arb.getIdField().getText();
             userPass = new String( this.arb.getPassFiled().getPassword() );
 
-            System.out.println(String.format("[Log] Resist id = %s / pass = %s",userId,userPass));
-
+            System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Log id = " + userId +" pass = " + userPass );
 
             //init Field
             this.arb.getIdField().setText("");
@@ -116,7 +115,8 @@ public class ToLobbyActionListener extends BoundaryActionListener{
 
             	if( !checkCharacters(userId) || !checkCharacters(userPass)) {
             		boundary.updatePanel(BoundaryID.AccountRegistrationBoundary, "禁止文字が含まれています「_」「 #」");
-                	System.out.println("[Error] forbidden character");
+
+                	System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Error Forbidden Characters");
                 	return;
             	}
 
@@ -128,7 +128,8 @@ public class ToLobbyActionListener extends BoundaryActionListener{
 
         }else if(str.equals("BackToLobby")) {
 
-        	System.out.println("[Log] BackToLobby Button Clicked");
+
+        	System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Log BackToLobbyButton Clicked");
 
          	//明示的に呼ばないとロビーに関する情報がもらえない(MAKELOBBYとかかも)
             boundary.getControl().communicate().sendData(ProcessID.MAKELOBBY, boundary.getControl().getMyPlayer().getId());
@@ -137,7 +138,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
 
 
         }else {
-        	System.out.println("[Error] aaListener cannot resolve action command");
+        	System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Error type error");
         }
 
 
@@ -150,7 +151,6 @@ public class ToLobbyActionListener extends BoundaryActionListener{
 
     	for(int i=0;i<FORBIDDEN_CHARACTERS.length;i++) {
     		if(text.indexOf(FORBIDDEN_CHARACTERS[i]) != -1 ) {
-    			System.out.println("Forbidden characters include");
     			return false;
     		}
     	}

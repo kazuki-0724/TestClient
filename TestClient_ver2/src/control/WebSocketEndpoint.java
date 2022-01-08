@@ -30,14 +30,16 @@ public class WebSocketEndpoint {
 		currentSession = session;
 
 		/* セッション確立時の処理 */
-		System.out.println("WebSocketセッション確立");
+		//System.out.println("WebSocketセッション確立");
+		System.out.println("[ WebSocketEndpoint ] onOpen() : Log Connection established");
 	}
 
 	@OnMessage
 	public void onMessage(String message) throws IOException {
 
 		/* メッセージ受信時の処理 */
-		System.out.println("WebSocket受信："+message);
+		//System.out.println("WebSocket受信："+message);
+		System.out.println("[ WebSocketEndpoint ] onMessage() : Log message = "+message);
 		cscc.receivedData(message);
 
 	}
@@ -45,7 +47,7 @@ public class WebSocketEndpoint {
 	@OnError
 	public void onError(Throwable th) {
 		/* エラー発生時の処理 */
-		System.out.println("WebSocketエラー：" + th.getMessage());
+		System.out.println("[ WebSocketEndpoint ] onError() : Error "+ th.getMessage());
 	}
 
 
@@ -53,8 +55,8 @@ public class WebSocketEndpoint {
 	@OnClose
 	public void onClose(Session session) {
 		/* セッション解放時の処理 */
-		System.out.println("["+ session.getId()+ "]"+"disconnected");
-		System.out.println("[Log] disconnect");
+		System.out.println("[ WebSocketEndpoint ] onClose() : Log session = "+ session.getId() + "disconnected");
+
 	}
 
 

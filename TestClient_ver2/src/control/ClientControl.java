@@ -103,7 +103,7 @@ public class ClientControl{
 		timer.schedule(timerTask, 0l, 1000l);
 
 
-		System.out.println("[Log runTimer()] Timer Start");
+		System.out.println("[ ClientControl ] runTimer() : Log タイマー開始");
 
 	}
 
@@ -118,8 +118,10 @@ public class ClientControl{
 		if(timer != null) {
 			timer.cancel();
 			timer = null;
+			System.out.println("[ ClientControl ] stopTimer() : Log タイマー停止");
+
 		}else {
-			System.out.println("[Error stopTimer()] timer is not exsit");
+			System.out.println("[ ClientControl ] stopTimer() : Error 起動しているタイマーが存在しない");
 		}
 	}
 
@@ -199,12 +201,12 @@ public class ClientControl{
 
 		if(data.contains("FINISHGAME")) {
 			//REQUEST#FINISHGAMEはsplitErrorになってしまうから
-			System.out.println("[Log handleData()] FINISHGAME received");
+			System.out.println("[ ClientControl ] handleData() : Log FINISHGAME受信");
 			secDataFlag = "FINISHGAME";
 
 		}else if(data.contains("TIMEOUT")) {
 			//REQUEST#FINISHGAMEはsplitErrorになってしまうから
-			System.out.println("[Log handleData()] TIMEOUT received");
+			System.out.println("[ ClientControl ] handleData() : Log TIMEOUT受信");
 			secDataFlag = "TIMEOUT";
 
 		}else {
@@ -218,7 +220,7 @@ public class ClientControl{
 
 				//スプリットエラーが出た場合の処理
 				e.printStackTrace();
-				System.out.println("[Error handleData()] cannot split by 「_」");
+				System.out.println("[ ClientControl ] handleData() : Error スプリットエラー");
 
 				//(拡張用)スプリットエラーが出たからもう一回遅れの指示を送るかも
 				//communicate().sendData(null, data);
@@ -237,7 +239,7 @@ public class ClientControl{
 
     		//第1ヘッダのswitch
     		case "REPLY":
-    			System.out.println("[Log handleData() case REPLY] data "+ data);
+    			System.out.println("[ ClientControl ] handleData() : Log REPLY case");
 
 
     			//第2ヘッダのswitch
@@ -319,17 +321,28 @@ public class ClientControl{
 
     				case "CONNECTCLM":
     					//接続ok。本当は後ろにOKが続いてる
-    					System.out.println("[Log ] Connect CLM complete");
+    					System.out.println("[ ClientControl ] handleData() : Log Connect CLM complete");
+
     					break;
 
     				case "CONNECTAP":
     					//接続ok。本当は後ろにOKが続いてる
-    					System.out.println("[Log ] Connect AP complete");
+    					System.out.println("[ ClientControl ] handleData() : Log Connect AP complete");
+
+    					break;
+
+    				case "DISCONNECT_CLM":
+    					communicate().disconnect(CLM);
+    					break;
+
+    				case "DISCONNECT_AP":
+    					communicate().disconnect(AP);
+
     					break;
 
 
     				default:
-        				System.out.println("[Error handleData()] secDataFlag is blank");
+        				System.out.println("[ ClientControl ] handleData() : Error REPLY/2ndDataFlag type Error");
         				break;
 
 	    			}
@@ -353,8 +366,9 @@ public class ClientControl{
 
 
     		case "REQUEST":
-    			System.out.println("[Log handleData() case REQUEST] data "+ data);
+    			System.out.println("[ ClientControl ] handleData() : Log REQUEST case");
 
+    			int limitTime = 0;
 
     			switch(secDataFlag) {
 
@@ -368,8 +382,11 @@ public class ClientControl{
 
     				case "STARTGAME":
 
+    					//REQUEST#STARTGAME_(制限時間)_JSON
+    					limitTime = Integer.parseInt(dates[1]);
+
 	    				//JSONからの復元
-    					Message message = gson.fromJson(dates[1], Message.class);
+    					Message message = gson.fromJson(dates[2], Message.class);
 
     					//gamePlayerListの取り出し、rommIDの取り出しとgameInfoへのセット
     					List<PlayerMessage> gamePlayerList = message.getGamePlayerList();
@@ -385,10 +402,10 @@ public class ClientControl{
 						boundary.changePanel(BoundaryID.GameStartBoundary);
 
 						//タイマバーの幅を調整
-						boundary.setTimerBar(BoundaryID.GameStartBoundary, 10);
+						boundary.setTimerBar(BoundaryID.GameStartBoundary, limitTime);
 
 						//タイマーの起動
-						runTimer(BoundaryID.GameStartBoundary,10);
+						runTimer(BoundaryID.GameStartBoundary,limitTime);
 
 						break;
 
@@ -396,9 +413,13 @@ public class ClientControl{
 
     				case "STARTTURN":
 
+    					//REQUEST#STARTTURN_(制限時間)_(出題者プレイヤーNum)_(お題)
+
+    					limitTime = Integer.parseInt(dates[1]);
+
     					//出題者プレイヤーのゲーム内番号とテーマの取り出し
-    					int painterPlayerNum = Integer.parseInt(dates[1]);
-    					String theme = dates[2];
+    					int painterPlayerNum = Integer.parseInt(dates[2]);
+    					String theme = dates[3];
 
 
     					//それらのgameInfoへのセット
@@ -409,14 +430,14 @@ public class ClientControl{
     					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
     						//自分が出題者だった場合
     						boundary.changePanel(BoundaryID.ConfirmationBoundary);
-    						boundary.setTimerBar(BoundaryID.ConfirmationBoundary, 10);
-    						runTimer(BoundaryID.ConfirmationBoundary,10);
+    						boundary.setTimerBar(BoundaryID.ConfirmationBoundary, limitTime);
+    						runTimer(BoundaryID.ConfirmationBoundary,limitTime);
 
     					}else {
     						//自分が解答者だった場合
     						boundary.changePanel(BoundaryID.WaitingTimeBoundary);
-    						boundary.setTimerBar(BoundaryID.WaitingTimeBoundary, 10);
-    						runTimer(BoundaryID.WaitingTimeBoundary,10);
+    						boundary.setTimerBar(BoundaryID.WaitingTimeBoundary, limitTime);
+    						runTimer(BoundaryID.WaitingTimeBoundary,limitTime);
     					}
 
     					communicate().sendData(ProcessID.STARTTURN_OK, "blank");
@@ -427,7 +448,7 @@ public class ClientControl{
     				case "QTIMESTART":
 
     					//制限時間の取り出し
-    					int limitTime = Integer.parseInt(dates[1]);
+    					limitTime = Integer.parseInt(dates[1]);
 
     					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
     						//自分が出題者だった場合
@@ -447,6 +468,8 @@ public class ClientControl{
 
     				case "ANSWERER":
 
+    					//REQUEST#ANSWERER_(プレイヤーNum)
+
     					/*******************************************************/
     					//正解者のプレイヤーNum
     					int correctPlayerNum = Integer.parseInt(dates[1]);
@@ -454,6 +477,7 @@ public class ClientControl{
     					//correctPlayerNumを使ってPaintrer/RespondenrBoundaryの表示を変える
     					boundary.setCorrectPlayer(correctPlayerNum);
 
+    					communicate().sendData(ProcessID.ANSWER_OK, "blank");
 
     					/*****************************************************/
 
@@ -462,8 +486,13 @@ public class ClientControl{
 
     				case "TURNRESULT":
 
+    					//REQUEST#TURNRESULT_(制限時間)_JSON
+
+    					//制限時間の取り出し
+    					limitTime = Integer.parseInt(dates[1]);
+
     					//JSONからMessageに復元
-    					Message result = gson.fromJson(dates[1], Message.class);
+    					Message result = gson.fromJson(dates[2], Message.class);
 
     					//結果が入ったプレイヤーリストの取り出し
     					List<PlayerMessage> resultGamePlayerList = result.getGamePlayerList();
@@ -471,8 +500,10 @@ public class ClientControl{
 
 
     					boundary.changePanel(BoundaryID.ResultBoundary);
-    					boundary.setTimerBar(BoundaryID.ResultBoundary, 10);
-    					runTimer(BoundaryID.ResultBoundary,10);
+    					boundary.setTimerBar(BoundaryID.ResultBoundary, limitTime);
+    					runTimer(BoundaryID.ResultBoundary,limitTime);
+
+    					communicate().sendData(ProcessID.TURNRESULT_OK,"blank");
     					break;
 
 
@@ -481,18 +512,16 @@ public class ClientControl{
     					//finalResultへの遷移
     					boundary.changePanel(BoundaryID.FinalResultBoundary);
     					//boundary.setTimerBar(BoundaryID.FinalResultBoundary, 60);
-    					runTimer(BoundaryID.FinalResultBoundary,10);
+
+    					//裏で動かすタイマー60秒
+    					runTimer(BoundaryID.FinalResultBoundary,60);
     					communicate().sendData(ProcessID.FINISHGAME_OK, secDataFlag);
 
 
 
     					/*非常に怪しい*******************/
-    					communicate().disconnect(AP);
+    					//communicate().disconnect(AP);
     					/********************************/
-
-
-
-
 
     					break;
 
@@ -500,17 +529,23 @@ public class ClientControl{
     				case "TIMEOUT":
     					//ログアウト処理を入れる
     					//ログアウト処理
-						System.out.println("[Log] LOGOUT");
+						System.out.println("[ ClientControl ] handleData() : Log REQUEST/TIMEOUT case");
 						getMyPlayer().init();
 						getGameInfo().init();
+
+						communicate().sendData(ProcessID.TIMEOUT_OK, "blank");
 						boundary.changePanel(BoundaryID.AccountAuthentificationBoudary);
 
     					break;
 
 
 
+
+
+
+
     				default:
-        				System.out.println("[Error handleData()] secDataFlag is blank");
+        				System.out.println("[ ClientControl ] handleData() : Error REQUEST/2ndDataFlag type Error");
         				break;
     			}
 
@@ -518,7 +553,7 @@ public class ClientControl{
     			break;
 
     		default:
-    			System.out.println("[Log handleData()] dataFlag type error");
+    			System.out.println("[ ClientControl ] handleData() : Error dataFlag type Error");
     			break;
 
 
@@ -573,7 +608,7 @@ public class ClientControl{
 				//最終結果画面にいるときは裏で60秒カウントする
 				if(type == BoundaryID.FinalResultBoundary) {
 
-					control.communicate().sendData(ProcessID.MAKELOBBY, id);
+					control.communicate().sendData(ProcessID.MAKELOBBY, getMyPlayer().getId());
 				}
 
 			}

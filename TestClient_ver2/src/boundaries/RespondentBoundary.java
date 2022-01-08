@@ -230,11 +230,11 @@ public class RespondentBoundary extends JPanel{
      */
     public void drawStroke(String stroke) {
 
-    	System.out.println("[Log RespondentB drawStroke()] "+stroke);
+    	System.out.println("[ RespondentBoundary ] drawStroke() : Log stroke = " + stroke);
 
     	if(stroke.equals("CLEAR")) {
 
-    		System.out.println("[Log] respondent/drawStroke() CLEAR");
+    		System.out.println("[ RespondentBoundary ] drawStroke() : Log");
     		ac.clear();
 
     	}else {
@@ -250,7 +250,6 @@ public class RespondentBoundary extends JPanel{
         	e_y = Integer.parseInt(tmpString[4]);
 
 
-        	System.out.println("[Log] respondent/drawStroke()");
         	ac.setLine(type,s_x,s_y,e_x,e_y);
     	}
 

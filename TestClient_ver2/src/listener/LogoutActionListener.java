@@ -16,38 +16,38 @@ import entity.ProcessID;
  *
  */
 public class LogoutActionListener extends BoundaryActionListener{
-    
-	
+
+
 	//private ClientControl control;
     private Boundary boundary;
     LobbyBoundary lobbyBoundary;
-    
-    
+
+
     /**
      * コンストラクタ
      * @param control
      * @param boundary
      */
     public LogoutActionListener(LobbyBoundary lobbyBoundary, Boundary boundary) {
-    	
+
     	//this.control = control;
     	this.boundary = boundary;
     	this.lobbyBoundary = lobbyBoundary;
-    	
+
     }
-    
+
     /**
 	 * イベント処理
 	 */
     public void actionPerformed(ActionEvent e){
-        
+
         String str = e.getActionCommand();
-        System.out.println("[Log] LogOut Button Clicked");
-        
+		System.out.println("[ LogoutActionListener ] actionPerFormed() : Log LogoutButton Clicked");
+
         //サーバ側にログアウトを通知
         boundary.getControl().communicate().sendData(ProcessID.LOGOUT,"blank");
-        
+
     }
 
-    
+
 }

@@ -43,7 +43,7 @@ public class StartGameActionListener extends BoundaryActionListener{
     public void actionPerformed(ActionEvent e){
 
         String str = e.getActionCommand();
-        System.out.println("[Log] Start Game Button Clicked");
+		System.out.println("[ StartGameActionListener ] actionPerFormed() : Log StartGameButton Clicked");
 
 
         //サーバ側にマッチメイクに参加することを通知

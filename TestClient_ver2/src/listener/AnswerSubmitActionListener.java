@@ -36,17 +36,16 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 	 */
 	public void actionPerformed(ActionEvent e){
 
-		System.out.println("[Log] Answer Submit Button Clicked");
+
 
 		String answer = this.rb.getAnswerField().getText();
-		System.out.println("[Log] answer is "+answer);
+
 
 
 		if( checkAnswer(answer) ) {
 			//正しい場合
 
-			//答えが一致していた場合、実際に正解時刻を送信する
-			System.out.println("[Log] your answer is correct");
+			System.out.println("[ AnswerSubmitActionListener ] actionPerFormed() : Log your answer is correct (" + answer + ")");
 			//時刻じゃなくて正解した旨を送信
 			boundary.getControl().communicate().sendData(ProcessID.ANSWER, "correct");
 			this.rb.getAnswerField().setText("");
@@ -54,7 +53,8 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 		}else {
 			//間違っている場合
 			//実際に一致していなかった場合
-			System.out.println("[Log] your answer is incorrect");
+
+			System.out.println("[ AnswerSubmitActionListener ] actionPerFormed() : Log your answer is incorrect (" + answer + ")");
 		}
 
 

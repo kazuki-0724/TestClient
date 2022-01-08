@@ -68,13 +68,13 @@ public class ClientCommunication{
     	String communicationFormat = handleSendData(processID,data);
 
 
-    	System.out.println("[Log] sendData()" + communicationFormat);
+    	System.out.println("[ ClientCommunication ] sendData() : Log communicationFormat = " + communicationFormat);
 
     	if(currentSession.isOpen()) {
     		webSocketEndpoint.sendMessage(currentSession,communicationFormat);
 
     	}else {
-    		System.out.println("[Log] currentSession is closed");
+    		System.out.println("[ ClientCommunication ] sendData() : Error セッションが閉じている");
     	}
     }
 
@@ -93,16 +93,17 @@ public class ClientCommunication{
 
 
     	//System.out.println("[Log handleSendData() ] data = "+ data);
+    	 System.out.println("[ ClientCommunication ] handleSendData() : Log data = "+ data);
 
     	switch(processID) {
 
     		//サーバ接続時
-    		case CONNECTCLM:
-    			communicationFormat = encode(CONNECT, ProcessID.CONNECTCLM.toString());
+    		case CLTOCLM:
+    			communicationFormat = encode(CONNECT, ProcessID.CLTOAP.toString());
     			break;
 
-    		case CONNECTAP:
-    			communicationFormat = encode(CONNECT, ProcessID.CONNECTAP.toString(),control.getMyPlayer().getId());
+    		case CLTOAP:
+    			communicationFormat = encode(CONNECT, ProcessID.CLTOAP.toString(),control.getMyPlayer().getId());
     			break;
 
     		case CONNECTAP_OK:
@@ -166,7 +167,7 @@ public class ClientCommunication{
 	    		break;
 
 	    	case ANSWER:
-	    		communicationFormat = encode(REQUEST, "ANSWERER",control.getGameInfo().getRoomID());
+	    		communicationFormat = encode(REQUEST, "ANSWERE");
 	    		break;
 
 	    	case ANSWER_OK:
@@ -190,6 +191,7 @@ public class ClientCommunication{
 	    		break;
 
 	    	default:
+	    		System.out.println("[ ClientCommunication ] handleSendData() : Error ProcessIDエラー");
 	    		break;
 
     	}
@@ -209,7 +211,7 @@ public class ClientCommunication{
      */
     public void receivedData(String message){
 
-    	System.out.println("[Log] received Data "+message);
+    	System.out.println("[ ClientCommunication ] receivedData() : Log message = "+message);
     	//イメージ的にはこの感じ
     	handleReceivedData(message);
 
@@ -273,7 +275,7 @@ public class ClientCommunication{
 
 
 
-    		sendData(ProcessID.CONNECTCLM,"blank");
+    		sendData(ProcessID.CLTOCLM,"blank");
 
 
     	}else if(type == 1){
@@ -291,18 +293,19 @@ public class ClientCommunication{
 
     		currentSession = APSession;
 
-    		sendData(ProcessID.CONNECTAP,"blank");
+    		sendData(ProcessID.CLTOAP,"blank");
 
 
 
     	}else {
-    		System.out.println("[Error connect()] type error");
+    		System.out.println("[ ClientCommunication ] connect() : Error destination type error");
+
     	}
 
     	if( currentSession.isOpen()) {
-    		System.out.println("Connection Successed ");
+    		System.out.println("[ ClientCommunication ] connect() : Log Connection Succssed");
     	}else {
-    		System.out.println("Connection failed");
+    		System.out.println("[ ClientCommunication ] connect() : Error Connection Failed");
     	}
 
 
@@ -319,7 +322,6 @@ public class ClientCommunication{
      */
     public void disconnect(int type){
 
-    	System.out.println("connection disconnected");
 
     	if(type == 0) {
 
@@ -332,6 +334,8 @@ public class ClientCommunication{
     		}
 
     		currentSession = null;
+    		System.out.println("[ ClientCommunication ] connect() : Log CLMSession disconnected");
+
 
     	}else if(type == 1) {
 
@@ -343,6 +347,8 @@ public class ClientCommunication{
     			// TODO 自動生成された catch ブロック
     			e.printStackTrace();
     		}
+
+    		System.out.println("[ ClientCommunication ] connect() : Log APSession disconnected");
     	}
 
 

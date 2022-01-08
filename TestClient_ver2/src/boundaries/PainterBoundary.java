@@ -330,7 +330,7 @@ class PainterBoundary extends JPanel{
 
     public void clear() {
     	clearButton.doClick();
-    	System.out.println("[Log clear()] Canvas clear");
+    	System.out.println("[ PainterBoundary ] clear() : Log");
     }
 
 
