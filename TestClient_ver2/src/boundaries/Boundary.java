@@ -82,7 +82,7 @@ public class Boundary extends JFrame{
         lobbyBoundary.addStartGameButtonListener(startGameActionListener);
         lobbyBoundary.addLogoutButtonListener(logoutActionListener);
         respondentBoundary.addAnswerButtonListener(answerSubmitActionListener);
-
+        finalResultBoundary.addToLobbyButtonActionListener(toLobbyActionListener);
 
 
 
@@ -193,7 +193,7 @@ public class Boundary extends JFrame{
                 break;
 
             case RespondentBoundary:
-            	updatePanel(BoundaryID.RespondentBoundary, "");
+            	updatePanel(BoundaryID.RespondentBoundary, "blank");
                 respondentBoundary.setVisible(true);
                 respondentBoundary.getAnswerButton().setEnabled(true);
                 respondentBoundary.getAnswerField().setEditable(true);
@@ -291,8 +291,12 @@ public class Boundary extends JFrame{
             //(text使う)受け手側の画面
             case RespondentBoundary:
             	System.out.println("[ Boundary ] updatePanel() : Log call drawStroke() text = "+text);
-            	respondentBoundary.drawStroke(text);
-                break;
+
+            	//blankの時は初期化処理のためのupdate
+            	if(!text.equals("blank"))
+            		respondentBoundary.drawStroke(text);
+
+            	break;
 
             //ターン結果画面
             case ResultBoundary:

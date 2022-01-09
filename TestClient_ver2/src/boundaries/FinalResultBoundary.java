@@ -175,8 +175,8 @@ public class FinalResultBoundary extends JPanel{
      * @param toLobbyActionListener
      *
      */
-    public void addNextButtonActionListener(ToLobbyActionListener toLobbyActionListener) {
-    //	this.nextButton.addActionListener(toLobbyActionListener);
+    public void addToLobbyButtonActionListener(ToLobbyActionListener toLobbyActionListener) {
+    	this.toLobbyButton.addActionListener(toLobbyActionListener);
     }
 
 

@@ -35,8 +35,8 @@ public class ClientCommunication{
 
 	//実機運用ではここのlocalhostをサーバのIPアドレスにする
 	//IPconfigで調べる
-	private final String CLM_URI = "ws://172.30.26.64:8080/app/clm";
-    private final String AP_URI = "ws://172.30.26.161:8081/app/ap";
+	private final String CLM_URI = "ws://192.168.56.1:8080/app/clm";
+    private final String AP_URI = "ws://192.168.56.1:8081/app/ap";
 
     private final String REQUEST = "REQUEST";
     private final String REPLY = "REPLY";
@@ -227,13 +227,17 @@ public class ClientCommunication{
     public void handleReceivedData(String message) {
 
 
-    	String dataFlag;
-    	String data;
+    	String dataFlag = null;
+    	String data = null;
 
-    	String[] tmpString = message.split("#");
+    	try {
+    		String[] tmpString = message.split("#");
+	    	dataFlag = tmpString[0];
+	    	data = tmpString[1];
 
-    	dataFlag = tmpString[0];
-    	data = tmpString[1];
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
 
     	control.handleData(dataFlag, data);
 

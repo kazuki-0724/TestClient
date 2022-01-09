@@ -185,7 +185,9 @@ class ResultBoundary extends JPanel{
 
 
 
-    public void setTable(List<PlayerMessage> list , int painterNum) {
+    public void setTable(List<PlayerMessage> list , String painterNum) {
+
+    	int painterPlayerNum = Integer.parseInt(painterNum);
 
     	for(int i=0;i<4;i++) {
 
@@ -193,7 +195,7 @@ class ResultBoundary extends JPanel{
 
     		//System.out.println(tmp.getPlayerID());
 
-    		if(painterNum == Integer.parseInt(tmp.getPlayerNum())) {
+    		if(painterPlayerNum == Integer.parseInt(tmp.getPlayerNum())) {
     			//出題者は
     			//setValueAt(セルにセットするデータ,,n行,n列)
         		tableModel.setValueAt("[出題者] " + tmp.getPlayerID(),i,0);

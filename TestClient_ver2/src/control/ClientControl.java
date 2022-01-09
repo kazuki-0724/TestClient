@@ -391,6 +391,17 @@ public class ClientControl{
     					//gamePlayerListの取り出し、rommIDの取り出しとgameInfoへのセット
     					List<PlayerMessage> gamePlayerList = message.getGamePlayerList();
 						String roomId = message.getRoomID();
+
+
+						for(PlayerMessage tmp:gamePlayerList) {
+							if(myPlayer.getId().equals(tmp.getPlayerID())) {
+								getGameInfo().setPlayerNum(tmp.getPlayerNum());
+								System.out.println(tmp.getPlayerID() +" "+ tmp.getPlayerNum());
+
+							}
+						}
+
+
 						getGameInfo().setGamePlayerList(gamePlayerList);
 						getGameInfo().setRoomID(roomId);
 
@@ -418,16 +429,18 @@ public class ClientControl{
     					limitTime = Integer.parseInt(dates[1]);
 
     					//出題者プレイヤーのゲーム内番号とテーマの取り出し
-    					int painterPlayerNum = Integer.parseInt(dates[2]);
+    					//int painterPlayerNum = Integer.parseInt(dates[2]);
     					String theme = dates[3];
 
 
     					//それらのgameInfoへのセット
-    					getGameInfo().setPainterPlayerNum(painterPlayerNum);
+    					getGameInfo().setPainterPlayerNum(dates[2]);
     					getGameInfo().setTheme(theme);
 
+    					System.out.println("[ ClientControl ] handleData() : Log painterNum/theme/myplayerNum "+ dates[2] + "/" + theme + " "+ getGameInfo().getPlayerNum());
 
-    					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
+
+    					if(getGameInfo().getPlayerNum().equals(getGameInfo().getPainterPlayerNum()) ) {
     						//自分が出題者だった場合
     						boundary.changePanel(BoundaryID.ConfirmationBoundary);
     						boundary.setTimerBar(BoundaryID.ConfirmationBoundary, limitTime);
@@ -450,7 +463,7 @@ public class ClientControl{
     					//制限時間の取り出し
     					limitTime = Integer.parseInt(dates[1]);
 
-    					if(getGameInfo().getPlayerNum() == getGameInfo().getPainterPlayerNum()) {
+    					if(getGameInfo().getPlayerNum().equals(getGameInfo().getPainterPlayerNum()) ) {
     						//自分が出題者だった場合
     						boundary.changePanel(BoundaryID.PainterBoundary);
     						boundary.setTimerBar(BoundaryID.PainterBoundary, limitTime);
@@ -462,6 +475,8 @@ public class ClientControl{
     						boundary.setTimerBar(BoundaryID.RespondentBoundary, limitTime);
     						runTimer(BoundaryID.RespondentBoundary,limitTime);
     					}
+
+    					communicate().sendData(ProcessID.QTIMESTART_OK, "");
 
     					break;
 
@@ -520,7 +535,7 @@ public class ClientControl{
 
 
     					/*非常に怪しい*******************/
-    					//communicate().disconnect(AP);
+    					communicate().disconnect(AP);
     					/********************************/
 
     					break;

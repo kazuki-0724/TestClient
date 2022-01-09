@@ -19,9 +19,9 @@ public class GameInfo {
 	//private HashMap<String,Player> playerMap = new HashMap<>();
 
 	//ゲーム中に使う番号
-	private int playerNum;
+	private String playerNum;
 
-	private int painterPlayerNum;
+	private String painterPlayerNum;
 
 	private String theme;
 
@@ -47,8 +47,8 @@ public class GameInfo {
 
 	public void init() {
 		this.gamePlayerList = null;
-		this.painterPlayerNum = -1;
-		this.playerNum = -1;
+		this.painterPlayerNum = null;
+		this.playerNum = null;
 		this.rankingData = null;
 		this.resultString = null;
 		this.roomID = null;
@@ -78,29 +78,29 @@ public class GameInfo {
 	}
 
 
-	public int getPainterPlayerNum() {
+	public String getPainterPlayerNum() {
 		return painterPlayerNum;
 	}
 
 
 
 
-	public void setPainterPlayerNum(int painterPlayerNum) {
-		this.painterPlayerNum = painterPlayerNum;
+	public void setPainterPlayerNum(String dates) {
+		this.painterPlayerNum = dates;
 	}
 
 
 
 
-	public int getPlayerNum() {
+	public String getPlayerNum() {
 		return playerNum;
 	}
 
 
 
 
-	public void setPlayerNum(int playerNum) {
-		this.playerNum = playerNum;
+	public void setPlayerNum(String string) {
+		this.playerNum = string;
 	}
 
 
