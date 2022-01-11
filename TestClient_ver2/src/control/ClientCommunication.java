@@ -132,7 +132,7 @@ public class ClientCommunication{
 
 	    	//座標
 	    	case STROKE:
-	    		communicationFormat = encode(POSITION, "COODINATE", data);
+	    		communicationFormat = encode(POSITION, control.getGameInfo().getRoomID(),data);
 	    		break;
 
 	    	//ゲームからロビーに戻る

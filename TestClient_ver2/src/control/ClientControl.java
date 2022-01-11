@@ -352,13 +352,11 @@ public class ClientControl{
 
 
 
-
-
-
-
-
     		case "POSITION":
     			//座標情報に基づいて描画する
+    			//POSITION#0_0_100_100_200_200
+    			//POSITION#(ペン/消しゴム)_(開始座標x)_(開始座標y)_(終了座標x)_(終了座標y)
+
     			boundary.updatePanel(BoundaryID.RespondentBoundary, data);
     			break;
 
