@@ -39,7 +39,11 @@ public class WebSocketEndpoint {
 
 		/* メッセージ受信時の処理 */
 		//System.out.println("WebSocket受信："+message);
+		System.out.println("********************************************************************************");
 		System.out.println("[ WebSocketEndpoint ] onMessage() : Log message = "+message);
+		System.out.println("********************************************************************************");
+
+
 		cscc.receivedData(message);
 
 	}
@@ -63,6 +67,9 @@ public class WebSocketEndpoint {
 	public void sendMessage(Session session,String str) {
 
 		try {
+			System.out.println("********************************************************************************");
+			System.out.println("[ WebSocketEndpoint ] sendMessage() : Log str = "+str);
+			System.out.println("********************************************************************************");
 			session.getBasicRemote().sendText(str);
 			//basic.sendText(str);
 		} catch (IOException e) {
