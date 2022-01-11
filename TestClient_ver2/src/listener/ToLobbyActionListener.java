@@ -65,7 +65,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
             userId = this.aab.getIdField().getText();
             userPass = new String( this.aab.getPassFiled().getPassword() );
 
-            //System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Log id = " + userId +" pass = " + userPass );
+            System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Log id = " + userId +" pass = " + userPass );
 
             //init Field
             this.aab.getIdField().setText("");
@@ -94,7 +94,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
             userId = this.arb.getIdField().getText();
             userPass = new String( this.arb.getPassFiled().getPassword() );
 
-            //System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Log id = " + userId +" pass = " + userPass );
+            System.out.println("[ ToLobbyActionListener ] actionPerFormed() : Log id = " + userId +" pass = " + userPass );
 
             //init Field
             this.arb.getIdField().setText("");
