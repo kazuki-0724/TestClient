@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/grizzly-framework-2.3.22.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/grizzly-http-2.3.22.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/grizzly-http-server-2.3.22.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/gson-2.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/hk2-2.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/hk2-api-2.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/hk2-core-2.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/hk2-locator-2.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/hk2-utils-2.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/javax.annotation-3.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/javax.annotation-api-1.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/javax.websocket-api-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/javax.ws.rs-api-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/jaxrs-ri-2.31.zip"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/jersey-client-2.32.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/jersey-common-2.32.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/jersey-container-grizzly2-http-2.32.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/jersey-container-servlet-2.32.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/jersey-container-servlet-core-2.32.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/jersey-hk2-2.32.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/jersey-server-2.32.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/mysql-connector-java-5.1.18-bin.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/tyrus-client-1.17.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/tyrus-container-grizzly-client-1.17.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/tyrus-container-grizzly-server-1.7.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/tyrus-core-1.17.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/tyrus-server-1.17.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/tyrus-spi-1.17.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/tyrus-standalone-client-1.17.jar"/>
+	<classpathentry kind="lib" path="C:/java_jar/info_exp2/validation-api-2.0.1.Final.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
