@@ -268,7 +268,7 @@ public class ClientControl{
     				case "LOGOUT":
     					if(dates[1].equals("OK")) {
     						//ログアウト処理
-    						System.out.println("[Log] LOGOUT");
+    						System.out.println("[ ClientControl ] handleData() : Log LOGOUT complete");
     						getMyPlayer().init();
     						getGameInfo().init();
     						boundary.changePanel(BoundaryID.AccountAuthentificationBoudary);

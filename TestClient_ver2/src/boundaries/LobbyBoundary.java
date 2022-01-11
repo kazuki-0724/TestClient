@@ -214,7 +214,15 @@ public class LobbyBoundary extends JPanel{
 
     	for(int i=0;i<rankingData.length;i++) {
 
-    		String[] data = rankingData[i].split(":");
+    		String[] data = {"rank:ID:Rate", "rank:ID:Rate","rank:ID:Rate", "rank:ID:Rate","rank:ID:Rate"};
+
+    		try {
+    			data = rankingData[i].split(":");
+
+    		}catch(Exception e) {
+    			e.printStackTrace();
+    		}
+
     		//String rank = data[0];
     		//String name = data[1];
     		//String rate = data[2];
@@ -223,6 +231,7 @@ public class LobbyBoundary extends JPanel{
     			//setValueAt(セルにセットするデータ,,n行,n列)
     			tableModel.setValueAt(data[j], i,j );
     		}
+
     	}
 
 

@@ -35,8 +35,11 @@ public class ClientCommunication{
 
 	//実機運用ではここのlocalhostをサーバのIPアドレスにする
 	//IPconfigで調べる
-	private final String CLM_URI = "ws://192.168.56.1:8080/app/clm";
-    private final String AP_URI = "ws://192.168.56.1:8081/app/ap";
+	//private final String CLM_URI = "ws://192.168.56.1:8080/app/clm";
+    //private final String AP_URI = "ws://192.168.56.1:8081/app/ap";
+
+    private final String CLM_URI = "ws://172.30.27.32:8080/clm/clmep";
+    private final String AP_URI =  "ws://172.30.27.48:8080/app/appep";
 
     private final String REQUEST = "REQUEST";
     private final String REPLY = "REPLY";
@@ -99,7 +102,7 @@ public class ClientCommunication{
 
     		//サーバ接続時
     		case CLTOCLM:
-    			communicationFormat = encode(CONNECT, ProcessID.CLTOAP.toString());
+    			communicationFormat = encode(CONNECT, ProcessID.CLTOCLM.toString());
     			break;
 
     		case CLTOAP:

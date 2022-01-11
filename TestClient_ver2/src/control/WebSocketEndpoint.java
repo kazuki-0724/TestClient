@@ -52,6 +52,9 @@ public class WebSocketEndpoint {
 	public void onError(Throwable th) {
 		/* エラー発生時の処理 */
 		System.out.println("[ WebSocketEndpoint ] onError() : Error "+ th.getMessage());
+		//ログアウト処理
+		cscc.receivedData("REPLY#LOGOUT_OK");
+
 	}
 
 
@@ -60,6 +63,8 @@ public class WebSocketEndpoint {
 	public void onClose(Session session) {
 		/* セッション解放時の処理 */
 		System.out.println("[ WebSocketEndpoint ] onClose() : Log session = "+ session.getId() + "disconnected");
+		//ログアウト処理
+		cscc.receivedData("REPLY#LOGOUT_OK");
 
 	}
 
