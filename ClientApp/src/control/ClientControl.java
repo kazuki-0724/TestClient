@@ -22,6 +22,7 @@ import entity.ProcessID;
 /**
  *クライアントのコントロールクラス
  * @author Kazuki0724
+ * 2022年1月11日
  *
  */
 public class ClientControl{
