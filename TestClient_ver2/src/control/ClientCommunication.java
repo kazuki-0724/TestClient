@@ -175,7 +175,7 @@ public class ClientCommunication{
 	    		break;
 
 	    	case POSITION:
-	    		communicationFormat = encode(POSITION,data);
+	    		communicationFormat = encode(POSITION, control.getGameInfo().getRoomID(), data);
 	    		break;
 
 	    	case TURNRESULT_OK:
