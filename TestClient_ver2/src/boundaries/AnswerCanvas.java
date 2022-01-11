@@ -115,7 +115,6 @@ public class AnswerCanvas extends Canvas{
     	g2d.setColor(white);
     	g2d.fillRect(0, 0, w, h);
     	repaint();
-
     }
 
     /**

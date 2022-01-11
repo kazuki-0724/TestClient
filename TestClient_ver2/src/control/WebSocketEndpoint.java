@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.OnClose;
@@ -31,7 +32,8 @@ public class WebSocketEndpoint {
 
 		/* セッション確立時の処理 */
 		//System.out.println("WebSocketセッション確立");
-		System.out.println("[ WebSocketEndpoint ] onOpen() : Log Connection established");
+		System.out.println("[ WebSocketEndpoint ] onOpen() : Log Connection established " + session.getId());
+		System.out.println("[ WebSocketEndpoint ] onOpen() : Time  " + LocalDateTime.now());
 	}
 
 	@OnMessage
@@ -53,7 +55,7 @@ public class WebSocketEndpoint {
 		/* エラー発生時の処理 */
 		System.out.println("[ WebSocketEndpoint ] onError() : Error "+ th.getMessage());
 		//ログアウト処理
-		cscc.receivedData("REPLY#LOGOUT_OK");
+		//cscc.receivedData("REPLY#LOGOUT_OK");
 
 	}
 
@@ -62,9 +64,10 @@ public class WebSocketEndpoint {
 	@OnClose
 	public void onClose(Session session) {
 		/* セッション解放時の処理 */
-		System.out.println("[ WebSocketEndpoint ] onClose() : Log session = "+ session.getId() + "disconnected");
+		System.out.println("[ WebSocketEndpoint ] onClose() : Log session = "+ session.getId() + " disconnected");
 		//ログアウト処理
-		cscc.receivedData("REPLY#LOGOUT_OK");
+		//cscc.receivedData("REPLY#LOGOUT_OK");
+		System.out.println("[ WebSocketEndpoint ] onClose() : Time  " + LocalDateTime.now());
 
 	}
 

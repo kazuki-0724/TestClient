@@ -286,11 +286,15 @@ public class LobbyBoundary extends JPanel{
      * @param games
      */
     public void setRateLabel(int win, int lose, int games) {
+
     	float temp = win;
     	float temp2 = games;
+    	float rate = 0;
 
-    	float rate = (temp / temp2) * 100;
-        this.rateLabel.setText(String.format("Rate : %.2f",rate));
+    	if(temp2 != 0)
+    		rate = (temp / temp2) * 100;
+
+    	this.rateLabel.setText(String.format("Rate : %.2f%%",rate));
     }
 
     /**

@@ -222,7 +222,10 @@ public class RespondentBoundary extends JPanel{
     }
 
 
-
+    public void clear() {
+    	ac.clear();
+    	System.out.println("[ RespondentBoundary ] clear() : Log");
+    }
 
     /**
      * 送られてきた座標データによって描画
@@ -234,7 +237,7 @@ public class RespondentBoundary extends JPanel{
 
     	if(stroke.equals("CLEAR")) {
 
-    		System.out.println("[ RespondentBoundary ] drawStroke() : Log");
+    		System.out.println("[ RespondentBoundary ] drawStroke() : Log Canvas CLEAR");
     		ac.clear();
 
     	}else {

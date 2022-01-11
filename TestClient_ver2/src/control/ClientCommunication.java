@@ -39,7 +39,7 @@ public class ClientCommunication{
     //private final String AP_URI = "ws://192.168.56.1:8081/app/ap";
 
     private final String CLM_URI = "ws://172.30.27.32:8080/clm/clmep";
-    private final String AP_URI =  "ws://172.30.27.48:8080/app/appep";
+    private final String AP_URI =  "ws://172.30.27.18:8080/app/appep";
 
     private final String REQUEST = "REQUEST";
     private final String REPLY = "REPLY";
@@ -71,7 +71,7 @@ public class ClientCommunication{
     	String communicationFormat = handleSendData(processID,data);
 
 
-    	System.out.println("[ ClientCommunication ] sendData() : Log communicationFormat = " + communicationFormat);
+    	//System.out.println("[ ClientCommunication ] sendData() : Log communicationFormat = " + communicationFormat);
 
     	if(currentSession.isOpen()) {
     		webSocketEndpoint.sendMessage(currentSession,communicationFormat);
@@ -178,7 +178,7 @@ public class ClientCommunication{
 	    		break;
 
 	    	case POSITION:
-	    		communicationFormat = encode(POSITION, control.getGameInfo().getRoomID(), data);
+	    		communicationFormat = encode(POSITION, data);
 	    		break;
 
 	    	case TURNRESULT_OK:

@@ -354,7 +354,7 @@ public class ClientControl{
 
     		case "POSITION":
     			//座標情報に基づいて描画する
-    			//POSITION#0_0_100_100_200_200
+    			//POSITION#0_100_100_200_200
     			//POSITION#(ペン/消しゴム)_(開始座標x)_(開始座標y)_(終了座標x)_(終了座標y)
 
     			boundary.updatePanel(BoundaryID.RespondentBoundary, data);
@@ -382,9 +382,15 @@ public class ClientControl{
 
     					//REQUEST#STARTGAME_(制限時間)_JSON
     					limitTime = Integer.parseInt(dates[1]);
+    					Message message = null;
 
-	    				//JSONからの復元
-    					Message message = gson.fromJson(dates[2], Message.class);
+    					try {
+    						//JSONからの復元
+    						message = gson.fromJson(dates[2], Message.class);
+    					}catch(Exception e) {
+    						System.out.println("[ ClientControl ] handleData() : Error JSON Error at STARTGAME");
+    						e.printStackTrace();
+    					}
 
     					//gamePlayerListの取り出し、rommIDの取り出しとgameInfoへのセット
     					List<PlayerMessage> gamePlayerList = message.getGamePlayerList();
@@ -435,7 +441,7 @@ public class ClientControl{
     					getGameInfo().setPainterPlayerNum(dates[2]);
     					getGameInfo().setTheme(theme);
 
-    					System.out.println("[ ClientControl ] handleData() : Log painterNum/theme/myplayerNum "+ dates[2] + "/" + theme + " "+ getGameInfo().getPlayerNum());
+    					System.out.println("[ ClientControl ] handleData() : Log ( PainterNum = " + dates[2] + "Theme = "+ theme + "myPlayerNum" +  getGameInfo().getPlayerNum());
 
 
     					if(getGameInfo().getPlayerNum().equals(getGameInfo().getPainterPlayerNum()) ) {
@@ -500,12 +506,20 @@ public class ClientControl{
     				case "TURNRESULT":
 
     					//REQUEST#TURNRESULT_(制限時間)_JSON
+    					Message result = null;
+
 
     					//制限時間の取り出し
     					limitTime = Integer.parseInt(dates[1]);
 
     					//JSONからMessageに復元
-    					Message result = gson.fromJson(dates[2], Message.class);
+    					try {
+    						result = gson.fromJson(dates[2], Message.class);
+    					}catch(Exception e) {
+    						System.out.println("[ ClientControl ] handleData() : Error JSON Error at TURNRESULT");
+    						e.printStackTrace();
+
+    					}
 
     					//結果が入ったプレイヤーリストの取り出し
     					List<PlayerMessage> resultGamePlayerList = result.getGamePlayerList();
@@ -550,11 +564,6 @@ public class ClientControl{
 						boundary.changePanel(BoundaryID.AccountAuthentificationBoudary);
 
     					break;
-
-
-
-
-
 
 
     				default:
