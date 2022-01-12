@@ -134,6 +134,7 @@ public class ToLobbyActionListener extends BoundaryActionListener{
          	//明示的に呼ばないとロビーに関する情報がもらえない(MAKELOBBYとかかも)
             boundary.getControl().communicate().sendData(ProcessID.MAKELOBBY, boundary.getControl().getMyPlayer().getId());
 
+            boundary.getControl().stopTimer();
 
 
 

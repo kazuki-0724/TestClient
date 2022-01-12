@@ -70,6 +70,7 @@ public class AnswerCanvas extends Canvas{
     /**
      * 描画処理
      */
+    @Override
     public void paint(Graphics g) {
 
 
@@ -111,11 +112,16 @@ public class AnswerCanvas extends Canvas{
     }
 
 
+
     public void clear() {
     	g2d.setColor(white);
     	g2d.fillRect(0, 0, w, h);
+    	//g2d.clearRect(0, 0, w, h);
     	repaint();
     }
+
+
+
 
     /**
      * 受け取った座標データの描画

@@ -175,6 +175,7 @@ public class RespondentBoundary extends JPanel{
         this.add(sp);
         this.add(answerField);
         this.add(answerButton);
+        this.add(timerBar);
         /******************************/
 
 
@@ -233,11 +234,11 @@ public class RespondentBoundary extends JPanel{
      */
     public void drawStroke(String stroke) {
 
-    	System.out.println("[ RespondentBoundary ] drawStroke() : Log stroke = " + stroke);
+    	//System.out.println("[ RespondentBoundary ] drawStroke() : Log stroke = " + stroke);
 
     	if(stroke.equals("CLEAR")) {
 
-    		System.out.println("[ RespondentBoundary ] drawStroke() : Log Canvas CLEAR");
+    		//System.out.println("[ RespondentBoundary ] drawStroke() : Log Canvas CLEAR");
     		ac.clear();
 
     	}else {
@@ -295,14 +296,14 @@ public class RespondentBoundary extends JPanel{
      * @param list
      * @param correctPlayerNum
      */
-    public void setCorrectPlayer(List<PlayerMessage> list ,int correctPlayerNum) {
+    public void setCorrectPlayer(List<PlayerMessage> list ,String correctPlayerNum) {
 
     	for(int i=0;i<4;i++) {
 
     		PlayerMessage tmp = list.get(i);
 
 
-    		if( Integer.parseInt(tmp.getPlayerNum()) == correctPlayerNum ) {
+    		if( tmp.getPlayerNum().equals(correctPlayerNum) ) {
 
     			tableModel.setValueAt("〇 " + tmp.getPlayerID(), i, 0);
     		}

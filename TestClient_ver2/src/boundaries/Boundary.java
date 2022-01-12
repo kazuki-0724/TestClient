@@ -198,6 +198,7 @@ public class Boundary extends JFrame{
                 respondentBoundary.setVisible(true);
                 respondentBoundary.getAnswerButton().setEnabled(true);
                 respondentBoundary.getAnswerField().setEditable(true);
+                respondentBoundary.getAnswerField().setText("");
                 //this.setTitle("Answer");
                 respondentBoundary.clear();
                 currentPanel = respondentBoundary;
@@ -296,7 +297,7 @@ public class Boundary extends JFrame{
 
             	//blankの時は初期化処理のためのupdate
             	if(!text.equals("blank")) {
-            		System.out.println("[ Boundary ] updatePanel() : Log call drawStroke() text = "+text);
+            		//System.out.println("[ Boundary ] updatePanel() : Log call drawStroke() text = "+text);
             		respondentBoundary.drawStroke(text);
             	}
 
@@ -436,7 +437,7 @@ public class Boundary extends JFrame{
      * 正解者の情報を画面に反映
      * @param correctPlayerNum
      */
-    public void setCorrectPlayer(int correctPlayerNum) {
+    public void setCorrectPlayer(String correctPlayerNum) {
 
     	if( currentPanel == painterBoundary ) {
 

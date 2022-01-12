@@ -315,15 +315,18 @@ class PainterBoundary extends JPanel{
 
 
     //正解しているプレイヤーの表示を変える
-    public void setCorrectPlayer(List<PlayerMessage> list ,int correctPlayerNum) {
+    public void setCorrectPlayer(List<PlayerMessage> list ,String correctPlayerNum) {
 
     	for(int i=0;i<4;i++) {
     		PlayerMessage tmp = list.get(i);
 
-    		if( Integer.parseInt(tmp.getPlayerNum()) == correctPlayerNum ) {
+    		if( tmp.getPlayerNum().equals(correctPlayerNum) ) {
 
-    			tableModel.setValueAt("〇" + tmp.getPlayerID(), correctPlayerNum, i);
+    			tableModel.setValueAt("〇" + tmp.getPlayerID(), i, 0);
+    			System.out.println("正解したひと見っけたよぉー　この人です =>"+correctPlayerNum);
     		}
+
+    		System.out.println("違う人だわ");
     	}
     }
 

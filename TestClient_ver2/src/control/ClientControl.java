@@ -494,9 +494,9 @@ public class ClientControl{
     					int correctPlayerNum = Integer.parseInt(dates[1]);
 
     					//correctPlayerNumを使ってPaintrer/RespondenrBoundaryの表示を変える
-    					boundary.setCorrectPlayer(correctPlayerNum);
+    					boundary.setCorrectPlayer(dates[1]);
 
-    					communicate().sendData(ProcessID.ANSWER_OK, "blank");
+    					//communicate().sendData(ProcessID.ANSWER_OK, "blank");
 
     					/*****************************************************/
 
