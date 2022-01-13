@@ -46,6 +46,11 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
     public Color white = Color.white;
 
 
+    BasicStroke pen = new BasicStroke(width,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+    BasicStroke erase = new BasicStroke(20,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+
+
+
     /**
      * コンストラクタ
      * @param csc
@@ -82,9 +87,8 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
 
         if (type == 1) {
             if (x >= 0 && y >= 0 && xx >= 0 && yy >= 0) {
-                BasicStroke stroke = new BasicStroke(width,
-                        BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-                g2d.setStroke(stroke);
+                //BasicStroke stroke = new BasicStroke(width,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                g2d.setStroke(pen);
                 g2d.setColor(black);
                 g2d.drawLine(xx, yy, x, y);
             }
@@ -92,9 +96,8 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
         } else if (type == 2) {
             if (x >= 0 && y >= 0 && xx >= 0 && yy >= 0) {
 
-                BasicStroke stroke = new BasicStroke(25.0f,
-                        BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-                g2d.setStroke(stroke);
+                //BasicStroke stroke = new BasicStroke(25.0f,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                g2d.setStroke(erase);
                 g2d.setColor(white);
                 g2d.drawLine(xx, yy, x, y);
             }

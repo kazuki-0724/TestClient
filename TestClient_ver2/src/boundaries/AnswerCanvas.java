@@ -40,6 +40,9 @@ public class AnswerCanvas extends Canvas{
     public Color white = Color.white;
 
 
+    BasicStroke pen = new BasicStroke(width,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+    BasicStroke erase = new BasicStroke(20,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+
 
     /**
      * コンストラクタ
@@ -75,9 +78,8 @@ public class AnswerCanvas extends Canvas{
         if (type == 1) {
 
             if (x >= 0 && y >= 0 && xx >= 0 && yy >= 0) {
-                BasicStroke stroke = new BasicStroke(width,
-                        BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-                g2d.setStroke(stroke);
+                //BasicStroke stroke = new BasicStroke(width,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                g2d.setStroke(pen);
                 g2d.setColor(black);
                 g2d.drawLine(xx, yy, x, y);
             }
@@ -87,9 +89,8 @@ public class AnswerCanvas extends Canvas{
 
             if (x >= 0 && y >= 0 && xx >= 0 && yy >= 0) {
 
-                BasicStroke stroke = new BasicStroke(25.0f,
-                        BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
-                g2d.setStroke(stroke);
+                //BasicStroke stroke = new BasicStroke(25.0f,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+                g2d.setStroke(erase);
                 g2d.setColor(white);
                 g2d.drawLine(xx, yy, x, y);
             }
@@ -117,7 +118,7 @@ public class AnswerCanvas extends Canvas{
     	//g2d.clearRect(0, 0, w, h);
 
 
-    	this.type = 1;
+    	this.type = 2;
         this.xx = -100;
         this.yy = -100;
         this.x = -100;
