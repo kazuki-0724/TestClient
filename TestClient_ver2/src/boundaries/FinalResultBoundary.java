@@ -244,25 +244,17 @@ public class FinalResultBoundary extends JPanel{
     		players[i] = list.get(i) ;
     	}
 
-    	boolean flag = true;
 
-    	while(flag) {
-
-	    	for(int i=1;i<4;i++) {
-
-	    		flag = false;
-
-	    		if(players[i-1].getTotalPoint() > players[i].getTotalPoint()) {
-
-	    			PlayerMessage tmp = players[i];
-	    			players[i] = players[i-1];
-	    			players[i-1] = tmp;
-	    			flag = true;
-
-	    		}
-	    	}
-    	}
-
+    	for (int i = 0; i < players.length - 1; i++) {
+            for (int j = players.length - 1; j > i; j--) {
+                if (players[j - 1].getTotalPoint() > players[j].getTotalPoint()) {
+                    // 入れ替え
+                    PlayerMessage tmp = players[j - 1];
+                    players[j - 1] = players[j];
+                    players[j] = tmp;
+                }
+             }
+        }
 
     	return players;
 
