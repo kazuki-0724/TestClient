@@ -49,6 +49,9 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
     BasicStroke pen = new BasicStroke(width,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
     BasicStroke erase = new BasicStroke(20,BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
 
+    //サンプリングレートを半分に
+    private boolean samplingFlag;
+
 
 
     /**
@@ -74,6 +77,9 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
         g2d = (Graphics2D) cImage.getGraphics();
         g2d.setColor(white);
         g2d.fillRect(0, 0, w, h);
+
+
+        samplingFlag = true;
 
 
     }
@@ -134,31 +140,45 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
     @Override
     public void mouseDragged(MouseEvent e) {
 
-        if (e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK) {
+    	if(samplingFlag == true) {
 
-            type = 1;
+        	if (e.getModifiersEx() == MouseEvent.BUTTON1_DOWN_MASK) {
+
+                type = 1;
+            }
+            if (e.getModifiersEx() == MouseEvent.BUTTON2_DOWN_MASK) {
+
+            }
+            if (e.getModifiersEx() == MouseEvent.BUTTON3_DOWN_MASK) {
+                type = 2;
+            }
+
+            xx = x;
+            yy = y;
+
+            Point point = e.getPoint();
+            x = point.x;
+            y = point.y;
+
+
+
+            String position = String.format("%d %d %d %d %d",type,xx,yy,point.x,point.y);
+            this.csc.communicate().sendData(ProcessID.POSITION, position);
+
+            samplingFlag = false;
+
+            repaint();
+
+
+        }else if(samplingFlag == false) {
+
+        	samplingFlag = true;
+        	//System.out.println("SKIP");
         }
-        if (e.getModifiersEx() == MouseEvent.BUTTON2_DOWN_MASK) {
-
-        }
-        if (e.getModifiersEx() == MouseEvent.BUTTON3_DOWN_MASK) {
-            type = 2;
-        }
-
-        xx = x;
-        yy = y;
 
 
-        Point point = e.getPoint();
-        x = point.x;
-        y = point.y;
 
 
-        String position = String.format("%d_%d_%d_%d_%d",type,xx,yy,point.x,point.y);
-        this.csc.communicate().sendData(ProcessID.POSITION,position);
-
-
-        repaint();
     }
 
 
