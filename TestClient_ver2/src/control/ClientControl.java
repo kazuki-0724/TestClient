@@ -328,6 +328,7 @@ public class ClientControl{
     				case "CONNECTAP":
     					//接続ok。本当は後ろにOKが続いてる
     					System.out.println("[ ClientControl ] handleData() : Log Connect AP complete");
+    					communicate().sendDatatoCLM("REPLY#CONNECTTOAP_OK");
 
     					break;
 
@@ -373,6 +374,10 @@ public class ClientControl{
 
     				case "CONNECTTOAP":
     					//CLMからAPに接続城っていう指令が来る
+
+    					//
+
+
     					communicate().connect(AP);
     					//communicate().sendData(ProcessID.CONNECTAP,getMyPlayer().getId());
     					break;
@@ -616,7 +621,7 @@ public class ClientControl{
 			if (time >= 0) {
 
 				boundary.updateCountDown(type, time+"");
-				System.out.println(String.format("count : %2d", time) );
+				//System.out.println(String.format("count : %2d", time) );
 				time--;
 
 

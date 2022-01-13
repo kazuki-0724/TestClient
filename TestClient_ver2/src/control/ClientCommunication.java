@@ -35,11 +35,11 @@ public class ClientCommunication{
 
 	//実機運用ではここのlocalhostをサーバのIPアドレスにする
 	//IPconfigで調べる
-	//private final String CLM_URI = "ws://localhost:8080/app/clm";
-    //private final String AP_URI = "ws://localhost:8081/app/ap";
+	private final String CLM_URI = "ws://localhost:8080/app/clm";
+    private final String AP_URI = "ws://localhost:8081/app/ap";
 
-    private final String CLM_URI = "ws://172.30.26.191:8080/clm/clmep";
-    private final String AP_URI =  "ws://172.30.26.101:8080/app/appep";
+    //private final String CLM_URI = "ws://172.30.26.191:8080/clm/clmep";
+    //private final String AP_URI =  "ws://172.30.26.101:8080/app/appep";
 
     private final String REQUEST = "REQUEST";
     private final String REPLY = "REPLY";
@@ -78,6 +78,21 @@ public class ClientCommunication{
 
     	}else {
     		System.out.println("[ ClientCommunication ] sendData() : Error セッションが閉じている");
+    	}
+    }
+
+
+
+
+
+
+    public void sendDatatoCLM(String data){
+
+    	if(CLMSession.isOpen()) {
+    		webSocketEndpoint.sendMessage(CLMSession,data);
+
+    	}else {
+    		System.out.println("[ ClientCommunication ] sendData() : Error CLMセッションが閉じている");
     	}
     }
 

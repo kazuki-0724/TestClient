@@ -46,13 +46,11 @@ public class AnswerCanvas extends Canvas{
      */
     public AnswerCanvas() {
 
-
         x = -1;
         y = -1;
         xx = -1;
         yy = -1;
         type = 0;
-
 
 
         setBackground(Color.white);
@@ -117,6 +115,14 @@ public class AnswerCanvas extends Canvas{
     	g2d.setColor(white);
     	g2d.fillRect(0, 0, w, h);
     	//g2d.clearRect(0, 0, w, h);
+
+
+    	this.type = 1;
+        this.xx = -100;
+        this.yy = -100;
+        this.x = -100;
+        this.y = -100;
+
     	repaint();
     }
 

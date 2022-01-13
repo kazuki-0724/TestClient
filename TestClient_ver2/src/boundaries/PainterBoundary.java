@@ -323,16 +323,17 @@ class PainterBoundary extends JPanel{
     		if( tmp.getPlayerNum().equals(correctPlayerNum) ) {
 
     			tableModel.setValueAt("〇" + tmp.getPlayerID(), i, 0);
-    			System.out.println("正解したひと見っけたよぉー　この人です =>"+correctPlayerNum);
+    			//System.out.println("正解したひと見っけたよぉー　この人です =>"+correctPlayerNum);
     		}
 
-    		System.out.println("違う人だわ");
+    		//System.out.println("違う人だわ");
     	}
     }
 
 
     public void clear() {
-    	clearButton.doClick();
+    	gc.clear();
+    	//clearButton.doClick();
     	System.out.println("[ PainterBoundary ] clear() : Log");
     }
 

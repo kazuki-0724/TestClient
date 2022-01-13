@@ -185,7 +185,7 @@ public class GameStartBoundary extends JPanel{
 
     		PlayerMessage tmp = list.get(i);
 
-    		System.out.println(tmp.getPlayerID());
+    		//System.out.println(tmp.getPlayerID());
 
     		//setValueAt(セルにセットするデータ,,n行,n列)
     		tableModel.setValueAt(tmp.getPlayerID(),i,0);

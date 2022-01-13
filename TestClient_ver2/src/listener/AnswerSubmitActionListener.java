@@ -57,6 +57,7 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 			//実際に一致していなかった場合
 
 			System.out.println("[ AnswerSubmitActionListener ] actionPerFormed() : Log your answer is incorrect (" + answer + ")");
+			this.rb.getAnswerField().setText("");
 		}
 
 
