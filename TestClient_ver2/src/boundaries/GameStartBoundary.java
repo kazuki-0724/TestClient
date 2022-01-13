@@ -189,7 +189,7 @@ public class GameStartBoundary extends JPanel{
 
     		//setValueAt(セルにセットするデータ,,n行,n列)
     		tableModel.setValueAt(tmp.getPlayerID(),i,0);
-    		tableModel.setValueAt(tmp.getRate(),i,1);
+    		tableModel.setValueAt(tmp.getRate() + "%",i,1);
 
 
     	}

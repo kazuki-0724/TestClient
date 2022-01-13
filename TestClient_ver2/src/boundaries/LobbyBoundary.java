@@ -228,8 +228,13 @@ public class LobbyBoundary extends JPanel{
     		//String rate = data[2];
 
     		for(int j=0;j<3;j++) {
-    			//setValueAt(セルにセットするデータ,,n行,n列)
+    			//setValueAt(セルにセットするデータ,,n行,m列)
     			tableModel.setValueAt(data[j], i,j );
+
+    			if(j == 2) {
+    				tableModel.setValueAt(data[j] + "%", i,j );
+    			}
+
     		}
 
     	}

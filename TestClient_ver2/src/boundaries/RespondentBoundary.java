@@ -302,7 +302,6 @@ public class RespondentBoundary extends JPanel{
 
     		PlayerMessage tmp = list.get(i);
 
-
     		if( tmp.getPlayerNum().equals(correctPlayerNum) ) {
 
     			tableModel.setValueAt("〇 " + tmp.getPlayerID(), i, 0);

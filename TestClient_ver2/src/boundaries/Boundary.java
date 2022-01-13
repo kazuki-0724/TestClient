@@ -250,7 +250,6 @@ public class Boundary extends JFrame{
      */
      public void updatePanel(BoundaryID boundary, String text){
 
-
     	//textを使う場面は画面遷移を伴わない画面の更新があるとき
 
         switch(boundary){
@@ -293,12 +292,15 @@ public class Boundary extends JFrame{
 
             //(text使う)受け手側の画面
             case RespondentBoundary:
-            	respondentBoundary.setTable(control.getGameInfo().getGamePlayerList());
 
-            	//blankの時は初期化処理のためのupdate
+            	//こっちは描画用
             	if(!text.equals("blank")) {
             		//System.out.println("[ Boundary ] updatePanel() : Log call drawStroke() text = "+text);
             		respondentBoundary.drawStroke(text);
+
+            	//blankの時は初期化処理のためのupdate
+            	}else if(text.equals("blank")){
+            		respondentBoundary.setTable(control.getGameInfo().getGamePlayerList());
             	}
 
             	break;
