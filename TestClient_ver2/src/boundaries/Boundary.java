@@ -420,9 +420,6 @@ public class Boundary extends JFrame{
     			resultBoundary.setTimerBar(time);
     			break;
 
-
-
-
     		default:
     			System.out.println("[ Boundary ] setTimerBar() : Error BoundaryID type eror");
     			break;
