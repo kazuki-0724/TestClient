@@ -162,7 +162,7 @@ public class GameCanvas extends Canvas implements MouseListener,MouseMotionListe
 
 
 
-            String position = String.format("%d %d %d %d %d",type,xx,yy,point.x,point.y);
+            String position = String.format("%d_%d_%d_%d_%d",type,xx,yy,point.x,point.y);
             this.csc.communicate().sendData(ProcessID.POSITION, position);
 
             samplingFlag = false;
