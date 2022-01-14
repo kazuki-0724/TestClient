@@ -61,7 +61,7 @@ public class GameStartBoundary extends JPanel{
      */
     public GameStartBoundary(){
 
-    	LineBorder border = new LineBorder(Color.RED, 2, true);
+    	LineBorder border = new LineBorder(Color.BLACK, 1, true);
 
 
         //各パーツのインスタンス生成
@@ -95,6 +95,7 @@ public class GameStartBoundary extends JPanel{
         timerBar.setStringPainted(true);
         timerBar.setBackground(Color.LIGHT_GRAY);
         timerBar.setBorderPainted(false);
+        timerBar.setBorder(border);
 
         tableModel = new DefaultTableModel(COLUMN_NAMES,0);
         for(int i=0;i<4;i++) {

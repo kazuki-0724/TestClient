@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -140,9 +141,10 @@ public class FinalResultBoundary extends JPanel{
         winnerLabel.setBounds(240,180,360,50);
         winnerLabel.setHorizontalAlignment(JLabel.CENTER);
         winnerLabel.setFont(winnerFont);
-        winnerLabel.setBackground(Color.RED);
-        winnerLabel.setForeground(Color.ORANGE);
+        winnerLabel.setForeground(new Color(255,255,255,200));
+
         winnerLabel.setOpaque(true);
+        winnerLabel.setBackground(new Color(255,0,0,200));
 
         messageLabel.setBounds(360,250,120,50);
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -151,6 +153,14 @@ public class FinalResultBoundary extends JPanel{
         sp.setBounds(120,300,600,212);
 
         toLobbyButton.setBounds(675,535,120,35);
+
+
+        //画像の表示
+        ImageIcon icon = new ImageIcon("./image/crown_alt.png");
+        JLabel backimage = new JLabel(icon);
+        backimage.setIcon(icon);
+
+        backimage.setBounds(0,0,840,630);
 
         /***************************************************/
 
@@ -161,7 +171,7 @@ public class FinalResultBoundary extends JPanel{
         this.add(messageLabel);
         this.add(toLobbyButton);
         this.add(sp);
-
+        this.add(backimage);
 
         /************************/
 

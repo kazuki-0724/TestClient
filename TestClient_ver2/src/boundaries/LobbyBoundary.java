@@ -3,6 +3,7 @@ package boundaries;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -160,9 +161,14 @@ public class LobbyBoundary extends JPanel{
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
+
         idLabel.setBounds(10, 40, 160, 25);
+        idLabel.setOpaque(true);
+        idLabel.setBackground(new Color(255,255,255,200));
         idLabel.setFont(textFont);
-        rateLabel.setBounds(10, 60, 160, 25);
+        rateLabel.setBounds(10, 65, 160, 25);
+        rateLabel.setOpaque(true);
+        rateLabel.setBackground(new Color(255,255,255,200));
         rateLabel.setFont(textFont);
 
         messageLabel_1.setBounds(200, 180, 440, 40);
@@ -184,6 +190,14 @@ public class LobbyBoundary extends JPanel{
 
         sp.setBounds(300, 348, 240, 133);//102
 
+
+        //画像の表示
+        ImageIcon icon = new ImageIcon("./image/paint.jpg");
+        JLabel backimage = new JLabel(icon);
+        backimage.setIcon(icon);
+
+        backimage.setBounds(0,0,840,630);
+
         /***************************************************/
 
 
@@ -198,6 +212,7 @@ public class LobbyBoundary extends JPanel{
         this.add(startGameButton);
         this.add(logoutButton);
         this.add(sp);
+        this.add(backimage);
 
         /************************/
 

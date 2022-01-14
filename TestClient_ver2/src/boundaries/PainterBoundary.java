@@ -143,7 +143,9 @@ class PainterBoundary extends JPanel{
 
 
         /*レイアウト視覚化のためのもの*/
-        LineBorder border = new LineBorder(Color.RED, 2, true);
+        LineBorder border = new LineBorder(Color.black, 2, true);
+        LineBorder gaku = new LineBorder(Color.BLACK, 2, true);
+        LineBorder gaku2 = new LineBorder(Color.GRAY, 1, true);
         Font themeFont = new Font(FONT_NAME, Font.BOLD,30);
         Font timerFont = new Font(FONT_NAME,Font.BOLD,18);
         Font messageFont = new Font(FONT_NAME, Font.BOLD,30);
@@ -170,11 +172,12 @@ class PainterBoundary extends JPanel{
 
         timerLabel.setBounds(600,10,30,40);
 
-        timerBar.setBounds(645, 11, 150, 40);
+        timerBar.setBounds(638, 19, 174, 44);
         timerBar.setStringPainted(true);
         timerBar.setBackground(Color.LIGHT_GRAY);
         timerBar.setForeground(Color.RED);
-        timerBar.setBorderPainted(false);
+        //timerBar.setBorderPainted(false);
+        timerBar.setBorder(border);
 
         clearButton.setBounds(648,170,150,40);
 
@@ -184,6 +187,21 @@ class PainterBoundary extends JPanel{
 
         gc.setBounds(20,70,600,450);
 
+
+        //画像の表示
+        /*
+        ImageIcon icon = new ImageIcon("./image/canvas_650_450.jpg");
+        JLabel backimage = new JLabel(icon);
+        backimage.setIcon(icon);
+
+        backimage.setBounds(0,50,650,450);
+         */
+
+
+        JLabel backimage = new JLabel();
+        backimage.setBounds(18,68,604,454);
+        backimage.setBorder(gaku);
+        //backimage.setBorder(gaku2);
         /*********************************************/
 
 
@@ -196,6 +214,7 @@ class PainterBoundary extends JPanel{
         this.add(sp);
         //this.add(timerLabel);
         this.add(timerBar);
+        this.add(backimage);
 
         /*
         for(int i=0; i<4 ; i++) {

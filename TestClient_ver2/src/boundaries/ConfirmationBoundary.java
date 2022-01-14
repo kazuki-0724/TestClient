@@ -77,10 +77,13 @@ class ConfirmationBoundary extends JPanel{
 
         timerLabel.setBounds(625,39,30,40);
 
-        timerBar.setBounds(650, 38, 150, 40);
+        timerBar.setBounds(638, 19, 174, 44);
         timerBar.setStringPainted(true);
         timerBar.setBackground(Color.LIGHT_GRAY);
-        timerBar.setBorderPainted(false);
+        //timerBar.setForeground(Color.RED);
+        //timerBar.setBorderPainted(false);
+        timerBar.setBorder(border);
+
 
         /***************************************************/
 

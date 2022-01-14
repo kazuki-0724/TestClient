@@ -34,6 +34,7 @@ public class RespondentBoundary extends JPanel{
     private JLabel messageLabel_1;
     private JLabel messageLabel_2;
     private JLabel messageLabel_3;
+    private JLabel messageLabel_4;
 
     private JLabel timerLabel;
     private JLabel pointLabel;
@@ -60,6 +61,7 @@ public class RespondentBoundary extends JPanel{
     Font MONOSPACED = new Font(Font.MONOSPACED,Font.PLAIN,15);
     final String THEME = "お題 : ";
     final String TIMEKEEP = "※制限時間以内に解答を送信してください";
+    final String WARN = "【注意】解答はひらがなで入力してください";
     final String PLAYER = "・playerLabel   xxpt";
     final String TIMER = "timer";
     final String POINT = "point";
@@ -84,6 +86,7 @@ public class RespondentBoundary extends JPanel{
 
     	 //各パーツのインスタンス生成
         messageLabel_1 = new JLabel(TIMEKEEP);
+        messageLabel_4 = new JLabel(WARN);
         statusLabel = new JLabel("未解答");
         statusLabel.setHorizontalAlignment(JLabel.CENTER);
 
@@ -138,7 +141,13 @@ public class RespondentBoundary extends JPanel{
 
 
         //レイアウト可視化のため
-        LineBorder border = new LineBorder(Color.RED, 2, true);
+        LineBorder border = new LineBorder(Color.BLACK, 2, true);
+
+        LineBorder gaku = new LineBorder(Color.BLACK, 2, true);
+
+        LineBorder gaku2 = new LineBorder(Color.GRAY, 1, true);
+
+
         Font messageFont = new Font(FONT_NAME, Font.BOLD,29);
         Font playerFont = new Font(FONT_NAME, Font.PLAIN,16);
         Font timerFont = new Font(FONT_NAME,Font.BOLD,18);
@@ -153,13 +162,19 @@ public class RespondentBoundary extends JPanel{
         messageLabel_1.setBounds(20,20,580,36);
         messageLabel_1.setFont(messageFont);
 
+        messageLabel_4.setBounds(20,535,500,36);
+        messageLabel_4.setOpaque(true);
+        messageLabel_4.setBackground(new Color(255,255,0,255));
+        messageLabel_4.setFont(messageFont);
+
         timerLabel.setBounds(600,20,30,40);
 
-        timerBar.setBounds(640, 21, 170, 40);
+        timerBar.setBounds(638, 19, 174, 44);
         timerBar.setStringPainted(true);
         timerBar.setBackground(Color.LIGHT_GRAY);
         timerBar.setForeground(Color.RED);
-        timerBar.setBorderPainted(false);
+        //timerBar.setBorderPainted(false);
+        timerBar.setBorder(border);
 
         sp.setBounds(640, 230, 170, 115);
 
@@ -169,11 +184,28 @@ public class RespondentBoundary extends JPanel{
 
         ac.setBounds(20,70,600,450);
 
+
         statusLabel.setBounds(640,450,170,70);
         statusLabel.setFont(messageFont);
         statusLabel.setBackground(Color.BLUE);
         statusLabel.setForeground(Color.WHITE);
         statusLabel.setOpaque(true);
+
+
+        //画像の表示
+        /*
+        ImageIcon icon = new ImageIcon("./image/canvas_650_450.jpg");
+        JLabel backimage = new JLabel(icon);
+        backimage.setIcon(icon);
+
+        backimage.setBounds(0,50,650,450);
+        */
+
+
+        JLabel backimage = new JLabel();
+        backimage.setBounds(18,68,604,454);
+        backimage.setBorder(gaku);
+        //backimage.setBorder(gaku2);
 
 
         /******************************************/
@@ -184,12 +216,14 @@ public class RespondentBoundary extends JPanel{
         /*パネルに追加*****************/
         this.add(ac);
         this.add(messageLabel_1);
+        this.add(messageLabel_4);
         //this.add(timerLabel);
         this.add(sp);
         this.add(answerField);
         this.add(answerButton);
         this.add(timerBar);
         this.add(statusLabel);
+        this.add(backimage);
         /******************************/
 
 

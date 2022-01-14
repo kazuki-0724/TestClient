@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -65,7 +66,7 @@ class ResultBoundary extends JPanel{
      */
     public ResultBoundary(){
 
-    	LineBorder border = new LineBorder(Color.RED, 2, true);
+    	LineBorder border = new LineBorder(Color.BLACK, 2, true);
 
 
         //各パーツのインスタンス生成
@@ -137,6 +138,11 @@ class ResultBoundary extends JPanel{
         themeLabel.setHorizontalAlignment(JLabel.CENTER);
         themeLabel.setFont(themeFont);
 
+        themeLabel.setForeground(new Color(255,255,255,200));
+        themeLabel.setOpaque(true);
+        themeLabel.setBackground(new Color(255,0,0,200));
+
+
         messageLabel.setBounds(310,270,220,40);
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
         messageLabel.setFont(messageFont);
@@ -144,16 +150,25 @@ class ResultBoundary extends JPanel{
         messageLabel_2.setBounds(640,25,150,30);
         messageLabel_2.setFont(messageFont2);
 
-        timerLabel.setBounds(605,60,30,30);
-        timerLabel.setFont(timerFont);
+        timerBar.setBounds(638, 19, 174, 44);
+        timerBar.setStringPainted(true);
         timerBar.setBackground(Color.LIGHT_GRAY);
-        timerBar.setBorderPainted(false);
+        //timerBar.setForeground(Color.RED);
+        //timerBar.setBorderPainted(false);
+        timerBar.setBorder(border);
 
         timerBar.setBounds(630, 59, 150, 30);
         timerBar.setStringPainted(true);
-
+        timerBar.setBorder(border);
 
         sp.setBounds(170, 320, 500, 151);
+
+        //画像の表示
+        ImageIcon icon = new ImageIcon("./image/crown_alt.png");
+        JLabel backimage = new JLabel(icon);
+        backimage.setIcon(icon);
+
+        backimage.setBounds(0,0,840,630);
 
         /***************************************************/
 
@@ -166,6 +181,7 @@ class ResultBoundary extends JPanel{
         //this.add(timerLabel);
         this.add(timerBar);
         this.add(sp);
+        this.add(backimage);
         /************************/
 
 
