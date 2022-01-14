@@ -1,5 +1,7 @@
 package boundaries;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -301,6 +303,10 @@ public class Boundary extends JFrame{
             	//blankの時は初期化処理のためのupdate
             	}else if(text.equals("blank")){
             		respondentBoundary.setTable(control.getGameInfo().getGamePlayerList());
+            		respondentBoundary.getStatusLabel().setBackground(Color.BLUE);
+                    respondentBoundary.getStatusLabel().setForeground(Color.WHITE);
+                    respondentBoundary.getStatusLabel().setOpaque(true);
+                    respondentBoundary.getStatusLabel().setText("未解答");
             	}
 
             	break;
