@@ -79,7 +79,8 @@ class ConfirmationBoundary extends JPanel{
 
         timerBar.setBounds(650, 38, 150, 40);
         timerBar.setStringPainted(true);
-
+        timerBar.setBackground(Color.LIGHT_GRAY);
+        timerBar.setBorderPainted(false);
 
         /***************************************************/
 
@@ -108,7 +109,7 @@ class ConfirmationBoundary extends JPanel{
      */
     public void setTheme(String theme) {
 
-    	System.out.println("お題は"+theme);
+    	//System.out.println("お題は"+theme);
     	this.themeLabel.setText(String.format("お題：%s",theme ));
 
     }

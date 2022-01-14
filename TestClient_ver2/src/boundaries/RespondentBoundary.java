@@ -37,6 +37,7 @@ public class RespondentBoundary extends JPanel{
 
     private JLabel timerLabel;
     private JLabel pointLabel;
+    private JLabel statusLabel;
     private JProgressBar timerBar;
 
 
@@ -83,6 +84,8 @@ public class RespondentBoundary extends JPanel{
 
     	 //各パーツのインスタンス生成
         messageLabel_1 = new JLabel(TIMEKEEP);
+        statusLabel = new JLabel("未解答");
+        statusLabel.setHorizontalAlignment(JLabel.CENTER);
 
         timerLabel = new JLabel(TIMER);
         timerBar = new JProgressBar();
@@ -152,8 +155,11 @@ public class RespondentBoundary extends JPanel{
 
         timerLabel.setBounds(600,20,30,40);
 
-        timerBar.setBounds(625, 21, 150, 40);
+        timerBar.setBounds(640, 21, 170, 40);
         timerBar.setStringPainted(true);
+        timerBar.setBackground(Color.LIGHT_GRAY);
+        timerBar.setForeground(Color.RED);
+        timerBar.setBorderPainted(false);
 
         sp.setBounds(640, 230, 170, 115);
 
@@ -162,6 +168,13 @@ public class RespondentBoundary extends JPanel{
         answerButton.setBounds(740,540,80,30);
 
         ac.setBounds(20,70,600,450);
+
+        statusLabel.setBounds(640,450,170,70);
+        statusLabel.setFont(messageFont);
+        statusLabel.setBackground(Color.BLUE);
+        statusLabel.setForeground(Color.WHITE);
+        statusLabel.setOpaque(true);
+
 
         /******************************************/
 
@@ -176,6 +189,7 @@ public class RespondentBoundary extends JPanel{
         this.add(answerField);
         this.add(answerButton);
         this.add(timerBar);
+        this.add(statusLabel);
         /******************************/
 
 
@@ -289,6 +303,9 @@ public class RespondentBoundary extends JPanel{
     }
 
 
+    public JLabel getStatusLabel() {
+    	return this.statusLabel;
+    }
 
 
     /**

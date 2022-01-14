@@ -146,6 +146,8 @@ class ResultBoundary extends JPanel{
 
         timerLabel.setBounds(605,60,30,30);
         timerLabel.setFont(timerFont);
+        timerBar.setBackground(Color.LIGHT_GRAY);
+        timerBar.setBorderPainted(false);
 
         timerBar.setBounds(630, 59, 150, 30);
         timerBar.setStringPainted(true);

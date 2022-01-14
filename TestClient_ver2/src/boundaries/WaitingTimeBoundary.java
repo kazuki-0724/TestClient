@@ -71,6 +71,9 @@ class WaitingTimeBoundary extends JPanel{
 
          timerBar.setBounds(650, 48, 150, 40);
          timerBar.setStringPainted(true);
+         timerBar.setBackground(Color.LIGHT_GRAY);
+
+         timerBar.setBorderPainted(false);
 
          /*************************************/
 

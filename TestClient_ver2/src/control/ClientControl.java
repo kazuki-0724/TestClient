@@ -405,7 +405,7 @@ public class ClientControl{
 						for(PlayerMessage tmp:gamePlayerList) {
 							if(myPlayer.getId().equals(tmp.getPlayerID())) {
 								getGameInfo().setPlayerNum(tmp.getPlayerNum());
-								System.out.println(tmp.getPlayerID() +" "+ tmp.getPlayerNum());
+								//System.out.println(tmp.getPlayerID() +" "+ tmp.getPlayerNum());
 
 							}
 						}
@@ -446,7 +446,7 @@ public class ClientControl{
     					getGameInfo().setPainterPlayerNum(dates[2]);
     					getGameInfo().setTheme(theme);
 
-    					System.out.println("[ ClientControl ] handleData() : Log ( PainterNum = " + dates[2] + "Theme = "+ theme + "myPlayerNum" +  getGameInfo().getPlayerNum());
+    					System.out.println("[ ClientControl ] handleData() : Log ( PainterNum = " + dates[2] + " Theme = "+ theme + " myPlayerNum" +  getGameInfo().getPlayerNum());
 
 
     					if(getGameInfo().getPlayerNum().equals(getGameInfo().getPainterPlayerNum()) ) {

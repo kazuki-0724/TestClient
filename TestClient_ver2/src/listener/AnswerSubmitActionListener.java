@@ -1,5 +1,6 @@
 package listener;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import boundaries.Boundary;
@@ -48,9 +49,12 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 			System.out.println("[ AnswerSubmitActionListener ] actionPerFormed() : Log your answer is correct (" + answer + ")");
 			//時刻じゃなくて正解した旨を送信
 			boundary.getControl().communicate().sendData(ProcessID.ANSWER, "correct");
-			this.rb.getAnswerField().setText("正解済み");
+			this.rb.getAnswerField().setText(answer);
 			this.rb.getAnswerField().setEditable(false);
 			this.rb.getAnswerButton().setEnabled(false);
+			this.rb.getStatusLabel().setText("正解");
+			this.rb.getStatusLabel().setBackground(Color.RED);
+			this.rb.getStatusLabel().setForeground(Color.WHITE);
 
 		}else {
 			//間違っている場合
@@ -58,6 +62,7 @@ public class AnswerSubmitActionListener extends BoundaryActionListener{
 
 			System.out.println("[ AnswerSubmitActionListener ] actionPerFormed() : Log your answer is incorrect (" + answer + ")");
 			this.rb.getAnswerField().setText("");
+			this.rb.getStatusLabel().setText("不正解");
 		}
 
 

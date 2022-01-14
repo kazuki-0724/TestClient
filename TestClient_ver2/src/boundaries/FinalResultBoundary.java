@@ -137,9 +137,12 @@ public class FinalResultBoundary extends JPanel{
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
-        winnerLabel.setBounds(240,180,360,40);
+        winnerLabel.setBounds(240,180,360,50);
         winnerLabel.setHorizontalAlignment(JLabel.CENTER);
         winnerLabel.setFont(winnerFont);
+        winnerLabel.setBackground(Color.RED);
+        winnerLabel.setForeground(Color.ORANGE);
+        winnerLabel.setOpaque(true);
 
         messageLabel.setBounds(360,250,120,50);
         messageLabel.setHorizontalAlignment(JLabel.CENTER);

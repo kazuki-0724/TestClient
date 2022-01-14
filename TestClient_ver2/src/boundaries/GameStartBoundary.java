@@ -93,7 +93,8 @@ public class GameStartBoundary extends JPanel{
 
         timerBar.setBounds(630, 60, 150, 30);
         timerBar.setStringPainted(true);
-
+        timerBar.setBackground(Color.LIGHT_GRAY);
+        timerBar.setBorderPainted(false);
 
         tableModel = new DefaultTableModel(COLUMN_NAMES,0);
         for(int i=0;i<4;i++) {
@@ -190,6 +191,7 @@ public class GameStartBoundary extends JPanel{
     		//setValueAt(セルにセットするデータ,,n行,n列)
     		tableModel.setValueAt(tmp.getPlayerID(),i,0);
     		tableModel.setValueAt(tmp.getRate() + "%",i,1);
+    		System.out.println("[ GSB ] setTable() : Log tmp.getRate()"+ tmp.getRate());
 
 
     	}

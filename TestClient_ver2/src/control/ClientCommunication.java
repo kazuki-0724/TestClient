@@ -35,11 +35,11 @@ public class ClientCommunication{
 
 	//実機運用ではここのlocalhostをサーバのIPアドレスにする
 	//IPconfigで調べる
-	//private final String CLM_URI = "ws://localhost:8080/app/clm";
-    //private final String AP_URI = "ws://localhost:8081/app/ap";
+	private final String CLM_URI = "ws://localhost:8080/app/clm";
+    private final String AP_URI = "ws://localhost:8081/app/ap";
 
-    private final String CLM_URI = "ws://172.30.26.221:8080/clm/clmep";
-    private final String AP_URI =  "ws://172.30.27.43:8080/app/appep";
+    //private final String CLM_URI = "ws://172.30.26.221:8080/clm/clmep";
+    //private final String AP_URI =  "ws://172.30.27.43:8080/app/appep";
 
     private final String REQUEST = "REQUEST";
     private final String REPLY = "REPLY";

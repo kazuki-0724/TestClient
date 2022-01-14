@@ -172,6 +172,9 @@ class PainterBoundary extends JPanel{
 
         timerBar.setBounds(645, 11, 150, 40);
         timerBar.setStringPainted(true);
+        timerBar.setBackground(Color.LIGHT_GRAY);
+        timerBar.setForeground(Color.RED);
+        timerBar.setBorderPainted(false);
 
         clearButton.setBounds(648,170,150,40);
 
