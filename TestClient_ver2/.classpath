@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="image"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
 	<classpathentry kind="lib" path="C:/java_jar/tyrus-standalone-client-1.12.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Kazuki0724/Downloads/gson-2.8.6.jar"/>
 	<classpathentry kind="output" path="bin"/>

@@ -3,6 +3,7 @@ package boundaries;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -64,15 +65,24 @@ class ConfirmationBoundary extends JPanel{
         /*レイアウト***************************************/
         this.setLayout(null);
 
-        messageLabel.setBounds(150,240,530,45);
+        messageLabel.setBounds(150,240,540,45);
+        messageLabel.setOpaque(true);
+        messageLabel.setBackground(new Color(255,255,255,240));
+        messageLabel.setHorizontalAlignment(JLabel.CENTER);
         messageLabel.setFont(titleFont);
 
         noticeLabel.setBounds(40,40,248,36);
-        noticeLabel.setBorder(border);
+        noticeLabel.setOpaque(true);
+        noticeLabel.setBackground(new Color(0,0,0,200));
+        //noticeLabel.setBorder(border);
+        noticeLabel.setForeground(new Color(255,255,255,255));
+        noticeLabel.setHorizontalAlignment(JLabel.CENTER);
         noticeLabel.setFont(messageFont);
 
-        themeLabel.setBounds(250,400,330,40);
+        themeLabel.setBounds(140,400,560,40);
         themeLabel.setHorizontalAlignment(JLabel.CENTER);
+        themeLabel.setOpaque(true);
+        themeLabel.setBackground(new Color(255,255,255,240));
         themeLabel.setFont(themeFont);
 
         timerLabel.setBounds(625,39,30,40);
@@ -84,6 +94,13 @@ class ConfirmationBoundary extends JPanel{
         //timerBar.setBorderPainted(false);
         timerBar.setBorder(border);
 
+        //画像の表示
+        ImageIcon icon = new ImageIcon("./image/question.png");
+        JLabel backimage = new JLabel(icon);
+        backimage.setIcon(icon);
+
+        backimage.setBounds(0,0,840,630);
+
 
         /***************************************************/
 
@@ -92,8 +109,8 @@ class ConfirmationBoundary extends JPanel{
         this.add(messageLabel);
         this.add(noticeLabel);
         this.add(themeLabel);
-        //this.add(timerLabel);
         this.add(timerBar);
+        this.add(backimage);
         /************************/
 
 

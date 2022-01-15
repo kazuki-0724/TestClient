@@ -90,7 +90,7 @@ class ResultBoundary extends JPanel{
         //table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
         TableColumnModel colModel=table.getColumnModel();
-        colModel.getColumn(0).setPreferredWidth(420);
+        colModel.getColumn(0).setPreferredWidth(440);
         colModel.getColumn(1).setPreferredWidth(60);
         colModel.getColumn(2).setPreferredWidth(160);
         colModel.getColumn(3).setPreferredWidth(160);
@@ -104,8 +104,8 @@ class ResultBoundary extends JPanel{
 
         DefaultTableCellRenderer tableCellRenderer = new DefaultTableCellRenderer();
         tableCellRenderer.setHorizontalAlignment(JLabel.CENTER);
-        TableColumn col = table.getColumnModel().getColumn(0);
-        col.setCellRenderer(tableCellRenderer);
+        //TableColumn col = table.getColumnModel().getColumn(0);
+        //col.setCellRenderer(tableCellRenderer);
         TableColumn col2 = table.getColumnModel().getColumn(1);
         col2.setCellRenderer(tableCellRenderer);
         TableColumn col3 = table.getColumnModel().getColumn(2);
@@ -134,17 +134,18 @@ class ResultBoundary extends JPanel{
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
-        themeLabel.setBounds(210,170,420,40);
+        themeLabel.setBounds(170,170,500,40);
         themeLabel.setHorizontalAlignment(JLabel.CENTER);
         themeLabel.setFont(themeFont);
-
         themeLabel.setForeground(new Color(255,255,255,200));
         themeLabel.setOpaque(true);
         themeLabel.setBackground(new Color(255,0,0,200));
 
 
-        messageLabel.setBounds(310,270,220,40);
+        messageLabel.setBounds(310,270,220,34);
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
+        messageLabel.setOpaque(true);
+        messageLabel.setBackground(new Color(255,255,255,200));
         messageLabel.setFont(messageFont);
 
         messageLabel_2.setBounds(640,25,150,30);
@@ -157,14 +158,12 @@ class ResultBoundary extends JPanel{
         //timerBar.setBorderPainted(false);
         timerBar.setBorder(border);
 
-        timerBar.setBounds(630, 59, 150, 30);
-        timerBar.setStringPainted(true);
-        timerBar.setBorder(border);
 
-        sp.setBounds(170, 320, 500, 151);
+
+        sp.setBounds(150, 320, 540, 151);
 
         //画像の表示
-        ImageIcon icon = new ImageIcon("./image/crown_alt.png");
+        ImageIcon icon = new ImageIcon("./image/marubatsu_alt_0.8.png");
         JLabel backimage = new JLabel(icon);
         backimage.setIcon(icon);
 

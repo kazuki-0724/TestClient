@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -91,11 +92,16 @@ public class GameStartBoundary extends JPanel{
 
         timerLabel.setBounds(605,60,30,30);
 
+        /*
         timerBar.setBounds(630, 60, 150, 30);
         timerBar.setStringPainted(true);
         timerBar.setBackground(Color.LIGHT_GRAY);
         timerBar.setBorderPainted(false);
         timerBar.setBorder(border);
+        */
+
+
+
 
         tableModel = new DefaultTableModel(COLUMN_NAMES,0);
         for(int i=0;i<4;i++) {
@@ -128,6 +134,13 @@ public class GameStartBoundary extends JPanel{
 
         sp.setBounds(210, 280, 420, 191);
 
+        //画像の表示
+        ImageIcon icon = new ImageIcon("./image/paint_0.4.png");
+        JLabel backimage = new JLabel(icon);
+        backimage.setIcon(icon);
+
+        backimage.setBounds(0,0,840,630);
+
 
         /***************************************************/
 
@@ -138,6 +151,7 @@ public class GameStartBoundary extends JPanel{
         //this.add(timerLabel);
         this.add(sp);
         this.add(timerBar);
+        this.add(backimage);
 
 
 

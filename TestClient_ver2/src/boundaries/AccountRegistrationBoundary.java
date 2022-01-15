@@ -5,6 +5,7 @@ package boundaries;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -96,7 +97,7 @@ public class AccountRegistrationBoundary extends JPanel{
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
-        messageLabel.setBounds(250,190,340,36);
+        messageLabel.setBounds(170,190,500,36);
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
         messageLabel.setFont(textFont);
 
@@ -113,6 +114,13 @@ public class AccountRegistrationBoundary extends JPanel{
         registButton.setBounds(360, 420, 100, 30);
         switchButton.setBounds(690,540,100,30);
 
+        //画像の表示
+        ImageIcon icon = new ImageIcon("./image/sky_0.5.png");
+        JLabel backimage = new JLabel(icon);
+        backimage.setIcon(icon);
+
+        backimage.setBounds(0,0,840,630);
+
         /***************************************************/
 
 
@@ -125,6 +133,7 @@ public class AccountRegistrationBoundary extends JPanel{
         this.add(passFiled);
         this.add(registButton);
         this.add(switchButton);
+        this.add(backimage);
         /************************/
 
         this.setSize(840, 630);

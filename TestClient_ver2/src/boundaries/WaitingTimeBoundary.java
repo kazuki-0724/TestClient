@@ -3,6 +3,7 @@ package boundaries;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -60,10 +61,17 @@ class WaitingTimeBoundary extends JPanel{
          this.setLayout(null);
 
          messageLabel.setBounds(150,270,540,45);
+         messageLabel.setOpaque(true);
+         messageLabel.setBackground(new Color(255,255,255,240));
+         messageLabel.setHorizontalAlignment(JLabel.CENTER);
          messageLabel.setFont(titleFont);
 
-         noticeLabel.setBounds(40,49,250,36);
-         noticeLabel.setBorder(border);
+         noticeLabel.setBounds(40,49,248,36);
+         noticeLabel.setOpaque(true);
+         noticeLabel.setBackground(new Color(0,0,0,200));
+         //noticeLabel.setBorder(border);
+         noticeLabel.setForeground(new Color(255,255,255,255));
+         noticeLabel.setHorizontalAlignment(JLabel.CENTER);
          noticeLabel.setFont(messageFont);
 
          timerLabel.setBounds(625,49,30,40);
@@ -76,7 +84,14 @@ class WaitingTimeBoundary extends JPanel{
          //timerBar.setBorderPainted(false);
          timerBar.setBorder(border);
 
-         timerBar.setBorderPainted(false);
+         //timerBar.setBorderPainted(false);
+
+         //画像の表示
+         ImageIcon icon = new ImageIcon("./image/question.png");
+         JLabel backimage = new JLabel(icon);
+         backimage.setIcon(icon);
+
+         backimage.setBounds(0,0,840,630);
 
          /*************************************/
 
@@ -84,8 +99,8 @@ class WaitingTimeBoundary extends JPanel{
          /*パネルに追加*********/
          this.add(messageLabel);
          this.add(noticeLabel);
-         //this.add(timerLabel);
          this.add(timerBar);
+         this.add(backimage);
          /**********************/
 
 

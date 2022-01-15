@@ -74,7 +74,7 @@ public class FinalResultBoundary extends JPanel{
         //this.control = control;
 
 
-        LineBorder border = new LineBorder(Color.RED, 2, true);
+        LineBorder border = new LineBorder(Color.BLACK, 2, true);
 
 
         //各パーツのインスタンス生成
@@ -138,16 +138,18 @@ public class FinalResultBoundary extends JPanel{
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         titleLabel.setFont(titleFont);
 
-        winnerLabel.setBounds(240,180,360,50);
+        winnerLabel.setBounds(170,180,500,50);
         winnerLabel.setHorizontalAlignment(JLabel.CENTER);
         winnerLabel.setFont(winnerFont);
         winnerLabel.setForeground(new Color(255,255,255,200));
-
         winnerLabel.setOpaque(true);
         winnerLabel.setBackground(new Color(255,0,0,200));
 
-        messageLabel.setBounds(360,250,120,50);
+        messageLabel.setBounds(360,244,120,52);
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
+        messageLabel.setOpaque(true);
+        messageLabel.setBackground(new Color(255,255,255,200));
+        messageLabel.setBorder(border);
         messageLabel.setFont(messageFont);
 
         sp.setBounds(120,300,600,212);

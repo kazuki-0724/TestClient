@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -118,7 +119,7 @@ class PainterBoundary extends JPanel{
         table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
         TableColumnModel colModel=table.getColumnModel();
         colModel.getColumn(0).setPreferredWidth(125);
-        colModel.getColumn(1).setPreferredWidth(40);
+        colModel.getColumn(1).setPreferredWidth(50);
 
         JTableHeader jheader = table.getTableHeader();
         jheader.setReorderingAllowed(false);
@@ -159,10 +160,16 @@ class PainterBoundary extends JPanel{
         /*レイアウト***********************************/
         this.setLayout(null);
 
-        themeLabel.setBounds(280,10,300,40);
+        themeLabel.setBounds(100,10,400,40);
+        themeLabel.setOpaque(true);
+        themeLabel.setBackground(new Color(255,255,255,240));
+        themeLabel.setHorizontalAlignment(JLabel.CENTER);
         themeLabel.setFont(themeFont);
 
         messageLabel_1.setBounds(70,537,500,36);
+        messageLabel_1.setOpaque(true);
+        messageLabel_1.setBackground(new Color(255,255,0,255));
+        messageLabel_1.setHorizontalAlignment(JLabel.CENTER);
         messageLabel_1.setFont(messageFont);
 
         messageLabel_2.setBounds(632,100,200,30);
@@ -180,27 +187,23 @@ class PainterBoundary extends JPanel{
         timerBar.setBorder(border);
 
         clearButton.setBounds(648,170,150,40);
+        clearButton.setOpaque(true);
+        clearButton.setBackground(new Color(135,206,250,255));
 
-
-        sp.setBounds(640, 290, 170, 115);
-
+        sp.setBounds(640, 290, 180, 115);
 
         gc.setBounds(20,70,600,450);
 
-
         //画像の表示
-        /*
-        ImageIcon icon = new ImageIcon("./image/canvas_650_450.jpg");
+        ImageIcon icon = new ImageIcon("./image/pigment_0.4.png");
         JLabel backimage = new JLabel(icon);
         backimage.setIcon(icon);
 
-        backimage.setBounds(0,50,650,450);
-         */
+        backimage.setBounds(0,0,840,630);
 
-
-        JLabel backimage = new JLabel();
-        backimage.setBounds(18,68,604,454);
-        backimage.setBorder(gaku);
+        JLabel frame = new JLabel();
+        frame.setBounds(18,68,604,454);
+        frame.setBorder(gaku);
         //backimage.setBorder(gaku2);
         /*********************************************/
 
@@ -212,16 +215,9 @@ class PainterBoundary extends JPanel{
         this.add(messageLabel_2);
         this.add(messageLabel_3);
         this.add(sp);
-        //this.add(timerLabel);
         this.add(timerBar);
+        this.add(frame);
         this.add(backimage);
-
-        /*
-        for(int i=0; i<4 ; i++) {
-        	this.add(playerLabel[i]);
-        }
-        */
-
         this.add(clearButton);
         /***********************/
 

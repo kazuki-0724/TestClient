@@ -162,16 +162,16 @@ public class LobbyBoundary extends JPanel{
         titleLabel.setFont(titleFont);
 
 
-        idLabel.setBounds(10, 40, 160, 25);
+        idLabel.setBounds(10, 40, 140, 25);
         idLabel.setOpaque(true);
         idLabel.setBackground(new Color(255,255,255,200));
         idLabel.setFont(textFont);
-        rateLabel.setBounds(10, 65, 160, 25);
+        rateLabel.setBounds(10, 65, 140, 25);
         rateLabel.setOpaque(true);
         rateLabel.setBackground(new Color(255,255,255,200));
         rateLabel.setFont(textFont);
 
-        messageLabel_1.setBounds(200, 180, 440, 40);
+        messageLabel_1.setBounds(170, 180, 500, 40);
         messageLabel_1.setHorizontalAlignment(JLabel.CENTER);
         messageLabel_1.setFont(helloFont);
 

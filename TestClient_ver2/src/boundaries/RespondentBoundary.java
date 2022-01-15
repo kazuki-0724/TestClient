@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -115,7 +116,7 @@ public class RespondentBoundary extends JPanel{
         table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
         TableColumnModel colModel=table.getColumnModel();
         colModel.getColumn(0).setPreferredWidth(125);
-        colModel.getColumn(1).setPreferredWidth(40);
+        colModel.getColumn(1).setPreferredWidth(50);
 
         JTableHeader jheader = table.getTableHeader();
         jheader.setReorderingAllowed(false);
@@ -149,6 +150,7 @@ public class RespondentBoundary extends JPanel{
 
 
         Font messageFont = new Font(FONT_NAME, Font.BOLD,29);
+        Font messageFont2 = new Font(FONT_NAME, Font.BOLD,24);
         Font playerFont = new Font(FONT_NAME, Font.PLAIN,16);
         Font timerFont = new Font(FONT_NAME,Font.BOLD,18);
         this.setLayout(null);
@@ -160,12 +162,16 @@ public class RespondentBoundary extends JPanel{
         this.setLayout(null);
 
         messageLabel_1.setBounds(20,20,580,36);
+        messageLabel_1.setOpaque(true);
+        messageLabel_1.setBackground(new Color(255,255,255,240));
+        messageLabel_1.setHorizontalAlignment(JLabel.CENTER);
         messageLabel_1.setFont(messageFont);
 
-        messageLabel_4.setBounds(20,535,500,36);
+        messageLabel_4.setBounds(15,535,510,36);
         messageLabel_4.setOpaque(true);
         messageLabel_4.setBackground(new Color(255,255,0,255));
-        messageLabel_4.setFont(messageFont);
+        messageLabel_4.setHorizontalAlignment(JLabel.CENTER);
+        messageLabel_4.setFont(messageFont2);
 
         timerLabel.setBounds(600,20,30,40);
 
@@ -176,7 +182,7 @@ public class RespondentBoundary extends JPanel{
         //timerBar.setBorderPainted(false);
         timerBar.setBorder(border);
 
-        sp.setBounds(640, 230, 170, 115);
+        sp.setBounds(640, 230, 180, 115);
 
         answerField.setBounds(540,540,200,30);
 
@@ -191,20 +197,17 @@ public class RespondentBoundary extends JPanel{
         statusLabel.setForeground(Color.WHITE);
         statusLabel.setOpaque(true);
 
-
         //画像の表示
-        /*
-        ImageIcon icon = new ImageIcon("./image/canvas_650_450.jpg");
+        ImageIcon icon = new ImageIcon("./image/pigment_0.4.png");
         JLabel backimage = new JLabel(icon);
         backimage.setIcon(icon);
 
-        backimage.setBounds(0,50,650,450);
-        */
+        backimage.setBounds(0,0,840,630);
 
 
-        JLabel backimage = new JLabel();
-        backimage.setBounds(18,68,604,454);
-        backimage.setBorder(gaku);
+        JLabel frame = new JLabel();
+        frame.setBounds(18,68,604,454);
+        frame.setBorder(gaku);
         //backimage.setBorder(gaku2);
 
 
@@ -223,6 +226,7 @@ public class RespondentBoundary extends JPanel{
         this.add(answerButton);
         this.add(timerBar);
         this.add(statusLabel);
+        this.add(frame);
         this.add(backimage);
         /******************************/
 
